@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { publishToRoom } from './api'
 import type { Source } from './api'
+import { isReplaySession, watchReplay } from './replaySession'
 import { isRoom, watchRoom } from './room'
 
 /**
@@ -161,7 +162,7 @@ export function usePublishRun(
     /* a new session is a new room: its first turn is worth a snapshot at once
        rather than whenever the throttle from the previous one runs out */
     wrote.current = 0
-    if (!session || isRoom(session) || typeof BroadcastChannel === 'undefined') return
+    if (!session || isRoom(session) || isReplaySession(session) || typeof BroadcastChannel === 'undefined') return
     const open = new BroadcastChannel(keyOf(session))
     channel.current = open
     return () => {
@@ -230,7 +231,11 @@ export function usePublishRun(
   }, [session, turns, total, ballot, playing, complete, pump])
 
   useEffect(() => {
-    if (!session || isRoom(session)) return
+    /* a replayed room is derived from the clock in its link, not relayed: there
+       is nobody to post to, and a hundred and fifty kilobytes written to
+       storage on every turn for a reader that will never open it is work spent
+       on nothing */
+    if (!session || isRoom(session) || isReplaySession(session)) return
     const state: SharedRun = { session, turns, total, ballot, playing, complete, updated: Date.now() }
 
     channel.current?.postMessage(state)
@@ -279,7 +284,7 @@ function snapshot(session: string | null): SharedRun | null {
   }
 }
 
-export function useWatchRun(session: string | null): WatchedRun {
+export function useWatchRun(session: string | null, startedAt: number | null = null): WatchedRun {
   const [run, setRun] = useState<SharedRun | null>(() => snapshot(session))
   const [lost, setLost] = useState(false)
   const [watching, setWatching] = useState(session)
@@ -300,6 +305,16 @@ export function useWatchRun(session: string | null): WatchedRun {
        whoever is watching wherever they are rather than only in this browser */
     if (isRoom(session)) {
       return watchRoom(session, setRun, setLost)
+    }
+
+    /* a room with no service under it: the debate is not sent here, it is
+       worked out here, from the transcript this build ships and the moment the
+       run started — which is the one thing the link had to carry. Without that
+       moment there is nothing to derive, and the view says as much rather than
+       showing an empty debate that will never fill. */
+    if (isReplaySession(session)) {
+      if (startedAt === null) return
+      return watchReplay(session, startedAt, setRun, () => setLost(true))
     }
 
     const key = keyOf(session)
@@ -324,7 +339,7 @@ export function useWatchRun(session: string | null): WatchedRun {
       channel?.close()
       window.removeEventListener('storage', onStorage)
     }
-  }, [session])
+  }, [session, startedAt])
 
   return { run, lost }
 }

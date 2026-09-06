@@ -10,9 +10,18 @@ import PollBoard from '../components/PollBoard'
 import PollVote from '../components/PollVote'
 import { useRecorder } from '../lib/recorder'
 import { annotate, closeRoom, openRoom, transcribe, ApiError, type Source } from '../lib/api'
-import { analyse, type AnalysedTurn } from '../lib/analytics'
+import { simulatedFloor } from '../lib/audience'
 import { DEMO } from '../config/backend'
 import { loadDemoTranscript } from '../lib/demo'
+import {
+  arguedIn,
+  clockFor,
+  clockParam,
+  fedPace,
+  isReplaySession,
+  newReplaySession,
+  readClock,
+} from '../lib/replaySession'
 import { SPEAKER_PREFIX, type FeedTurn } from '../lib/transcript'
 import { useFeed, useSteadyScroll } from '../lib/feed'
 import {
@@ -39,23 +48,6 @@ const QrCode = lazy(() => import('../components/QrCode'))
 
 /** The floor as it opens: two sides and a chair, all of them renameable. */
 const OPENING_FLOOR = ['MODERATOR', 'SPEAKER A', 'SPEAKER B']
-
-/**
- * How fast the shipped debate is fed in, when there is no service to speak to.
- *
- * By the length of the turn, the way a real one takes as long as it takes to
- * say: the opening statements run a minute, the interruptions go by in a
- * second. A flat interval would make the two the same thing, and the point of
- * playing a debate rather than dumping it is that it has a rhythm.
- */
-const FED_PER_WORD = 55
-const FED_MIN = 700
-const FED_MAX = 4200
-
-function fedPace(text: string): number {
-  const words = text.trim().split(/\s+/).length
-  return Math.min(FED_MAX, Math.max(FED_MIN, words * FED_PER_WORD))
-}
 
 /** One turn as it was spoken, transcribed and annotated. */
 interface SpokenTurn {
@@ -92,7 +84,16 @@ const PHASE_LABEL: Record<Phase, string> = {
  */
 export default function LiveSessionPage() {
   const watching = useHashParam('session')
-  return watching ? <Watching session={watching} /> : <Session />
+  /*
+   * A replayed room carries its clock beside its id rather than inside it.
+   *
+   * The two are addressed separately because they change at different moments:
+   * the id is the thing votes are counted against and must survive the debate
+   * being paused, and the clock is re-issued every time it is. Put the clock in
+   * the id and stopping to explain a turn would empty the floor.
+   */
+  const clock = useHashParam('t')
+  return watching ? <Watching session={watching} startedAt={readClock(clock)} /> : <Session />
 }
 
 /**
@@ -148,13 +149,6 @@ const Turn = memo(function Turn({
  * have actually made a claim or a premise, and whoever is running the session
  * corrects it in a click either way.
  */
-function arguedIn(rows: AnalysedTurn[]): Set<string> {
-  const stats = analyse(rows)
-  return new Set(
-    stats.speakers.filter((speaker) => speaker.claims + speaker.premises > 0).map((speaker) => speaker.speaker),
-  )
-}
-
 /**
  * A debate as it is being spoken.
  *
@@ -362,6 +356,21 @@ function Session() {
    */
   const [script, setScript] = useState<FeedTurn[] | null>(null)
   const [fed, setFed] = useState(0)
+  /*
+   * When this run started, or null while it has not.
+   *
+   * The one number a phone needs. Everything else it shows — which turns have
+   * landed, which one is being worked on, who is on the ballot — it works out
+   * for itself from the transcript this build ships and the pace in
+   * `replaySession.ts`, because both sides of the code are running the same
+   * function over the same file. So the room is not sent the debate: it is
+   * sent the moment the debate began, and derives the rest.
+   *
+   * It is an origin in the past rather than a position, which is what makes it
+   * survive being read late: somebody scanning at turn forty gets the whole
+   * debate so far and then carries on live, with nothing to catch up on.
+   */
+  const [clock, setClock] = useState<number | null>(null)
   const [feeding, setFeeding] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -475,7 +484,13 @@ function Session() {
       return
     }
     setNotice(null)
-    if (await load()) setFeeding(true)
+    const loaded = await load()
+    if (!loaded) return
+    /* anchored so that the turn about to be played lands at the same instant
+       here and on every phone: resuming after a pause re-issues it from
+       wherever the run had got to, which is why the code is redrawn */
+    setClock(clockFor(loaded, fed, Date.now()))
+    setFeeding(true)
   }
 
   /* ---- what the session adds up to --------------------------------- */
@@ -502,7 +517,7 @@ function Session() {
    * leaving the session unshareable: the debate is not the room's, and losing
    * the audience must not cost the run.
    */
-  const [room, setRoom] = useState(newLocalSession)
+  const [room, setRoom] = useState(DEMO ? newReplaySession : newLocalSession)
   const [minting, setMinting] = useState(!DEMO)
   /* set when a service was configured and would not give us a room */
   const [roomFailed, setRoomFailed] = useState(false)
@@ -551,9 +566,11 @@ function Session() {
     /* the one being left is closed rather than left to time out. An empty floor
        is what "clears the votes" means, and a service still holding the old room
        would go on relaying this debate to anybody who kept the old link. */
-    if (!isLocalSession(room)) void closeRoom(room)
+    if (!isLocalSession(room) && !isReplaySession(room)) void closeRoom(room)
     if (DEMO) {
-      setRoom(newLocalSession())
+      /* a new room is a new floor, not a new debate: the clock belongs to the
+         run and the run has not changed, so it carries over untouched */
+      setRoom(newReplaySession())
       return
     }
     setMinting(true)
@@ -583,6 +600,21 @@ function Session() {
   /* a spoken debate has no length known in advance, and it is live for as long
      as somebody is running it */
   const reach = usePublishRun(room, relayed, 0, ballot, true, false)
+
+  /*
+   * The room the moderator is watching, when there is no service to hold one.
+   *
+   * Real votes cannot be pooled across devices on a build with nothing behind
+   * it, so a board fed only by this browser would sit at one voter however many
+   * phones had scanned in. The simulated floor is what puts a room on the chart
+   * — derived, not received, and identical on every device because every device
+   * computes it from the same id and the same turn count. It is labelled as
+   * simulated on the board itself; see `lib/audience.ts`.
+   */
+  const crowd = useMemo(
+    () => (isReplaySession(room) && clock !== null ? simulatedFloor(room, ballot, turns.length) : null),
+    [room, clock, ballot, turns.length],
+  )
 
   return (
     <div className="page" ref={scroller}>
@@ -848,6 +880,7 @@ function Session() {
             <aside className="session__side" data-scroll>
               <Share
                 session={room}
+                clock={clock}
                 minting={minting}
                 failed={roomFailed}
                 reach={reach}
@@ -895,6 +928,7 @@ function Session() {
               has to see first. */}
           <PollBoard
             session={room}
+            crowd={crowd}
             speakers={speakers}
             ballot={ballot}
             onBallot={setChosen}
@@ -923,10 +957,16 @@ function Session() {
  * under it, and one thing to say back — which side they are on, and when they
  * changed their mind about it.
  */
-function Watching({ session }: { session: string }) {
+function Watching({ session, startedAt }: { session: string; startedAt: number | null }) {
   const [view, setView] = useState<LayerView>('all')
-  const { run: relay, lost } = useWatchRun(session)
+  const { run: relay, lost } = useWatchRun(session, startedAt)
   const turns = useMemo(() => relay?.turns ?? [], [relay])
+
+  /* a replayed room whose link arrived without a clock: the debate had not
+     started when the code was scanned, and nothing here can be told when it
+     does — there is no connection to be told over */
+  const replay = isReplaySession(session)
+  const unstarted = replay && startedAt === null
 
   /* the same rule as the session it is watching: follow the end, and let go
      the moment somebody scrolls back */
@@ -947,6 +987,16 @@ function Watching({ session }: { session: string }) {
   )
   const transcript = turns.map((turn) => turn.tagged).join('\n\n')
 
+  const ballot = useMemo(() => relay?.ballot ?? [], [relay])
+  /* the same room the moderator's board shows, and for the same reason:
+     computed from the session and the turn count, so every phone open on this
+     code has the same one without anything having been sent */
+  const ballotKey = ballot.join('|')
+  const crowd = useMemo(
+    () => (replay && !unstarted ? simulatedFloor(session, ballotKey ? ballotKey.split('|') : [], turns.length) : null),
+    [replay, unstarted, session, ballotKey, turns.length],
+  )
+
   return (
     <div className="page" ref={scroller}>
       <div className="page__inner">
@@ -960,9 +1010,20 @@ function Watching({ session }: { session: string }) {
                 </h1>
               </div>
               <p className="session__lead">
-                A read-only view of a debate being spoken in another tab. Each turn appears here as it is
-                transcribed and annotated over there, and everything below is recomputed as they land. The one thing
-                this page lets you do is say where you stand — and change it whenever the debate does.
+                {replay ? (
+                  <>
+                    A read-only view of a debate being played on the screen you scanned. This build has no service
+                    behind it, so nothing is being sent here: the debate ships with the site, and this page works out
+                    which turn has landed from the moment the run started — which is what the code carried. The one
+                    thing this page lets you do is say where you stand, and change it whenever the debate does.
+                  </>
+                ) : (
+                  <>
+                    A read-only view of a debate being spoken in another tab. Each turn appears here as it is
+                    transcribed and annotated over there, and everything below is recomputed as they land. The one
+                    thing this page lets you do is say where you stand — and change it whenever the debate does.
+                  </>
+                )}
               </p>
             </header>
 
@@ -971,8 +1032,16 @@ function Watching({ session }: { session: string }) {
                 session <strong>{session}</strong>
               </span>
               <span className="mic__state">
+                {/* a replayed debate ends, and saying "live" under a feed that
+                    has stopped for good is the one thing this row must not do */}
                 <span className={`mic__phase mic__phase--${turns.length ? 'idle' : 'transcribing'}`}>
-                  {turns.length ? 'live' : 'waiting for the first turn'}
+                  {relay?.complete
+                    ? 'the debate has ended'
+                    : unstarted
+                      ? 'not started'
+                      : turns.length
+                        ? 'live'
+                        : 'waiting for the first turn'}
                 </span>
                 <span className="mic__clock">
                   {turns.length} {turns.length === 1 ? 'turn' : 'turns'}
@@ -988,9 +1057,11 @@ function Watching({ session }: { session: string }) {
               <div className="session__feed" data-scroll ref={feedBox} onScroll={onFeedScroll}>
                 {!turns.length && (
                   <p className="session__empty">
-                    {isLocalSession(session)
-                      ? 'Nothing said yet — this follows a session running in another tab of this browser, and the turns appear here as they are spoken.'
-                      : 'Nothing said yet — this follows a debate somebody is running now, and the turns appear here as they are spoken.'}
+                    {unstarted
+                      ? 'This code was made before the debate began, so it carries no clock to follow — and with no service behind this build there is no way for it to be sent one. Scan the code again now that the debate is running and it will open at the turn everybody else is on.'
+                      : isLocalSession(session)
+                        ? 'Nothing said yet — this follows a session running in another tab of this browser, and the turns appear here as they are spoken.'
+                        : 'Nothing said yet — this follows a debate somebody is running now, and the turns appear here as they are spoken.'}
                   </p>
                 )}
 
@@ -999,8 +1070,9 @@ function Watching({ session }: { session: string }) {
                     difference is said rather than left to be guessed at */}
                 {lost && (
                   <p className="session__lost" role="status">
-                    Not connected — new turns are not arriving. What is above stays as it was, and the feed picks up
-                    again by itself.
+                    {replay
+                      ? 'The debate that ships with this site could not be read, so there is nothing to play here. Reloading the page is what tries again.'
+                      : 'Not connected — new turns are not arriving. What is above stays as it was, and the feed picks up again by itself.'}
                   </p>
                 )}
 
@@ -1024,7 +1096,7 @@ function Watching({ session }: { session: string }) {
             </div>
           </section>
 
-          <PollVote session={session} ballot={relay?.ballot ?? []} turns={analysed} />
+          <PollVote session={session} crowd={crowd} ballot={ballot} turns={analysed} />
 
           <LiveStats turns={analysed} />
 
@@ -1064,12 +1136,15 @@ const REACHES_ONLY_HERE = /^(localhost|127\.0\.0\.1|\[::1\])$/i
  */
 function Share({
   session,
+  clock,
   minting,
   failed,
   reach,
   onReset,
 }: {
   session: string
+  /** when the replayed run started, or null while it has not — see `replaySession.ts` */
+  clock: number | null
   /** a room has been asked of the service and has not arrived yet */
   minting: boolean
   /** a service was configured and would not give us one */
@@ -1077,18 +1152,34 @@ function Share({
   reach: Published
   onReset: () => void
 }) {
-  const url = useMemo(() => linkTo('/livesession', { session }), [session])
+  /*
+   * The link, and — for a replayed room — the clock beside it.
+   *
+   * This is the whole of what travels. A phone that opens it has the transcript
+   * already, because it is the same build, so the session names the floor it
+   * votes on and `t` says when the debate began; everything else is worked out
+   * on the device. It is re-issued whenever the run is resumed, which is why the
+   * code is worth looking at again after a pause.
+   */
+  const url = useMemo(
+    () => linkTo('/livesession', clock === null ? { session } : { session, t: clockParam(clock) }),
+    [session, clock],
+  )
   const field = useRef<HTMLInputElement>(null)
   const [copied, setCopied] = useState(false)
 
   const local = isLocalSession(session)
+  const replay = isReplaySession(session)
+  /* a replayed room is only worth scanning once it has a clock in it: before
+     the debate is started there is nothing for the other side to follow */
+  const waiting = replay && clock === null
   const onlyHere = useMemo(() => REACHES_ONLY_HERE.test(window.location.hostname), [])
   /* whether the link the code carries can be reached from the device that
      scans it. The code is drawn either way — it is the link, and a panel that
      shows the link but hides its code is a panel with a hole in it — but what
      is said under it changes, because "point a camera at this" is a promise
      that a `localhost` address cannot keep */
-  const scannable = !local && !onlyHere
+  const scannable = !local && !onlyHere && !waiting
 
   async function copy() {
     field.current?.select()
@@ -1120,7 +1211,9 @@ function Share({
         <p className="share__scan">
           {scannable
             ? 'Point a camera at this to join.'
-            : 'This is the link below, as a code. It reaches exactly as far as the link does — see under it.'}
+            : waiting
+              ? 'The code carries the moment the debate started, so it is worth nothing until it has. Press play, and then point a camera at it.'
+              : 'This is the link below, as a code. It reaches exactly as far as the link does — see under it.'}
           {/* the one figure that says the code is working */}
           {reach.watching > 0 && (
             <>
@@ -1156,7 +1249,17 @@ function Share({
           answering. What is running behind it is not their problem; how far
           the thing in their hand travels is. */}
       <p className="share__note">
-        {minting ? (
+        {waiting ? (
+          'Nothing is served behind this build, so the room is not held anywhere: the debate ships with the site, and this link hands a phone the one thing it cannot work out on its own — when the run began. Start the debate and the code goes live.'
+        ) : replay ? (
+          <>
+            Anyone who scans this now opens the debate at the turn everybody else is on, on any device, with nothing
+            served behind it: both sides play the same transcript to the same schedule from the moment in this link.
+            Pausing re-issues it, so a phone that scanned before the pause runs ahead until it scans again — there is
+            no connection here to tell it otherwise. The floor it votes on is this session, and it is cleared by a new
+            room.
+          </>
+        ) : minting ? (
           'Opening a room on the service — the link will work from any device once it answers.'
         ) : failed ? (
           <>

@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState, type CSSProperties } from 'react'
-import { NEUTRAL, choiceColour, isNeutral, tally, useVotes } from '../lib/poll'
+import { withCrowd } from '../lib/audience'
+import { NEUTRAL, choiceColour, isNeutral, tally, useVotes, type Ballot } from '../lib/poll'
 import './PollBoard.css'
 
 interface Props {
@@ -12,6 +13,14 @@ interface Props {
   onBallot: (next: string[]) => void
   /** turns gone by, which is the axis the room is read against */
   turns: number
+  /**
+   * A room that is not there, for the published build that cannot pool one.
+   *
+   * Null wherever there is a service or a second tab to count real people
+   * with. Where it is set it is said on the board, because a chart of invented
+   * figures presented as a measured room would be a different thing entirely.
+   */
+  crowd?: Map<string, Ballot[]> | null
 }
 
 /**
@@ -22,13 +31,16 @@ interface Props {
  * chart is where they moved, laid against the turn that moved them. A final
  * result says who won the room; this says which minute won it.
  */
-export default function PollBoard({ session, speakers, ballot, onBallot, turns }: Props) {
+export default function PollBoard({ session, speakers, ballot, onBallot, turns, crowd = null }: Props) {
   const { votes } = useVotes(session)
   const [showing, setShowing] = useState(false)
 
+  /* real votes over the simulated ones, never the other way about */
+  const floor = useMemo(() => withCrowd(votes, crowd), [votes, crowd])
+
   /* neutral is a line like any other, and always the last one */
   const choices = useMemo(() => [...ballot, NEUTRAL], [ballot])
-  const report = useMemo(() => tally(votes, turns, choices), [votes, turns, choices])
+  const report = useMemo(() => tally(floor, turns, choices), [floor, turns, choices])
 
   const moved = report.changed
   const open = ballot.length >= 2
@@ -45,6 +57,16 @@ export default function PollBoard({ session, speakers, ballot, onBallot, turns }
           mind as often as the debate gives them reason to. Every ballot is kept, so this is not a result — it is
           when the room moved, against the turn that moved it.
         </p>
+        {/* said before the chart rather than under it: whoever reads these
+            numbers has to know what they are before they read them */}
+        {!!crowd?.size && (
+          <p className="poll__simulated" role="note">
+            <strong>{crowd.size} of these voters are simulated.</strong> This build has no service behind it, so real
+            votes cannot be pooled between devices — every phone in the room counts only its own. The simulated floor
+            is derived from the session id and the turn count, so it is the same on every device watching, and it
+            moves as the debate does. Anybody voting here is counted as themselves, on top of it.
+          </p>
+        )}
       </header>
 
       {/* who is standing: it opens as the speakers who have argued — a

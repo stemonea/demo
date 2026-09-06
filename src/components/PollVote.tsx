@@ -1,6 +1,7 @@
 import { useMemo, type CSSProperties } from 'react'
 import { analyse, type AnalysedTurn } from '../lib/analytics'
-import { NEUTRAL, choiceColour, tally, useBallot, useVotes } from '../lib/poll'
+import { withCrowd } from '../lib/audience'
+import { NEUTRAL, choiceColour, tally, useBallot, useVotes, type Ballot } from '../lib/poll'
 import './PollVote.css'
 
 interface Props {
@@ -10,6 +11,14 @@ interface Props {
   ballot: string[]
   /** the debate so far — what a voter is deciding on */
   turns: AnalysedTurn[]
+  /**
+   * A room that is not there, for the published build that cannot pool one.
+   *
+   * A phone watching a replayed debate can count its own vote and nobody
+   * else's, which would put every bar at 100% of one person. This is what puts
+   * a room under the answers — and it is said, under them, that it is one.
+   */
+  crowd?: Map<string, Ballot[]> | null
 }
 
 /**
@@ -46,7 +55,7 @@ function initials(name: string): string {
  * names. A poll that only lets you pick a side reports a room with no
  * undecided people in it, which is not a room anybody has ever moderated.
  */
-export default function PollVote({ session, ballot, turns: debate }: Props) {
+export default function PollVote({ session, ballot, turns: debate, crowd = null }: Props) {
   const turns = debate.length
   const { voter, ballots, choice, changes, cast } = useBallot(session, Math.max(0, turns - 1))
   const { votes } = useVotes(session)
@@ -75,11 +84,12 @@ export default function PollVote({ session, ballot, turns: debate }: Props) {
    * just pressed the button.
    */
   const room = useMemo(() => {
-    if (!ballots.length) return votes
-    const merged = new Map(votes)
+    const floor = withCrowd(votes, crowd)
+    if (!ballots.length) return floor
+    const merged = new Map(floor)
     merged.set(voter, ballots)
     return merged
-  }, [votes, voter, ballots])
+  }, [votes, crowd, voter, ballots])
 
   const choices = useMemo(() => [...ballot, NEUTRAL], [ballot])
   const report = useMemo(() => tally(room, turns, choices), [room, turns, choices])
@@ -213,8 +223,19 @@ export default function PollVote({ session, ballot, turns: debate }: Props) {
           </>
         )}{' '}
         <span className="ballot__where">
-          The room is counted between the tabs of this browser, so a second window is a second voter. Whoever is
-          running the debate sees the same figures turn by turn, and who moved.
+          {crowd?.size ? (
+            <>
+              {crowd.size} of the voters in these figures are simulated: this build has no service behind it, so votes
+              cannot be pooled between the phones watching. The simulated room is worked out from the session and the
+              turn count, so everyone scanning this code sees the same one. Your own answer is real, and it is counted
+              on top of it.
+            </>
+          ) : (
+            <>
+              The room is counted between the tabs of this browser, so a second window is a second voter. Whoever is
+              running the debate sees the same figures turn by turn, and who moved.
+            </>
+          )}
         </span>
       </p>
     </section>
