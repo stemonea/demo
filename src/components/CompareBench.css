@@ -1,0 +1,290 @@
+/* ---- the compare bench --------------------------------------------- *
+ * A turn, three systems, three clocks — advanced by hand.
+ *
+ * Geometry and type only. Every surface here is named in appearance.css beside
+ * the panel it is a sibling of: `.bench__doors` and `.bench__panel` are joined
+ * workspaces like the playground's sheet, `.bench__bar` is a bar like the live
+ * view's, `.bench__input` is a carved field like the annotator's. Restating a
+ * radius or a shadow in this file would be the one place on the site that has
+ * to be remembered separately when the finish changes.
+ * ------------------------------------------------------------------- */
+.bench {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: clamp(12px, 1.8vh, 20px);
+}
+
+/* the same heading every other page has: the name on the left, and what the
+   page does set beside it rather than stacked under it */
+.bench__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.bench__title {
+  margin-top: 8px;
+  font-size: var(--display-md);
+}
+
+.bench__lead {
+  max-width: 56ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/*
+ * The two ways in, side by side and the same size.
+ *
+ * They are alternatives, not steps: one box above the other reads as "do this,
+ * then that", and the whole point of the screen is that either one is enough.
+ */
+.bench__doors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--rule);
+  background: var(--line);
+  align-items: stretch;
+}
+
+/*
+ * A door is a heading, something that fills, and a foot.
+ *
+ * Both of them have all three, which is what makes the writing box and the drop
+ * box end on the same line: the grid already stretches the two panels to a
+ * common height, but with a foot on one side only, the thing being aimed at
+ * inside them stopped at two different places.
+ */
+.bench__door {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px 22px;
+  background: var(--paper);
+}
+
+.bench__door > .drop {
+  flex: 1;
+}
+
+.bench__input {
+  flex: 1;
+  min-height: 132px;
+  padding: 14px 16px;
+  border: var(--rule) solid var(--line);
+  background: var(--carved);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.8;
+  resize: vertical;
+  box-shadow: var(--shadow-carved);
+}
+
+.bench__input::placeholder {
+  color: var(--ink-faint);
+}
+
+/*
+ * The foot: a shade off the paper it sits on, the way every card's is, and run
+ * out to the door's own edges. The bleed has to match the door's padding
+ * exactly — it was two pixels short of it, so the foot's text sat inset from
+ * everything above it.
+ */
+.bench__door-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: auto -22px -20px;
+  padding: 13px 22px;
+  min-height: 48px;
+}
+
+.bench__chars {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.bench__error,
+.bench__notice {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+}
+
+.bench__error {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+
+.bench__notice {
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+  color: var(--warn);
+}
+
+/* ---- the running bench --------------------------------------------- */
+.bench__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 11px 16px;
+  border: var(--rule) solid transparent;
+}
+
+.bench__subject {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  max-width: 32ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bench__progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.bench__state {
+  color: var(--ok);
+}
+
+.bench__tools {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/*
+ * The comparison, as one object: the three names, the turns under them, and
+ * what the pass has cost at its foot. The hairlines between them are the
+ * sheet's own rules, so the panel reads as divided rather than as stacked.
+ */
+.bench__panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  background: var(--line);
+}
+
+.bench__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
+}
+
+.bench__column {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 16px;
+}
+
+.bench__column--joint {
+  box-shadow: inset 0 2px 0 var(--accent);
+}
+
+.bench__name {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.bench__flow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+.bench__rows {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  background: var(--line);
+}
+
+/*
+ * The way on, at the foot of what has landed.
+ *
+ * Repeated here as well as in the bar because the reader is at the bottom of
+ * the last row when they want it, and a control that is only at the top of a
+ * scrolling list is a control they have to go back for.
+ */
+.bench__next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border: none;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background 180ms var(--ease-out);
+}
+
+.bench__next:hover {
+  background: var(--accent-soft);
+}
+
+.bench__totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
+}
+
+.bench__total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 11px 16px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.bench__total-name {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.bench__total-of {
+  font-size: 11px;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 980px) {
+  .bench__doors,
+  .bench__columns,
+  .bench__totals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

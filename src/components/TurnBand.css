@@ -1,0 +1,282 @@
+/* One turn, three readings of it. Shared by the Double page and the compare
+   bench, which make the same measurement and must look as though they do.
+
+   Geometry only: the radius, the shadow and the surfaces are the site's, set in
+   appearance.css beside every other panel — a band is a cell of a sheet, not a
+   card of its own, so what it needs from that sheet is a hairline and nothing
+   more. */
+.band {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  background: var(--line);
+}
+
+/*
+ * How a turn arrives.
+ *
+ * It is computed while the reader waits for it, so it should land rather than
+ * appear: a short rise into place says a row has been added, where a row simply
+ * being there from one frame to the next reads as the list having jumped. Short
+ * and small on purpose — this happens once per turn and a run is many turns, so
+ * anything longer would be a wait added to the wait.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .band {
+    animation: band-land 320ms var(--ease-out) both;
+  }
+}
+
+@keyframes band-land {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* who spoke, how much of it there is, and the way to the words themselves */
+.band__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 16px;
+}
+
+.band__index {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.band__speaker {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* the length, which is what makes a folded turn a known quantity rather than a
+   closed box: a reader can see whether it is a sentence or a paragraph */
+.band__size {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.band__peek {
+  margin-left: auto;
+  padding: 4px 12px;
+  border: none;
+  border-radius: var(--radius-segment);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 11.5px;
+  transition: background 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+
+.band__peek:hover {
+  background: var(--bg-sunken);
+  color: var(--ink);
+}
+
+.band__peek.is-open {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* the source turn, when it was asked for: set as prose, and given a ceiling so
+   that opening a very long one does not push the readings off the screen */
+.band__source {
+  max-height: 26vh;
+  overflow-y: auto;
+  padding: 14px 16px;
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.band__cells {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
+}
+
+.band__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 16px;
+  background: var(--paper);
+  font-size: 13.5px;
+}
+
+/*
+ * The reading itself.
+ *
+ * Given a ceiling and its own scroll rather than being allowed to set the
+ * height of the row: three columns of markup grow at three different rates, and
+ * without this the row is as tall as the wordiest system made it while the
+ * other two sit in white space. Line height is the reading kind, not the
+ * interface kind — this is the one thing on the row anybody actually reads.
+ */
+.band__reading {
+  min-width: 0;
+  max-height: 34vh;
+  overflow-y: auto;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+/*
+ * The fastest of the three on this row.
+ *
+ * Marked on the cell rather than in a legend, because the comparison is the
+ * point of the row — and marked the way the site marks a chosen thing anywhere
+ * else, with the accent inset it uses for a raised selection, rather than with
+ * a colour invented here.
+ */
+.band__cell.is-quickest {
+  background: linear-gradient(180deg, var(--accent-soft), var(--paper) 60%);
+  box-shadow: var(--shadow-selected);
+}
+
+.band__cell.is-quickest .band__ms {
+  color: var(--accent);
+}
+
+.band__cell.is-quickest .band__fill {
+  background: var(--accent);
+}
+
+.band__clock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.band__ms {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  min-width: 7ch;
+  font-variant-numeric: tabular-nums;
+}
+
+/* drawn against the slowest system on this turn, so the bar is read across the
+   row and never against the rest of the debate */
+.band__bar {
+  flex: 1 1 auto;
+  height: 5px;
+  min-width: 0;
+  border-radius: 999px;
+  background: var(--bg-sunken);
+  box-shadow: var(--shadow-carved);
+  overflow: hidden;
+}
+
+.band__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ink-soft);
+  transition: width 320ms var(--ease-out);
+}
+
+.band__missing {
+  color: var(--ink-faint);
+  font-size: 12.5px;
+}
+
+/*
+ * The mark a cell carries instead of a number.
+ *
+ * Set as a word rather than as a dash: a dash in a column of times reads as a
+ * measurement of zero, and the whole claim here is that nobody measured this
+ * one.
+ */
+.band__unmeasured {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/*
+ * What ran this cell, when that is something a time could be misread over.
+ *
+ * Set as a quiet mark at the foot of the reading rather than as a banner over
+ * the row: the caveat belongs to the one column it is true of, and a row where
+ * one system is composed and two are not would otherwise be captioned as though
+ * the whole comparison were a stand-in.
+ */
+.band__served {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+  color: var(--warn);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: help;
+}
+
+@media (max-width: 980px) {
+  /* three columns of markup do not fit a phone: the row becomes three blocks,
+     which keeps every reading whole rather than shaving each to a word */
+  .band__cells {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- a column that is still producing ------------------------------ *
+ * Each system generates in its own cell. Three columns sharing one animation
+ * would say that one thing is happening; three are, at three different speeds,
+ * and that difference is the whole finding.
+ * ------------------------------------------------------------------- */
+.band__cell--working {
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+}
+
+.band__working {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.band__working::after {
+  content: '…';
+  animation: band-working 1.4s steps(4, end) infinite;
+}
+
+@keyframes band-working {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* the field cut down to a cell: it is a status, not a second hero */
+.stream--cell {
+  justify-content: flex-start;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.stream--cell .stream__field {
+  font-size: clamp(7px, 0.6vw, 10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band__working::after {
+    animation: none;
+  }
+}

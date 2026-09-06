@@ -1,0 +1,18 @@
+.tokenlabel {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* the real words, invisible, holding the width open — and never selected */
+.tokenlabel__width {
+  visibility: hidden;
+  user-select: none;
+}
+
+/* what is on screen while the label is being rebuilt */
+.tokenlabel__live {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+}

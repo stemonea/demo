@@ -1,0 +1,336 @@
+/* =====================================================================
+   Where the room stands.
+
+   The same ruled sheet as everything else: a heading, the ballot, four
+   figures across, and one chart under them.
+
+     +-----------------------------------------------+
+     |  on the ballot  [ name ][ name ][ name ]      |
+     +--------+--------+--------+--------------------+
+     | watching | changed | stood aside | took a side|
+     +--------+--------+--------+--------------------+
+     |  share of the room, turn by turn              |
+     +-----------------------------------------------+
+   ===================================================================== */
+
+.poll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  margin-top: clamp(30px, 5vh, 60px);
+}
+
+.poll__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 28px;
+  margin-bottom: clamp(10px, 1.6vh, 18px);
+}
+
+.poll__title {
+  margin-top: 4px;
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+}
+
+.poll__lead {
+  max-width: 56ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---- who is standing ----------------------------------------------- */
+/* The speaker list holds whoever chaired the debate as well as whoever
+   ran in it, and no rule can tell them apart — so the person running it
+   says, and the ballot the watchers see is the one they set. */
+.poll__ballot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 16px;
+  border: var(--rule) solid var(--line);
+  background: var(--bg-sunken);
+}
+
+.poll__ballot-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* where the default came from, so a name that is missing is not a mystery */
+.poll__ballot-note {
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 11px;
+}
+
+.poll__names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.poll__name {
+  --series: var(--series-other);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px;
+  border: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.poll__name:hover,
+.poll__name:focus-visible {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.poll__name.is-on {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* the mark carries the identity; the name stays in ink, as all text does */
+.poll__swatch {
+  width: 9px;
+  height: 9px;
+  background: var(--series);
+  opacity: 0.3;
+  transition: opacity 0.16s ease;
+}
+
+.poll__name.is-on .poll__swatch {
+  opacity: 1;
+}
+
+.poll__empty {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.poll__empty--wide {
+  padding: 22px 18px;
+  border: var(--rule) solid var(--line);
+  background: var(--paper);
+  font-size: 12.5px;
+}
+
+/* the four figures use the same block the running totals do */
+.poll__tallies {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ---- the chart ------------------------------------------------------ */
+.poll__chart {
+  gap: 12px;
+  border: var(--rule) solid var(--line);
+}
+
+.standing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.standing__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* recessive: the grid is what a line is read against, not something to be
+   read itself */
+.standing__grid {
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.standing__tick,
+.standing__label,
+.standing__value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink-faint);
+}
+
+/* text wears text colour — the swatch beside it carries the identity */
+.standing__label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--ink);
+}
+
+.standing__value {
+  fill: var(--ink-soft);
+}
+
+.standing__line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* the 2px surface ring that keeps two heads at the same height apart */
+.standing__head {
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.standing__cross {
+  stroke: var(--ink-faint);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- what is under the cursor -------------------------------------- */
+.standing__tip {
+  position: absolute;
+  top: 8px;
+  left: var(--at);
+  z-index: 2;
+  margin-left: 12px;
+  padding: 8px 11px;
+  border: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+  box-shadow: var(--shadow-popover);
+  pointer-events: none;
+  min-width: 168px;
+}
+
+/* near the right-hand end it would run off the sheet, so it changes sides */
+.standing__tip.is-left {
+  margin-left: 0;
+  transform: translateX(calc(-100% - 12px));
+}
+
+.standing__tip-head {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.standing__tip-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.standing__tip-rows li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+}
+
+.standing__tip-key {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  background: var(--series);
+}
+
+.standing__tip-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.standing__tip-n {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the legend, always ---------------------------------------------- */
+.standing__key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 16px;
+}
+
+.standing__key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+.standing__key-item::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--series);
+}
+
+/* ---- the same thing, read ------------------------------------------- */
+.numbers {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.numbers th,
+.numbers td {
+  padding: 6px 8px;
+  border-bottom: var(--rule) solid var(--line);
+  text-align: right;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.numbers thead th {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.numbers tbody th {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  color: var(--ink);
+}
+
+.numbers__key {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  background: var(--series);
+}
+
+@media (max-width: 720px) {
+  .poll__tallies {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,30 @@
+/*
+ * The code sizes itself against whatever it is put in, and stays square. A
+ * ceiling rather than a fixed size: a phone reads this from across a room, so
+ * it wants to be as large as the panel allows, but a code that grew to fill a
+ * wide panel would be the only thing on it.
+ */
+.qr {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+}
+
+/*
+ * Its own two colours, not the panel's.
+ *
+ * A scanner reads contrast between neighbouring modules, so the ground has to
+ * be painted rather than left to whatever is behind — and it has to be the
+ * lighter of the two. `--paper` and `--ink` are the strongest pair the palette
+ * has, which is what this needs and what a tinted surface would cost it.
+ */
+.qr__ground {
+  fill: var(--paper);
+}
+
+.qr__ink {
+  fill: var(--ink);
+}

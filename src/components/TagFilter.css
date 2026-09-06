@@ -1,0 +1,69 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.filter__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter__all {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.18s ease;
+}
+
+.filter__all:hover {
+  color: var(--accent);
+}
+
+.filter__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Off by default-looking: an inactive chip keeps the colour only in its border,
+   so the ones actually painted in the text above are the ones that read as on. */
+.filter__chip {
+  --tag-color: var(--tag-fallback);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 4px 12px;
+  border: 1px solid color-mix(in srgb, var(--tag-color) 35%, transparent);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.filter__chip:hover {
+  border-color: var(--tag-color);
+  color: var(--ink);
+}
+
+.filter__chip.is-on {
+  border-color: color-mix(in srgb, var(--tag-color) 60%, transparent);
+  background: color-mix(in srgb, var(--tag-color) 14%, transparent);
+  color: var(--tag-color);
+}
+
+.filter__count {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: currentColor;
+}

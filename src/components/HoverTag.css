@@ -1,0 +1,306 @@
+/* At rest the markers are folded to zero width, so a page nobody is pointing at
+   looks exactly as it did before, and only the hovered text makes room for its
+   tag. */
+.ht {
+  display: inline;
+  /* never override the cursor of what it sits in — a nav link stays a link */
+  cursor: inherit;
+}
+
+/* only the floating variant needs it; everywhere else it is not rendered */
+.ht__ghost {
+  display: none;
+}
+
+.ht__body {
+  display: inline;
+}
+
+.ht__mark {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  vertical-align: baseline;
+  color: var(--tag-color, var(--accent));
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 0.46em, 19px);
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: pre;
+  opacity: 0;
+  transition: max-width 0.24s ease, opacity 0.18s ease, padding 0.24s ease;
+}
+
+.ht.is-on .ht__mark {
+  max-width: 14em;
+  padding-inline: 0.28em;
+  opacity: 1;
+}
+
+/* A tag that closes itself is how it reads at rest, so its markers are not
+   folded away: `<ARGUSTREAM/>` is the resting mark, and hovering opens it into
+   `<argustream>ARGUSTREAM</argustream>` around the name it stands for. */
+.ht--self .ht__mark {
+  max-width: 6em;
+  padding-inline: 0.04em;
+  opacity: 1;
+  font-size: 0.74em;
+}
+
+.ht--self.is-on .ht__mark {
+  max-width: 14em;
+  padding-inline: 0.28em;
+}
+
+.ht__text {
+  transition: color 0.18s ease;
+}
+
+/*
+ * A word cannot be broken between its letters.
+ *
+ * Each character sits in a box of its own, and boxes are places a line is
+ * allowed to break — so without this a heading would wrap in the middle of a
+ * word rather than at the space, which is the one thing giving the characters
+ * boxes could have cost.
+ */
+.ht__word {
+  white-space: nowrap;
+}
+
+/* the box, the width of the letter that belongs in it */
+.ht__cell {
+  position: relative;
+  display: inline-block;
+}
+
+/*
+ * The letter itself, holding the box open and carrying the text.
+ *
+ * Transparent rather than hidden: `visibility: hidden` would take it out of
+ * the selection and away from a screen reader, and this is the copy that has
+ * to stay readable — what is painted over it is noise for part of a second.
+ */
+.ht__slot {
+  color: transparent;
+}
+
+/*
+ * What is actually painted, laid over the box and centred in it.
+ *
+ * Out of the flow, so a glyph wider than the letter it stands in for overhangs
+ * its box instead of pushing everything after it along. Not selectable: the
+ * letter underneath is the one that copies.
+ */
+.ht__glyph {
+  position: absolute;
+  inset: 0;
+  display: block;
+  text-align: center;
+  color: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ht.is-on .ht__text {
+  color: var(--tag-color, var(--accent));
+}
+
+/* ---- inside a display heading: markers that cannot move the line --- *
+ * At display size a marker is wider than the word it belongs to, and opening it
+ * inline pushes the whole heading sideways. A heading that moves under the
+ * pointer leaves it, which closes the tag, which moves the heading back under
+ * the pointer, which opens it again: the two states chase each other for as
+ * long as the cursor is anywhere near the edge, and the page never settles.
+ * So above this size the markers come out of the flow and sit over the word
+ * instead of beside it. Nothing reflows, and there is nothing to chase.
+ */
+.display .ht {
+  position: relative;
+}
+
+.display .ht__mark {
+  position: absolute;
+  bottom: 100%;
+  max-width: none;
+  padding-inline: 0;
+  font-size: clamp(10px, 0.17em, 20px);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/*
+ * The run of noise is held in a box of its own, of a height the heading sets.
+ *
+ * The alphabet the scramble is drawn from contains marks the display face does
+ * not carry — the shaded block and the box-drawing rules — so mid-animation the
+ * browser falls back to another font, whose ascent and descent are not the
+ * display face's. The line box grows to fit them and shrinks again a frame
+ * later, and everything below the heading rises and falls with it. Giving the
+ * run a fixed height, aligned by geometry rather than by a baseline the
+ * fallback font gets to move, means whatever lands inside it cannot touch the
+ * line.
+ */
+/*
+ * The real words hold the box; the animation is drawn over them.
+ *
+ * A heading at this size wraps, and how many lines it takes is not something a
+ * fixed height can be told in advance — cut one to a single line and a title
+ * that runs to two simply paints its second line over the paragraph below.
+ * So the words themselves stay in the flow, invisible, and are what the heading
+ * is measured and wrapped by; the run that scrambles is lifted out of the flow
+ * and laid over them. The layout is then the finished title's layout at every
+ * moment of the animation, which is both why nothing moves and why nothing can
+ * end up on top of anything.
+ */
+.display .ht {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.display .ht__ghost {
+  display: inline;
+  visibility: hidden;
+}
+
+.display .ht__body {
+  position: absolute;
+  inset: 0;
+  /* A hair of slack.
+     The copy underneath measures the very same markup, so the two set to the
+     same width — but sub-pixel rounding can still differ by a fraction, and a
+     fraction is enough to push the last word onto a second line that the clip
+     below then removes altogether. */
+  right: -1px;
+}
+
+/* the noise is clipped to the space the real words take, so a run that happens
+   to set wider cannot spill past them */
+.display .ht__body .ht__text {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+/*
+ * The band the markers stand in.
+ *
+ * They are out of the flow — that is what stops them pushing the heading
+ * sideways as they open — but out of the flow also means nothing makes room for
+ * them, and they were landing on the eyebrow above the title. The heading
+ * reserves the band itself, so the markers have somewhere of their own to be.
+ */
+.display:has(.ht__mark) {
+  padding-top: clamp(20px, 0.34em, 36px);
+}
+
+.display .ht__mark:first-of-type {
+  left: 0;
+}
+
+.display .ht__mark:last-of-type {
+  right: 0;
+}
+
+.display .ht.is-on .ht__mark {
+  padding-inline: 0;
+}
+
+/* ---- stacked: display-size type ---------------------------------- *
+ * The hero line is already as wide as the screen, so its markers cannot push
+ * their neighbours around: they sit above the word instead, and the layout
+ * never moves.                                                              */
+.ht--stacked {
+  position: relative;
+}
+
+.ht--stacked .ht__mark {
+  position: absolute;
+  bottom: 100%;
+  max-width: none;
+  padding-inline: 0;
+  font-size: clamp(10px, 0.16em, 18px);
+  line-height: 1.6;
+}
+
+.ht--stacked .ht__mark:first-of-type {
+  left: 0;
+}
+
+.ht--stacked .ht__mark:last-of-type {
+  right: 0;
+}
+
+.ht--stacked.is-on .ht__mark {
+  padding-inline: 0;
+}
+
+/* A nav label is too short to carry both markers on one line, so in the bar they
+   sandwich it: the opener above, the closer below, both centred. */
+.nav .ht--stacked .ht__mark {
+  font-size: 9px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.nav .ht--stacked .ht__mark:first-of-type {
+  bottom: calc(100% - 0.1em);
+}
+
+.nav .ht--stacked .ht__mark:last-of-type {
+  bottom: auto;
+  top: calc(100% - 0.1em);
+}
+
+/* ---- floating: bars that must not reflow -------------------------- *
+ * The resting box stays in the layout as an invisible ghost and the tagged form
+ * is drawn over it, so nothing around it moves — a link can never slide out
+ * from under the cursor between the press and the release. The floating layer
+ * takes no pointer events, so every click reaches the link underneath.       */
+.ht--float {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.ht--float .ht__ghost {
+  display: inline;
+  visibility: hidden;
+}
+
+/* At rest the floating layer is inert, so a click anywhere near it reaches
+   whatever is underneath. Once it has opened it is the thing being pointed at —
+   it is drawn over its own link and is the only thing the cursor can find there
+   — so it takes pointer events back and the click travels up to the anchor it
+   sits inside. Opened text that could not be clicked would be a target that
+   grows out from under the pointer. */
+.ht--float .ht__body {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: baseline;
+  pointer-events: none;
+  transition: background 0.2s ease, padding 0.2s ease;
+}
+
+.ht--float.is-on .ht__body {
+  pointer-events: auto;
+}
+
+.ht--float.is-on .ht__body {
+  z-index: 3;
+  margin-left: -9px;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ht__mark {
+    transition: none;
+  }
+}

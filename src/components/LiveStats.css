@@ -1,0 +1,1260 @@
+/* =====================================================================
+   The running statistics, under the debate.
+
+   A section of its own, not a continuation of the box above it: it opens
+   with its own heading, stands clear of the debate, and is read top to
+   bottom then left to right — how much of it there is, then the question
+   on the left and the answer on the right.
+
+     +-----------------------------------------------+
+     |  turns  speakers  claims  premises  mentions  |
+     +-----------------------+-----------------------+
+     |  NARROW THE VIEW      |  WHAT WAS ARGUED      |
+     |  [ who ][ named ]     |  [both][claims][prem] |
+     |  ------------------   |  showing N of M …     |
+     |  one list, one        |  ------------------   |
+     |  scroll               |  the components       |
+     +-----------------------+-----------------------+
+
+   The band used to be three lists side by side, each scrolling in its own
+   slot: the reader had to work out which one drove which, and the entity
+   table had five columns inside a third of the width. Now the left panel
+   is plainly the control — one list at a time, under a heading that says
+   what pressing a row does — and the right panel is plainly the result,
+   with the filter written out directly over the list it has shortened.
+   ===================================================================== */
+
+.stats {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  /*
+   * Clear of the debate above it.
+   *
+   * The two used to sit a hairline apart, which read as one long ruled sheet
+   * broken in an odd place rather than as two things. The space, and the
+   * heading that follows it, are what say the debate has ended and something
+   * else has begun.
+   */
+  margin-top: clamp(30px, 5vh, 60px);
+}
+
+/* ---- the heading that opens the section --------------------------- */
+.stats__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 28px;
+  margin-bottom: clamp(10px, 1.6vh, 18px);
+}
+
+.stats__title {
+  margin-top: 4px;
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+}
+
+.stats__lead {
+  max-width: 54ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---- the headline numbers ------------------------------------------ */
+/* No chart: five numbers, each with what it counts written under it. A
+   number this size is the fastest thing here to read, and the second
+   line is what stops it being ambiguous. */
+.tallies {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+}
+
+.tally {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 14px 18px 16px;
+  background: var(--paper);
+}
+
+.tally__value {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.5vw, 34px);
+  line-height: 1;
+  /* a figure that changes on every turn must not shift the ones beside it */
+  font-variant-numeric: tabular-nums;
+}
+
+.tally__label {
+  margin-top: 5px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.tally__of {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink-faint);
+}
+
+/* ---- the two panels ------------------------------------------------- */
+/* The question on the left, the answer on the right. Both have the full
+   height of the band, and each holds exactly one scrolling list. */
+.stats__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+  /* the band has a height of its own, and each panel scrolls inside it
+     rather than the page growing as turns arrive */
+  height: clamp(440px, 60vh, 680px);
+}
+
+.cell {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+  background: var(--paper);
+}
+
+.cell__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.cell__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* how many components the list on the right is currently showing, said
+   where the heading is rather than only in the sentence below it */
+.cell__count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell__count-of {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+/* the one line that says the rows below are pressable, next to the heading
+   that says what they are */
+.cell__hint {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.cell__note {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+
+.cell__empty {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+/* ---- the two ways of narrowing, one at a time ---------------------- */
+/*
+ * A pair of tabs, not two stacked panels.
+ *
+ * They are the same act — narrow the list on the right — so they share one
+ * heading and one slot, and only one is on screen. That is what gives the
+ * entity table the width its five columns need, and it leaves the reader with
+ * one list to scroll on this side instead of two half-height ones.
+ *
+ * A tab whose list currently has a filter set carries a dot, so a narrowing
+ * made on the other tab is never invisible.
+ */
+.lens {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
+  border-bottom: var(--rule) solid var(--line);
+}
+
+.lens__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 6px;
+  white-space: nowrap;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.lens__tab:hover,
+.lens__tab:focus-visible {
+  color: var(--ink);
+  background: var(--bg-sunken);
+}
+
+.lens__tab.is-on {
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
+
+/* how many rows are behind the tab: the reader knows what they are opening */
+.lens__n {
+  padding: 1px 6px;
+  background: var(--bg-sunken);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.lens__tab.is-on .lens__n {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* how many rows on that tab are currently held: a filter set on the tab you
+   are not looking at must never be invisible, and with several selectable at
+   once the number is what says how many */
+.lens__on {
+  min-width: 16px;
+  padding: 1px 4px;
+  background: var(--accent);
+  color: var(--on-fill);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* the slot the chosen list lives in: it takes the rest of the panel, and the
+   list inside it is the only thing that scrolls */
+.lens__panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* ---- the legend --------------------------------------------------- */
+/* Two series, so it is always here. The swatch carries the identity and
+   the word repeats it, which is what keeps the chart readable to someone
+   who cannot separate the two hues. */
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.key__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+.key__item::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--key-color);
+}
+
+.key__item--claim {
+  --key-color: var(--tag-claim);
+}
+
+.key__item--premise {
+  --key-color: var(--tag-premise);
+}
+
+/* "outside any argument" is a deliberate neutral, and it is always spelled
+   out rather than left to the absence of a colour */
+.key__item--outside {
+  --key-color: var(--chart-neutral);
+}
+
+/* ---- one row per speaker, and each one is a way in ----------------- */
+.speakers {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/*
+ * A speaker block is the target, not a small link inside it: the number and
+ * the bar are what raise the question.
+ *
+ * It used to carry no chrome at all at rest, on the argument that the band is
+ * read more often than it is pressed. That argument cost the reader the one
+ * thing they needed to know — that the row does something — so the row now
+ * sits on the sunken surface with a rule down its side, the way every other
+ * pressable thing on the sheet does.
+ */
+.speaker__row {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  padding: 10px 12px 11px;
+  border: none;
+  border-left: 3px solid var(--line-strong);
+  background: var(--bg-sunken);
+  text-align: left;
+  color: inherit;
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.speaker__row:hover,
+.speaker__row:focus-visible {
+  border-left-color: var(--accent);
+}
+
+.speaker__row:hover .speaker__name,
+.speaker__row:focus-visible .speaker__name {
+  color: var(--accent);
+}
+
+.speaker__row.is-open {
+  border-left-color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 var(--rule) var(--line-strong);
+}
+
+.speaker__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/*
+ * The box that says this row is one of several that can be held at once.
+ *
+ * Empty at rest, ticked when the speaker is in view. A row that filters is a
+ * checkbox whatever it is drawn as, so it is drawn as one — and the reader can
+ * see from the column of boxes that picking a second one is allowed.
+ */
+.speaker__mark {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--on-fill);
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.speaker__row:hover .speaker__mark,
+.speaker__row:focus-visible .speaker__mark {
+  border-color: var(--accent);
+}
+
+.speaker__row.is-open .speaker__mark {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.speaker__row.is-open .speaker__mark::after {
+  content: '\2713';
+}
+
+.speaker__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.16s ease;
+}
+
+.speaker__turns {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * The track is the full scale, the bar is this speaker's share of it.
+ *
+ * Every speaker is measured against the same maximum, so the lengths can be
+ * compared — a bar that filled its own row would say every speaker argued the
+ * same amount, which is the one thing this band exists to disprove.
+ */
+.speaker__track {
+  display: block;
+  height: 14px;
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+}
+
+.speaker__bar {
+  display: flex;
+  gap: 2px; /* the surface gap that keeps two fills from reading as one */
+  height: 100%;
+  min-width: 2px;
+  transition: width 0.45s ease;
+}
+
+.speaker__seg {
+  min-width: 3px;
+}
+
+.speaker__seg--claim {
+  background: var(--tag-claim);
+}
+
+.speaker__seg--premise {
+  background: var(--tag-premise);
+}
+
+.speaker__counts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 12px;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+/* the number in ink, the word beside it muted: the colour here is the
+   mark's, and text keeps its own */
+.count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.count strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 12.5px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.count--claim::before,
+.count--premise::before {
+  content: '';
+  align-self: center;
+  width: 7px;
+  height: 7px;
+}
+
+.count--claim::before {
+  background: var(--tag-claim);
+}
+
+.count--premise::before {
+  background: var(--tag-premise);
+}
+
+/* what pressing this row will do, written on the row itself */
+.speaker__cue {
+  margin-left: auto;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color 0.16s ease;
+}
+
+.speaker__row:hover .speaker__cue,
+.speaker__row:focus-visible .speaker__cue {
+  color: var(--accent);
+}
+
+.speaker__row.is-open .speaker__cue {
+  color: var(--ink);
+}
+
+/* ---- finding one name among a couple of hundred -------------------- */
+/* A real debate names far more things than fit a list. The order is by how
+   often, which answers "what is this debate about"; the search answers "what
+   did they say about *this*", and the two are different questions. */
+.find {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.find__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 9px;
+  border: var(--rule) solid var(--line-strong);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+}
+
+.find__input::placeholder {
+  color: var(--ink-faint);
+}
+
+.find__input:focus-visible {
+  border-color: var(--accent);
+}
+
+.find__count {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the names themselves ------------------------------------------ */
+/*
+ * One row per entity, after aliases are folded together.
+ *
+ * The table above is about classes — are dates argued with, or only cited —
+ * and this is about a particular name: how often it came up, and how much of
+ * that was inside an argument rather than in passing. The bar is the same
+ * three-part reading the analytics figures give the entity, so a row here and
+ * a bar in the band below cannot say different things about it.
+ */
+.named {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.named__row {
+  --tag-color: var(--tag-fallback);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 11px 9px;
+  border: none;
+  border-left: 3px solid var(--line-strong);
+  background: var(--bg-sunken);
+  text-align: left;
+  color: inherit;
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.named__row:hover,
+.named__row:focus-visible {
+  border-left-color: var(--accent);
+}
+
+.named__row.is-on {
+  border-left-color: var(--tag-color);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 var(--rule) var(--line-strong);
+}
+
+.named__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* the same tick the other two lists use, in the entity's own colour */
+.named__mark {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border: var(--rule) solid var(--tag-color);
+  background: color-mix(in srgb, var(--tag-color) 22%, transparent);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--on-fill);
+  transition: background 0.16s ease;
+}
+
+.named__row:hover .named__mark,
+.named__row:focus-visible .named__mark {
+  background: color-mix(in srgb, var(--tag-color) 45%, transparent);
+}
+
+.named__row.is-on .named__mark {
+  background: var(--tag-color);
+}
+
+.named__row.is-on .named__mark::after {
+  content: '\2713';
+}
+
+.named__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.named__row.is-on .named__name {
+  font-weight: 700;
+}
+
+/* the NER class the name belongs to, in its own colour: the row is about the
+   name, but which kind of thing it is is never guessed from the colour alone */
+.named__type {
+  flex: none;
+  padding: 1px 6px;
+  border: var(--rule) solid color-mix(in srgb, var(--tag-color) 55%, transparent);
+  color: var(--tag-color);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+}
+
+.named__total {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* the bar is the entity's share of the most-named one; the segments inside it
+   are its own split between claim, premise and neither */
+.named__track {
+  display: flex;
+  gap: 2px;
+  width: var(--fill);
+  min-width: 3px;
+  height: 10px;
+}
+
+.named__seg {
+  min-width: 3px;
+}
+
+.named__seg--claim {
+  background: var(--tag-claim);
+}
+
+.named__seg--premise {
+  background: var(--tag-premise);
+}
+
+.named__seg--outside {
+  background: var(--chart-neutral);
+}
+
+/* ---- what gets named, and where ------------------------------------ */
+/*
+ * One table, five columns: how often a type is named, how many claims name
+ * one, how many premises do, and how many mentions are left over in between.
+ * Reading across a row is the point of it — a name that is said constantly
+ * and argued with almost never is a row whose first figure is large and whose
+ * middle two are not.
+ *
+ * These were two separate panels, which meant reading the same eight names
+ * twice to put them back together. The middle two columns are also the pair a
+ * sequential pipeline cannot produce at all: it has to find the entities
+ * before it knows the argument spans, by which time the spans are gone.
+ *
+ * Only the column the table is ordered by is drawn as a bar. Three sets of
+ * bars in a cell this wide are three sets of stubs; one set of lengths, under
+ * the heading that says what they measure, is a chart.
+ */
+.table {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.table__head,
+.table__row {
+  --tag-color: var(--tag-fallback);
+  display: grid;
+  /* px, not em: the head sets a smaller font of its own, and em columns would
+     resolve differently there — the two would stop lining up */
+  grid-template-columns: minmax(72px, 1fr) 92px 84px 92px 52px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.table__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0 4px 7px;
+  border-bottom: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+}
+
+.table__label,
+.table__sort {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-faint);
+}
+
+.table__label--last {
+  text-align: right;
+}
+
+/* a heading that reorders the table says so by being pressable, and the one
+   in force says so by being the only one in ink — with the caret that names
+   the direction, so the ranking is never inferred from the bars alone */
+.table__sort {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  padding: 3px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+.table__sort:hover,
+.table__sort:focus-visible {
+  color: var(--accent);
+}
+
+.table__sort.is-on {
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
+
+.table__caret {
+  font-size: 9px;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.table__sort:hover .table__caret,
+.table__sort.is-on .table__caret {
+  opacity: 1;
+}
+
+.table__row {
+  padding: 9px 4px;
+  border: none;
+  border-bottom: var(--rule) solid var(--line);
+  background: transparent;
+  color: inherit;
+  transition: background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.table__row:last-child {
+  border-bottom: none;
+}
+
+.table__row:hover,
+.table__row:focus-visible {
+  background: var(--bg-sunken);
+  box-shadow: inset 3px 0 0 var(--line-strong);
+}
+
+.table__row.is-on {
+  background: color-mix(in srgb, var(--tag-color) 12%, transparent);
+  box-shadow: inset 3px 0 0 var(--tag-color);
+}
+
+.table__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+/*
+ * The swatch is also the checkbox.
+ *
+ * It already carries the colour the tag is drawn in everywhere else in the
+ * app, so making it the thing that gets ticked keeps one mark doing one job:
+ * this is the type, and this is whether it is being held. Several can be held
+ * at once, which is why it is a tick and not a dot.
+ */
+.table__key {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border: var(--rule) solid var(--tag-color);
+  background: color-mix(in srgb, var(--tag-color) 22%, transparent);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--on-fill);
+  transition: background 0.16s ease;
+}
+
+.table__row:hover .table__key,
+.table__row:focus-visible .table__key {
+  background: color-mix(in srgb, var(--tag-color) 45%, transparent);
+}
+
+.table__row.is-on .table__key {
+  background: var(--tag-color);
+}
+
+.table__row.is-on .table__key::after {
+  content: '\2713';
+}
+
+.table__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* one figure, with the bar behind it when this is the ranked column */
+.figure {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.figure__track {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 10px;
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+}
+
+.figure__bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--ink-soft);
+  transition: width 0.45s ease;
+}
+
+.figure__bar--claim {
+  background: var(--tag-claim);
+}
+
+.figure__bar--premise {
+  background: var(--tag-premise);
+}
+
+.figure__n {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* a figure in an unranked column is still a figure, only quieter */
+.figure:not(.figure--ranked) .figure__n {
+  color: var(--ink-soft);
+}
+
+.table__loose {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-align: right;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- what was argued ----------------------------------------------- */
+.said__filters {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.said__filters .toggle {
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+/*
+ * The state of the list, over the list.
+ *
+ * It used to sit in a bar above all three panels, a long way from the rows it
+ * had shortened. Here it is the line the reader crosses on the way into the
+ * components, so a short list is never read as the whole debate — and every
+ * part of it carries the way to undo it.
+ */
+.showing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--line);
+  background: var(--bg-sunken);
+}
+
+.showing.is-narrowed {
+  border-left-color: var(--accent);
+}
+
+.showing__all {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+.picks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/*
+ * One narrowing, however many values it holds.
+ *
+ * The phrase is the filter and the names sit inside it — "naming any of PERSON,
+ * DATE" — rather than one filter per name with the label repeated in front of
+ * each. Each name keeps its own × , so a filter of four types can be taken
+ * apart one type at a time.
+ */
+.pick {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px 3px 9px;
+  border: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+  font-size: 11px;
+}
+
+.pick__label {
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+
+/*
+ * With more than one value the label becomes the switch.
+ *
+ * Union or intersection is the question the reader is actually asking of a
+ * multi-type filter — "components that name a person *or* a date" against
+ * "components that name a person *and* a date" — and the second is the one the
+ * joint schema exists to be able to answer. It belongs on the word that says
+ * which is in force, not in a separate control somewhere else on the band.
+ */
+.pick__match {
+  padding: 1px 5px;
+  border: var(--rule) dashed var(--line-strong);
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.pick__match strong {
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pick__match:hover,
+.pick__match:focus-visible {
+  border-color: var(--accent);
+  border-style: solid;
+  color: var(--accent);
+}
+
+.pick__values {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.pick__value {
+  --tag-color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 1px 1px 7px;
+  border: var(--rule) solid color-mix(in srgb, var(--tag-color) 55%, transparent);
+  background: color-mix(in srgb, var(--tag-color) 14%, transparent);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pick__x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 14px;
+  line-height: 1;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.pick__x:hover,
+.pick__x:focus-visible {
+  background: color-mix(in srgb, var(--tag-color) 30%, transparent);
+  color: var(--ink);
+}
+
+.picks__clear {
+  padding: 4px 10px;
+  border: var(--rule) solid var(--line-strong);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.picks__clear:hover,
+.picks__clear:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.said {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* one component: what it is, who said it and when, what it said, what it
+   named. The kind comes first because that is what the list is filtered by. */
+.said__item {
+  /* same reason as the feed: three hundred components, of which a dozen are
+     ever on screen at once */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 96px;
+  --tag-color: var(--tag-claim);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 11px 0 13px 12px;
+  border-left: 3px solid var(--tag-color);
+  border-bottom: var(--rule) solid var(--line);
+}
+
+.said__item:last-child {
+  border-bottom: none;
+}
+
+.said__item--premise {
+  --tag-color: var(--tag-premise);
+}
+
+.said__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.said__turn {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.said__kind {
+  padding: 1px 7px;
+  border: var(--rule) solid var(--tag-color);
+  color: var(--tag-color);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.said__speaker {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.said__text {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+/* the entities the component named, as they were said */
+.said__named {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.said__mention {
+  --tag-color: var(--tag-fallback);
+  padding: 1px 7px;
+  border-bottom: 2px solid color-mix(in srgb, var(--tag-color) 70%, transparent);
+  background: color-mix(in srgb, var(--tag-color) 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink);
+}
+
+/* the mention that answers the filter the list is under */
+.said__mention.is-hit {
+  background: color-mix(in srgb, var(--tag-color) 26%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tag-color) 55%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speaker__bar,
+  .figure__bar {
+    transition: none;
+  }
+}
+
+@media (max-width: 1240px) {
+  .tallies {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* five numbers over two or three columns leaves one cell short; the last
+     figure takes the slack rather than a blank square sitting next to it */
+  .tally:last-child {
+    grid-column: span 2;
+  }
+
+  .table__head,
+  .table__row {
+    grid-template-columns: minmax(64px, 1fr) 80px 74px 80px 46px;
+    gap: 8px;
+  }
+}
+
+/* One column: the control first, then the list it drives, in the order they
+   are used. The band gives up its own height here — two full-width panels
+   stacked inside a fixed one would be two slots half a screen tall. */
+@media (max-width: 900px) {
+  .stats__row {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .speakers,
+  .table,
+  .named {
+    max-height: 320px;
+  }
+
+  .said {
+    max-height: 480px;
+  }
+}
+
+@media (max-width: 720px) {
+  .tallies {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lens {
+    grid-template-columns: 1fr;
+  }
+
+  .lens__tab {
+    justify-content: flex-start;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+  }
+
+  .lens__tab.is-on {
+    border-bottom-color: transparent;
+    border-left-color: var(--ink);
+  }
+
+  .table__head,
+  .table__row {
+    grid-template-columns: minmax(56px, 1fr) 72px 66px 72px 40px;
+    gap: 7px;
+  }
+}

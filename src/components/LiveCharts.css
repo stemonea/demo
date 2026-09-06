@@ -1,0 +1,103 @@
+/* =====================================================================
+   The deeper figures, under the explorer.
+
+   Same sheet, same ruling: four cells with a hairline between them, two
+   cross-sections across the top and two full-width readings under them.
+
+     +-------------------+-------------------+
+     | speakers x        | invoked together  |
+     | entities          |                   |
+     +-------------------+-------------------+
+     | how each entity is used               |
+     +---------------------------------------+
+     | turn by turn                          |
+     +---------------------------------------+
+   ===================================================================== */
+
+.deep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  margin-top: clamp(26px, 4vh, 48px);
+}
+
+.deep__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 28px;
+  margin-bottom: clamp(8px, 1.4vh, 16px);
+}
+
+.deep__title {
+  margin-top: 4px;
+  font-size: clamp(1.15rem, 1.7vw, 1.6rem);
+}
+
+.deep__lead {
+  max-width: 56ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.deep__empty {
+  padding: 22px 18px;
+  border: var(--rule) solid var(--line);
+  background: var(--paper);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.deep__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+}
+
+/* `.cell` comes from LiveStats: same padding, same paper, same column. The
+   ones here differ only in that they hold a figure rather than a list, and a
+   figure sizes itself rather than scrolling inside a fixed slot.
+
+   `min-width: 0` is what lets a figure wider than its cell scroll *itself*
+   rather than being clipped; `overflow: hidden` is then safe again, and is
+   what keeps anything that still overruns from being painted across whatever
+   is beside it. The two go together — the clipping bug was the first without
+   the second. */
+.deep__cell {
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.deep__cell--wide {
+  grid-column: 1 / -1;
+}
+
+/*
+ * Room under the timeline for the bar that scrolls it.
+ *
+ * On macOS the scrollbar is an overlay: it is drawn *over* the content rather
+ * than beside it, so with the grid ending flush at the bottom of its box the
+ * bar sat across the last row of dots and the name beside them. The gutter is
+ * reserved where the browser supports it and paid for in padding where it does
+ * not, so the bottom row is legible under the bar in either case.
+ */
+.deep__cell .timeline {
+  padding-bottom: 14px;
+  scrollbar-gutter: stable;
+}
+
+
+@media (max-width: 900px) {
+  .deep__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .deep__cell--wide {
+    grid-column: auto;
+  }
+}

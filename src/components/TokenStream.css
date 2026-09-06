@@ -1,0 +1,114 @@
+.stream {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.stream__field {
+  margin: 0;
+  font-family: var(--font-mono);
+  /* 92 columns of a monospace face are ~55em wide: a band, not a backdrop */
+  font-size: clamp(4px, 1.3vw, 22px);
+  /* box-drawing glyphs only connect at line-height 1 and no tracking */
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--stream-noise);
+  white-space: pre;
+  cursor: default;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+/* A field that covers the box it is given, and knows nothing beyond it: it is
+   its own container, so the glyphs are sized against the portion being drawn
+   rather than against the window, and the grid is however many of them fit. The
+   same component in a half-page band and in a side panel therefore reads the
+   same, and resizing the portion is what changes it. */
+.stream--fit {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+}
+
+/* the starting size only: once the box has been measured, the field is given
+   the exact type that makes a whole grid land on every edge of it */
+.stream--fit .stream__field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-size: clamp(15px, 6.5cqh, 30px);
+}
+
+/*
+ * Width alone: the run spans the panel, and keeps the type its own rules set.
+ *
+ * `overflow: hidden` is the guard, not the mechanism — the column count is
+ * rounded down so nothing should reach the edge, but a fractional pixel in the
+ * measurement must never be able to push a line out over the panel beside it.
+ */
+.stream--fit-width {
+  width: 100%;
+  overflow: hidden;
+}
+
+.stream--fit-width .stream__field {
+  position: relative;
+  width: 100%;
+}
+
+/* one character, measured rather than assumed — never in the flow */
+.stream__probe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* what the tagger emits reads through the noise */
+.stream__tag {
+  color: var(--tag-color);
+  transition: color 0.25s ease;
+}
+
+/* a field that answers the pointer says so before it is pressed */
+.stream--interactive .stream__field {
+  cursor: crosshair;
+}
+
+/*
+ * The wavefront. `--charge` is how hard the front is standing on this run, in
+ * quarters: the noise it has aligned comes up out of the field to the charge
+ * colour and carries a halo the width of its own type, so the ring reads as
+ * lit rather than merely recoloured.
+ *
+ * No transition, deliberately. The front is redrawn several times a second and
+ * a cell is under it for only two or three of those frames; a colour easing in
+ * over a quarter of a second would never arrive, and the ring would smear into
+ * a grey band instead of passing.
+ */
+.stream__charged {
+  color: color-mix(in srgb, var(--stream-charge) calc(var(--charge) * 100%), var(--stream-noise));
+  text-shadow: 0 0 calc(var(--charge) * 0.6em)
+    color-mix(in srgb, var(--stream-charge) calc(var(--charge) * 45%), transparent);
+  transition: none;
+}
+
+/* a tag the front crosses is lit, not overwritten: it keeps its own colour and
+   is pulled part of the way towards the charge, so the markup stays readable */
+.stream__tag.stream__charged {
+  color: color-mix(in srgb, var(--stream-charge) calc(var(--charge) * 45%), var(--tag-color));
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

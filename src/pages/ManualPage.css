@@ -1,0 +1,345 @@
+.manual {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: clamp(12px, 2vh, 22px);
+}
+
+.manual__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.manual__title,
+.manual__section {
+  margin-top: 8px;
+  font-size: var(--display-md);
+}
+
+.manual__lead {
+  max-width: 56ch;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.manual__message {
+  padding: 9px 12px;
+  border-left: 3px solid var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+  color: var(--warn);
+  font-size: 12.5px;
+}
+
+
+/* ---- tag set ------------------------------------------------------ */
+.setbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.setbox__empty {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.setbox__add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.setbox__input {
+  flex: 1 1 220px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+}
+
+.setbox__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.chip--inline {
+  padding: 2px 9px;
+  font-size: 10.5px;
+}
+
+ /* both are rendered as <Strip>: one row that scrolls instead of stacking */
+.chips {
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.chip {
+  --chip: var(--tag-fallback);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border: 1px solid color-mix(in srgb, var(--chip) 55%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--chip) 10%, transparent);
+  color: var(--chip);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+.chip--locked {
+  opacity: 0.85;
+}
+
+.chip__remove {
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+}
+
+kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: var(--bg-sunken);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.workspace__side {
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* each instrument is its own cell of the column */
+.workspace__panel {
+  padding: 12px 14px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workspace__side::after {
+  content: none;
+}
+
+.workspace__code {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.workspace__exports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+ /* the list stops growing after a few rows and scrolls on its own, so a long
+   annotation never turns the panel into an endless pile */
+.spanlist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: min(300px, 34vh);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  padding-right: 2px;
+}
+
+.spanlist::-webkit-scrollbar {
+  width: 6px;
+}
+
+.spanlist::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+
+.spanlist::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.spanlist__item {
+  flex: none;
+}
+
+.spanlist__empty {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.spanlist__item.is-active {
+  outline: 1px solid var(--ink);
+}
+
+/* the row, and the span inside it as a target: the same two rules the
+   popover is drawn with in `SpanCorrector.css`, which is where the pair
+   they belong to is explained */
+.spanlist__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.spanlist__pick {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.spanlist__item {
+  --chip: var(--tag-fallback);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 10px;
+  border-left: 3px solid var(--chip);
+  background: var(--bg-sunken);
+}
+
+/* the span being corrected is the one the eye should be on */
+.spanlist__item.is-editing {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.spanlist__label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--chip);
+}
+
+.spanlist__text {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spanlist__remove {
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+
+.spanlist__remove:hover {
+  color: var(--bad);
+}
+
+/* ---- what a loaded file turned out to be --------------------------- */
+.setbox__note--formats code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.setbox__ok {
+  padding-left: 12px;
+  border-left: 2px solid var(--accent);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* what had to be dropped to make the annotation legal: quiet, but never
+   silent — a correction pass is exactly where this has to be said */
+.setbox__warnings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 2px solid var(--warn);
+  font-size: 12px;
+  color: var(--warn);
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+/*
+ * The two boxes a pass starts from, set as one.
+ *
+ * They were stacked, each as tall as whatever happened to be inside it — the
+ * text box carrying a drop target and its notes, the type box a strip of chips
+ * and a form — so the pair read as two unrelated panels of different sizes.
+ * Side by side in equal columns they are the same size in both directions:
+ * `1fr` each gives them the same width, and a grid row stretches its cells to
+ * the taller of the two, so the heights come out equal without either being
+ * told a figure.
+ */
+.setup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vh, 22px);
+  align-items: stretch;
+}
+
+/* the drop target grows into whichever box has the room, and whatever each box
+   ends with is held at its foot, so neither leaves a band of empty paper in the
+   middle of itself once the pair has been levelled up */
+.setup .setbox > .drop {
+  flex: 1;
+}
+
+.setup .setbox > :last-child {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .setup {
+    grid-template-columns: 1fr;
+  }
+
+  .setup .setbox > .drop {
+    flex: none;
+  }
+
+  .setup .setbox > :last-child {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,276 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  /* the figure the live view measures its first screen against; it still
+     grows when the links wrap, which only happens on a narrow window */
+  min-height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px var(--gutter);
+  /*
+   * The bar paints no surface of its own.
+   *
+   * It used to be a pane of frosted glass, which is the right thing for a bar
+   * that content travels under — and nothing here does: `.app` is a flex column
+   * that clips, so the page scrolls inside its own row and never behind this
+   * one. The blur had nothing to blur, and the flat translucent white it was
+   * mixed from could not follow the gradient `.app` is painted with: the bar
+   * matched the page at the left edge and drifted lighter than it all the way
+   * across, leaving a band along the top of every screen. Painting nothing is
+   * what makes it the colour of the page by construction, on every page and
+   * wherever the gradient happens to have got to.
+   */
+  background: transparent;
+  /* the bar is a rule of the sheet like any other: drawn everywhere the bar is
+     read as sitting over a page — which the landing page is not */
+  border-bottom: var(--rule) solid var(--line);
+  transition: color 0.42s var(--ease-out, ease), border-color 0.2s ease;
+}
+
+/*
+ * The tone, on a layer that can be faded.
+ *
+ * A background cannot be transitioned from nothing to a gradient — there is no
+ * halfway between "no image" and an image, so the bar simply changed colour
+ * between one frame and the next while the slide it belongs to was still
+ * travelling. Painting the field on a layer of its own and moving its opacity
+ * gives the browser something it can interpolate, so the bar arrives with the
+ * slide instead of ahead of it.
+ *
+ * `fixed` for the same reason the slide uses it: both are then windows on one
+ * field anchored to the viewport, and no seam can open between them.
+ */
+.nav::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(140deg, var(--green-surface), var(--green-deep));
+  background-attachment: fixed;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.42s var(--ease-out, ease);
+}
+
+.nav--toned::after {
+  opacity: 1;
+}
+
+/* everything the bar carries stands above that layer */
+.nav__brand,
+.nav__links,
+.nav__watching {
+  position: relative;
+  z-index: 1;
+}
+
+.nav:hover {
+  border-bottom-color: var(--line-strong);
+}
+
+/*
+ * No rule where the bar sits over a deck; see `seamless` in NavBar.tsx.
+ *
+ * The width is kept and only the colour is dropped, so the bar measures the
+ * same as everywhere else — `--nav-h` is what the live view sizes its first
+ * screen against, and a bar that lost a pixel here would make every other page
+ * disagree with it by one.
+ */
+.nav--seamless,
+.nav--seamless:hover {
+  border-bottom-color: transparent;
+}
+
+/*
+ * The mark, and the journey it makes across the landing page.
+ *
+ * On the first slide it stands in the middle of the window, which is where a
+ * title belongs; from the second slide on it is a brand in a bar and sits at
+ * the left, where one belongs. The move is done with `left` and a transform
+ * rather than by changing how the bar lays itself out: `position: relative`
+ * leaves the mark exactly where the flex row put it, so nothing around it
+ * reflows and the links keep the places they will occupy — the mark simply
+ * travels over them. Both halves are animatable, so it glides instead of
+ * jumping between two layouts.
+ *
+ * `left: 50%` is half the bar's content box, `translateX(-50%)` half the mark's
+ * own width: together they centre it against the gutters rather than against
+ * the viewport, so a scrollbar cannot pull it off centre.
+ */
+.nav__brand {
+  --tag-argustream: var(--logo-text);
+  color: var(--logo-text);
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  left: 0;
+  transform: translateX(0);
+  transition: left 0.42s var(--ease-out, ease), transform 0.42s var(--ease-out, ease);
+}
+
+.nav--bare .nav__brand {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*
+ * Centred under the cursor as well as at rest.
+ *
+ * `HoverTag` keeps the resting mark in the layout as an invisible ghost and
+ * paints the opened tag over it, anchored to the ghost's left edge — which is
+ * right everywhere the mark is a brand in the corner, and wrong here. Centring
+ * is done on the ghost, and `<argustream>ARGUSTREAM</argustream>` is a good deal
+ * wider than `<ARGUSTREAM/>`, so the whole of that extra width used to grow to
+ * the right: the mark was centred until it was pointed at and visibly off
+ * centre for as long as it was. On the landing slide the opened form is
+ * centred on the same axis instead, so hovering changes what the mark says and
+ * nothing about where it sits.
+ */
+.nav--bare .nav__brand .ht--float .ht__body {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* the nudge that pays for the pill's padding assumes a left-anchored body;
+   centred, it is the thing that would put it off centre */
+.nav--bare .nav__brand .ht--float.is-on .ht__body {
+  margin-left: 0;
+}
+
+.nav__name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.nav__links {
+  display: flex;
+  gap: 4px;
+  transition: opacity 0.28s ease;
+}
+
+.nav__links.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav__link {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.nav__link:hover {
+  color: var(--ink);
+  background: var(--bg-sunken);
+}
+
+.nav__link.is-active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+@media (max-width: 620px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .nav__link {
+    padding: 7px 12px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ---- a page somebody was sent, not one they opened ----------------- *
+ * The mark stays, because it says what they are looking at. Everything
+ * that leads somewhere goes: a spectator was given one debate, and the
+ * first click of a navigation bar would take them out of it.
+ * ------------------------------------------------------------------- */
+.nav--locked .nav__brand {
+  cursor: default;
+}
+
+.nav__watching {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+
+/* ---- the bar over a slide with a tone of its own ------------------- *
+ * Everywhere else the bar paints nothing, so it is the colour of the page by
+ * construction. That stops working over a full-bleed slide, which is a surface
+ * the bar is *above* rather than part of: the "Why joint?" slide runs green
+ * from just under the bar to the foot of the window, and the bar went on
+ * showing the light gradient behind it — a pale strip across the top of the one
+ * slide meant to fill the screen.
+ *
+ * So here alone the bar takes a surface, and it takes the one the slide begins
+ * with. The transition is what makes it arrive with the slide rather than
+ * snapping on the frame the deck changes index.
+ * ------------------------------------------------------------------- */
+/* the surface is set in appearance.css, paired with the slide it continues */
+.nav--toned {
+  color: var(--bg);
+  /*
+   * What a tag opens into, on the tone.
+   *
+   * `HoverTag` colours the text it reveals with `var(--tag-<name>, var(--accent))`,
+   * and for ordinary words the name is `text` — which nothing defines, so it
+   * fell through to the accent. On a green bar the accent *is* the bar: every
+   * link went dark green the moment it was pointed at, which is the one moment
+   * it has to be readable. Named here, the fallback never runs and a tag opens
+   * in the light instead.
+   */
+  --tag-text: var(--bg);
+}
+
+/*
+ * The mark, in the same light as everything else on the tone.
+ *
+ * `--tag-argustream` has to be restated *here* and not on the bar. Custom
+ * properties are resolved by the nearest ancestor that sets them, and
+ * `.nav__brand` sets this one a few lines above — so a value put on the header
+ * never reached the mark inside it, and hovering the logo opened it in the
+ * logo's own dark green: on a green bar, the tag and the `<` `/>` around it
+ * both went out at the moment they were pointed at. Set at the brand, it beats
+ * the brand's own default because it is the same element and comes later.
+ *
+ * At rest as well as under the pointer: a brand a shade dimmer than the links
+ * beside it reads as the one thing on the bar that is switched off.
+ */
+.nav--toned .nav__brand {
+  --tag-argustream: var(--bg);
+  color: var(--bg);
+}
+
+.nav--toned .nav__link {
+  color: color-mix(in srgb, var(--bg) 76%, transparent);
+}
+
+.nav--toned .nav__link:hover {
+  color: var(--bg);
+  background: color-mix(in srgb, var(--bg) 12%, transparent);
+}
+
+.nav--toned .nav__link.is-active {
+  background: color-mix(in srgb, var(--bg) 16%, transparent);
+  color: var(--bg);
+}
+
+/* the floating mark opens on to a pill of the page's colour; over the tone that
+   pill has to be the tone, or the brand lands on a chip of white */
+.nav--toned .ht--float.is-on .ht__body {
+  background: var(--green-surface);
+}

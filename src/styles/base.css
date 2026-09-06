@@ -1,0 +1,405 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* the page travels sideways, never down */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: calc(0.95rem + 0.1vh);
+  line-height: 1.6;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/*
+ * The frame.
+ *
+ * The layout is a technical grid, and the content is what the grid is measured
+ * off — not a pattern the content happens to sit on. Two vertical rules stand on
+ * the edges of the content column and run the full height of the window; the
+ * content block draws the other two at its own top and bottom, and those run the
+ * full width. The block is therefore inside the grid, with the rules running out
+ * of it to all four edges of the screen:
+ *
+ *        |            |
+ *   -----+------------+-----
+ *        |  content   |
+ *   -----+------------+-----
+ *        |            |
+ *
+ * The vertical pair lives here because it is the same on every page — the
+ * content column is a constant, so its position is arithmetic on the tokens and
+ * never needs measuring. It sits behind everything, so a card crosses it rather
+ * than being crossed by it.
+ */
+.app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 0;
+  /* the content column plus the margin the frame is held off it by */
+  width: calc(var(--col) + 2 * var(--frame-margin) + 2 * var(--rule));
+  transform: translateX(-50%);
+  border-inline: var(--rule) solid var(--frame-line);
+  pointer-events: none;
+}
+
+/* ---- cells on the sheet ------------------------------------------- *
+ * `.sheet` is a grid whose gaps are the rules themselves: one hairline of
+ * background shows between the cells, so a row of cards reads as a ruled
+ * table rather than as a row of floating objects. `.cell` is what sits in
+ * one. Both are plain CSS, applied through the classes a page already
+ * uses, so no markup carries layout twice.
+ * ------------------------------------------------------------------ */
+.sheet {
+  display: grid;
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+}
+
+.sheet > * {
+  background: var(--paper);
+  min-width: 0;
+}
+
+/*
+ * The mark that says a box is a cell and not a card: a tick at the top-left
+ * corner, drawn in the accent, the way a drawing calls out a datum. It is a
+ * corner, never a frame — the frame is the sheet's own ruling.
+ */
+.tick {
+  position: relative;
+}
+
+.tick::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+/*
+ * Cut into the sheet rather than laid on it.
+ *
+ * This is what every figure on the site uses: the surface is the sunken one, the
+ * inner edge is dark at the top and light at the bottom, and there is no drop
+ * shadow and no tint laid over the content. A figure treated this way reads as
+ * an engraving in the page — which is the point — and nothing on the page ever
+ * looks as though it could be picked up.
+ */
+.carved {
+  background: var(--carved);
+  border: var(--rule) solid var(--line);
+  border-radius: 0;
+  box-shadow: var(--shadow-carved);
+}
+
+/* ---- shared primitives ------------------------------------------- */
+
+/* Big uppercase display type, the signature of the layout. */
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/*
+ * The content column, and the other half of the frame.
+ *
+ * The two horizontal rules are its own top and bottom edges, extended to the
+ * full width of the window — `left: 50% - 50vw` puts them at the left edge of
+ * the screen whatever the column is doing. They are drawn by the content rather
+ * than by the page precisely so that they land where the content actually ends,
+ * which is the whole point of the layout: move the content and the grid moves
+ * with it.
+ */
+.shell {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.shell::before,
+.shell::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: var(--rule);
+  background: var(--frame-line);
+  pointer-events: none;
+}
+
+.shell::before {
+  top: calc(-1 * var(--frame-margin));
+}
+
+.shell::after {
+  bottom: calc(-1 * var(--frame-margin));
+}
+
+/* The scroll keeps the same margin the frame does, so a slide comes to rest
+   with its rules clear of the window rather than flush against it. */
+.shell {
+  padding-block: var(--frame-margin);
+}
+
+/* A block that is only ever a slot in another layout — the hero's upper half,
+   which is bounded by the field below it — has the pair suppressed, so the one
+   rule at the fold is not drawn twice. */
+.shell--open::before,
+.shell--open::after {
+  content: none;
+}
+
+/* Standalone page shell, for the views that are one screen rather than a deck:
+   the same layout a slide gave them — centred when it fits, scrolling inside
+   itself when it does not. */
+.page {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.page__inner {
+  width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  margin-block: auto;
+  /* the same figure the deck scrolls by, and the same the frame stands off by */
+  padding-block: calc(var(--frame-margin) + clamp(6px, 1.4vh, 20px));
+  display: flex;
+  flex-direction: column;
+}
+
+/* The one button: a stamped box, filled or outlined. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-fill);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-fill);
+}
+
+.btn--accent:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/*
+ * A button that is generated rather than drawn: under the cursor its label is
+ * rebuilt out of the field's own alphabet, and the box registers on the grid —
+ * a second rule appears just inside its edge, the way a dimension is called out
+ * on a drawing. The corners no longer change, because on this sheet nothing is
+ * round to begin with. `TokenLabel` runs the letters.
+ */
+.btn--token:hover,
+.btn--token:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+}
+
+
+/* small stamped box, used for sample pickers */
+.samples__btn {
+  padding: 5px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.samples__btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.samples__btn.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* the one entry that is actually computed: your own turn */
+.samples__btn--yours {
+  border-style: dashed;
+  font-weight: 700;
+}
+
+.samples__btn--yours.is-on {
+  border-style: solid;
+}
+
+/* tag counters, shared by the playground and the live view */
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.counts__item {
+  --tag-color: var(--tag-fallback);
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--tag-color) 50%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--tag-color);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+
+.counts__empty {
+  color: var(--ink-faint);
+  font-size: 12px;
+}
+
+/*
+ * The way back to the end of a feed that has moved on without you.
+ *
+ * A live feed follows its own newest turn, and stops following the moment a
+ * reader scrolls back to read something — otherwise the next turn drags the
+ * box out from under them. What it must not do is leave them wondering
+ * whether anything is still arriving, so what arrived while they were reading
+ * is counted, and the count is the button back.
+ *
+ * `sticky` rather than `absolute`: it belongs to the foot of the scrollport,
+ * not to the foot of the content, and there is no wrapper to hang it from.
+ */
+.catchup {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  align-self: center;
+  margin-top: auto;
+  padding: 7px 16px;
+  border: var(--rule) solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-popover);
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.catchup:hover,
+.catchup:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-fill);
+}

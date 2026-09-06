@@ -1,0 +1,684 @@
+[1] DAVID MUIR
+<person>DAVID MUIR</person>: Good evening, I'm <person>David Muir</person>. And thank you for joining us for tonight's <event>ABC News Presidential Debate</event>. We want to welcome viewers watching on <organization>ABC</organization> and around the world tonight. <person>Vice President Kamala Harris</person> and <person>President Donald Trump</person> are just moments away from taking the stage in this unprecedented race for <role>president</role>.
+
+[2] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: And I'm <person>Linsey Davis</person>. <date>Tonight</date>'s meeting could be the most consequential event of their campaigns, with <event>Election Day</event> now less than two months away. For <person>Vice President Kamala Harris</person>, this is her first debate since <person>President Biden</person> withdrew from the race on <date>July 21st</date>. Of course, that decision followed his debate against <person>President Donald Trump</person> in <date>June</date>. Since then, this race has taken on an entirely new dynamic.
+
+[3] DAVID MUIR
+<person>DAVID MUIR</person>: And that brings us to the rules of tonight's <event>debate</event>: 90 minutes with two commercial breaks. No topics or questions have been shared with the campaigns. The candidates will have two minutes to answer questions. And this is the clock. That's what they'll be seeing. Two minutes for rebuttals and one minute for follow-ups, clarifications or responses. Their microphones will only be turned on when it's their turn to speak. No prewritten notes allowed. There is no audience here tonight in this hall at the <organization>National Constitution Center</organization>. This is an intimate setting for two candidates who have never met.
+
+[4] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person> won the coin toss. He chose to deliver the final closing statement of the evening. <person>Vice President Harris</person> selected the podium to the right.
+
+[5] DAVID MUIR
+<person>DAVID MUIR</person>: So let's now welcome the candidates to the stage. <person>Vice President Kamala Harris</person> and <person>President Donald Trump</person>.
+
+[6] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: <person>Kamala Harris</person>. Let's have a good <event>debate</event>.
+
+[7] DONALD TRUMP
+<person>DONALD TRUMP</person>: Nice to see you. Have fun.
+
+[8] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Thank you.
+
+[9] DONALD TRUMP
+<person>DONALD TRUMP</person>: Thank you.
+
+[10] DAVID MUIR
+<person>DAVID MUIR</person>: Welcome to you both. It's wonderful to have you. It's an honor to have you both here <date>tonight</date>.
+
+[11] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Good evening, we are looking forward to a spirited and thoughtful debate.
+
+[12] DAVID MUIR
+<person>DAVID MUIR</person>: So let's get started. I want to begin tonight with the issue voters repeatedly say is their number one issue, and that is the economy and the cost of living in this country. <person>Vice President Harris</person>, you and <person>President Trump [sic]</person> were elected four years ago and your opponent on the stage here tonight often asks his supporters, are you better off than you were four years ago? When it comes to the economy, do you believe Americans are better off than they were four years ago?
+
+[13] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: So, <premise>I was raised as a middle-class kid</premise>. And <claim>I am actually the only person on this stage who has a plan that is about lifting up the middle class and working people of <location>America</location></claim>. <claim>I believe in the ambition, the aspirations, the dreams of the American people</claim>. And that is why <claim>I imagine and have actually a plan to build what I call an opportunity economy</claim>. Because here's the thing. <premise>We know that we have a, a shortage of homes and housing</premise>, and <premise>the cost of housing is too expensive for far too many people</premise>. <premise>We know that young families need support to raise their children</premise>. And <claim>I intend on extending a tax cut for those families of $6,000</claim>, <premise>which is the largest child tax credit that we have given in a long time</premise>. So that <premise>those young families can afford to buy a crib, buy a car seat, buy clothes for their children</premise>. <premise>My passion, one of them, is small businesses</premise>. I was actually--<premise>my mother raised my sister and me but there was a woman who helped raise us</premise>. <premise>We call her our second mother</premise>. <premise>She was a small business owner</premise>. <claim>I love our small businesses</claim>. <claim>My plan is to give a $50,000 tax deduction to start up small businesses</claim>, <premise>knowing they are part of the backbone of <location>America</location>'s economy</premise>. <premise>My opponent, on the other hand, his plan is to do what he has done before, which is to provide a tax cut for billionaires and big corporations</premise>, <premise>which will result in $5 trillion to <location>America</location>'s deficit</premise>. <premise>My opponent has a plan that I call the Trump sales tax, which would be a 20% tax on everyday goods that you rely on to get through the month</premise>. <premise>Economists have said that that Trump's sales tax would actually result for middle-class families in about $4,000 more a year because of his policies and his ideas about what should be the backs of middle-class people paying for tax cuts for billionaires</premise>.
+
+[14] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, I'll give you two minutes.
+
+[15] DONALD TRUMP
+<person>DONALD TRUMP</person>: First of all, <claim>I have no sales tax</claim>. <claim>That's an incorrect statement</claim>. <premise>She knows that</premise>. We're doing tariffs on other countries. Other countries are going to finally, after 75 years, pay us back for all that we've done for the world. And the tariff will be substantial in some cases. <premise>I took in billions and billions of dollars, as you know, from <location>China</location></premise>. In fact, <claim>they never took the tariff off</claim> because <premise>it was so much money, they can't</premise>. <claim>It would totally destroy everything that they've set out to do</claim>. <premise>They're taking in billions of dollars from <location>China</location> and other places</premise>. <claim>They've left the tariffs on</claim>. <premise>When I had it, I had tariffs and yet I had no inflation</premise>. Uh, look, <claim>we've had a terrible economy</claim> because <premise>inflation has--which is really known as a country buster</premise>. <premise>It breaks up countries</premise>. <claim>We have inflation like very few people have ever seen before</claim>. Probably the worst in our nation's history. We were at 21%. But that's being generous because <premise>many things are 50, 60, 70, and 80% higher than they were just a few years ago</premise>. <claim>This has been a disaster for people, for the middle class, but for every class</claim>. On top of that, <claim>we have millions of people pouring into our country from prisons and jails, from mental institutions and insane asylums</claim>. And <claim>they're coming in and they're taking jobs that are occupied right now by African Americans and Hispanics and also unions</claim>. <claim>Unions are going to be affected very soon</claim>. And you see what's happening. You see what's happening with towns throughout the <location>United States</location>. You look at <location>Springfield</location>, <location>Ohio</location>. You look at <location>Aurora</location> in <location>Colorado</location>. They are taking over the towns. They're taking over buildings. They're going in violently. These are the people that she and <person>Biden</person> let into our country. And they're destroying our country. They're dangerous. They're at the highest level of criminality. And we have to get 'em out. We have to get 'em out fast. I created one of the greatest economies in the history of our country. I'll do it again and even better.
+
+[16] DAVID MUIR
+<person>DAVID MUIR</person>: We are going to get to immigration and border security during this debate. But I would like to let <person>Vice President Harris</person> respond on the economy here.
+
+[17] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, I would love to. Let's talk about what <person>Donald Trump</person> left us. <claim><person>Donald Trump</person> left us the worst unemployment since the <event>Great Depression</event></claim>. <claim><person>Donald Trump</person> left us the worst public health epidemic in a century</claim>. <claim><person>Donald Trump</person> left us the worst attack on our democracy since the <event>Civil War</event></claim>. And what we have done is clean up <person>Donald Trump</person>'s mess. What we have done and what I intend to do is build on what we know are the aspirations and the hopes of the American people. But I'm going to tell you all, in this <event>debate</event> tonight, you're gonna hear from the same old, tired playbook, a bunch of lies, grievances and name-calling. What you're gonna hear tonight is a detailed and dangerous plan called <law>Project 2025</law> that the <role>former president</role> intends on implementing if he were elected again. I believe very strongly that the American people want a <role>president</role> who understands the importance of bringing us together knowing we have so much more in common than what separates us. And I pledge to you to be a <role>president</role> for all Americans.
+
+[18] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, I'll give you a minute here to respond.
+
+[19] DONALD TRUMP
+<person>DONALD TRUMP</person>: Number one, <claim>I have nothing to do, as you know and as she knows better than anyone, I have nothing to do with <law>Project 2025</law></claim>. That's out there. <premise>I haven't read it</premise>. <premise>I don't wanna read it, purposely</premise>. <premise>I'm not going to read it</premise>. <premise>This was a group of people that got together</premise>, <premise>they came up with some ideas</premise>. <premise>I guess some good, some bad</premise>. But it makes no difference. <claim>I have nothing to do--everybody knows I'm an open book</claim>. <claim>Everybody knows what I'm going to do</claim>. <claim>Cut taxes very substantially</claim>. And <claim>create a great economy like I did before</claim>. <premise>We had the greatest economy</premise>. <premise>We got hit with a pandemic</premise>. And the pandemic was--not since <date>1917</date> where 100 million people died has there been anything like it. We did a phenomenal job with the pandemic. We handed them over a country where the economy and where the stock market was higher than it was before the pandemic came in. Nobody's ever seen anything like it. We made ventilators for the entire world. We got gowns. We got masks. We did things that nobody thought possible. And people give me credit for rebuilding the military. They give me credit for a lot of things. But not enough credit for the great job we did with the pandemic. But the only jobs they got were bounce-back jobs. These were jobs, bounce-back. And it bounced back and it went to their benefit. But I was the one that created them. They know it and so does everybody else.
+
+[20] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, I'll let you respond.
+
+[21] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: So, <claim><person>Donald Trump</person> has no plan for you</claim>. And <premise>when you look at his economic plan, it's all about tax breaks for the richest people</premise>. <premise>I am offering what I describe as an opportunity economy</premise>, and <premise>the best economists in our country, if not the world, have reviewed our relative plans for the future of <location>America</location></premise>. <premise>What <organization>Goldman Sachs</organization> has said is that <person>Donald Trump</person>'s plan would make the economy worse</premise>. <claim>Mine would strengthen the economy</claim>. <premise>What the <organization>Wharton School</organization> has said is <person>Donald Trump</person>'s plan would actually explode the deficit</premise>. <premise>Sixteen Nobel laureates have described his economic plan as something that would increase inflation and, by the middle of next year, would invite a recession</premise>. You just have to look at where we are and where we stand on the issues. And I'd invite you to know that <claim><person>Donald Trump</person> actually has no plan for you</claim>, because <premise>he is more interested in defending himself than he is in looking out for you</premise>.
+
+[22] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>That's just a sound bite</claim>. <premise>They gave her that to say</premise>. Look, <premise>I went to the <organization>Wharton School of Finance</organization> and many of those <role>professors</role>, the top <role>professors</role>, think my plan is a brilliant plan, it's a great plan</premise>. <claim>It's a plan that's gonna bring up our worth, our value as a country</claim>. <claim>It's going to make people want to be able to go and work and, uh, create jobs and create a lot of good, solid money for our--for our country</claim>. And just to finish off, uh, <claim>she doesn't have a plan</claim>. <premise>She copied <person>Biden</person>'s plan</premise>. And <premise>it's like four sentences, like run-Spot-run</premise>. <premise>Four sentences that are just oh, we'll try and lower taxes</premise>. <claim>She doesn't have a plan</claim>. <premise>Take a look at her plan</premise>. <claim>She doesn't have a plan</claim>.
+
+[23] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>, I do want to drill down on something you both brought up. The <role>vice president</role> brought up your tariffs you responded and let's drill down on this because your plan is, what she calls is a essentially a national sales tax. Your proposal calls for tariffs as you pointed out here, on foreign imports across the board. You recently said that you might double your plan, imposing tariffs up to 20% on good coming into this country. As you know many economists say that with tariffs at that level costs are then passed onto the consumer. <person>Vice President Harris</person> has argued it'll mean higher prices on gas, food, clothing medication arguing it costs the typical family nearly four thousand dollars a year. Do you believe Americans can afford higher prices because of tariffs.
+
+[24] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>They aren't gonna have higher prices what's gonna have, and who's going to have higher prices is <location>China</location> and all of the countries that have been ripping us off for years</claim>. I charge, <premise>I was the only <role>president</role> ever--<location>China</location> was paying us hundreds of billions of dollars and so were other countries</premise> and you know <premise>if she doesn't like 'em they shouldaa gone out and they should have immediately cut the tariffs</premise> but <premise>those tariffs are there three and a half years now under their administration</premise>. <claim>We are gonna take in billions of dollars, hundreds of billions of dollars</claim>. <premise>I had no inflation, virtually no inflation</premise>, <premise>they had the highest inflation, perhaps in the history of our country</premise> because <premise>I've never seen a worse period of time</premise>. <premise>People can't go out and buy cereal or bacon or eggs or anything else</premise>. These--<claim>the people of our country are absolutely dying with what they've done</claim>. <claim>They've destroyed the economy</claim> and <premise>all you have to do is look at a poll</premise>. <premise>The polls say 80 and 85 and even 90% that the Trump economy was great that their economy was terrible</premise>.
+
+[25] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person> I do want to ask for your response and you heard what the <role>president</role> said there because the <organization>Biden administration</organization> did keep a number of the <person>Trump</person> tariffs in place so how do you respond?
+
+[26] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, let's be clear that the <organization>Trump administration</organization> resulted in a trade deficit, one of the highest we've ever seen in the history of <location>America</location>. He invited trade wars, you wanna talk about his deal with <location>China</location>--what he ended up doing is under <person>Donald Trump</person>'s presidency he ended up selling American chips to <location>China</location> to help them improve and modernize their military. Basically sold us out, when a policy about <location>China</location> should be in making sure the <location>United States of America</location> wins the competition for the <date>21st century</date>. Which means focusing on the details of what that requires, focusing on relationships with our allies; focusing on investing in American based technology so that we win the race on A.I., on quantum computing; focusing on what we need to do to support America's workforce, so that we don't end up having the--on the short end of the stick in terms of workers' rights. But what <person>Donald Trump</person> did, let's talk about this, with COVID, is he actually thanked <person>President Xi</person> for what he did during COVID. Look at his tweet. "Thank you, <person>President Xi</person>", exclamation point. When we know that <person>Xi</person> was responsible for lacking and not giving us transparency about the origins of COVID.
+
+[27] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, I'll let you respond.
+
+[28] DONALD TRUMP
+<person>DONALD TRUMP</person>: First of all, <premise>they bought their chips from <location>Taiwan</location></premise>. <claim>We hardly make chips anymore</claim> because of, uh, philosophies like they have and policies like they have. I don't say her because she has no policy. Everything that she believed three years ago and four years ago is out the window. She's going to my philosophy now. In fact, I was gonna send her a MAGA hat. She's gone to my philosophy. But, if she ever got elected, she'd change it. And it will be the end of our country. She's a <party>Marxist</party>. Everybody knows she's a <party>Marxist</party>. Her father's a <party>Marxist</party> <role>professor</role> in economics. And he taught her well. But when you look at what she's done to our country and when you look at these millions and millions of people that are pouring into our country monthly where it's, I believe 21 million people, not the 15 that people say, and I think it's a lot higher than the 21. That's bigger than <location>New York state</location>. Pouring in. And just look at what they're doing to our country. They're criminals. Many of these people coming in are criminals. And that's bad for our economy too. You know, you mentioned before, we'll talk about immigration later. Well, bad immigration is the worst thing that can happen to our economy. They have, and she has, destroyed our country with policy that's insane. Almost policy that you'd say they have to hate our country.
+
+[29] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, thank you. <person>Linsey</person>?
+
+[30] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: I want to turn to the issue of abortion. <person>President Trump</person>, you've often touted that you were able to kill <law>Roe v. Wade</law>. Last year, you said that you were proud to be the most pro-life <role>president</role> in American history. Then last month you said that your administration would be great for women and their reproductive rights. In your home state of <location>Florida</location>, you surprised many, uh, with regard to your six-week abortion ban because you initially had said that it was too short and you said, "I'm going to be voting that we need more than six weeks." But then the very next day, you reversed course and said you would vote to support the six-week ban. <person>Vice President Harris</person> says that women shouldn't trust you on the issue of abortion because you've changed your position so many times. Therefore, why should they trust you?
+
+[31] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, the reason I'm doing that vote is because the plan is, as you know, the vote is, they have abortion in the ninth month. They even have, and you can look at the <role>governor</role> of <location>West Virginia</location>, the previous <role>governor</role> of <location>West Virginia</location>, not the current <role>governor</role>, who's doing an excellent job, but the <role>governor</role> before. He said the baby will be born and we will decide what to do with the baby. In other words, we'll execute the baby. And that's why I did that, because that predominates. Because they're radical. The <party>Democrats</party> are radical in that. And her <role>vice presidential pick</role>, which I think was a horrible pick, by the way for our country, because he is really out of it. But her <role>vice presidential pick</role> says abortion in the ninth month is absolutely fine. He also says execution after birth, it's execution, no longer abortion, because the baby is born, is okay. And that's not okay with me. Hence the vote. But what I did is something, for 52 years they've been trying to get <law>Roe v. Wade</law> into the states. And through the uh genius and, and heart and strength of six <organization>Supreme Court</organization> <role>justices</role> we were able to do that. Now, I believe in the exceptions for rape, incest, and life of the mother. I believe strongly in it. <person>Ronald Reagan</person> did also. Eighty-five percent of <party>Republicans</party> do--exceptions. It's very important. But we were able to get it. And now states are voting on it. And for the first time you're gonna see--look, this is an issue that's torn our country apart for 52 years. Every legal scholar, every <party>Democrat</party>, every <party>Republican</party>, liberal, conservative, they all wanted this issue to be brought back to the states where the people could vote. And that's what happened, happened. Now, <location>Ohio</location>, the vote was somewhat liberal. <location>Kansas</location> the vote was somewhat liberal. Much more liberal than people would have thought. But each individual state is voting. It's the vote of the people now. It's not tied up in the federal government. I did a great service in doing it. It took courage to do it. And the <organization>Supreme Court</organization> had great courage in doing it. And I give tremendous credit to those six <role>justices</role>.
+
+[32] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: There is no state in this country where it is legal to kill a baby after it's born. <person>Madam Vice-President</person>, I want to get your response to <person>President Trump</person>.
+
+[33] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, as I said, you're going to hear a bunch of lies. And that's not actually a surprising fact. Let's understand how we got here. <claim><person>Donald Trump</person> hand-selected three members of the <organization>United States Supreme Court</organization> with the intention that they would undo the protections of <law>Roe v. Wade</law></claim>. And <premise>they did exactly as he intended</premise>. And now in over 20 states there are <person>Trump</person> abortion bans which make it criminal for a doctor or nurse to provide health care. In one state it provides prison for life. <person>Trump</person> abortion bans that make no exception even for rape and incest. Which, understand what that means: A survivor of a crime of violation to their body, does not have the right to make a decision about what happens to their body next. That is immoral. And one does not have to abandon their faith or deeply held beliefs to agree the government, and <person>Donald Trump</person> certainly, should not be telling a woman what to do with her body. I have talked with women around our country. You wanna talk about this is what people wanted? Pregnant women who want to carry a pregnancy to term suffering from a miscarriage, being denied care in a emergency room because the health care providers are afraid they might go to jail and she's bleeding out in a car in the parking lot? She didn't want that. Her husband didn't want that. A 12 or 13-year-old survivor of incest being forced to carry a pregnancy to term? They don't want that. And I pledge to you when <organization>Congress</organization> passes a bill to put back in place the protections of <law>Roe v. Wade</law> as <role>President of the United States</role>, I will proudly sign it into law. But understand, if <person>Donald Trump</person> were to be re-elected, he will sign a national abortion ban. Understand, in his <organization>Project 2025</organization> there would be a national abortion--a monitor that would be monitoring your pregnancies, your miscarriages. I think the American people believe that certain freedoms, in particular the freedom to make decisions about one's own body, should not be made by the government.
+
+[34] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Thank you, <person>Vice President Harris</person>.
+
+[35] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, there she goes again. <claim>It's a lie</claim>. <claim>I'm not signing a ban</claim>. And <claim>there's no reason to sign a ban</claim>. Because <premise>we've gotten what everybody wanted</premise>. <party>Democrats</party>, <party>Republicans</party> and everybody else and every legal scholar wanted it to be brought back into the states. And the states are voting. And it may take a little time, but for <date>52 years</date> this issue has torn our country apart. And they've wanted it back in the states. And I did something that nobody thought was possible. The states are now voting. What she says is an absolute lie. And as far as the abortion ban, no, I'm not in favor of abortion ban. But it doesn't matter, because this issue has now been taken over by the states.
+
+[36] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Would you veto a national abortion ban if it came to your desk--
+
+[37] DONALD TRUMP
+<person>DONALD TRUMP</person>: --Well, I won't have to because again--two things. Number one, she said she'll go back to <organization>Congress</organization>. She'll never get the vote. It's impossible for her to get the vote. Especially now with a 50-50 in--essentially 50-50 in both <organization>Senate</organization> and the <organization>House</organization>. She's not gonna get the vote. She can't get the vote. She won't even come close to it. So it's just talk. You know what it reminds me of? When they said they're gonna get student loans terminated and it ended up being a total catastrophe. The student loans--and then her--I think probably her boss, if you call 'em a boss, he spends all his time on the beach--but look, her boss went out and said we'll do it again, we'll do it a different way. He went out, got rejected again by the <organization>Supreme Court</organization>. So all these students got uh, taunted with this whole thing about--this whole idea. And how unfair that would have been-- part of the reason they lost--to the millions and millions of people that hadda pay off their student loans. They didn't get it for free. But they were saying--it's the same way that they talked about that, that they talk about abortion.
+
+[38] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: But if I could just get a Yes or No. Because your running mate jen--<person>J.D. Vance</person> has said that you would veto if it did come to your desk.
+
+[39] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, <claim>I didn't discuss it with <person>J.D.</person></claim>, in all fairness. <person>J.D.</person>--and I don't mind if he has a certain view but I think he was speaking for me, but I really didn't. Look, <claim>we don't have to discuss it</claim> because <premise>she'd never be able to get it just like she couldn't get student loans</premise>. They couldn't get--<premise>they didn't even come close to getting student loans</premise>. They didn't even come close to getting student loans. They taunted young people--and a lot of other people that had loans. They can never get this approved. So it doesn't matter what she says about going to <organization>Congress</organization>. Wonderful. Let's go to <organization>Congress</organization>. Do it. But the fact is that <claim>for years they wanted to get it out of <organization>Congress</organization> and out of the <organization>federal government</organization></claim> and <claim>we did something that everybody said couldn't be done</claim>. And <claim>now you have a vote of the people on abortion</claim>.
+
+[40] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, I want to give you your time to respond. But I do want to ask, would you support any restrictions on a woman's right to an abortion?
+
+[41] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: <claim>I absolutely support reinstating the protections of <law>Roe v. Wade</law></claim>. And as you rightly mentioned, <premise>nowhere in <location>America</location> is a woman carrying a pregnancy to term and, and, and asking for an abortion</premise>. <claim>That is not happening</claim>. <claim>It's insulting to the women of <location>America</location></claim>. And understand what has been happening under <person>Donald Trump</person>'s abortion bans. <premise>Couples who pray and, and, and dream of having a family are being denied IVF treatments</premise>. <premise>What is happening in our country, working people, working women who are working one or two jobs, who can barely afford childcare as it is, have to travel to another state--to get on a plane sitting next to strangers--to go and get the health care she needs</premise>. <premise>Barely can afford to do it</premise>, and <claim>what you are putting her through is unconscionable</claim>. And the people of <location>America</location> have not--the, the majority of Americans believe in a woman's right to make decisions about her own body. And that is why in every state where this issue has been on the ballot, in red and blue states both, the people of <location>America</location> have voted for freedom.
+
+[42] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>--
+
+[43] DONALD TRUMP
+<person>DONALD TRUMP</person>: Excuse me, I have to respond. Another lie. It's another lie. <claim>I have been a leader on IVF which is fertilization</claim>. The IVF--<claim>I have been a leader</claim>. In fact, <premise>when they got a very negative decision on IVF from the <location>Alabama</location> courts, I saw the people of <location>Alabama</location> and the legislature two days later voted it in</premise>. <claim>I've been a leader on it</claim>. <claim>They know that and everybody else knows it</claim>. <claim>I have been a leader on fertilization, IVF</claim>. And the other thing, they--you should ask, will she allow abortion in the eighth month, ninth month, seventh month?
+
+[44] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Come on.
+
+[45] DONALD TRUMP
+<person>DONALD TRUMP</person>: Would you do that? Why don't you ask her that question--
+
+[46] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Why, why don't you answer the question would you veto-–
+
+[47] DONALD TRUMP
+<person>DONALD TRUMP</person>: That's the problem. Because under <law>Roe v. Wade</law>.
+
+[48] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Answer the question, would you veto--
+
+[49] DONALD TRUMP
+<person>DONALD TRUMP</person>: You could do abortions in the seventh month, the eighth month, the ninth month--
+
+[50] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: --That's not true.
+
+[51] DONALD TRUMP
+<person>DONALD TRUMP</person>: And probably after birth. Just look at the <role>governor</role>, former <role>governor</role> of <location>Virginia</location>. The <role>governor</role> of <location>Virginia</location> said we put the baby aside and then we determine what we want to do with the baby.
+
+[52] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, thank you.
+
+[53] DAVID MUIR
+<person>DAVID MUIR</person>: We're going to turn now to immigration and border security. We know it's an issue that's important to <party>Republicans</party>, <party>Democrats</party>, voters across the board, uh, in this country. <person>Vice President Harris</person>, you were tasked by <person>President Biden</person> with getting to the root causes of migration from <location>Central America</location>. We know that illegal border crossings reached a record high in the <organization>Biden Administration</organization>. This past <date>June</date>, <person>President Biden</person> imposed tough new asylum restrictions. We know the numbers since then have dropped significantly. But my question to you tonight is why did the <organization>administration</organization> wait until <date>six months</date> before the <event>election</event> to act and would you have done anything differently from <person>President Biden</person> on this?
+
+[54] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: So <premise>I'm the only person on this stage who has prosecuted transnational criminal organizations for the trafficking of guns, drugs, and human beings</premise>. And let me say that <premise>the <organization>United States Congress</organization>, including some of the most conservative members of the <organization>United States Senate</organization>, came up with a border security bill which I supported</premise>. And <premise>that bill would have put fifteen hundred more border agents on the border to help those folks who are workin' there right now overtime trying to do their job</premise>. <premise>It would have allowed us to stem the flow of fentanyl coming into the <location>United States</location></premise>. I know there are so many families watching tonight who have been personally affected by the surge of fentanyl in our country. <premise>That bill would have allowed us to prosecute transnational criminal organizations for trafficking in guns, drugs and human beings</premise>. But you know what happened to that bill? <claim><person>Donald Trump</person> got on the phone, called up some folks in <organization>Congress</organization>, and said kill the bill</claim>. And you know why? Because <claim>he'd prefer to run on a problem instead of fixing a problem</claim>. And understand, <premise>this comes at a time where the people of our country actually need a <role>leader</role> who engages in solutions</premise>, <premise>who actually addresses the problems at hand</premise>. But <premise>what we have in the <role>former president</role> is someone who would prefer to run on a problem instead of fixing a problem</premise>. And I'll tell you something, <claim>he's going to talk about immigration a lot tonight even when it's not the subject that is being raised</claim>. And I'm going to actually do something really unusual and I'm going to invite you to attend one of <person>Donald Trump</person>'s rallies because it's a really interesting thing to watch. You will see, during the course of his rallies he talks about fictional characters like <person>Hannibal Lecter</person>. He will talk about windmills cause cancer. And what you will also notice is that people start leaving his rallies early out of exhaustion and boredom. And I will tell you, the one thing you will not hear him talk about, is you. You will not hear him talk about your needs, your dreams, and your ne--your desires. And I'll tell ya, <claim>I believe you ne--deserve a <role>president</role> who actually puts you first</claim>. And I pledge to you that I will.
+
+[55] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, thank you. <person>President Trump</person>, on that point I want to get your response.
+
+[56] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, I would like to respond.
+
+[57] DAVID MUIR
+<person>DAVID MUIR</person>: Let me just ask, though, why did you try to kill that bill and successfully so? That would have put thousands of additional agents and officers on the border.
+
+[58] DONALD TRUMP
+<person>DONALD TRUMP</person>: First let me respond as to the rallies. She said people start leaving. People don't go to her rallies. There's no reason to go. And the people that do go, she's busing 'em in and paying them to be there. And then showing them in a different light. So, she can't talk about that. People don't leave my rallies. We have the biggest rallies, the most incredible rallies in the history of politics. That's because people want to take their country back. Our country is being lost. We're a failing nation. And it happened three and a half years ago. And what, what's going on here, you're gonna end up in <event>World War 3</event>, just to go on to another subject. What they have done to our country by allowing these millions and millions of people to come into our country. And look at what's happening to the towns all over the <location>United States</location>. And a lotta towns don't want to talk--not gonna be <location>Aurora</location> or <location>Springfield</location>. A lotta towns don't want to talk about it because they're so embarrassed by it. In <location>Springfield</location>, they're eating the dogs. The people that came in. They're eating the cats. They're eating--they're eating the pets of the people that live there. And this is what's happening in our country. And it's a shame. As far as rallies are concerned, as far as--the reason they go is they like what I say. They wanna bring our country back. They wanna make <location>America</location> great again. It's a very simple phrase. Make <location>America</location> great again. She's destroying this country. And if she becomes <role>President</role>, this country doesn't have a chance of success. Not only success. We'll end up being <location>Venezuela</location> on steroids.
+
+[59] DAVID MUIR
+<person>DAVID MUIR</person>: I just want to clarify here, you bring up <location>Springfield</location>, <location>Ohio</location>. And <organization>ABC News</organization> did reach out to the <role>city manager</role> there. He told us there have been no credible reports of specific claims of pets being harmed, injured or abused by individuals within the immigrant community--
+
+[60] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, I've seen people on television--
+
+[61] DAVID MUIR
+<person>DAVID MUIR</person>: Let me just say here this--
+
+[62] DONALD TRUMP
+<person>DONALD TRUMP</person>: --the people on television say my dog was taken and used for food. So maybe he said that and maybe that's a good thing to say for a <role>city manager</role>.
+
+[63] DAVID MUIR
+<person>DAVID MUIR</person>: I'm not taking this from television. I'm taking it from the <role>city manager</role>--
+
+[64] DONALD TRUMP
+<person>DONALD TRUMP</person>: --but the people on television say their dog was eaten by the people that went there.
+
+[65] DAVID MUIR
+<person>DAVID MUIR</person>: Again, the <role>Springfield city manager</role> says there's no evidence of that.
+
+[66] DONALD TRUMP
+<person>DONALD TRUMP</person>: --We'll find out--
+
+[67] DAVID MUIR
+<person>DAVID MUIR</person>: --<person>Vice President Harris</person>, I'll let you respond to the rest of what you heard.
+
+[68] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: [laughing] Talk about extreme. [laughs] Um, you know, I uh, this is I think, one of the reasons why in this <event>election</event> I actually have the endorsement of 200 <party>Republicans</party> who have formally worked with <person>President Bush</person>, <person>Mitt Romney</person>, and <person>John McCain</person> including the endorsement of <person>former Vice President Dick Cheney</person> and <person>Congressmember Liz Cheney</person>. And if you wanna really know the inside track on who the former <role>President</role> is, if he didn't make it clear already, just ask people who have worked with him. His former <role>Chief of Staff</role>, a four-star <role>general</role>, has said he has contempt for the <law>Constitution of the United States</law>. His former <role>National Security Adviser</role> has said he is dangerous and unfit. His former <role>Secretary of Defense</role> has said the nation, the republic would never survive another <person>Trump</person> term. And when we listen to this kind of rhetoric, when the issues that affect the American people are not being addressed, I think the choice is clear in this <event>election</event>.
+
+[69] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, I'll give you a quick minute to respond.
+
+[70] DONALD TRUMP
+<person>DONALD TRUMP</person>: Yeah. Uh, thank you. Because when I hear that--see, I'm a different kind of a person. I fired most of those people. Not so graciously. They did bad things or a bad job. I fired 'em. They never fired one person. They didn't fire anybody having to do with <location>Afghanistan</location> and the <organization>Taliban</organization> and the 13 people who's, who's--were just killed, viciously and violently killed, and I got to know the parents and the family. They should have fired all those <role>Generals</role>, all those top people because that was one of the most incompetently handled situations anybody has ever seen. So when somebody does a bad job, I fire 'em. And you take a guy like <person>Esper</person>. He was no good, I fired him. So he writes a book. Another one writes a book. Because with me they can write books. With nobody else can they. But they have done such a poor job. And they never fire anybody. Look at the economy. Look how--look at the inflation. They didn't fire any of their <role>economists</role>. They have the same people. That's a good way not to have books written about you. But, just to finish, I got more votes than any <party>Republican</party> in history by far. In fact, I got more votes than any <role>President</role>, sitting <role>President</role> in history by far.
+
+[71] DAVID MUIR
+<person>DAVID MUIR</person>: Let me continue on immigration. It was what you wanted to talk about earlier. So let's get back to your deportation proposal that the <role>Vice President</role> has reacted to as well. <person>President Trump</person>, you called this the largest domestic deportation operation in the history of our country. You say you would use the <organization>National Guard</organization>. You say if things get out of control you'd have uh, no problem using the <organization>U.S. military</organization>.
+
+[72] DONALD TRUMP
+<person>DONALD TRUMP</person>: With local police.
+
+[73] DAVID MUIR
+<person>DAVID MUIR</person>: You also said you would use local police. How would you deport 11 million undocumented immigrants? I know you believe that number is much higher. Uh, take us through this. What does this look like? Will authorities be going door to door in this country?
+
+[74] DONALD TRUMP
+<person>DONALD TRUMP</person>: Yeah. <claim>It is much higher</claim>, because of them. <premise>They allowed criminals</premise>. <premise>Many, many, millions of criminals</premise>. <premise>They allowed terrorists</premise>. <premise>They allowed common street criminals</premise>. <premise>They allowed people to come in, drug dealers, to come into our country, and they're now in the <location>United States</location></premise>. And <premise>told by their countries like <location>Venezuela</location> don't ever come back or we're going to kill you</premise>. Do you know that crime in <location>Venezuela</location> and crime in countries all over the world is way down? You know why? Because they've taken their criminals off the street and they've given them to her to put into our country. And, this will be one of the greatest mistakes in history for them to allow--and I think they probably did it because they think they're going to get votes. But it's not worth it. Because they're--they're destroying the fabric of our country by what they've done. There's never been anything done like this at all. They've destroyed the fabric of our country. Millions of people let in. And all over the world crime is down. All over the world except here. Crime here is up and through the roof. Despite their fraudulent statements that they made. Crime in this country is through the roof. And we have a new form of crime. It's called migrant crime. And it's happening at levels that nobody thought possible.
+
+[75] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, as you know, the <organization>FBI</organization> says overall violent crime is actually coming down in this country, but <person>Vice President Harris</person> I'll give you--
+
+[76] DONALD TRUMP
+<person>DONALD TRUMP</person>: --excuse me, the <organization>FBI</organization> defraud--they were defrauding statements. They, <claim>they didn't include the worst cities</claim>. <claim>They didn't include the cities with the worst crime</claim>. It was a, a fraud. Just like their number of 818,000 jobs that they said they created turned out to be a fraud.
+
+[77] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, thank you. I'll let you respond, <person>Vice President Harris</person>.
+
+[78] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, I think this is so rich. Coming from someone who has been prosecuted for national security crimes, economic crimes, election interference, has been found liable for sexual assault, and his next big court appearance is in <date>November</date> at his own criminal sentencing. And let's be clear where each person stands on the issue of what is important about respect for the rule of law and respect for law enforcement. The <role>former Vice President</role> [sic] called for defunding, federal law enforcement, 45,000 agents, get this, on the day after he was arraigned on 34 felony counts. So let's talk about what is important in this race. It is important that we move forward, that we turn the page on this same old tired rhetoric. And address the needs of the American people, address what we need to do about the housing shortage, which I have a plan for. Address what we must do to support our small businesses. Address bringing down the price of groceries. But frankly, the American people are exhausted with the same old tired playbook.
+
+[79] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, thank you.
+
+[80] DONALD TRUMP
+<person>DONALD TRUMP</person>: Excuse me. <claim>Every one of those cases was started by them against their political opponent</claim>. And <claim>I'm winning most of them and I will win the rest on appeal</claim>. And <premise>you saw that with the decision that came down just recently from the <organization>Supreme Court</organization></premise>. <claim>I'm winning most of 'em</claim>. But <claim>those are cases, it's called weaponization</claim>. <claim>Never happened in this country</claim>. <claim>They weaponized the <organization>Justice Department</organization></claim>. <premise>Every one of those cases was involved with the <organization>DOJ</organization>, from <location>Atlanta</location> and <person>Fani Willis</person>--to, to the uh <role>Attorney General</role> of <location>New York</location> and the <role>D.A.</role> In <location>New York</location></premise>. <premise>Every one of those cases</premise>. And then they say, "Oh, he was--he's a criminal." <claim>They're the ones that made them go after me</claim>. By the way, <person>Joe Biden</person> was found essentially guilty on the documents case. And what happened in my documents case? They said "Oh, that's the toughest of them all." <claim>A complete and total victory</claim>. <premise><date>Two months ago</date> it was thrown out</premise>. <claim>It's weaponization</claim>. And <claim>they used it</claim>. And <claim>it's never happened in this country</claim>. <claim>They used it to try and win an <event>election</event></claim>. <claim>They're fake cases</claim>.
+
+[81] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, thank you. A really quick response here, <person>Vice President Harris</person>, on this notion of weaponization of the <organization>Justice Department</organization>.
+
+[82] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well let's talk about extreme. And understand the context in which this election in <date>2024</date> is taking place. The <organization>United States Supreme Court</organization> recently ruled that the <role>former President</role> would essentially be immune from any misconduct if he were to enter the <location>White House</location> again. Understand, this is someone who has openly said he would terminate, I'm quoting, terminate the <law>Constitution of the United States</law>. That he would weaponize the <organization>Department of Justice</organization> against his political enemies. Someone who has openly expressed disdain for members of our military. Understand what it would mean if <person>Donald Trump</person> were back in the <location>White House</location> with no guardrails. Because certainly, we know now the <organization>Court</organization> won't stop him. We know <person>J.D. Vance</person> is not gonna stop him. It's up to the American people to stop him.
+
+[83] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, thank you. <person>Linsey</person>?
+
+[84] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, in your last run for <role>president</role>
+
+[85] DONALD TRUMP
+<person>DONALD TRUMP</person>: This is the one that weaponized. Not me. She weaponized. <claim>I probably took a bullet to the head</claim> because of the things that they say about me. They talk about democracy. I'm a threat to democracy. They're the threat to democracy-–
+
+[86] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>--
+
+[87] DONALD TRUMP
+<person>DONALD TRUMP</person>: --with the fake <location>Russia</location> <location>Russia</location> <location>Russia</location> investigation that went nowhere.
+
+[88] DAVID MUIR
+<person>DAVID MUIR</person>: We have a lot to get to. <person>Linsey</person>?
+
+[89] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, in your last run for <role>president</role> you said you wanted to ban fracking. Now you don't. You wanted mandatory government buyback programs for assault weapons. Now your campaign says you don't. You supported decriminalizing border crossings. Now you're taking a harder line. I know you say that your values have not changed. So then why have so many of your policy positions changed?
+
+[90] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: So, <claim>my values have not changed</claim>. And I'm going to discuss every one--at least every point that you've made. But in particular, let's talk about fracking because we're here in <location>Pennsylvania</location>. I made that very clear in <date>2020</date>. <claim>I will not ban fracking</claim>. <claim>I have not banned fracking as <role>Vice President of the United States</role></claim>. And, in fact, <premise>I was the tie-breaking vote on the <law>Inflation Reduction Act</law>, which opened new leases for fracking</premise>. My position is that <claim>we have got to invest in diverse sources of energy so we reduce our reliance on foreign oil</claim>. <premise>We have had the largest increase in domestic oil production in history</premise> because of <premise>an approach that recognizes that we cannot over-rely on foreign oil</premise>. As it relates to my values, let me tell you, <premise>I grew up a middle-class kid raised by a hard-working mother who worked and saved and was able to buy our first home when I was a teenager</premise>. <premise>The values I bring to the importance of home ownership, knowing not everybody got handed $400 million on a silver platter and then filed bankruptcy six times, is a value that I bring to my work, to say we are going to work with the private sector and home builders to increase 3 million homes, increase by 3 million homes by the end of my first term</premise>. <premise>My work that is related to having a friend when I was in high school who was sexually assaulted by her stepfather</premise>. And <premise>my focus then, on protecting women and children from violent crime, is based on a value that is deeply grounded in the importance of standing up for those who are most vulnerable</premise>. <premise>My work that is about protecting social security and Medicare is based on long-standing work that I have done--protecting seniors from scams</premise>. <claim>My values have not changed</claim>. And what is important is that there is a <role>president</role> who actually brings values and a perspective that is about lifting people up and not beating people down and name-calling. The true measure of the <role>leader</role> is the <role>leader</role> who actually understands that strength is not in beating people down, it's in lifting people up. I intend to be that <role>president</role>.
+
+[91] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, your response.
+
+[92] DONALD TRUMP
+<person>DONALD TRUMP</person>: Well, first of all, <claim>I wasn't given $400 million</claim>. <claim>I wish I was</claim>. <premise>My father was a <location>Brooklyn</location> <role>builder</role></premise>. <premise><location>Brooklyn</location>, <location>Queens</location></premise>. And a great father and I learned a lot from 'im. But <claim>I was given a fraction of that, a tiny fraction, and I built it into many, many billions of dollars</claim>. Many, many billions. And when people see it, they are even surprised. So, we don't have to talk about that. Fracking? <claim>She's been against it for <date>12 years</date></claim>. Uh, defund the police. <claim>She's been against [sic] that forever</claim>. <claim>She gave all that stuff up, very wrongly, very horribly</claim>. And everybody's laughing at it, okay? They're all laughing at it. She gave up at least 12 and probably 14 or 15 different policies. Like, she was big on defund the police.
+
+[93] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: That's not true.
+
+[94] DONALD TRUMP
+<person>DONALD TRUMP</person>: In <location>Minnesota</location>, she went out--wait a minute. I'm talking now. If you don't mind. Please. Does that sound familiar?
+
+[95] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Don't lie.
+
+[96] DONALD TRUMP
+<person>DONALD TRUMP</person>: She went out--<premise>she went out in <location>Minnesota</location> and wanted to let criminals that killed people, that burned down <location>Minneapolis</location></premise>, <premise>she went out and raised money to get 'em out of jail</premise>. <premise>She did things that nobody would ever think of</premise>. Now <premise>she wants to do transgender operations on illegal aliens that are in prison</premise>. <claim>This is a radical left liberal that would do this</claim>. <claim>She wants to confiscate your guns</claim> and <claim>she will never allow fracking in <location>Pennsylvania</location></claim>. <claim>If she won the <event>election</event>, fracking in <location>Pennsylvania</location> will end on day one</claim>. Just to finish one thing, so important in my opinion: So, I got the oil business going like nobody has ever done before. They took, when they took over, they got rid of it, started getting rid of it, and the prices were going up the roof. They immediately let these guys go to where they were. I would have been five times, four times, five times higher because you're talking about 3 1/2 years ago. They got it up to where I was, because they had no choice. Because the prices of energy were quadrupling and doubling. You saw what happened to gasoline. So, they said let's go back to <person>Trump</person>. But if she won the <event>election</event>, the day after that <event>election</event>, they'll go back to destroying our country and oil will be dead, fossil fuel will be dead. We'll go back to windmills and we'll go back to solar, where they need a whole desert to get some energy to come out. You ever see a solar plant? By the way, I'm a big fan of solar. But they take 400, 500 acres of desert soil--
+
+[97] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>--
+
+[98] DONALD TRUMP
+<person>DONALD TRUMP</person>: --these are not good things for the environment that she understands.
+
+[99] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, we have a lot of issues that we have to get to. We're out of time. Thank you.
+
+[100] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Linsey</person>, thank you. We have an <event>election</event> in just 56 days. An--I want to talk about the peaceful transfer of power, which of course we all know was a cornerstone of our democracy and the role of a <role>president</role> in a moment of crisis. Uh, <person>Mr. President</person>, on <date>January 6th</date> you told your supporters to march to the <organization>Capitol</organization>. You said you would be right there with them. The country and the world saw what played out at the <organization>Capitol</organization> that day. The officers coming under attack. Aides in the <location>West Wing</location> say you watched it unfold on television off the <location>Oval Office</location>. You did send out tweets, but it was more than two hours before you sent out that video message telling your supporters to go home. Is there anything you regret about what you did on that day?
+
+[101] DONALD TRUMP
+<person>DONALD TRUMP</person>: You just said a thing that isn't covered. Peacefully and patriotically, I said during my speech. Not later on. Peacefully and patriotically. And nobody on the other side was killed. <person>Ashli Babbitt</person> was shot by an out-of-control <role>police officer</role> that should have never, ever shot her. It's a disgrace. But we didn't do--this group of people that have been treated so badly. I ask, what about all the people that are pouring into our country and killing people? That she allowed to pour in. She was the border czar. Remember that. She was the border czar. She doesn't want to be called the border czar because she's embarrassed by the border. In fact, she said at the beginning, I'm surprised you're not talking about the border yet. That's because she knows what a bad job they've done. What about those people? What's, when are they going to be prosecuted? When are these people from countries all over the world, not just <location>South America</location>, they're coming in from all over the world, <person>David</person>, all over the world. And crime rates are down all over the world because of it--
+
+[102] DAVID MUIR
+<person>DAVID MUIR</person>: But let me just ask you--
+
+[103] DONALD TRUMP
+<person>DONALD TRUMP</person>: <person>David</person>. But when are those, <person>David</person>, when are the people that burned down <location>Minneapolis</location> going to be prosecuted? When are the people in <location>Seattle</location>? They went into <location>Seattle</location>, they took over a big percentage of the city of <location>Seattle</location>. When are those people going to be prosecuted?
+
+[104] DAVID MUIR
+<person>DAVID MUIR</person>: But let me just ask you--
+
+[105] DONALD TRUMP
+<person>DONALD TRUMP</person>: You might ask her that question.
+
+[106] DAVID MUIR
+<person>DAVID MUIR</person>: You were the <role>President</role>. You were watching it unfold on television. It's a very simple question as we move forward toward another <event>election</event>. Is there anything you regret about what you did on that day? Yes or no.
+
+[107] DONALD TRUMP
+<person>DONALD TRUMP</person>: I had nothing to do with that other than they asked me to make a speech. I showed up for a speech. I said, I think it's going to be big. I went to <person>Nancy Pelosi</person> and the <role>mayor</role> of <location>Washington, D.C.</location> And the <role>mayor</role> put it back in writing, as you know. I said, you know, this is gonna be a very big rally or whatever you want to call it. And again, it wasn't done by me. It was done by others. I said I'd like to give you 10,000 <organization>National Guard</organization> or soldiers. They rejected me. <person>Nancy Pelosi</person> rejected me. It was just two weeks ago, her daughter has a tape of her saying she is fully responsible for what happened. They want to get rid of that tape. It would have never happened if <person>Nancy Pelosi</person> and the <role>mayor</role> of <location>Washington</location> did their jobs. I wasn't responsible for security. <person>Nancy Pelosi</person> was responsible. She didn't do her job.
+
+[108] DAVID MUIR
+<person>DAVID MUIR</person>: The question was about you as <role>President</role>, not about <person>Former Speaker Pelosi</person>. But I do want <person>Vice President Harris</person> to respond here.
+
+[109] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: I was at the <location>Capitol</location> on <date>January 6th</date>. I was the <role>Vice President-Elect</role>. I was also an acting <role>senator</role>. I was there. And on that day, the <role>President of the United States</role> incited a violent mob to attack our nation's <location>Capitol</location>, to desecrate our nation's <location>Capitol</location>. On that day, 140 law enforcement officers were injured. And some died. And understand, the <role>former President</role> has been indicted and impeached for exactly that reason. But this is not an isolated situation. Let's remember <location>Charlottesville</location>, where there was a mob of people carrying tiki torches, spewing antisemitic hate, and what did the <role>President</role> then at the time say? There were fine people on each side. Let's remember that when it came to the <organization>Proud Boys</organization>, a militia, the <role>President</role> said, the <role>former President</role> said, "Stand back and stand by." So for everyone watching who remembers what <date>January 6th</date> was, I say we don't have to go back. Let's not go back. We're not going back. It's time to turn the page. And if that was a bridge too far for you, well, there is a place in our campaign for you. To stand for country. To stand for our democracy. To stand for rule of law. And to end the chaos. And to end the approach that is about attacking the foundations of our democracy 'cause you don't like the outcome. And be clear on that point. <person>Donald Trump</person> the candidate has said in this <event>election</event> there will be a bloodbath, if this--and the outcome of this <event>election</event> is not to his liking. Let's turn the page on this. Let's not go back. Let's chart a course for the future and not go backwards to the past.
+
+[110] DAVID MUIR
+<person>DAVID MUIR</person>: Let me just follow up here--
+
+[111] DONALD TRUMP
+<person>DONALD TRUMP</person>: --I have said blood-bash--bath. It was a different term, and it was a term that related to energy, because they have destroyed our energy business. That was where bloodbath was. Also, on <location>Charlottesville</location>, that story has been as you would say, debunked. <person>Laura Ingraham</person>, <person>Sean Hannity</person>, <person>Jesse</person>--all of these people, they covered it. If they go an extra sentence, they will see it was perfect. It was debunked in almost every newspaper. But they still bring it up, just like they bring <date>2025</date> up. They bring all of this stuff up. I ask you this. You talk about the <location>Capitol</location>. Why are we allowing these millions of people to come through on the southern border? How come she's not doing the--and I'll tell you what I would do. And I would be very proud to do it. I would say we would both leave this debate right now, I'd like to see her go down to <location>Washington, D.C.</location> during this debate 'cause we're wasting a lot of time. Go down to--because she's been so bad, it's so ridiculous. Go down to-- <premise>because she's been so bad</premise>, <claim>it's so ridiculous</claim>. Go down to-- <premise>because she's been so bad</premise>, <claim>it's so ridiculous</claim>. Go down to-- <premise>because she's been so bad</premise>, <claim>it's so ridiculous</claim>. <premise>Go down to</location> <location>Washington, D.C.</location> And let her sign a bill [sic] to close up the border. Because they have the right to do it. They don't need bills. They have the right to do it. The <role>President of the United States</role>, you'll get him out of bed. You'll wake him up at 4:00 in the afternoon--
+
+[112] DAVID MUIR
+<person>DAVID MUIR</person>: Alright--
+
+[113] DONALD TRUMP
+<person>DONALD TRUMP</person>: --you'll say come on; come on down to the office, let's sign a bill. If he--if he signs a bill that the border is closed, all he has to do is say it to the <organization>border patrol</organization>, who are phenomenal. If they do that, the border is closed.--
+
+[114] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>--
+
+[115] DONALD TRUMP
+<person>DONALD TRUMP</person>: --Those people are killing many people, unlike <event>J-6</event>.
+
+[116] DAVID MUIR
+<person>DAVID MUIR</person>: We talked immigration here tonight. I do want to focus on this next issue to both of you. Because it really brings us, uh, this into focus. Truth, uh, in these times that we're living in. <person>Mr. President</person>, for three and a half years after uh you lost the <event>2020 election</event> you repeatedly, uh, falsely claimed that you won, many times saying you won in a landslide. In the past couple of weeks leading up to this <event>debate</event>, you have said, quote, you lost by a whisker, that you, quote, didn't quite make it, that you came up a little bit short.
+
+[117] DONALD TRUMP
+<person>DONALD TRUMP</person>: I said that?
+
+[118] DAVID MUIR
+<person>DAVID MUIR</person>: Are you now acknowledging that you lost in <date>2020</date>?
+
+[119] DONALD TRUMP
+<person>DONALD TRUMP</person>: No, I don't acknowledge that at all.
+
+[120] DAVID MUIR
+<person>DAVID MUIR</person>: But you did say that.
+
+[121] DONALD TRUMP
+<person>DONALD TRUMP</person>: I said that sarcastically. You know that. It was said, oh we lost by a whisker. That was said sarcastically. Look, there's so much proof. All you have to do is look at it. And they shoulda sent it back to the legislatures for approval. I got almost 75 million votes. The most votes any sitting <role>president</role> has ever gotten. I was told if I got 63, which was what I got in <date>2016</date>, you can't be beaten. The election, people should never be thinking about an election as fraudulent. We need two things. We need walls. We need--and we have to have it. We have to have borders. And we have to have good elections. Our elections are bad. And a lot of these illegal immigrants coming in, they're trying to get them to vote. They can't even speak English. They don't even know what country they're in practically. And these people are trying to get them to vote. And that's why they're allowing them to come into our country.
+
+[122] DAVID MUIR
+<person>DAVID MUIR</person>: I did watch all of these pieces of video. I didn't detect the sarcasm, "lost by a whisker," "we didn't quite make it," and we should just point out as clarification, and you know this, you and your allies, 60 cases in front of many <role>judges</role>. Many of them--
+
+[123] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>No <role>judge</role> looked at it</claim>.
+
+[124] DAVID MUIR
+<person>DAVID MUIR</person>: --and said there was no widespread fraud.
+
+[125] DONALD TRUMP
+<person>DONALD TRUMP</person>: They said we didn't have standing. That's the other thing. They said we didn't have standing. A technicality. Can you imagine a system where a person in an <event>election</event> doesn't have standing, the <role>President of the United States</role> doesn't have standing? That's how we lost. If you look at the facts, and I'd love to have you--you'll do a special on it. I'll show you <location>Georgia</location> and I'll show you <location>Wisconsin</location> and I'll show you <location>Pennsylvania</location> and I'll show you--we have so many facts and statistics. But you know what? That doesn't matter. Because we have to solve the problem that we have right now. That's old news. And the problem that we have right now is we have a nation in decline, and they have put it into decline. We have a nation that is dying, <person>David</person>.
+
+[126] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>, thank you. Uh, <person>Vice President Harris</person>, you heard the <role>President</role> there <date>tonight</date>. He said he didn't say that he lost by a whisker. So he still believes, uh, he did not lose the <event>election</event> uh, that was won by <person>President Biden</person> uh, and and yourself. But I do want to ask you about something that's come up in the <date>last couple of days</date>. This was a post from <person>President Trump</person> about this upcoming <event>election</event> uh, just <date>weeks away</date>. He said, "When I win, those people who cheated," and then he lists donors, voters, <role>election officials</role>, he says "Will be prosecuted to the fullest extent of the law, which will include long-term prison sentences." One of your campaign's top <role>lawyers</role> responded saying, "We won't let <person>Donald Trump</person> intimidate us. We won't let him suppress the vote." Is that what you believe he's trying to do here?
+
+[127] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: <claim><person>Donald Trump</person> was fired by 81 million people</claim>. So, let's be clear about that. And clearly, he is having a very difficult time processing that. But we cannot afford to have a <role>President of the United States</role> who attempts as he did in the past to upend the will of the voters in a free and fair election. And I'm gonna tell you that, uh, I have traveled the world as <role>Vice President of the United States</role>. And world leaders are laughing at <person>Donald Trump</person>. I have talked with military leaders, some of whom worked with you. And they say you're a disgrace. And when you then talk in this way in a <event>presidential debate</event> and deny what over and over again are court cases you have lost, because you did in fact lose that election, it leads one to believe that perhaps we do not have in the <role>candidate</role> to my right the temperament or, or the ability to not be confused about fact. That's deeply troubling. And the American people deserve better.
+
+[128] DAVID MUIR
+<person>DAVID MUIR</person>: I'll give you one minute to respond, <person>Mr. President</person>.
+
+[129] DONALD TRUMP
+<person>DONALD TRUMP</person>: Okay, let me just tell you about world leaders. <person>Viktor Orban</person>, one of the most respected men--they call him a strong man. He's a, he's a tough person. Smart. <role>Prime Minister</role> of <location>Hungary</location>. They said, "Why is the whole world blowing up? Three years ago it wasn't. Why is it blowing up?" He said, "Because you need <person>Trump</person> back as <role>President</role>. They were afraid of him. <location>China</location> was afraid." And I don't like to use the word afraid but I'm just quoting him. "China was afraid of him. <location>North Korea</location> was afraid of him." Look at what's going on with <location>North Korea</location>, by the way. He said, "Russia was afraid of him." I ended the Nord Stream 2 pipeline and <person>Biden</person> put it back on day one but he ended the XL pipeline. The XL pipeline in our country. He ended that. But he let the Russians build a pipeline going all over <location>Europe</location> and heading into <location>Germany</location>. The biggest pipeline in the world. Look, <person>Viktor Orban</person> said it. He said the most respected, most feared person is <person>Donald Trump</person>. We had no problems when <person>Trump</person> was <role>President</role>. But when this weak, pathetic man that you saw at a <event>debate</event> just a few months ago that if he weren't in that <event>debate</event> he'd be running instead of her, she got no votes, he got 14 million votes, what you did, you talk about a threat to democracy. He got 14 million votes and they threw him out of office. And you know what? I'll give you a little secret. He hates her. He can't stand her.
+
+[130] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person> --
+
+[131] DONALD TRUMP
+<person>DONALD TRUMP</person>: But he had 14 million votes. They threw 'im out. She got zero votes. And when she ran, she was the first one to leave because she failed. And now she's running. I don't understand it but I'm okay with it-–
+
+[132] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>--
+
+[133] DONALD TRUMP
+<person>DONALD TRUMP</person>: --because I think we're going to do pretty well.
+
+[134] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>, your time is up. We've got a lot more to get--to.
+
+[135] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Turning now to the <event>Israel-Hamas war</event> and the hostages who are still being held, Americans among them. <person>Vice President Harris</person>, in <date>December</date> you said, "Israel has a right to defend itself" but you added, "It matters how." Saying, "International humanitarian law must be respected, Israel must do more to protect innocent civilians." You said that <date>nine months ago</date>. Now an estimated 40,000 Palestinians are dead. Nearly 100 hostages remain. Just last week <person>Prime Minister Benjamin Netanyahu</person> said there's not a deal in the making. <person>President Biden</person> has not been able to break through the stalemate. How would you do it?
+
+[136] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, let's understand how we got here. On <date>Oct. 7</date>, <organization>Hamas</organization>, a terrorist organization, slaughtered twelve hundred Israelis. Many of them young people who were simply attending a concert. Women were horribly raped. And so absolutely, I said then, I say now, <location>Israel</location> has a right to defend itself. We would. And how it does so matters. Because it is also true, far too many innocent Palestinians have been killed. Children, mothers. What we know is that this war must end. It must when--end immediately, and the way it will end is we need a cease-fire deal and we need the hostages out. And so we will continue to work around the clock on that. Work around the clock also understanding that we must chart a course for a two-state solution. And in that solution, there must be security for the Israeli people and <location>Israel</location> and in equal measure for the Palestinians. But the one thing I will assure you always, I will always give <location>Israel</location> the ability to defend itself, in particular as it rates--relates to <location>Iran</location> and any threat that <location>Iran</location> and its proxies pose to <location>Israel</location>. But we must have a two-state solution where we can rebuild <location>Gaza</location>, where the Palestinians have security, self-determination and the dignity they so rightly deserve.
+
+[137] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, how would you negotiate with <person>Netanyahu</person> and also <organization>Hamas</organization> in order to get the hostages out and prevent the killing of more innocent civilians in <location>Gaza</location>?
+
+[138] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>If I were <role>president</role>, it would have never started</claim>. <claim>If I were <role>president</role>, <location>Russia</location> would have never, ever--I know <person>Putin</person> very well. He would have never--and there was no threat of it either, by the way, for four years--have gone into <location>Ukraine</location> and killed millions of people when you add it up</claim>. Far worse than people understand what's going on over there. But when she mentions about <location>Israel</location> all of a sudden--<claim>she hates <location>Israel</location></claim>. <premise>She wouldn't even meet with <person>Netanyahu</person> when he went to <organization>Congress</organization> to make a very important speech</premise>. <premise>She refused to be there because she was at a sorority party of hers</premise>. <premise>She wanted to go to the sorority party</premise>. <claim>She hates <location>Israel</location></claim>. <claim>If she's <role>president</role>, I believe that <location>Israel</location> will not exist within two years from now</claim>. And I've been pretty good at predictions. And I hope I'm wrong about that one. <claim>She hates <location>Israel</location></claim>. At the same time in her own way she hates the Arab population because the whole place is gonna get blown up, Arabs, Jewish people, <location>Israel</location>. <location>Israel</location> will be gone. It would have never happened. <claim><location>Iran</location> was broke under <person>Donald Trump</person></claim>. <claim>Now <location>Iran</location> has $300 billion</claim> because <premise>they took off all the sanctions that I had</premise>. <claim><location>Iran</location> had no money for <organization>Hamas</organization> or <organization>Hezbollah</organization> or any of the 28 different spheres of terror</claim>. And they are spheres of terror. Horrible terror. They had no money. It was a big story, and you know it. You covered it. Very well, actually. They had no money for terror. They were broke. Now they're a rich nation. And now what they're doing is spreading that money around. Look at what's happening with the Houthis and <location>Yemen</location>. Look at what's going on in the <location>Middle East</location>. This would have never happened. I will get that settled and fast. And I'll get the war with <location>Ukraine</location> and <location>Russia</location> ended. If I'm <role>President-Elect</role>, I'll get it done before even becoming <role>President</role>.
+
+[139] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, he says you hate <location>Israel</location>.
+
+[140] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Heh, well, <claim>that's absolutely not true</claim>. <premise>I have my entire career and life supported <location>Israel</location> and the Israeli people</premise>. He knows that. He's trying to again divide and and distract from the reality, which is it is very well known that <claim><person>Donald Trump</person> is weak and wrong on national security and foreign policy</claim>. It is well known that <claim>he admires dictators</claim>, <claim>wants to be a dictator on day one according to himself</claim>. It is well known that <claim>he said of <person>Putin</person> that he can do whatever the hell he wants and go into <location>Ukraine</location></claim>. It is well known that <claim>he said when <location>Russia</location> went into <location>Ukraine</location> it was brilliant</claim>. It is well known <claim>he exchanged love letters with <person>Kim Jong Un</person></claim>. And it is absolutely well known that <claim>these dictators and autocrats are rooting for you to be <role>president</role> again</claim> because they're so clear, <premise>they can manipulate you with flattery and favors</premise>. And that is why so many military leaders who you have worked with have told me you are a disgrace. That is why we understand that we have to have a <role>president</role> who is not consistently weak and wrong on national security--
+
+[141] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>--
+
+[142] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: --including the importance of upholding and respecting in highest regard our military.
+
+[143] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, thank you.
+
+[144] DONALD TRUMP
+<person>DONALD TRUMP</person>: They're the ones--and <claim>she's the one that caused it</claim>--that's weak on national security by allowing every nation last month for the year, 168 different countries sending people into our country. Their crime rates are way down. <person>Putin</person> endorsed her last week. Said, "I hope she wins." And I think he meant it. Because what he's gotten away with is absolutely incredible. It wouldn't have happened with me. The leaders of other countries think that they're weak and incompetent. And they are. They're grossly incompetent. And I just ask one question. Why does <person>Biden</person> go in and kill the <law>Keystone pipeline</law> and approve the single biggest deal that <location>Russia</location>'s ever made, <law>Nordstream 2</law>, the biggest pipeline anywhere in the world going to <location>Germany</location> and all over <location>Europe</location>? Because they're weak and they're ineffective. And <person>Biden</person>, by the way--
+
+[145] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>--
+
+[146] DONALD TRUMP
+<person>DONALD TRUMP</person>: --gets paid a lot of money --
+
+[147] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Thank you. We have a lot of issues to get to.
+
+[148] DAVID MUIR
+<person>DAVID MUIR</person>: We'll be right back with much more of this historic <event>ABC News presidential debate</event> from the <organization>National Constitution Center</organization> right here in <location>Philadelphia</location>. Back in a moment.
+
+[149] DAVID MUIR
+<person>DAVID MUIR</person>: Welcome back to this historic <event>ABC news presidential debate</event> <date>tonight</date>. We're going to continue here, and I want to turn to the war in <location>Ukraine</location>. We're now 2 1/2 years into this conflict. <person>Mr. President</person>, it has been the position of the <organization>Biden Administration</organization> that we must defend <location>Ukraine</location> from <location>Russia</location>, from <person>Vladimir Putin</person>, to defend their sovereignty, their democracy, that it's in <location>America</location>'s best interest to do so, arguing that if <person>Putin</person> wins he may be emboldened to move even further into other countries. You have said you would solve this war in 24 hours. You said so just before the break <date>tonight</date>. How exactly would you do that? And, and I want to ask you a very simple question <date>tonight</date>. Do you want <location>Ukraine</location> to win this war?
+
+[150] DONALD TRUMP
+<person>DONALD TRUMP</person>: I want the war to stop. I wanna save lives that are being uselessly--people being killed by the millions. It's the millions. It's so much worse than the numbers that you're getting, which are fake numbers. Look, we're in for 250 billion or more, because they don't ask <location>Europe</location>, which is a much bigger beneficiary to getting this thing done than we are. They're in for $150 billion less because <person>Biden</person> and you don't have the courage to ask <location>Europe</location> like I did with <organization>NATO</organization>. They paid billions and billions, hundreds of billions of dollars when I said either you pay up or we're not gonna protect you anymore. So that may be one of the reasons they don't like me as much as they like weak people. But you take a look at what's happening. We're in for 250 to 275 billion. They're into 100 to 150. They should be forced to equalize. With that being said, I wanna get the war settled. I know <person>Zelenskyy</person> very well, and I know <person>Putin</person> very well. I have a good relationship. And they respect your <role>President</role>. Okay? They respect me. They don't respect <person>Biden</person>. How would you respect him? Why? For what reason? He hasn't even made a phone call in two years to <person>Putin</person>. Hasn't spoken to anybody. They don't even try and get it. That is a war that's dying to be settled. I will get it settled before I even become <role>President</role>. If I win, when I'm <role>President</role>-Elect, and what I'll do is I'll speak to one, I'll speak to the other, I'll get 'em together. That war would have never happened. And in fact when I saw <person>Putin</person> after I left, unfortunately left because our--our country has gone to hell, but after I left when I saw him building up soldiers, he did it after I left, I said oh, he must be negotiating. It must be a good strong point of negotiation. Well, it wasn't because <person>Biden</person> had no idea how to talk to him. He had no idea how to stop it. And now you have millions of people dead and it's only getting worse and it could lead to <event>World War 3</event>. Don't kid yourself, <person>David</person>. We're playing with <event>World War 3</event>. And we have a <role>President</role> that we don't even know if he's -- where is our <role>President</role>? We don't even know if he's a <role>President</role>.
+
+[151] DAVID MUIR
+<person>DAVID MUIR</person>: And just to clarify here.
+
+[152] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>They threw him out of a campaign like a dog</claim>. We don't even know, is he our <role>President</role>? But we have a <role>President</role>--
+
+[153] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>,
+
+[154] DONALD TRUMP
+<person>DONALD TRUMP</person>: --that doesn't know he's alive.
+
+[155] DAVID MUIR
+<person>DAVID MUIR</person>: Your time is up. Uh, uh,just to clarify the question, do you believe it's in the <location>U.S.</location>'s best interests for <location>Ukraine</location> to win this <event>war</event>? Yes or no?
+
+[156] DONALD TRUMP
+<person>DONALD TRUMP</person>: I think <claim>it's in the <location>U.S.</location> best interest to get this war finished and f--just get it done</claim>.
+
+[157] DAVID MUIR
+<person>DAVID MUIR</person>: All right.
+
+[158] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>Negotiate a deal</claim>. Because <premise>we have to stop all of these human lives from being destroyed</premise>.
+
+[159] DAVID MUIR
+<person>DAVID MUIR</person>: I want to take this to <person>Vice President Harris</person>. I want to get your thoughts on support for <location>Ukraine</location> in this moment. But also as <role>Commander-in-Chief</role>, if elected, how would you deal with <person>Vladimir Putin</person> and would it be any different from what we're seeing from <person>President Biden</person>?
+
+[160] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, first of all, it's important to remind the <role>former President</role> you're not runnin' against <person>Joe Biden</person>, you're runnin' against me. I believe the reason that <person>Donald Trump</person> says that this war would be over within 24 hours is because he would just give it up. And that's not who we are as Americans. Let's understand what happened here. Uh, I actually met with <person>Zelenskyy</person> a few days before <location>Russia</location> invaded, tried through force to change territorial boundaries, to defy one of the most important international rules and norms, which is the importance of sovereignty and territorial integrity. And I met with <person>President Zelenskyy</person>. I shared with him American intelligence about how he could defend himself. Days later I went to <organization>NATO</organization>'s eastern flank, to <location>Poland</location> and <location>Romania</location>. And through the work that I and others did, we brought 50 countries together to support <location>Ukraine</location> in its righteous defense. And because of our support, because of the air defense, the ammunition, the artillery, the javelins, the Abrams tanks that we have provided, <location>Ukraine</location> stands as an independent and free country. If <person>Donald Trump</person> were <role>President</role>, <person>Putin</person> would be sitting in <location>Kyiv</location> right now. And understand what that would mean. Because <person>Putin</person>'s agenda is not just about <location>Ukraine</location>. Understand why the European allies and our <organization>NATO</organization> allies are so thankful that you are no longer <role>President</role> and that we understand the importance of the greatest military alliance the world has ever known, which is <organization>NATO</organization>. And what we have done to preserve the ability of <person>Zelenskyy</person> and the Ukrainians to fight for their Independence. Otherwise, <person>Putin</person> would be sitting in <location>Kyiv</location> with his eyes on the rest of <location>Europe</location>. Starting with <location>Poland</location>. And why don't you tell the 800,000 Polish Americans right here in <location>Pennsylvania</location> how quickly you would give up, for the sake of favor and what you think is a friendship, with what is known to be a <role>dictator</role> who would eat you for lunch.
+
+[161] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person> Thank you. We heard from both of you on <location>Ukraine</location> tonight. <location>Afghanistan</location> came up in the last hour--
+
+[162] DONALD TRUMP
+<person>DONALD TRUMP</person>: I have to respond to her.
+
+[163] DAVID MUIR
+<person>DAVID MUIR</person>: -- I wanted her to respond to something you said earlier.
+
+[164] DONALD TRUMP
+<person>DONALD TRUMP</person>: I have to respond.
+
+[165] DAVID MUIR
+<person>DAVID MUIR</person>: Please I'll give you a minute here.
+
+[166] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim><person>Putin</person> would be sitting in <location>Moscow</location> and he wouldn't have lost 300,000 men and women</claim>. But he would have been sitting in <location>Moscow</location>
+
+[167] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: [speaking off-mic]
+
+[168] DONALD TRUMP
+<person>DONALD TRUMP</person>: Quiet, please. <claim>He would have been sitting in <location>Moscow</location> much happier than he is right now</claim>. But eventually, you know, he's got a thing that other people don't have. He's got nuclear weapons. They don't ever talk about that. He's got nuclear weapons. Nobody ever thinks about that. And eventually uh maybe he'll use them. Maybe he hasn't been that threatening. But he does have that. Something we don't even like to talk about. Nobody likes to talk about it. But just so you understand, they sent her to negotiate peace before this war started. Three days later he went in and he started the war because everything they said was weak and stupid. They said the wrong things. That war should have never started. She was the emissary. They sent her in to negotiate with <person>Zelenskyy</person> and <person>Putin</person>. And she did and the war started three days later--
+
+[169] DAVID MUIR
+<person>DAVID MUIR</person>: <role>Vice President</role>--
+
+[170] DONALD TRUMP
+<person>DONALD TRUMP</person>: --and that's the kind of talent we have with her. <claim>She's worse than <person>Biden</person></claim>. In my opinion, <claim>I think he's the worst <role>president</role> in the history of our country</claim>. <claim>She goes down as the worst <role>Vice President</role> in the history of our country</claim>. But let me tell you something. <claim>She is a horrible negotiator</claim>. <premise>They sent her in to negotiate</premise>. <premise>As soon as they left <person>Putin</person> did the invasion</premise>.
+
+[171] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, thank you. You did bring up something, you said she went to negotiate with <person>Vladimir Putin</person>. <person>Vice President Harris</person>, have you ever met <person>Vladimir Putin</person>, can you clarify tonight?
+
+[172] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Yet again, I said it at the beginning of this <event>debate</event>, you're going to hear a bunch of lies coming from this fella. And that is another one. When I went to meet with <person>President Zelenskyy</person>, I've now met with him over five times. The reality is, it has been about standing as <location>America</location> always should, as a leader upholding international nul--rules and norms. As a leader who shows strength, understanding that the alliances we have around the world are dependent on our ability to look out for our friends and not favor our enemies, because you adore strongmen instead of caring about democracy. And that is very much what is at stake here. The <role>President of the United States</role> is <role>Commander-in-Chief</role>. And the American people have a right to rely on a <role>president</role> who understands the significance of <location>America</location>'s role and responsibility in terms of ensuring that there is stability and ensuring we stand up for our principles and not sell them for the--for the benefit of personal flattery.
+
+[173] DAVID MUIR
+<person>DAVID MUIR</person>: We've talked about <location>Ukraine</location> and <person>Vladimir Putin</person>. I do want to talk about <location>Afghanistan</location>. It came up in the first hour of this <event>debate</event>.
+
+[174] DONALD TRUMP
+<person>DONALD TRUMP</person>: <person>David</person>, one thing.
+
+[175] DAVID MUIR
+<person>DAVID MUIR</person>: I, I want to move on to <location>Afghanistan</location>--
+
+[176] DONALD TRUMP
+<person>DONALD TRUMP</person>: <person>Secretary General Stoltenberg</person> said <claim><person>Trump</person> did the most amazing thing I've ever seen</claim>, he got these countries, the 28 countries at the time, to pay up. He said I've never seen--he's the <role>head</role> of <organization>NATO</organization>. He said I've never seen--for years we were paying almost all of <organization>NATO</organization>. We were being ripped off by European nations both on trade and on <organization>NATO</organization>. I got them to pay up by saying one of the statements you made before, if you don't pay we're not gonna protect you.
+
+[177] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>--
+
+[178] DONALD TRUMP
+<person>DONALD TRUMP</person>: Otherwise we would've never gotten it. He said it was one of the most incredible jobs that he's ever seen done.
+
+[179] DAVID MUIR
+<person>DAVID MUIR</person>: Thank you. I want to turn to <location>Afghanistan</location>. It came up in the first hour of the <event>debate</event>, and we witnessed a, a poignant moment <date>today</date> on Capitol Hill honoring the soldiers who died in the chaotic withdrawal from <location>Afghanistan</location>. I do want to ask the <role>Vice President</role>, do you believe you bear any responsibility in the way that withdrawal played out?
+
+[180] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, I will tell you, I agreed with <person>President Biden</person>'s decision to pull out of <location>Afghanistan</location>. <premise>Four <role>presidents</role> said they would, and <person>Joe Biden</person> did</premise>. And as a result, <claim><location>America</location>'s taxpayers are not paying the $300 million a day we were paying for that endless war</claim>. And as of today, <claim>there is not one member of the <location>United States</location> military who is in active duty in a combat zone in any war zone around the world--the first time this century</claim>. But let's understand how we got to where we are. <premise><person>Donald Trump</person> when he was <role>President</role> negotiated one of the weakest deals you can imagine</premise>. <premise>He calls himself a dealmaker</premise>. <premise>Even his <role>National Security Adviser</role> said it was a weak, terrible deal</premise>. And here's how it went down. <premise>He bypassed the <location>Afghan government</location></premise>. <premise>He negotiated directly with a terrorist organization called the <organization>Taliban</organization></premise>. <premise>The negotiation involved the <organization>Taliban</organization> getting 5,000 terrorists, <organization>Taliban</organization> terrorists, released</premise>. And get this--no, get this. And <premise>the <role>President</role> at the time invited the <organization>Taliban</organization> to <location>Camp David</location></premise>. <premise>A place of storied significance for us as Americans, a place where we honor the importance of American diplomacy, where we invite and receive respected world leaders</premise>. And <premise>this former <role>President</role> as <role>President</role> invited them to <location>Camp David</location></premise> because <claim>he does not again appreciate the role and responsibility of the <role>President of the United States</role> to be <role>Commander in Chief</role> with a level of respect</claim>. And this gets back to the point of how he has consistently disparaged and demeaned members of our military, fallen soldiers, and the work that we must do to uphold the strength and the respect of the <location>United States of America</location> around the world.
+
+[181] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, thank you. <person>President Trump</person>, your response to her saying that you began the negotiations with the <organization>Taliban</organization>.
+
+[182] DONALD TRUMP
+<person>DONALD TRUMP</person>: Yeah, thank you. So if you take a look at that period of time, the <organization>Taliban</organization> was killing our soldiers, a lot of 'em, with snipers. And I got involved with the <organization>Taliban</organization> because the <organization>Taliban</organization> was doing the killing. That's the fighting force within <location>Afghanistan</location>. They don't bother doing that because you know, they deal with the wrong people all the time. But I got involved. And <person>Abdul</person> is the head of the <organization>Taliban</organization>. He is still the head of the <organization>Taliban</organization>. And I told <person>Abdul</person> don't do it anymore, you do it anymore you're gonna have problems. And he said, "Why do you send me a picture of my house?" I said, "You're going to have to figure that out, <person>Abdul</person>." And for <date>18 months</date> we had nobody killed. We did have an agreement negotiated by <person>Mike Pompeo</person>. It was a very good agreement. The reason it was good, it was--we were getting out. We would have been out faster than them, but we wouldn't have lost the soldiers. We wouldn't have left many Americans behind. And we wouldn't have left--we wouldn't have left $85 billion worth of brand new beautiful military equipment behind. And just to finish, they blew it. The agreement said you have to do this, this, this, this, this, and they didn't do it. They didn't do it. The agreement was--was terminated by us because they didn't do what they were supposed to do.
+
+[183] DAVID MUIR
+<person>DAVID MUIR</person>: I want to move on.
+
+[184] DONALD TRUMP
+<person>DONALD TRUMP</person>: And <claim>these people did the worst withdrawal and in my opinion the most embarrassing moment in the history of our country</claim>. And by the way, <claim>that's why <location>Russia</location> attacked <location>Ukraine</location></claim>. Because <premise>they saw how incompetent he and his boss are</premise>.
+
+[185] DAVID MUIR
+<person>DAVID MUIR</person>: <person>President Trump</person>, thank you. I want to move on now to race and politics in this country. <person>Mr. President</person>, you recently said of <person>Vice President Harris</person>, "I didn't know she was Black until a number of years ago when she happened to turn Black, and now she wants to be known as Black." I want to ask a bigger-picture question here tonight. Why do you believe it's appropriate to weigh in on the racial identity of your opponent?
+
+[186] DONALD TRUMP
+<person>DONALD TRUMP</person>: I don't. And I don't care. I don't care what she is. I don't care. Uh, you make a big deal out of something. I couldn't care less. Whatever she wants to be is okay with me.
+
+[187] DAVID MUIR
+<person>DAVID MUIR</person>: But those were your words. So, I'm asking --
+
+[188] DONALD TRUMP
+<person>DONALD TRUMP</person>: I don't know. I don't know. All I can say is I read where she was not Black--that she put out. And, I'll say that. And then I read that she was Black. And that's okay. Either one was okay with me. That's up to her. That's up to her.
+
+[189] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, your thoughts on this?
+
+[190] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: I think it's, I mean honestly, I think it's a tragedy that we have someone who wants to be <role>President</role> who has consistently over the course of his career attempted to use race to divide the American people. You know, I do believe that the vast majority of us know that we have so much more in common than what separates us. And we don't want this kind of approach that is just constantly trying to divide us, and especially by race. And let's remember how <person>Donald Trump</person> started. He was a, a, a—land, he owned land, he owned buildings, and he was investigated because he refused to rent property to Black families. Let's remember, this is the same individual who took out a full-page ad in <organization>The New York Times</organization> calling for the execution of five young Black and Latino boys who were innocent, the <organization>Central Park Five</organization>. Took out a full-page ad calling for their execution. This is the same individual who spread birther lies about the first Black <role>President</role> of the <location>United States</location>. And I think the American people want better than that. Want better than this. Want someone who understands as I do, I travel our country, we see in each other a friend. We see in each other a neighbor. We don't want a <role>leader</role> who is constantly trying to have Americans point their fingers at each other. I meet with people all the time who tell me "Can we please just have discourse about how we're going to invest in the aspirations and the ambitions and the dreams of the American people?" Knowing that regardless of people's color or the language their grandmother speaks we all have the same dreams and aspirations and want a <role>president</role> who invests in those, not in hate and division.
+
+[191] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person> thank you. <person>Linsey</person>?
+
+[192] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, this is now your third time --
+
+[193] DONALD TRUMP
+<person>DONALD TRUMP</person>: This is the most divisive presidency in the history of our country. There's never been anything like it. They're destroying our country. And they come up with things like what she just said going back many, many years when a lot of people including <person>Mayor Bloomberg</person> agreed with me on the <organization>Central Park Five</organization>. They admitted--they said, they pled guilty. And I said, well, if they pled guilty they badly hurt a person, killed a person ultimately. And if they pled guilty--then they pled we're not guilty. But this is a person that has to stretch back years, 40, 50 years ago because there's nothing now. I built one of the greatest economies in the history of the world and I'm gonna build it again. It's going to be bigger, better and stronger. But they're destroying our economy. They have no idea what a good economy is. Their oil policies--every single policy--and remember this. She is <person>Biden</person>. She's trying to get away from <person>Biden</person>. I don't know the gentleman, she says. She is <person>Biden</person>. The worst inflation we've ever had. A horrible economy because inflation has made it so bad. And she can't get away with that.
+
+[194] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Mr. President</person>, thank you, your time is up. <person>Linsey</person> --
+
+[195] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: I want to respond to that, though. I want to just respond briefly. Clearly, <claim>I am not <person>Joe Biden</person></claim>. And <claim>I am certainly not <person>Donald Trump</person></claim>. And <claim>what I do offer is a new generation of leadership for our country</claim>. <premise>One who believes in what is possible</premise>, <premise>one who brings a sense of optimism about what we can do instead of always disparaging the American people</premise>. <claim>I believe in what we can do to strengthen our small businesses</claim>, which is why <claim>I have a plan</claim>. Let's talk about our plans. And, and let's compare the plans. I have a plan. <claim>$6,000 for young families for the first year of your child's life</claim>. <premise>To help you in that most critical stage of your child's development</premise>. <claim>I have a plan that is about allowing people to be able to pursue what has been fleeting in terms of the American dream</claim>, <premise>by offering a help with down payment of $25,000, down payment assistance for first-time home buyers</premise>. <claim>That's the kind of conversation I believe, <person>David</person>, that people really want <date>tonight</date> as opposed to a conversation that is constantly about belittling and name-calling</claim>. <claim>Let's turn the page and move forward</claim>.
+
+[196] DAVID MUIR
+<person>DAVID MUIR</person>: <person>Vice President Harris</person>, thank you. Let's turn to policy--let's turn back to policy.
+
+[197] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, we have to move on. <person>President Trump</person> --
+
+[198] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>She is destroying our country</claim>.
+
+[199] DAVID MUIR
+<person>DAVID MUIR</person>: Let's turn to policy, please?
+
+[200] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>She has a plan to defund the police</claim>. She has a flan--<claim>plan to confiscate everybody's gun</claim>.
+
+[201] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person> we do have to--
+
+[202] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>She has a plan to not allow fracking in <location>Pennsylvania</location> or anywhere else</claim>. <claim>That's what her plan is until just recently</claim>.
+
+[203] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, <person>President Trump</person>.
+
+[204] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: The <role>former president</role> has said something twice and I need to respond too. I just need to respond one time to what he has said multiple times.
+
+[205] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: I'm sorry, we're going to move on, <person>Vice President Harris</person>. [To <person>President Trump</person>:] This is now your third time running for <role>president</role>. you have long vowed to repeal and replace the <law>Affordable Care Act</law>, also known as <law>Obamacare</law>. You have failed to accomplish that. You now say you're going to keep <law>Obamacare</law>. Quote, unless we can do something much better. Last month you said, quote, we're working on it. So tonight, nine years after you first started running, do you have a plan and can you tell us what it is?
+
+[206] DONALD TRUMP
+<person>DONALD TRUMP</person>: <law>Obamacare</law> was lousy health care. Always was. It's not very good today. And what I said, that if we come up with something, and we are working on things, we're going to do it and we're going to replace it. But remember this. <claim>I inherited <law>Obamacare</law></claim> because <premise><party>Democrats</party> wouldn't change it</premise>. <premise>They wouldn't vote for it</premise>. <premise>They were unanimous</premise>. <premise>They wouldn't vote to change it</premise>. If they woulda done that, we woulda had a much better plan than <law>Obamacare</law>. But the <party>Democrats</party> came up, they wouldn't vote for it. I had a choice to make when I was <role>President</role>, do I save it and make it as good as it can be? Never gonna be great. Or do I let it rot? And I felt I had an obligation, even though politically it would have been good to just let it rot and let it go away. I decided--and I told my people, the top people, and they're very good people--I have a lot of good people in this -- that administration. We read about the bad ones. We had some real bad ones too. And so do they. And so do they. The difference is they don't get rid of 'em. But let me just explain. I had a choice to make do I save it and make it as good as it can be, or do I let it rot? And I saved it. I did the right thing. But it's still never going to be great. And it's too expensive for people. And what we will do is we're looking at different plans. If we can come up with a plan that's going to cost our people, our population, less money and be better health care than <law>Obamacare</law>, then I would absolutely do it. But until then, I'd run it as good as it can be run.
+
+[207] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: So just a yes or no, you still do not have a plan?
+
+[208] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>I have concepts of a plan</claim>. <premise>I'm not <role>President</role> right now</premise>. But <claim>if we come up with something I would only change it if we come up with something that's better and less expensive</claim>. And <claim>there are concepts and options we we have to do that</claim>. And <claim>you'll be hearing about it in the not-too-distant future</claim>.
+
+[209] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice president Harris</person>, in <date>2017</date> you supported <person>Bernie Sanders</person>' proposal to do away with private insurance and create a government-run health care system. Two years later you proposed a plan that included a private insurance option. What is your plan today?
+
+[210] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, first of all, <claim>I absolutely support and over the last four years as <role>Vice President</role>, private health care options</claim>. But <claim>what we need to do is maintain and grow the <law>Affordable Care Act</law></claim>. But I, I'll get to that, <person>Linsey</person>. I just need to respond to a previous point that the <role>former President</role> has made. I've made very clear my position on fracking. And then this business about taking everyone's guns away. <person>Tim Walz</person> and I are both gun owners. We're not taking anybody's guns away. So stop with the continuous lying about this stuff. As it relates to the <law>Affordable Care Act</law>, understand, just look at the history to know where people stand. When <person>Donald Trump</person> was <role>president</role>, 60 times he tried to get rid of the <law>Affordable Care Act</law>. 60 times. I was a <role>Senator</role> at the time. When, I will never forget the early morning hours when it was up for a vote in the <organization>United States Senate</organization> and the late great <person>John McCain</person>, who you have disparaged as being--uh, you don't like him, you said at the time, because he got caught, he was an American hero. The late great <person>John McCain</person>, I will never forget that night. Walked onto the <organization>Senate</organization> floor and said no, you don't. No, you don't. No, you don't get rid of the <law>Affordable Care Act</law>. You have no plan. And what the <law>Affordable Care Act</law> has done is eliminate the ability of insurance companies to deny people with pre-existing conditions. I don't have to tell the people watching tonight, you remember what that was like? Remember when an insurance company could deny if a child had asthma, if someone was a breast cancer survivor, if a grandparent had diabetes? And thankfully, as I've been <role>Vice President</role> and we over the last four years have strengthened the <law>Affordable Care Act</law>, we have allowed for the first time <organization>Medicare</organization> to negotiate drug prices on behalf of you the American people. <person>Donald Trump</person> said he was gonna allow <organization>Medicare</organization> to negotiate dr, drug prices. He never did. We did. And now we have capped the cost of insulin at $35 a month. Since I've been <role>Vice President</role> we have capped the cost of prescription medication for seniors at $2,000 a year. And when I am <role>President</role> we will do that for all people understanding that the value I bring to this is that access to health care should be a right and not just a privilege of those who can afford it. And the plan has to be to strengthen the <law>Affordable Care Act</law>, not get rid of it--
+
+[211] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: Thank you--
+
+[212] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: --the past is prologue in terms of where <person>Donald Trump</person> stands on that.
+
+[213] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: I want to move to an issue that's important --
+
+[214] DONALD TRUMP
+<person>DONALD TRUMP</person>: <claim>She made a mistake</claim>. Number one, <premise><person>John McCain</person> fought <law>Obamacare</law> for ten years</premise>. But <claim>it wasn't only him</claim>. It was, <claim>all of the <party>Democrats</party> that kept it going</claim>. And you know what? <claim>We could do much better than <law>Obamacare</law></claim>. <claim>Much less money</claim>. But <claim>she won't improve private insurance for people</claim>. Private, medical insurance. That's another thing she doesn't want to get.--
+
+[215] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>--
+
+[216] DONALD TRUMP
+<person>DONALD TRUMP</person>: --People are paying privately for insurance that have worked hard and made money and they want to have private. She wants everybody to be on government insurance where you wait six months for an operation that you need immediately.
+
+[217] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, thank you. We have another issue that we'd like to get to that's important for a number of Americans, in particular younger voters, and that's climate change. <person>President Trump</person>, with regard to the environment, you say that we have to have clean air and clean water. <person>Vice President Harris</person>, you call climate change an existential threat. The question to you both tonight is what would you do to fight climate change? And <person>Vice President Harris</person>, we'll start with you. One minute for you each.
+
+[218] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: Well, the <role>former President</role> had said that climate change is a hoax. And what we know is that it is very real. You ask anyone who lives in a state who has experienced these extreme weather occurrences, who now is either being denied home insurance or is being jacked up. You ask anybody who has been um, the victim of what that means in terms of losing their home, having nowhere to go. We know that we can actually deal with this issue. The young people of <location>America</location> care deeply about this issue. And I am proud that as <role>Vice President</role> over the last four years we have invested a trillion dollars in a clean energy economy while we have also increased domestic gas production to historic levels. We have created over 800,000 new manufacturing jobs while I have been <role>Vice President</role>. We have invested in clean energy to the point that we are opening up factories around the world. <person>Donald Trump</person> said he was going to create manufacturing jobs. He lost manufacturing jobs. And I'm also proud to have the endorsement of the <organization>United Auto Workers</organization> and <person>Shawn Fain</person>, who also know that part of building a clean energy economy includes investing in American-made products, American automobiles. It includes growing what we can do around American manufacturing and opening up auto plants, not closing them like happened under <person>Donald Trump</person>.
+
+[219] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, thank you.
+
+[220] DONALD TRUMP
+<person>DONALD TRUMP</person>: That didn't happen under <person>Donald Trump</person>. Let me just tell you, <claim>they lost 10,000 manufacturing jobs this last month</claim>. It's going--<claim>they're all leaving</claim>. <claim>They're building big auto plants in <location>Mexico</location></claim>. In many cases owned by <location>China</location>. <claim>They're building these massive plants</claim>, and <claim>they think they're going to sell their cars into the <location>United States</location></claim> because of these people. What they have given to <location>China</location> is unbelievable. But we're not going to let that. We'll put tariffs on those cars so they can't come into our country. Because they will kill the <organization>United Auto Workers</organization> and any auto worker, whether it's in <location>Detroit</location> or <location>South Carolina</location> or any other place. What they've done to business and manufacturing in this country is horrible. We have nothing because they, they refuse--you know, <person>Biden</person> doesn't go after people because supposedly <location>China</location> paid him millions of dollars. He's afraid to do it. Between him and his son. They get all this money from <location>Ukraine</location>. They get all this money from all of these different countries. And then you wonder why is he so loyal to this one, that one <location>Ukraine</location>, <location>China</location>? Why is he? Why did he get 3 1/2 million dollars from the <role>mayor</role> of <location>Moscow</location>'s wife? Why did he get--why did she pay him 3 1/2 million dollars? This is a crooked administration, and they're selling our country down the tubes.
+
+[221] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person>, thank you.
+
+[222] DONALD TRUMP
+<person>DONALD TRUMP</person>: Thank you.
+
+[223] DAVID MUIR
+<person>DAVID MUIR</person>: We'll be right back with closing statements from both of our <role>candidates</role>. An historic night, this <event>ABC News Presidential Debate</event> from <location>Philadelphia</location>. Back in a moment. The time has come for closing statements. And <person>Vice President Harris</person>, we begin with you.
+
+[224] KAMALA HARRIS
+<person>KAMALA HARRIS</person>: So I think you've heard tonight two very different visions for our country. One that is focused on the future and the other that is focused on the past. And an attempt to take us backward. But we're not going back. And I do believe that the American people know we all have so much more in common than what separates us, and we can chart a new way forward. And a vision of that includes having a plan, understanding the aspirations, the dreams, the hopes, the ambition of the American people, which is why <claim>I intend to create an opportunity economy, investing in small businesses, in new families, in what we can do around protecting seniors, what we can do that is about giving hard-working folks a break in bringing down the cost of living</claim>. <claim>I believe in what we can do together that is about sustaining <location>America</location>'s standing in the world and ensuring we have the respect that we so rightly deserve including respecting our military and ensuring we have the most lethal fighting force in the world</claim>. <claim>I will be a <role>President</role> that will protect our fundamental rights and freedoms including the right of a woman to make decisions about her own body and not have her government tell her what to do</claim>. I'll tell you, <premise>I started my career as a <role>prosecutor</role></premise>. <premise>I was a <role>D.A.</role></premise> <premise>I was an <role>attorney general</role></premise>. <premise>A <role>United States Senator</role></premise>. And now <role>Vice President</role>. <premise>I've only had one client</premise>. <premise>The people</premise>. And I'll tell you, <premise>as a <role>prosecutor</role> I never asked a victim or a witness are you a <party>Republican</party> or a <party>Democrat</party></premise>. <premise>The only thing I ever asked them, are you okay</premise>? And <claim>that's the kind of <role>president</role> we need right now</claim>. <claim>Someone who cares about you and is not putting themselves first</claim>. <claim>I intend to be a <role>president</role> for all Americans and focus on what we can do over the next 10 and 20 years to build back up our country by investing right now in you the American people</claim>.
+
+[225] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>Vice President Harris</person>, thank you. <person>President Trump</person>?
+
+[226] DONALD TRUMP
+<person>DONALD TRUMP</person>: So, <premise>she just started by saying she's gonna to do this, she's gonna to do that, she's gonna to do all these wonderful things</premise>. <premise>Why hasn't she done it?</premise> <premise>She's been there for 3 1/2 years</premise>. <premise>They've had 3 1/2 years to fix the border</premise>. <premise>They've had 3 1/2 years to create jobs and all the things we talked about</premise>. <premise>Why hasn't she done it?</premise> <claim>She should leave right now, go down to that beautiful <location>White House</location>, go to the <organization>Capitol</organization>, get everyone together and do the things you want to do</claim>. But <claim>you haven't done it</claim>. And <claim>you won't do it</claim>. Because <premise>you believe in things that the American people don't believe in</premise>. <premise>You believe in things like, we're not going to frack</premise>. <premise>We're not going to take fossil fuel</premise>. We're not going to do--<premise>things that are going to make this country strong, whether you like it or not</premise>. <premise><location>Germany</location> tried that and within one year they were back to building normal energy plants</premise>. <claim>We're not ready for it</claim>. <claim>We can't sacrifice our country for the sake of bad vision</claim>. But I just ask one simple question. Why didn't she do it? <claim>We're a failing nation</claim>. <claim>We're a nation that's in serious decline</claim>. <claim>We're being laughed at all over the world</claim>. <premise>All over the world, they laugh, I know the leaders very well</premise>. <premise>They're coming to see me</premise>. <premise>They call me</premise>. <claim>We're laughed at all over the world</claim>. <premise>They don't understand what happened to us as a nation</premise>. <claim>We're not a leader</claim>. <premise>We don't have any idea what's going on</premise>. <premise>We have wars going on in the <location>Middle East</location></premise>. <premise>We have wars going on with <location>Russia</location> and <location>Ukraine</location></premise>. <claim>We're going to end up in a third <event>World War</event></claim>. And <claim>it will be a war like no other</claim> because of <premise>nuclear weapons, the power of weaponry</premise>. <premise>I rebuilt our entire military</premise>. <premise>She gave a lot of it away to the <organization>Taliban</organization></premise>. <premise>She gave it to <location>Afghanistan</location></premise>. <premise>What these people have done to our country</premise>, and <claim>maybe toughest of all is allowing millions of people to come into our country, many of them are criminals, and they're destroying our country</claim>. The worst <role>President</role>, the worst <role>Vice President</role> in the history of our country.
+
+[227] LINSEY DAVIS
+<person>LINSEY DAVIS</person>: <person>President Trump</person> thank you. And that is our <event>ABC News presidential debate</event> from here in <location>Philadelphia</location> at the <organization>National Constitution Center</organization>. I'm <person>Linsey Davis</person>.
+
+[228] DAVID MUIR
+<person>DAVID MUIR</person>: And I'm <person>David Muir</person>. Thank you for watching here in the <location>U.S.</location> And all over the world. And from all of us here at <organization>ABC News</organization>, good night.
+

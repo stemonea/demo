@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+
+# build output — produced by the Pages workflow, never committed
+dist/
+
+# local configuration: the address of your own jaet-be, and any key
+.env
+.env.local
+.env.*.local
+
+# editor / OS noise
+.DS_Store
+*.log

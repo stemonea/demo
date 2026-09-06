@@ -1,0 +1,585 @@
+/* ---- hero slide -------------------------------------------------- */
+/* the copy keeps the page gutter; the field runs edge to edge under it */
+.hero__top {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 3.4vh, 40px);
+}
+
+/* the way out of the landing page, pinned to the right edge */
+.scroll-hint {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 12;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 10px 18px;
+  border: 1px solid var(--line);
+  border-right: none;
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(8px);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* once the deck has moved on, the bar below takes over from the marker */
+.scroll-hint.is-gone {
+  opacity: 0;
+  transform: translate(12px, -50%);
+}
+
+.scroll-hint__arrows {
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 0;
+  animation: scroll-nudge 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-nudge {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint__arrows {
+    animation: none;
+  }
+}
+/* This slide fills its height so the illustration can sit on the floor — right
+   on it: the deck's own bottom padding would leave a band of empty page under
+   the field, which is the one thing a full-bleed field must not have. */
+.slide--fill .deck__slide-inner {
+  flex: 1 1 auto;
+  margin-block: 0;
+  padding-bottom: 0;
+}
+
+/*
+ * The landing slide is halved: the words on top, the field they are about
+ * underneath, each taking exactly half the height. The split is a horizontal
+ * rule the eye reads as the fold between what is said and what is generated.
+ */
+.hero {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  min-height: 0;
+}
+
+.hero__top {
+  justify-content: center;
+  min-height: 0;
+  padding-bottom: clamp(16px, 3vh, 34px);
+}
+
+/* The lower half: the field covers it, edge to edge, and is sunk into the page
+   rather than placed over it — the glyphs read as engraved into the sheet, and
+   nothing is laid across them. */
+.hero__field {
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+  border-top: var(--rule) solid var(--line-strong);
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+}
+
+@media (max-width: 720px) {
+  /* on a phone the words need the room more than the field does */
+  .hero {
+    grid-template-rows: 1.35fr 1fr;
+  }
+}
+
+/* The title is a centred row of words with a rule running between them. Centred
+   rather than justified: the rules are a fixed tie between the words, so the
+   line has a natural width, and that width is what is centred in the column. */
+.hero__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 1.05vw, 18px);
+  /* sized so the four words plus the three rules always fit one row */
+  /* The cap is what the column can hold: past about 1500px the column stops
+     growing but a viewport-relative size does not, and the line would run out
+     past the frame. The floor lets it keep shrinking on a phone rather than
+     breaking onto a second row. */
+  font-size: clamp(1.4rem, 6.5vw, 5.9rem);
+  line-height: 1.08;
+  /* the variable cut of the same face: identical at rest, and able to thin */
+  font-family: var(--font-display-variable);
+  font-weight: 700;
+}
+
+.hero__word {
+  position: relative;
+  flex: none;
+  white-space: nowrap;
+}
+
+/* The question the title asks, standing behind the words that ask it: one mark
+   per word, centred on it and taller than the letters, so it reads as a
+   watermark the word is set over. The first is turned over and the last is not,
+   so the line opens and closes the way a Spanish question does. */
+.hero__ask {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  font-size: 2.35em;
+  line-height: 1;
+  color: var(--hero-ask);
+  /* off the upright by a few degrees, so the mark reads as something laid
+     behind the word rather than as part of the setting */
+  transform: translate(-50%, -50%) rotate(-8deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* the opening mark is turned over, and leans the other way */
+.hero__ask--upside-down {
+  transform: translate(-50%, -50%) rotate(188deg);
+}
+
+/* ---- letters that thin out under the cursor ---------------------- */
+.thin {
+  position: relative;
+  z-index: 1;
+}
+
+.thin__letter {
+  position: relative;
+  display: inline-block;
+}
+
+/* the letter at its resting weight, invisible, holding the advance open */
+.thin__width {
+  visibility: hidden;
+}
+
+.thin__ink {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: inherit;
+  transition: font-weight 280ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .thin__letter:hover .thin__ink {
+    font-weight: 300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thin__ink {
+    transition: none;
+  }
+}
+
+/* The rule between two words: a short, fine tie rather than a bar. It takes
+   only the width the words leave, and they are what the line is made of. */
+.hero__rule {
+  flex: 0 1 auto;
+  width: clamp(12px, 2vw, 40px);
+  min-width: 10px;
+  height: 2px;
+  background: var(--ink);
+  position: relative;
+  /*
+   * Centred on the capitals, not on the line box.
+   *
+   * `align-items: center` finds the middle of the line box, and a line box is
+   * not what the eye centres on: it carries the face's descent, which none of
+   * these four words uses. Measured on the face the title is set in, the
+   * baseline falls 0.914em below the top of the box and the capitals rise
+   * 0.705em above it, so their middle is 0.561em down where the box's is
+   * 0.540em — the rule is carried the 0.021em difference to meet it.
+   */
+  transform: translateY(0.021em);
+}
+
+/*
+ * A four-pixel bar is a four-pixel target.
+ *
+ * The reach is extended above and below so the mark can actually be found,
+ * and only there: widened sideways it would take the hover off the words,
+ * whose own letters thin under the cursor and would stop doing it near their
+ * edges for no reason a reader could see.
+ */
+.hero__rule::after {
+  content: '';
+  position: absolute;
+  inset: -0.34em 0;
+}
+
+/* under the cursor the tie is not drawn: the mark stands in its place */
+.hero__rule:hover {
+  background: transparent;
+}
+
+/*
+ * The question the tie becomes.
+ *
+ * Centred on the rule's own box, which is what centres it between the two
+ * words — horizontally because the gap is measured from that box, vertically
+ * because the box has already been carried onto the middle of the capitals.
+ * It is laid over the rule rather than replacing it, so the line's width never
+ * changes and the other three questions do not move while one is hovered.
+ */
+.hero__rule-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.86em;
+  line-height: 1;
+  color: var(--hero-rule, var(--ink));
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.14s ease;
+}
+
+.hero__rule:hover .hero__rule-mark {
+  opacity: 1;
+}
+
+/* turned over, the way the mark that opens the title is */
+.hero__rule-mark--upside-down {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__rule-mark {
+    transition: none;
+  }
+}
+
+.hero__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.hero__lead {
+  max-width: 46ch;
+  font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---- preview slides: a whole slide is a link -------------------- */
+/*
+ * Two cells of the layout: the copy on one side, the figure it describes on the
+ * other. The block carries no padding of its own and its rows stretch, so the
+ * figure fills its cell exactly — its top and bottom edges land on the two
+ * horizontal rules of the frame, and its outer edge on the vertical one. The
+ * figure is then a cell of the grid rather than a picture floating inside one,
+ * and the copy takes its breathing room privately.
+ */
+.preview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: stretch;
+  padding-block: 0;
+  cursor: pointer;
+}
+
+.preview__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(18px, 3.4vh, 44px);
+}
+
+/* No rule of its own: the frame's vertical already stands exactly here, at the
+   edge of the content column, so the copy simply sits just inside it. */
+.preview__text {
+  position: relative;
+  padding-left: clamp(12px, 1.4vw, 20px);
+}
+
+.preview__title {
+  margin-top: 10px;
+  font-size: clamp(2rem, 4.6vw, 4.4rem);
+}
+
+.preview__lead {
+  text-align: justify;
+  /* a display title, wrapped or not, needs more than a line's worth under it */
+  margin-top: clamp(20px, 2.6vh, 34px);
+  max-width: 44ch;
+  color: var(--ink-soft);
+}
+
+.preview--green .preview__lead {
+  color: color-mix(in srgb, var(--bg) 74%, transparent);
+}
+
+.preview--green .eyebrow {
+  color: var(--green-lit);
+}
+
+.preview__cta {
+  display: inline-block;
+  /* the copy column is a flex column now: without this the rule under the
+     link would be stretched to the width of the whole cell */
+  align-self: flex-start;
+  margin-top: 26px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.preview:hover .preview__cta {
+  color: var(--accent);
+}
+
+/*
+ * The figure the slide previews, cut into the page.
+ *
+ * It is a recess in the sheet, not a card lying on it: the surface is the sunken
+ * one, the inner edge does the shading, and there is no drop shadow and nothing
+ * laid over the content. Pointing at it therefore cannot lift it — what answers
+ * the cursor is the edge of the recess sharpening to ink, which is a change to
+ * the cut rather than to the height.
+ */
+/*
+ * The figure sits on the page itself, exactly as the copy opposite it does: no
+ * ground of its own, no frame, nothing behind it. What separates the two halves
+ * of the slide is the layout's own rule, not a panel drawn around one of them.
+ */
+.preview__shot {
+  position: relative;
+  margin: 0;
+  color: var(--ink);
+  padding: clamp(18px, 2.4vw, 30px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  overflow-x: auto;
+}
+
+
+
+.preview__shot-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* the streaming preview alternates the columns */
+.preview--reverse {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.preview--reverse .preview__text {
+  order: 2;
+}
+
+.preview__turn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.preview__turn:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.preview__speaker {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* the manual preview: the tag set plus a scrap of its output */
+.preview__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.preview__chip {
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.preview__code {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+/* three-system diagram inside the second preview */
+.systems {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.systems__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--paper);
+  color: var(--ink); /* the card stays light even on the dark slide */
+}
+
+.systems__item--joint {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.systems__name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.systems__item--joint .systems__name {
+  color: var(--accent);
+}
+
+.systems__flow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+.systems__item--joint .systems__flow {
+  color: color-mix(in srgb, var(--bg) 62%, transparent);
+}
+
+/* Full-bleed dark slide. Its own ink covers the frame's vertical rules, which
+   run behind the pages, so it redraws them in a line that reads on ink — the
+   grid is the layout and cannot stop where the page turns dark. */
+/*
+ * The slide the "Why joint?" preview sits on: the accent's own hue, taken down
+ * to a surface, rather than the neutral ink it used to be.
+ *
+ * `--tag-text` is the reason the title stays readable. `HoverTag` resolves its
+ * colour as `var(--tag-<name>, var(--accent))`, and for ordinary words the name
+ * is `text` — undefined everywhere else, so it falls through to the accent. On
+ * a dark green panel the accent is the panel, and the title dissolved into the
+ * background the moment the pointer arrived: the tag opened on to nothing.
+ *
+ * It is the plain light rather than the tinted one. A light green reads on this
+ * panel, but it reads as *less* than the title did at rest — the word the
+ * pointer is on should not be the dimmer of the two — and it put the heading a
+ * shade away from the mark in the bar above it, which is doing the same thing
+ * at the same moment. The markers around it take the same colour, being the
+ * same custom property.
+ */
+.slide--green {
+  position: relative;
+  background-color: var(--green-deep);
+  color: var(--bg);
+  --tag-text: var(--bg);
+}
+
+/* the rule under the call to action, which was drawn in an accent the panel had
+   already swallowed */
+.preview--green .preview__cta {
+  border-bottom-color: var(--green-lit);
+}
+
+.slide--green::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 0;
+  width: calc(var(--col) + 2 * var(--rule));
+  transform: translateX(-50%);
+  border-inline: var(--rule) solid var(--frame-line-ink);
+  pointer-events: none;
+}
+
+.slide--green .shell::before,
+.slide--green .shell::after {
+  background: var(--frame-line-ink);
+}
+
+/* on the dark slide the figure is bare too; only its caption has to lighten */
+.preview--green .preview__shot {
+  color: var(--bg);
+}
+
+.preview--green .preview__shot-label {
+  color: color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+@media (max-width: 900px) {
+  .preview {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__title {
+    flex-wrap: wrap;
+  }
+}
+
+/* the speaker holding the floor in the session preview */
+.preview__chip--live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-color: var(--bad);
+  color: var(--bad);
+}
+
+.preview__on-air {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}

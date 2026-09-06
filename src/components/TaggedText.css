@@ -1,0 +1,105 @@
+/*
+ * How an annotated turn is drawn.
+ *
+ * The text has to stay readable as text: the annotation is a layer over it, not
+ * an interruption of it. So the words keep their flow, an argument component is
+ * a tinted band opened by its label — there are one or two per turn — and an
+ * entity is underlined in its colour and carries a short code after it, small
+ * enough to read as a footnote marker rather than as another word.
+ */
+.tagged {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.tagged--raw {
+  margin: 0;
+  white-space: pre-wrap;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.tagged__span {
+  --tag-color: var(--tag-fallback);
+  position: relative;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---- argument components: a band that opens with its name --------- */
+.tagged__span--argument {
+  padding: 3px 7px 3px 8px;
+  border-left: 3px solid color-mix(in srgb, var(--tag-color) 75%, transparent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: color-mix(in srgb, var(--tag-color) 9%, transparent);
+}
+
+.tagged__label {
+  display: inline-block;
+  margin-right: 7px;
+  color: var(--tag-color);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  vertical-align: 1.5px;
+}
+
+/* ---- entities: the word itself, underlined, with its code ---------- */
+.tagged__span--entity {
+  padding: 1px 2px;
+  border-bottom: 2px solid color-mix(in srgb, var(--tag-color) 70%, transparent);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--tag-color) 13%, transparent);
+}
+
+.tagged__code {
+  margin-left: 2px;
+  color: var(--tag-color);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  vertical-align: 5px;
+}
+
+/* Pointing at a span raises it out of the page: which words a tag covers is the
+   one thing colour alone cannot say when spans nest. The title attribute spells
+   the type out in full. */
+.tagged__span:hover {
+  outline: 1px solid color-mix(in srgb, var(--tag-color) 60%, transparent);
+  outline-offset: 1px;
+  background: color-mix(in srgb, var(--tag-color) 20%, transparent);
+}
+
+/* ---- what the sequential pipelines get wrong ---------------------- */
+.tagged__span--unclosed {
+  border-color: var(--bad);
+  background: var(--bad-soft);
+}
+
+.tagged__span--unclosed .tagged__label,
+.tagged__span--unclosed .tagged__code {
+  color: var(--bad);
+}
+
+.tagged__warn {
+  margin-left: 4px;
+  color: var(--bad);
+}
+
+.tagged__orphan {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 0;
+  background: var(--bad-soft);
+  border: 1px solid var(--bad);
+  color: var(--bad);
+  font-weight: 600;
+  text-decoration: line-through;
+}

@@ -1,0 +1,101 @@
+/* ---- file drop zone ---------------------------------------------- */
+/*
+ * A target, rather than a row with a button on the end of it.
+ *
+ * It used to read left to right — a line of text, then a button pushed to the
+ * far side by `space-between` — which is the shape of a toolbar and not of a
+ * place to drop something. The whole box accepts a file, so the whole box is
+ * what should look like it does: the invitation, the terms and the way in are
+ * stacked on one centre line, and the box is given the height to be aimed at.
+ */
+.drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 168px;
+  padding: 28px 24px;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg);
+  text-align: center;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+/* the mark that says which way a file travels; it lifts as one arrives */
+.drop__mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-sunken);
+  color: var(--ink-faint);
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.drop.is-hot {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+.drop.is-hot .drop__mark {
+  transform: translateY(-3px);
+  background: var(--accent);
+  color: var(--on-fill);
+}
+
+.drop.is-loaded {
+  border-style: solid;
+  border-color: var(--ink);
+}
+
+.drop.is-loaded .drop__mark {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.drop__input {
+  display: none;
+}
+
+.drop__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.drop__title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  /* a long file name is the one thing here that can outgrow the box */
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drop__hint {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* said once, under the button: the box takes a file either way */
+.drop__or {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 640px) {
+  .drop {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+}

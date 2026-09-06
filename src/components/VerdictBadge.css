@@ -1,0 +1,25 @@
+.verdict {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid currentColor;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.verdict--match {
+  color: var(--ok);
+}
+
+.verdict--partial {
+  color: var(--warn);
+}
+
+.verdict--broken {
+  color: var(--bad);
+}
+
+.panel--joint .verdict--match {
+  color: var(--ok-bright);
+}

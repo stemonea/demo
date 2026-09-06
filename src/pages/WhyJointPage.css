@@ -1,0 +1,221 @@
+/* ---- overview slide ---------------------------------------------- */
+.why-intro__title {
+  margin-top: 10px;
+  font-size: var(--display-lg);
+}
+
+.why-intro__lead {
+  max-width: 66ch;
+  margin-top: 18px;
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: var(--ink-soft);
+}
+
+.why-intro .legend {
+  margin-top: clamp(18px, 3vh, 34px);
+}
+
+.why-intro__mechanisms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+  margin-top: clamp(24px, 4vh, 44px);
+}
+
+.mechanism {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--paper);
+  border-top: 2px solid var(--ink);
+}
+
+.mechanism__num {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.mechanism__title {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.mechanism__body {
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+/* ---- comparison slides ------------------------------------------- */
+.compare {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: clamp(10px, 1.6vh, 16px);
+}
+
+.compare__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.compare__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(16px, 1.7vw, 21px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.controls__toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle {
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.toggle:hover {
+  color: var(--ink);
+}
+
+.toggle.is-on {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.gold {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding-block: clamp(8px, 1.4vh, 14px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.gold__label {
+  flex: none;
+  margin-top: 5px;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/*
+ * One column per system, ruled off the sheet: the gap between the columns is a
+ * single hairline, so the three panels read as three cells of one table rather
+ * than as three cards side by side. They scroll together as one region when the
+ * window is too short, so the slide itself always fits.
+ */
+.split {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+  align-items: stretch;
+}
+
+.commentary {
+  padding-top: clamp(8px, 1.4vh, 14px);
+  border-top: 2px solid var(--accent);
+  max-width: 100ch;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+
+@media (max-width: 1000px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- run the three systems on your own text ---------------------- */
+.own {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.own__input {
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  resize: vertical;
+}
+
+.own__input::placeholder {
+  color: var(--ink-faint);
+}
+
+.own__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.own__hint {
+  color: var(--ink-faint);
+  font-size: 13px;
+}
+
+.own__error {
+  padding: 12px 14px;
+  border-left: 3px solid var(--bad);
+  background: var(--bad-soft);
+  color: var(--bad);
+  font-size: 13px;
+}
+
+.commentary--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}

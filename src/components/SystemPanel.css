@@ -1,0 +1,125 @@
+/* A panel is a cell of `.split`: the rules around it belong to the sheet, so it
+   draws none of its own. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--paper);
+}
+
+/* The joint system is the reference column. With no shadow to raise it and no
+   border of its own to thicken, what marks it is a rule drawn inside its own
+   edge — the way a drawing calls out the part it is about. */
+.panel--joint {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.panel__head {
+  padding: clamp(12px, 1.8vh, 20px) 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel--joint .panel__head {
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom-color: var(--ink);
+}
+
+.panel__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.panel--joint .panel__title {
+  color: var(--accent);
+}
+
+.panel__tagline {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.panel--joint .panel__tagline {
+  color: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+
+.panel__flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.panel__step {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.panel--joint .panel__step {
+  border-color: color-mix(in srgb, var(--bg) 35%, transparent);
+  color: var(--bg);
+}
+
+.panel__step--io {
+  border-style: dashed;
+  color: var(--ink-faint);
+}
+
+.panel--joint .panel__step--io {
+  color: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.panel__flow li:not(:last-child)::after {
+  content: '→';
+  margin-left: 6px;
+  color: var(--ink-faint);
+}
+
+.panel__body {
+  flex: 1;
+  padding: clamp(14px, 2vh, 22px);
+}
+
+.panel__foot {
+  padding: clamp(10px, 1.6vh, 16px) 22px;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel__note {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.panel__markup {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.panel__markup.is-ok {
+  color: var(--ok);
+}
+
+.panel__markup.is-bad {
+  color: var(--bad);
+}

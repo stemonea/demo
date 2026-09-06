@@ -1,0 +1,331 @@
+/* =====================================================================
+   The ballot, from the side that votes.
+
+   A band under the debate, not a box in the margin: it is the one thing
+   this page lets its reader do, and it is read at a glance while
+   somebody is still talking.
+
+     +-----------------------------------------------+
+     |  your say · where do you stand?     turn 47   |
+     +-----------------------+-----------------------+
+     |  [x] HA  KAMALA HARRIS| [ ] TR  DONALD TRUMP  |
+     |     35 turns · 55/67  |    79 turns · 127/93  |
+     |     ██████ 45%   9/20 |    ████ 35%      7/20 |
+     +-----------------------+-----------------------+
+     |  [ ] —   Neither of them          20%    4/20 |
+     +-----------------------------------------------+
+   ===================================================================== */
+
+.ballot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+  margin-top: clamp(26px, 4vh, 48px);
+}
+
+.ballot__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 28px;
+  margin-bottom: clamp(10px, 1.6vh, 18px);
+}
+
+.ballot__title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+}
+
+/* the moment an answer given now is stamped with */
+.ballot__turn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ballot__lead {
+  max-width: 58ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.ballot__closed {
+  padding: 22px 18px;
+  border: var(--rule) solid var(--line);
+  background: var(--paper);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+/* ---- the answers ---------------------------------------------------- */
+/*
+ * A grid, on the same ruled sheet as everything else.
+ *
+ * Two columns rather than one row across the whole width: three cards abreast
+ * on a desktop are three banners — wide, shallow, and scanned like a toolbar
+ * instead of weighed against each other. Side by side in a column each, the
+ * rivals are the same size and directly comparable.
+ *
+ * A single row is right on a phone, and that is exactly where it goes back to
+ * being one — one column, stacked, at the foot of this file.
+ */
+.ballot__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--rule);
+  background: var(--line);
+  border: var(--rule) solid var(--line);
+}
+
+/* an odd last candidate, and standing aside, take the whole of their row: no
+   card is ever left with an empty half beside it */
+.ballot__option--wide {
+  grid-column: 1 / -1;
+}
+
+/*
+ * Standing aside is a position, set apart from the names without being made
+ * to look like a lesser one: it has the whole of the last row to itself and a
+ * quieter surface, and that is all.
+ */
+.ballot__option--aside {
+  background: var(--bg-sunken);
+}
+
+.ballot__option--aside.is-mine {
+  background: color-mix(in srgb, var(--series) 8%, var(--bg-sunken));
+}
+
+.ballot__option {
+  --series: var(--series-other);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px 18px;
+  background: var(--paper);
+  border-top: 3px solid transparent;
+  transition: border-color 0.16s ease;
+}
+
+/* where this reader stands, said on the cell and not only on its button */
+.ballot__option.is-mine {
+  border-top-color: var(--series);
+  background: color-mix(in srgb, var(--series) 6%, var(--paper));
+}
+
+.ballot__pick {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  color: var(--ink-soft);
+  transition: color 0.16s ease;
+}
+
+.ballot__pick:hover,
+.ballot__pick:focus-visible {
+  color: var(--ink);
+}
+
+/*
+ * The candidate, as a mark.
+ *
+ * Two long names that share their first two words — "vice president",
+ * "former president" — are nearly the same shape at a glance, and the
+ * moderator's chart identifies the same people by colour. So the card
+ * carries a tile in that colour with the two letters that actually differ,
+ * and the name underneath is free to run to two lines instead of being cut
+ * off by an ellipsis in the middle of a title.
+ */
+.ballot__tile {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: color-mix(in srgb, var(--series) 16%, transparent);
+  box-shadow: inset 0 0 0 var(--rule) color-mix(in srgb, var(--series) 45%, transparent);
+  color: var(--series);
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.ballot__option.is-mine .ballot__tile {
+  background: var(--series);
+  color: var(--on-fill);
+  box-shadow: none;
+}
+
+.ballot__who {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* what this candidate has put on the record so far, from the tool's own
+   count — the thing a viewer is actually weighing while they decide */
+.ballot__made {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ballot__made strong {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+/* the box that fills with the colour of the position it stands for */
+.ballot__mark {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: var(--rule) solid var(--line-strong);
+  background: var(--paper);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--on-fill);
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.ballot__pick:hover .ballot__mark,
+.ballot__pick:focus-visible .ballot__mark {
+  border-color: var(--series);
+}
+
+.ballot__option.is-mine .ballot__mark {
+  border-color: var(--series);
+  background: var(--series);
+}
+
+.ballot__option.is-mine .ballot__mark::after {
+  content: '\2713';
+}
+
+/* a real speaker is called "FORMER PRESIDENT TRUMP", so the name wraps
+   rather than being trimmed to something that does not identify anybody */
+.ballot__name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.ballot__you {
+  flex: none;
+  align-self: flex-start;
+  padding: 1px 7px;
+  border: var(--rule) solid var(--series);
+  color: var(--series);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---- what the room has done with it --------------------------------- */
+/*
+ * Shown to the voter on purpose. A poll that answers nothing back is a
+ * form; watching your side move while somebody is still speaking is the
+ * reason to do this during a debate rather than after one. What stays on
+ * the other side of the link is the evolution — turn by turn, and who
+ * changed their mind.
+ */
+.ballot__room {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ballot__track {
+  display: block;
+  height: 12px;
+  background: var(--carved);
+  box-shadow: var(--shadow-carved);
+}
+
+.ballot__bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--series);
+  transition: width 0.45s ease;
+}
+
+.ballot__figures {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ballot__figures strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ballot__heads {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.ballot__note {
+  padding: 10px 16px;
+  border: var(--rule) solid var(--line);
+  border-top: none;
+  background: var(--bg-sunken);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* the caveat, present but not competing with the count */
+.ballot__where {
+  color: var(--ink-faint);
+}
+
+/* the narrow case: one column, and nothing spans anything */
+@media (max-width: 720px) {
+  .ballot__options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ballot__option--wide {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ballot__bar {
+    transition: none;
+  }
+}

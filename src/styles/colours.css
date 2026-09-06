@@ -1,0 +1,170 @@
+/* =====================================================================
+   COLOURS — the only file to touch when restyling the tool.
+   Every colour in the interface resolves to one of these tokens; nothing
+   in a component or a page hard-codes a value. Grouped by the job the
+   colour does, not by where it happens to appear.
+   Start with --accent, --bg, --paper and the --logo-* tokens.
+   Hover colours, translucent surfaces and series derive from these values.
+   Logo assets and the browser theme colour sync on dev/build and CSS edits.
+   ===================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* --- 1 · Surfaces -------------------------------------------------
+     Backgrounds and the hairlines that divide them.                   */
+  --bg: #f7f8fa; /* the page itself */
+  --paper: #ffffff; /* cards, panels, the annotation sheet */
+  --bg-sunken: #f0f2f5; /* toolbars and inset areas */
+  --line: #e5e7eb; /* ordinary borders and dividers */
+  --line-strong: #cbd0d8; /* borders that need to be seen */
+
+  /* The frame: the four rules the content block stands in. They are drawn
+     off the content's own edges, so they are structure rather than
+     decoration, and they are a shade quieter than --line — a card's own
+     edge has to stay the stronger of the two where they meet. */
+  --frame-line: #d5d8dc;
+  /* the same frame where it crosses the dark full-bleed slide */
+  --frame-line-ink: #55575a;
+  /* the floor a carved figure is cut into */
+  --carved: #f8f9fb;
+  --glass: color-mix(in srgb, var(--paper) 82%, transparent);
+  --highlight: color-mix(in srgb, var(--paper) 92%, transparent);
+  --highlight-control: color-mix(in srgb, var(--paper) 14%, transparent);
+  --highlight-hover: color-mix(in srgb, var(--paper) 18%, transparent);
+  --highlight-dark: color-mix(in srgb, var(--paper) 10%, transparent);
+  --dark-surface: #202a3d;
+  --dark-deep: #171d2b;
+
+  /* The deep green the "Why joint?" slide is set on: the same hue as --accent,
+     taken down to a surface a page can be printed on. --green-lit is the one
+     that has to be read *on* it — headings, and the tag the title opens into —
+     so it is light enough to carry text rather than only to decorate. */
+  --green-surface: #1e4436;
+  --green-deep: #143025;
+  --green-lit: #9fd8bf;
+
+  /* --- 2 · Text -----------------------------------------------------
+     Three weights of ink, plus the colour text takes when it sits on a
+     filled (accent or ink) surface.                                   */
+  --ink: #1d1d1f; /* headings and body copy */
+  --ink-soft: #626873; /* secondary copy */
+  --ink-faint: #737984; /* labels, captions, disabled */
+  --on-fill: #ffffff; /* text over --accent or --ink fills */
+
+  /* --- 3 · Brand ----------------------------------------------------
+     One accent carries the whole identity: buttons, active states, the
+     corner ticks on the grid, the marker in the illustration.         */
+  --accent: #235c46;
+  --accent-hover: color-mix(in srgb, var(--accent) 88%, var(--ink));
+  --accent-light: color-mix(in srgb, var(--accent) 40%, var(--paper));
+  --accent-soft: color-mix(in srgb, var(--accent) 8%, var(--paper));
+  --hero-rule: var(--ink); /* the ties between the hero's four questions, and the marks they turn into */
+  /* the two marks standing behind the first and last question: held right
+     back, because they are a watermark the words are set over rather than
+     something to be read on their own */
+  --hero-ask: color-mix(in srgb, var(--accent) 13%, transparent);
+  --lilac: #cda9ef; /* secondary brand tint, used sparingly */
+  --ascii-hover: var(--accent-light); /* the hero field under the cursor */
+  --stream-noise: #d7dde6; /* the symbols the hero field is generated from */
+  /* the crest of the wave a press sends through that field: the noise it
+     crosses aligns to the front and is lit to this, then falls back */
+  --stream-charge: var(--accent);
+
+  /* Logo: pastel green tile, with a darker mark for small-size clarity.
+     Asset generation accepts hex colours and var(--token) aliases here
+     and for --bg. Generated SVG/PNG files must not be edited by hand. */
+  --logo-start: #b8e6cb;
+  --logo-end: #91d2af;
+  --logo-ink: #235c46;
+  --logo-dash: var(--logo-ink);
+  --logo-highlight: var(--paper);
+  --logo-text: var(--logo-ink);
+
+  /* --- 4 · Status ---------------------------------------------------
+     Reserved meanings: never reuse them as decoration.                */
+  --ok: #12805c;
+  --ok-bright: #7ee2b8; /* the same signal, read on a dark panel */
+  --warn: #a06a10;
+  --bad: #d63a1e;
+  --bad-soft: color-mix(in srgb, var(--bad) 10%, var(--paper));
+
+  /* --- 5 · Shadow tint ----------------------------------------------
+     Channels only, so each shadow can pick its own opacity.           */
+  --shadow-tint: 24 36 56;
+
+  /* --- 6 · Annotation tags ------------------------------------------
+     One token per tag name declared in `src/lib/tags.ts`; adding a tag
+     there means adding its colour here. `--tag-fallback` covers a tag
+     that arrives from a backend without a token of its own, and the
+     manual annotator hands these out, in order, to user-declared types. */
+  --tag-fallback: #8b8e92;
+
+  /* argument components */
+  --tag-claim: #ff5555;
+  --tag-premise: #6a4bd6;
+
+  /* debate named entities */
+  --tag-person: #12805c;
+  --tag-location: #2b6cb0;
+  --tag-date: #b4690e;
+  --tag-role: #a5347c;
+  --tag-org: #0f7a8a;
+  --tag-party: #7a00df;
+  --tag-event: #5b7c07;
+  --tag-law: #6b6f76;
+
+  /* --- 7 · Charts ---------------------------------------------------
+     The categorical pair the charts encode with is --tag-claim and
+     --tag-premise, so the charts and the annotations agree; that pair is
+     validated for colour-vision deficiency against --bg. Below is the
+     single-hue sequential ramp used by the heatmap and the neutral that
+     stands for "outside any argument" — the neutral is always spelled
+     out in the legend, never left to colour alone.                    */
+  --chart-ramp-0: #ffeceb; /* ramp: lightest */
+  --chart-ramp-1: #e0341c; /* ramp: darkest */
+  --chart-neutral: #b9bcc0;
+
+  /* --- 8 · Series ---------------------------------------------------
+     One hue per person on the ballot, assigned in this fixed order and
+     never cycled: colour follows the candidate, so a filter or a
+     withdrawal never repaints the ones that are left.
+
+     They are the entity hues above, reordered — nothing new is
+     introduced — and the order is the one that passes. Checked as a
+     categorical palette against the paper surface: lightness band,
+     chroma floor, adjacent-pair separation under deuteranopia,
+     protanopia and tritanopia, the normal-vision floor and contrast all
+     pass at six slots (worst adjacent pair ΔE 15.1 CVD, 16.3 normal,
+     OKLab ×100). --tag-claim and --tag-premise are deliberately not in
+     the list: they mean claim and premise everywhere else on the page,
+     and a seventh person on the ballot folds into "others" rather than
+     taking a generated hue.
+
+     The neutral position is a true grey, so it reads as the absence of a
+     side rather than as a seventh one — and it is always named in the
+     legend and labelled on the chart, never left to colour alone.      */
+  --series-1: var(--tag-role);
+  --series-2: var(--tag-date);
+  --series-3: var(--tag-location);
+  --series-4: var(--tag-person);
+  --series-5: var(--tag-party);
+  --series-6: var(--tag-event);
+  --series-other: var(--tag-law);
+  --series-neutral: #6d7073;
+
+  /* --- 9 · Accessibility --------------------------------------------
+     Alternate colours used when the device requests more contrast. */
+  --contrast-line: #a6adb8;
+  --contrast-line-strong: #737984;
+  --contrast-ink-faint: #505762;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --line: var(--contrast-line);
+    --line-strong: var(--contrast-line-strong);
+    --ink-faint: var(--contrast-ink-faint);
+    --glass: var(--paper);
+  }
+}

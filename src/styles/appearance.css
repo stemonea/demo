@@ -1,0 +1,817 @@
+/*
+ * Shared visual finish, loaded after component styles. The existing grids,
+ * dimensions, gaps, ordering and scroll containers remain owned by each page.
+ */
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* A quiet canvas replaces the drafting rules without moving the content. */
+.app {
+  background: linear-gradient(155deg, var(--paper), var(--bg) 60%);
+}
+
+
+.app::before,
+.shell::before,
+.shell::after,
+.slide--green::before,
+.tick::after {
+  content: none;
+}
+
+.display {
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  text-transform: none;
+}
+
+.eyebrow {
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  text-transform: none;
+}
+
+:is(.nav__name, .panel__title, .systems__name, .cell__head,
+  .turn__speaker, .preview__speaker, .queue__speaker, .speaker__name,
+  .ballot__name, .integrity__name) {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+
+:is(.btn, .samples__btn, .nav__link, .toggle,
+  .layers__option, .floor__who, .mic__btn, .catchup, .share__reset,
+  .preview__cta, .poll__name, .lens__tab) {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:is(.layers__label, .export__label, .samples__hint, .sourcebar__label,
+  .floor__label, .say__label, .poll__ballot-label, .preview__shot-label,
+  .tile__label, .tally__label, .pg__chars, .cell__hint, .editor__caption,
+  .replay, .mic__phase, .live__status, .live-badge, .pg__service,
+  .nav__watching, .scroll-hint) {
+  letter-spacing: 0.015em;
+  text-transform: none;
+}
+
+:is(.tile__value, .tally__value) {
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Translucent chrome, with raised selections like a native segmented control. */
+.nav__name {
+  font-size: 15px;
+}
+
+.nav__link {
+  border-radius: var(--radius-control);
+  transition: background 180ms var(--ease-out), color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+
+.nav__link.is-active {
+  background: var(--bg-sunken);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 rgb(var(--shadow-tint) / 0.03);
+}
+
+.btn,
+.mic__btn {
+  border-radius: var(--radius-control);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--highlight-control);
+  transition: background 180ms var(--ease-out), color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.btn--accent {
+  background: var(--accent);
+}
+
+.btn--accent:hover {
+  background: var(--accent-hover);
+  border-color: transparent;
+}
+
+.btn--ghost {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn--ghost:hover {
+  background: var(--bg-sunken);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.btn--token:hover,
+.btn--token:focus-visible {
+  box-shadow: var(--shadow), inset 0 1px 0 var(--highlight-hover);
+}
+
+:is(.btn, .mic__btn):active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  box-shadow: none;
+}
+
+.layers__track {
+  border-radius: var(--radius-control);
+  background: var(--bg-sunken);
+  border-color: transparent;
+  box-shadow: var(--shadow-carved);
+}
+
+.layers__option {
+  border-radius: var(--radius-segment);
+}
+
+.layers__option.is-active {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+:is(.samples__btn, .export__btn, .toggle) {
+  border-radius: var(--radius-segment);
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+.samples__btn.is-on,
+.toggle.is-on {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: var(--shadow-selected);
+}
+
+/* Joined workspaces keep their exact geometry and get a rounded outer shell. */
+:is(.sheet, .pg__grid, .split, .workspace, .live__grid, .session__grid,
+  .intake, .tiles, .tallies, .stats__row, .deep__grid, .ballot__options,
+  .why-intro__mechanisms, .systems, .bench__doors, .bench__panel) {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  /* Overflow clips child fills to the corners while preserving the shell's
+     own border and shadow; clip-path also cut those off. */
+  overflow: clip;
+}
+
+.pg__grid,
+.split {
+  overflow: auto;
+}
+
+/* the panel clips its own corners; the turns inside it are what scrolls */
+.bench__rows {
+  overflow: auto;
+}
+
+:is(.setbox, .integrity, .own, .drop, .floor, .mic, .say,
+  .live__bar, .sourcebar, .labelbar, .poll__ballot, .poll__chart,
+  .deep__empty, .poll__empty--wide, .ballot__closed, .bench__bar) {
+  border-radius: var(--radius);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+:is(.floor, .say, .live__bar, .sourcebar, .labelbar, .poll__ballot, .bench__bar) {
+  background: color-mix(in srgb, var(--paper) 65%, var(--bg-sunken));
+}
+
+:is(.card__head, .card__foot, .panel__head, .own__actions,
+  .band__head, .bench__column, .bench__total, .bench__door-foot) {
+  background: color-mix(in srgb, var(--paper) 85%, var(--bg-sunken));
+}
+
+.card--output,
+.panel--joint {
+  box-shadow: none;
+}
+
+.card--output .card__head {
+  background: var(--accent-soft);
+}
+
+:is(.pg__output, .workspace__text, .carved, .bench__input) {
+  border-radius: var(--radius-sm);
+  border-color: var(--line);
+}
+
+:is(.live__feed, .session__feed) {
+  background: var(--carved);
+}
+
+/* The dark reference widget informs code surfaces and the joint system. */
+:is(.panel--joint .panel__head, .systems__item--joint,
+  .preview__code, .workspace__code, .intake__sample) {
+  background: linear-gradient(135deg, var(--dark-surface), var(--dark-deep));
+  color: var(--on-fill);
+  border-color: var(--dark-surface);
+}
+
+.panel--joint .panel__title,
+.systems__item--joint .systems__name {
+  color: var(--accent-light);
+}
+
+/*
+ * The joint row, on the green slide.
+ *
+ * The navy above is the site's treatment for anything that reads as code — the
+ * sample transcript, the joint panel, the flow of the single-pass system — and
+ * it stays that everywhere it appears. On the one slide that has been taken
+ * into the accent's own hue it would be the only thing left of the old dark,
+ * a blue block in the middle of a green page, so it is retoned to match rather
+ * than the convention being changed underneath every other page.
+ */
+.slide--green .systems__item--joint {
+  background: linear-gradient(135deg, var(--green-surface), var(--green-deep));
+  border-color: var(--green-surface);
+}
+
+.slide--green .systems__item--joint .systems__name {
+  color: var(--green-lit);
+}
+
+/*
+ * The call to action, while the slide is being pointed at.
+ *
+ * Every preview lights its link in the accent on hover, which is right on the
+ * five light slides and hides it on this one: the accent *is* the panel here,
+ * so the words went out the instant the pointer arrived — and since the whole
+ * slide is the link, the pointer is always there when anyone is reading it. The
+ * rule that lit it green was `.preview--green :is(…)`, a class and a class; the
+ * one that put it back to the accent was `.preview:hover .preview__cta`, a
+ * class, a pseudo-class and a class — one step more specific, so it won
+ * whatever the order of the files. Naming the slide as well settles it on
+ * specificity rather than on which stylesheet happens to be loaded last.
+ */
+.slide--green .preview:hover .preview__cta {
+  color: var(--bg);
+}
+
+.mechanism,
+.tile {
+  border-top-color: transparent;
+}
+
+.tile--accent {
+  background: linear-gradient(145deg, var(--paper), var(--accent-soft));
+}
+
+.mechanism__num {
+  font-weight: 600;
+}
+
+.commentary {
+  border-top-color: var(--line);
+}
+
+/* Smaller details use the same corner family as the cards. */
+:is(.catchup, .mic__phase, .lens__n, .lens__on) {
+  border-radius: var(--radius-pill);
+}
+
+:is(.floor__who, .poll__name, .share__reset, .labelbar__btn) {
+  border-radius: var(--radius-segment);
+}
+
+:is(.chip, .legend__item, .filter__chip, .counts__item, .named__type,
+  .ballot__you, .source, .verdict, .panel__step, .preview__chip) {
+  border-radius: var(--radius-tag);
+}
+
+:is(.floor__input, .say__input, .find__input, .setbox__input,
+  .editor__select, .editor__step, .spanmenu__remove, kbd) {
+  border-radius: var(--radius-sm);
+  border-color: var(--line-strong);
+}
+
+:is(.floor__input, .say__input, .find__input, .setbox__input) {
+  background: var(--paper);
+  box-shadow: var(--shadow-carved);
+  transition: box-shadow 180ms var(--ease-out), border-color 180ms var(--ease-out);
+}
+
+:is(.floor__input, .say__input, .find__input, .setbox__input):focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+:is(.pg__input, .own__input):focus-visible {
+  outline-offset: -3px;
+}
+
+:is(.mic__meter, .integrity__bar, .integrity__fill, .ballot__track,
+  .ballot__bar, .speaker__track, .speaker__bar) {
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+:is(.speaker__row, .named__row, .spanlist__item, .spanmenu__row,
+  .ballot__tile) {
+  border-radius: var(--radius-control);
+}
+
+:is(.speaker__mark, .named__mark, .table__key) {
+  border-radius: var(--radius-check);
+}
+
+.ballot__mark {
+  border-radius: 50%;
+}
+
+.lens__tab {
+  border-radius: var(--radius-segment);
+}
+
+.lens__tab.is-on {
+  color: var(--accent);
+  border-color: transparent;
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-selected);
+}
+
+/* Selection is a fill and a contour that follow the control's own shape. */
+.floor__who.is-on {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: var(--shadow-selected);
+}
+
+.floor__who.is-on:hover:not(:disabled) {
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.poll__name.is-on {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--series) 8%, var(--paper));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--series) 35%, transparent);
+}
+
+.speaker__row,
+.named__row {
+  border-left: none;
+}
+
+.speaker__row {
+  padding-left: 15px;
+}
+
+.named__row {
+  padding-left: 14px;
+}
+
+:is(.speaker__row, .named__row):hover {
+  border-left-color: transparent;
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg-sunken));
+}
+
+.speaker__row.is-open,
+.named__row.is-on,
+.bars__row--pick.is-on {
+  border-left-color: transparent;
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-selected);
+}
+
+.speaker__row.is-open .speaker__mark,
+.lens__tab.is-on .lens__n {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.spanlist__item.is-active {
+  outline: none;
+  border-left-color: transparent;
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-selected);
+}
+
+.labelbar.is-armed {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--paper));
+  background: var(--accent-soft);
+}
+
+.workspace__text .tagged__span.is-active {
+  border-left-color: transparent;
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+}
+
+.spanmenu__row,
+.spanlist__item {
+  border-left: none;
+}
+
+.spanlist__item {
+  padding-left: 13px;
+}
+
+.spanmenu__row {
+  padding-left: 11px;
+  background: color-mix(in srgb, var(--chip) 5%, var(--paper));
+}
+
+.bars__row--pick {
+  border-left: none;
+  padding-left: 9px;
+  border-radius: var(--radius-segment);
+}
+
+.bars__row--pick:hover,
+.bars__row--pick:focus-visible {
+  border-left-color: transparent;
+}
+
+.table__row:hover,
+.table__row:focus-visible {
+  box-shadow: none;
+}
+
+.table__row.is-on {
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-selected);
+}
+
+/* The argument reader uses the same small cards and filter controls as
+   the rest of the app, with type labels carrying the claim/premise colour. */
+.showing {
+  border-left: none;
+  padding-left: 13px;
+  border-radius: var(--radius-control);
+  background: var(--carved);
+}
+
+.showing.is-narrowed {
+  background: var(--accent-soft);
+}
+
+.pick {
+  border: 0;
+  padding: 4px 7px 4px 10px;
+  border-radius: var(--radius-control);
+  background: var(--paper);
+}
+
+.pick__value,
+.pick__match,
+.picks__clear,
+.said__kind,
+.said__mention {
+  border-radius: var(--radius-tag);
+}
+
+.pick__value {
+  border-color: transparent;
+}
+
+.pick__x {
+  border-radius: 50%;
+}
+
+.picks__clear {
+  letter-spacing: 0;
+  text-transform: none;
+  background: var(--paper);
+  border-color: var(--line);
+}
+
+.said {
+  gap: 8px;
+}
+
+.said__item {
+  flex: none;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--carved);
+}
+
+.said__item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.said__kind {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--tag-color) 10%, var(--paper));
+}
+
+.said__speaker {
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.said__filters .toggle {
+  letter-spacing: 0;
+}
+
+.said__mention {
+  border-bottom: none;
+  padding-bottom: 3px;
+}
+
+/* Inline text and adjoining cells stay nearly square, including when selected. */
+.tagged__span--argument {
+  border-left-color: transparent;
+  border-radius: 3px;
+}
+
+.tagged__span--entity {
+  border-radius: 2px;
+}
+
+.ballot__option.is-mine {
+  border-top-color: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--series) 35%, transparent);
+}
+
+.ballot__option:first-child {
+  border-start-start-radius: calc(var(--radius-lg) - var(--rule));
+}
+
+.ballot__option:nth-child(2) {
+  border-start-end-radius: calc(var(--radius-lg) - var(--rule));
+}
+
+.ballot__option:last-child {
+  border-end-start-radius: calc(var(--radius-lg) - var(--rule));
+  border-end-end-radius: calc(var(--radius-lg) - var(--rule));
+}
+
+.table__sort.is-on {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+:is(.pairs__item--pick, .chart__jump).is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Keyboard focus follows rounded controls, without replacing selection. */
+:is(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  outline-offset: 2px;
+}
+
+.pg__input,
+.pg__output,
+.own__input {
+  border-radius: var(--radius-control);
+}
+
+:is(.pg__input, .own__input):focus-visible {
+  outline-offset: -3px;
+}
+
+:is(.table__row, .speaker__row, .named__row):focus-visible {
+  outline-offset: -2px;
+}
+
+.share__row {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* The annotation menu must be able to extend beyond its text workspace. */
+.workspace {
+  overflow: visible;
+  background: var(--paper);
+}
+
+.workspace__pane {
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.workspace__side {
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.matrix__cell,
+.timeline__cell {
+  border-radius: 2px;
+}
+
+.chart__key::before {
+  border-radius: var(--radius-check);
+}
+
+.chart__ramp,
+.bars__track {
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.chart__jump {
+  border-radius: var(--radius-pill);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spanmenu,
+.standing__tip {
+  background: var(--paper);
+  border-color: var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-popover);
+}
+
+:is(.session__notice, .manual__message, .sourcebar__error,
+  .live__error, .own__error, .failure, .ballot__note) {
+  border-radius: var(--radius-sm);
+}
+
+.drop {
+  background: var(--paper);
+}
+
+.drop.is-loaded {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+}
+
+.drop.is-hot {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.drop__title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* The landing page retains its split hero and alternating preview columns. */
+.hero__title {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.hero__actions .btn {
+  border-radius: var(--radius-pill);
+}
+
+.hero__rule {
+  height: clamp(3px, 0.3vw, 5px);
+  border-radius: var(--radius-pill);
+  background: var(--hero-rule);
+}
+
+.hero__field {
+  border-top-color: var(--line);
+  background: linear-gradient(160deg, var(--paper), var(--accent-soft));
+  box-shadow: inset 0 1px 0 var(--highlight);
+}
+
+.preview__shot {
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow), inset 0 0 0 1px var(--line);
+}
+
+.preview__shot > * {
+  margin-inline: 20px;
+}
+
+.preview__lead {
+  text-align: start;
+}
+
+.preview__cta {
+  color: var(--accent);
+  border-bottom-color: transparent;
+}
+
+.preview:hover .preview__shot {
+  box-shadow: var(--shadow-lifted), inset 0 0 0 1px var(--line);
+}
+
+.preview__shot {
+  transition: box-shadow 240ms var(--ease-out);
+}
+
+/*
+ * One gradient, painted across two boxes.
+ *
+ * The bar and the slide are separate elements stacked on top of each other, and
+ * a gradient given to each is a gradient that starts twice: the bar was a flat
+ * green matched to the slide's top-left corner, and by the right-hand edge the
+ * slide had travelled a sixth of the way towards its dark end while the bar had
+ * not moved at all. What that left along the bottom of the bar was a soft step
+ * — read, reasonably, as the bar still drawing a rule.
+ *
+ * `background-attachment: fixed` anchors the gradient to the window rather than
+ * to the element, so both boxes are windows on to the same field and the seam
+ * cannot exist: whatever colour the slide has at its top edge is the colour the
+ * bar has at its bottom edge, at every x, without either being told a figure.
+ */
+/* the bar takes the same field on a layer of its own, so that it can be faded
+   in; see `.nav__tone` in NavBar.css */
+.slide--green {
+  background: linear-gradient(140deg, var(--green-surface), var(--green-deep));
+  background-attachment: fixed;
+}
+
+.preview--green .preview__shot {
+  background: color-mix(in srgb, var(--green-surface) 80%, var(--green-deep));
+  box-shadow: var(--shadow), inset 0 0 0 1px var(--highlight-dark);
+}
+
+.preview--green .eyebrow {
+  color: var(--green-lit);
+}
+
+/* The call to action reads as writing, not as an accent: it is the sentence the
+   slide is inviting you to act on, so it takes the light the heading takes. The
+   rule under it stays lit, which is what still marks it as the way through. */
+.preview--green .preview__cta {
+  color: var(--bg);
+}
+
+.scroll-hint {
+  background: var(--glass);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Keep every navigation destination reachable on narrow screens. */
+@media (max-width: 1000px) {
+  .nav__links {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav__link {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 980px) {
+  .workspace__pane {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .workspace__side {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Let the existing single-column scroller hold both panels at full height. */
+  .pg__grid {
+    grid-auto-rows: max-content;
+  }
+}
+
+@media (max-width: 720px) {
+  .lens__tab {
+    border-left: none;
+    padding-left: 8px;
+  }
+
+  .ballot__option:first-child {
+    border-start-end-radius: calc(var(--radius-lg) - var(--rule));
+  }
+
+  .ballot__option:nth-child(2) {
+    border-start-end-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .scroll-hint {
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

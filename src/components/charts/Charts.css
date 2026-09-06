@@ -1,0 +1,499 @@
+.chart {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.chart__caption {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.chart__empty {
+  color: var(--ink-faint);
+  font-size: 13px;
+}
+
+.chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+}
+
+.chart__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+.chart__key::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 0;
+  background: var(--key);
+}
+
+.chart__ramp {
+  width: 96px;
+  height: 10px;
+  border-radius: 0;
+  background: linear-gradient(90deg, var(--chart-ramp-0), var(--chart-ramp-1));
+  border: 1px solid var(--line);
+}
+
+.chart__legend-text {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+/* what a truncated figure is leaving out, said in the caption itself */
+.chart__shown {
+  color: var(--ink-faint);
+}
+
+/* ---- moving along a debate that is still going --------------------- */
+.chart__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.chart__jump {
+  padding: 4px 10px;
+  border: var(--rule) solid var(--line-strong);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+}
+
+.chart__jump:hover,
+.chart__jump:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* the end button says whether the view is currently riding the end */
+.chart__jump.is-on {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.chart__nav-note {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+/* ---- heatmap ------------------------------------------------------ */
+.matrix {
+  display: grid;
+  grid-template-columns: minmax(84px, auto) repeat(var(--cols), minmax(52px, 1fr));
+  gap: 2px; /* the surface gap that keeps adjacent cells separate */
+  align-items: stretch;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* same reason as the timeline: the row label is the only thing that says
+   which speaker a row of cells belongs to */
+.matrix__corner,
+.matrix__row-label {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--paper);
+}
+
+.matrix__corner {
+  display: block;
+}
+
+.matrix__col-label,
+.matrix__row-label {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.matrix__col-label {
+  padding-bottom: 4px;
+  align-self: end;
+}
+
+.matrix__row-label {
+  align-self: center;
+  padding-right: 10px;
+  color: var(--ink);
+}
+
+.matrix__cell {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--chart-ramp-1) calc(var(--weight) * 100%), var(--chart-ramp-0));
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.matrix__cell:not(.is-empty) {
+  color: color-mix(in srgb, var(--ink) calc(100% - var(--weight) * 45%), var(--on-fill));
+}
+
+.matrix__cell.is-empty {
+  background: var(--bg-sunken);
+}
+
+/* ---- stacked bars -------------------------------------------------- */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bars__row {
+  display: grid;
+  grid-template-columns: minmax(92px, 150px) minmax(0, 1fr) 34px;
+  align-items: center;
+  gap: 12px;
+}
+
+.bars__label {
+  font-size: 12px;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bars__track {
+  display: flex;
+  gap: 2px; /* surface gap between stacked segments */
+  width: var(--fill);
+  min-width: 3px;
+  height: 16px;
+}
+
+.bars__seg {
+  border-radius: 0;
+  min-width: 3px;
+}
+
+.bars__seg:first-child {
+  border-radius: 0;
+}
+
+.bars__seg:last-child {
+  border-radius: 0;
+}
+
+.bars__value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+/* ---- timeline ------------------------------------------------------ */
+/*
+ * The whole debate, however long it has got.
+ *
+ * `min-width: 0` is what makes the scroll work rather than the grid simply
+ * being wider than the box that holds it: as a flex item it would otherwise
+ * refuse to shrink below its content, take the full width of all its columns,
+ * and be cut off by whatever encloses it — with no scrollbar of its own to get
+ * the clipped turns back.
+ */
+/*
+ * The width of the name column is fixed rather than a range.
+ *
+ * It used to be `minmax(92px, 150px)`, which reads as "150 where there is room"
+ * but never is: a debate of any length makes the turn columns overrun the box,
+ * and a column asked to shrink under overflow goes to its floor. Every real
+ * timeline therefore drew its names at 92px, where "European Commission" and
+ * "European Central Bank" are both "European C…" — two different rows with the
+ * same label, in the one figure whose whole job is telling entities apart. The
+ * turns are already scrolled; giving the names the width they need costs a
+ * little more of the same scrolling and buys back the row headings.
+ */
+.timeline {
+  --timeline-label: 176px;
+  display: grid;
+  grid-template-columns: var(--timeline-label) repeat(var(--turns), minmax(34px, 1fr));
+  gap: 2px;
+  align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  /*
+   * A turn is never left cut in half by the column of names.
+   *
+   * The names are sticky, so the scrolled timeline passes underneath them, and
+   * wherever it happened to stop, the column straddling that edge was shown as
+   * a sliver — a dot sawn down the middle against the rule, which is what the
+   * figure was being read as broken for. Snapping the turn headings past the
+   * names means the first turn on screen is always a whole one. `proximity`
+   * rather than `mandatory`: it tidies where the reader lets go, it does not
+   * take the scroll away from them.
+   */
+  scroll-snap-type: x proximity;
+  scroll-padding-left: var(--timeline-label);
+  /* the jump buttons animate themselves; following the newest turn must not,
+     or a fast replay spends its whole time gliding sideways */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* one snap point per turn, taken from the headings: the cells below them sit
+   on the same columns, so the whole grid lands with them */
+.timeline__head {
+  scroll-snap-align: start;
+}
+
+/*
+ * The names stay put while the turns travel.
+ *
+ * A row whose label has scrolled off the side is a row of dots that means
+ * nothing. The label has to be opaque and it has to be above what passes under
+ * it, and the shadow carries its surface across the 2px grid gap as well — a
+ * transparent stripe there is exactly wide enough for a dot to show through
+ * and read as sitting on top of the name.
+ *
+ * `align-self: stretch` is the other half of being opaque, and the half that
+ * was missing. The grid centres its items, so the name was a box only as tall
+ * as the words in it, sitting in a row half again that height — and the turns
+ * sliding underneath were visible in the band above it and the band below,
+ * as pale stripes running out of the names into the figure. What looked like
+ * boxes drawn around the text was the text's own surface being too short to
+ * hide what it was covering. Stretched to the row, there is nothing left to
+ * see past.
+ */
+.timeline__corner,
+.timeline__label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  align-self: stretch;
+  background: var(--paper);
+}
+
+.timeline__corner {
+  display: block;
+}
+
+.timeline__head {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+/* the name, held on the row's centre line now that its box is the whole row */
+.timeline__label {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+  overflow: hidden;
+  /*
+   * The surface across the gap, then the edge that closes the column. The
+   * first shadow is wide enough to swallow a mark that has slid up against the
+   * column rather than only the 2px grid gap: a dot arriving under the names
+   * must disappear behind them completely, not surface as a half circle on the
+   * far side of the rule.
+   */
+  box-shadow: 6px 0 0 var(--paper), 7px 0 0 var(--line);
+}
+
+/*
+ * The name itself. `text-overflow` needs a block container with inline content
+ * to work on, which the label stopped being when it became a flex box, so the
+ * truncation lives here instead — and `min-width: 0` is what lets a flex item
+ * be narrower than the words inside it and therefore be truncated at all.
+ */
+.timeline__name {
+  min-width: 0;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ * A cell keeps its marks to itself.
+ *
+ * `overflow: hidden` is the guarantee behind the count in `TimelineRow`: even
+ * if a row is ever drawn with more dots than fit, nothing crosses into the
+ * neighbouring turn or travels under the column of names. Without it the marks
+ * of a busy turn were read as belonging to the turns on either side of it.
+ */
+.timeline__cell {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  align-items: center;
+  min-height: 26px;
+  padding-inline: 2px;
+  overflow: hidden;
+  border-radius: 0;
+  background: var(--bg-sunken);
+}
+
+.timeline__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--paper); /* the 2px surface ring on overlapping marks */
+}
+
+/* what a crowded turn is not drawing, said in the cell itself */
+.timeline__more {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__dot--claim {
+  background: var(--tag-claim);
+}
+
+.timeline__dot--premise {
+  background: var(--tag-premise);
+}
+
+.timeline__dot--outside {
+  background: var(--chart-neutral);
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    --timeline-label: 132px;
+  }
+}
+
+/* ---- invoked together ---------------------------------------------- */
+/* Shared by the analytics deck and the live band: the pairs of entities
+   that turned up inside the same argument component. */
+.pairs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* centred rather than packed to the left: the pairs are the finding of this
+   figure, not a row of controls beside it, and a short list of them reads as
+   a set when it sits under the middle of what it was read off */
+.pairs__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pairs__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+}
+
+/* the link between the two names, drawn heavier than a hairline: it is what
+   the pair asserts — these two were said inside one component — so it should
+   read as a bond at a glance rather than as punctuation */
+.pairs__link {
+  width: 22px;
+  height: 3px;
+  background: var(--accent);
+}
+
+.pairs__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.pairs__note {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+/* a pair that can be pressed is a control, and says so */
+.pairs__item--pick {
+  background: transparent;
+  color: inherit;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.pairs__item--pick:hover,
+.pairs__item--pick:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pairs__item--pick.is-on {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.pairs__item--pick.is-on .pairs__count {
+  color: color-mix(in srgb, var(--bg) 70%, transparent);
+}
+
+.pairs__item--pick.is-on .pairs__link {
+  background: var(--bg);
+}
+
+/* ---- a bar row that is also a filter -------------------------------- */
+.bars__row--pick {
+  width: 100%;
+  padding: 3px 6px;
+  border: none;
+  border-left: 3px solid transparent;
+  background: transparent;
+  text-align: left;
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.bars__row--pick:hover,
+.bars__row--pick:focus-visible {
+  background: var(--bg-sunken);
+  border-left-color: var(--accent);
+}
+
+.bars__row--pick.is-on {
+  background: var(--bg-sunken);
+  border-left-color: var(--ink);
+}
+
+.bars__row--pick.is-on .bars__label {
+  font-weight: 700;
+}
