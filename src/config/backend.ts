@@ -51,7 +51,7 @@ const flag = (value: string | undefined, fallback: boolean) =>
  *
  * or the same line in a `.env` of their own.
  */
-export const DEMO = 1
+export const DEMO = flag(env.VITE_DEMO as string | undefined, true)
 
 /**
  * The debate the demo plays, and where it is kept.
