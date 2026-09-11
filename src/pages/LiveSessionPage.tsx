@@ -69,12 +69,49 @@ interface SpokenTurn {
 /** Where a turn is between the microphone closing and the annotation landing. */
 type Phase = 'idle' | 'recording' | 'transcribing' | 'annotating'
 
+/**
+ * The longest of a set of labels, by characters.
+ *
+ * Characters rather than pixels: every label these reserve space for is set in
+ * the same face at the same size and tracking, so the count orders them the way
+ * the type does, and counting needs no measuring pass and no layout to read.
+ */
+const widest = (labels: readonly string[]) =>
+  labels.reduce((longest, label) => (label.length > longest.length ? label : longest), '')
+
 const PHASE_LABEL: Record<Phase, string> = {
   idle: 'ready',
   recording: 'listening',
   transcribing: 'transcribing',
   annotating: 'annotating',
 }
+
+/**
+ * The phases this build can actually reach.
+ *
+ * Only a session with a microphone behind it records and transcribes; a played
+ * debate is either waiting or being annotated. The badge below reserves room
+ * for the longest word it can show, so reserving room for words this build will
+ * never show is a badge that sits half empty for the whole debate.
+ */
+const PHASES_SHOWN: readonly Phase[] = DEMO
+  ? ['idle', 'annotating']
+  : ['idle', 'recording', 'transcribing', 'annotating']
+
+/**
+ * The longest of those, drawn and hidden behind whichever one is current.
+ *
+ * The badge used to be as wide as the word in it, and the word changes on every
+ * turn: `ready` is five characters and `annotating` is ten, so the badge grew
+ * by twenty-six pixels the moment a turn started being worked on. That was
+ * enough to wrap the bar it sits in onto a second line, which made the bar
+ * fifty-three pixels taller, which pushed the debate below it down — and then
+ * back up again when the turn landed. Twice a turn, for the whole debate.
+ *
+ * Taken from the labels rather than written out, so a phase added later cannot
+ * quietly reintroduce it.
+ */
+const LONGEST_PHASE = widest(PHASES_SHOWN.map((phase) => PHASE_LABEL[phase]))
 
 /**
  * `#/livesession?session=…` is the same view with nothing to run.
@@ -483,6 +520,45 @@ function Session() {
     (DEMO ? moreToPlay : Boolean(current))
 
   /*
+   * What the one button says, and everything it could say.
+   *
+   * The second list is what the button reserves room for. Written out beside
+   * the label rather than derived from it, because they are the same decision:
+   * a label added to the first without being added to the second brings the
+   * jitter back, and here that is one line apart.
+   */
+  const micLabel = DEMO
+    ? playing
+      ? 'Pause'
+      : loading
+        ? 'Loading…'
+        : !moreToPlay
+          ? 'Finished'
+          : fed
+            ? 'Resume'
+            : 'Play'
+    : recorder.phase === 'recording'
+      ? `Stop — ${current}`
+      : busy
+        ? PHASE_LABEL[phase]
+        : `Record ${current || '…'}`
+
+  /*
+   * What the button reserves room for, where it needs to reserve any.
+   *
+   * Only the spoken session needs it: there the label is `Record MODERATOR`
+   * between turns and the phase word while one is being worked on, so it
+   * changes by itself on every turn and the bar re-wraps under it. A played
+   * debate changes this label only when somebody presses it, or when the
+   * transcript runs out — never while a turn lands — so there is nothing to
+   * reserve against, and reserving anyway left `Play` floating in a button
+   * built for `Loading…`.
+   */
+  const micSizer = DEMO
+    ? widest(['Play', 'Pause', 'Resume', 'Loading…', 'Finished'])
+    : widest([`Stop — ${current}`, `Record ${current || '…'}`, ...Object.values(PHASE_LABEL)])
+
+  /*
    * One turn, then the wait its own length earns, then the next.
    *
    * The wait is spent the way a real one is: the turn is being worked on
@@ -801,28 +877,33 @@ function Session() {
             */}
             <button
               type="button"
-              className={`mic__btn${recorder.phase === 'recording' || playing ? ' is-live' : ''}`}
+              /* two different things, and only one of them is red: `is-live`
+                 is a microphone that is actually open and listening to a room,
+                 which is worth an alarm colour. A debate being played is simply
+                 running — it keeps the tool's own colour and says so with the
+                 light, the way every other running thing here does. */
+              className={`mic__btn${
+                recorder.phase === 'recording' ? ' is-live' : playing ? ' is-running' : ''
+              }`}
               onClick={() => (DEMO ? void playDebate() : recorder.phase === 'recording' ? close() : open())}
               disabled={
                 DEMO ? loading || !moreToPlay : busy || !current
               }
             >
               <span className="mic__dot" aria-hidden="true" />
-              {DEMO
-                ? playing
-                  ? 'Pause'
-                  : loading
-                    ? 'Loading…'
-                    : !moreToPlay
-                      ? 'Finished'
-                      : fed
-                        ? 'Resume'
-                        : 'Play'
-                : recorder.phase === 'recording'
-                  ? `Stop — ${current}`
-                  : busy
-                    ? PHASE_LABEL[phase]
-                    : `Record ${current || '…'}`}
+              {/* The button holds the longest label it can ever show, and draws
+                  the current one over it — the same reservation the phase badge
+                  makes, and for the same reason: `Record MODERATOR` becoming
+                  `annotating` and back on every turn was re-wrapping this bar
+                  and shoving the debate up and down under it. */}
+              <span className="mic__label">
+                {micSizer && (
+                  <span className="mic__label-sizer" aria-hidden="true">
+                    {micSizer}
+                  </span>
+                )}
+                <span className="mic__label-word">{micLabel}</span>
+              </span>
             </button>
 
             {/* the level, so a speaker can see they are being heard before
@@ -837,7 +918,12 @@ function Session() {
             )}
 
             <span className="mic__state">
-              <span className={`mic__phase mic__phase--${phase}`}>{PHASE_LABEL[phase]}</span>
+              <span className={`mic__phase mic__phase--${phase}`}>
+                <span className="mic__phase-sizer" aria-hidden="true">
+                  {LONGEST_PHASE}
+                </span>
+                <span className="mic__phase-word">{PHASE_LABEL[phase]}</span>
+              </span>
               {recorder.phase === 'recording' && <span className="mic__clock">{recorder.seconds.toFixed(1)}s</span>}
               {recorder.phase === 'recording' && (
                 <button type="button" className="toggle" onClick={() => { recorder.cancel(); setPhase('idle') }}>
@@ -866,7 +952,12 @@ function Session() {
 
             <span className="mic__right">
               <LayerSwitch value={view} onChange={setView} />
-              <ExportMenu tagged={transcript} filename="live-session" />
+              {/* compact here and nowhere else: this bar carries the transport,
+                  the state, the way in and the view as well, and at full size
+                  the four formats were the last thing that fitted — pressing
+                  play was enough to push the row onto a second line and take
+                  fifty pixels off the debate */}
+              <ExportMenu tagged={transcript} filename="live-session" compact />
             </span>
           </section>
 

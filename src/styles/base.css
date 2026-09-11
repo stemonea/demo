@@ -282,9 +282,11 @@ button {
   color: var(--on-fill);
 }
 
+/* an accent button darkens within the accent rather than turning black: the
+   fill is the colour of the tool, and a cursor is not a reason to leave it */
 .btn--accent:hover {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 .btn:disabled {
@@ -380,6 +382,10 @@ button {
  * `sticky` rather than `absolute`: it belongs to the foot of the scrollport,
  * not to the foot of the content, and there is no wrapper to hang it from.
  */
+/* the way back to the foot of a feed that has run on: filled, because it has to
+   be found without being looked for, and filled in the accent rather than in ink
+   — it floats over the debate, and a black pill over the transcript is the one
+   thing on the page that is not the tool's colour */
 .catchup {
   position: sticky;
   bottom: 0;
@@ -387,9 +393,9 @@ button {
   align-self: center;
   margin-top: auto;
   padding: 7px 16px;
-  border: var(--rule) solid var(--ink);
-  background: var(--ink);
-  color: var(--bg);
+  border: var(--rule) solid var(--accent);
+  background: var(--accent);
+  color: var(--on-fill);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -399,7 +405,7 @@ button {
 
 .catchup:hover,
 .catchup:focus-visible {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   color: var(--on-fill);
 }
