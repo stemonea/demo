@@ -61,7 +61,7 @@ button {
  * The frame.
  *
  * The layout is a technical grid, and the content is what the grid is measured
- * off — not a pattern the content happens to sit on. Two vertical rules stand on
+ * off - not a pattern the content happens to sit on. Two vertical rules stand on
  * the edges of the content column and run the full height of the window; the
  * content block draws the other two at its own top and bottom, and those run the
  * full width. The block is therefore inside the grid, with the rules running out
@@ -73,7 +73,7 @@ button {
  *   -----+------------+-----
  *        |            |
  *
- * The vertical pair lives here because it is the same on every page — the
+ * The vertical pair lives here because it is the same on every page - the
  * content column is a constant, so its position is arithmetic on the tokens and
  * never needs measuring. It sits behind everything, so a card crosses it rather
  * than being crossed by it.
@@ -122,7 +122,7 @@ button {
 /*
  * The mark that says a box is a cell and not a card: a tick at the top-left
  * corner, drawn in the accent, the way a drawing calls out a datum. It is a
- * corner, never a frame — the frame is the sheet's own ruling.
+ * corner, never a frame - the frame is the sheet's own ruling.
  */
 .tick {
   position: relative;
@@ -146,7 +146,7 @@ button {
  * This is what every figure on the site uses: the surface is the sunken one, the
  * inner edge is dark at the top and light at the bottom, and there is no drop
  * shadow and no tint laid over the content. A figure treated this way reads as
- * an engraving in the page — which is the point — and nothing on the page ever
+ * an engraving in the page - which is the point - and nothing on the page ever
  * looks as though it could be picked up.
  */
 .carved {
@@ -179,7 +179,7 @@ button {
  * The content column, and the other half of the frame.
  *
  * The two horizontal rules are its own top and bottom edges, extended to the
- * full width of the window — `left: 50% - 50vw` puts them at the left edge of
+ * full width of the window - `left: 50% - 50vw` puts them at the left edge of
  * the screen whatever the column is doing. They are drawn by the content rather
  * than by the page precisely so that they land where the content actually ends,
  * which is the whole point of the layout: move the content and the grid moves
@@ -218,8 +218,8 @@ button {
   padding-block: var(--frame-margin);
 }
 
-/* A block that is only ever a slot in another layout — the hero's upper half,
-   which is bounded by the field below it — has the pair suppressed, so the one
+/* A block that is only ever a slot in another layout - the hero's upper half,
+   which is bounded by the field below it - has the pair suppressed, so the one
    rule at the fold is not drawn twice. */
 .shell--open::before,
 .shell--open::after {
@@ -227,7 +227,7 @@ button {
 }
 
 /* Standalone page shell, for the views that are one screen rather than a deck:
-   the same layout a slide gave them — centred when it fits, scrolling inside
+   the same layout a slide gave them - centred when it fits, scrolling inside
    itself when it does not. */
 .page {
   flex: 1;
@@ -297,7 +297,7 @@ button {
 
 /*
  * A button that is generated rather than drawn: under the cursor its label is
- * rebuilt out of the field's own alphabet, and the box registers on the grid —
+ * rebuilt out of the field's own alphabet, and the box registers on the grid -
  * a second rule appears just inside its edge, the way a dimension is called out
  * on a drawing. The corners no longer change, because on this sheet nothing is
  * round to begin with. `TokenLabel` runs the letters.
@@ -374,7 +374,7 @@ button {
  * The way back to the end of a feed that has moved on without you.
  *
  * A live feed follows its own newest turn, and stops following the moment a
- * reader scrolls back to read something — otherwise the next turn drags the
+ * reader scrolls back to read something - otherwise the next turn drags the
  * box out from under them. What it must not do is leave them wondering
  * whether anything is still arriving, so what arrived while they were reading
  * is counted, and the count is the button back.
@@ -384,7 +384,7 @@ button {
  */
 /* the way back to the foot of a feed that has run on: filled, because it has to
    be found without being looked for, and filled in the accent rather than in ink
-   — it floats over the debate, and a black pill over the transcript is the one
+   - it floats over the debate, and a black pill over the transcript is the one
    thing on the page that is not the tool's colour */
 .catchup {
   position: sticky;

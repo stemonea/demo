@@ -7,7 +7,7 @@ import type { SystemId } from './systems'
  *
  * They are not invented: every string is a reported model output for that turn,
  * so what the interface shows offline is exactly what the three systems produced.
- * The UI always labels these as pre-computed — see `lib/api.ts`.
+ * The UI always labels these as pre-computed - see `lib/api.ts`.
  */
 export interface Fixture {
   id: string

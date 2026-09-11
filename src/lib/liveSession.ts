@@ -7,7 +7,7 @@ import { liveStream, type LiveTurnPayload, type Source } from './api'
  * The transcript was uploaded once; from then on the service annotates it and
  * sends each turn the moment it becomes an answer. This hook holds the open
  * `EventSource` and turns that stream into something the feed can wait on: an
- * annotation per turn, resolved when it arrives — or straight away when it has
+ * annotation per turn, resolved when it arrives - or straight away when it has
  * already arrived.
  *
  * That is what keeps the rest of the view unchanged. The producer in
@@ -15,8 +15,8 @@ import { liveStream, type LiveTurnPayload, type Source } from './api'
  * session instead, and the pacing, the buffer and the panels behave exactly as
  * they did.
  *
- * The stream is opened from the first turn still missing, so a remount —
- * restarting the replay — replays everything already computed at once instead of
+ * The stream is opened from the first turn still missing, so a remount -
+ * restarting the replay - replays everything already computed at once instead of
  * asking for it again, and a connection that drops is reopened from the turn it
  * had reached: no turn arrives twice, and none is skipped.
  */
@@ -36,7 +36,7 @@ export interface LiveSession {
   /**
    * The turns as they were pushed, in order.
    *
-   * The replay does not need these — it has the transcript already and only
+   * The replay does not need these - it has the transcript already and only
    * waits here for the markup. A second reader does: somebody opening the
    * share link has no file and no upload, only the stream, and the stream
    * replays from the first turn it has not sent, so the whole debate arrives

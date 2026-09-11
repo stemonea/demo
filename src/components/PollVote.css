@@ -12,7 +12,7 @@
      |     35 turns · 55/67  |    79 turns · 127/93  |
      |     ██████ 45%   9/20 |    ████ 35%      7/20 |
      +-----------------------+-----------------------+
-     |  [ ] —   Neither of them          20%    4/20 |
+     |  [ ] -   Neither of them          20%    4/20 |
      +-----------------------------------------------+
    ===================================================================== */
 
@@ -70,12 +70,12 @@
  * A grid, on the same ruled sheet as everything else.
  *
  * Two columns rather than one row across the whole width: three cards abreast
- * on a desktop are three banners — wide, shallow, and scanned like a toolbar
+ * on a desktop are three banners - wide, shallow, and scanned like a toolbar
  * instead of weighed against each other. Side by side in a column each, the
  * rivals are the same size and directly comparable.
  *
  * A single row is right on a phone, and that is exactly where it goes back to
- * being one — one column, stacked, at the foot of this file.
+ * being one - one column, stacked, at the foot of this file.
  */
 .ballot__options {
   display: grid;
@@ -142,8 +142,8 @@
 /*
  * The candidate, as a mark.
  *
- * Two long names that share their first two words — "vice president",
- * "former president" — are nearly the same shape at a glance, and the
+ * Two long names that share their first two words - "vice president",
+ * "former president" - are nearly the same shape at a glance, and the
  * moderator's chart identifies the same people by colour. So the card
  * carries a tile in that colour with the two letters that actually differ,
  * and the name underneath is free to run to two lines instead of being cut
@@ -180,7 +180,7 @@
 }
 
 /* what this candidate has put on the record so far, from the tool's own
-   count — the thing a viewer is actually weighing while they decide */
+   count - the thing a viewer is actually weighing while they decide */
 .ballot__made {
   font-size: 11px;
   line-height: 1.45;
@@ -252,7 +252,7 @@
  * Shown to the voter on purpose. A poll that answers nothing back is a
  * form; watching your side move while somebody is still speaking is the
  * reason to do this during a debate rather than after one. What stays on
- * the other side of the link is the evolution — turn by turn, and who
+ * the other side of the link is the evolution - turn by turn, and who
  * changed their mind.
  */
 .ballot__room {

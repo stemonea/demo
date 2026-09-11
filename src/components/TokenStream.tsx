@@ -71,8 +71,8 @@ export interface TokenStreamProps {
    * its half of the page whatever the window is. `cols` and `rows` are then the
    * starting point, replaced as soon as the box has been measured.
    *
-   * `'width'` measures the width alone. The field then spans its box exactly —
-   * no short line ending in the middle of a panel, no run overflowing it — while
+   * `'width'` measures the width alone. The field then spans its box exactly -
+   * no short line ending in the middle of a panel, no run overflowing it - while
    * keeping the number of rows it was asked for and the type its own stylesheet
    * gives it. That is what a status band wants: it is a strip of a given height
    * whose only unknown is how wide the panel holding it happens to be.
@@ -93,7 +93,7 @@ export interface TokenStreamProps {
 /**
  * A field fitted to its box: the grid, and the type that makes it land on it.
  *
- * `type` is null when only the width was measured — the field then keeps the
+ * `type` is null when only the width was measured - the field then keeps the
  * size its stylesheet set, and the count of columns is what was fitted to the
  * box instead of the other way round.
  */
@@ -277,7 +277,7 @@ export default function TokenStream({
    * once at whatever `cols` it was seeded with and then snaps to its real width
    * a frame later. On the hero, mounted once, that is a flicker nobody sees; on
    * the loader it is not, because the loader is mounted afresh for every turn of
-   * the debate — the band would flash short and jump wide, over and over, for
+   * the debate - the band would flash short and jump wide, over and over, for
    * as long as the replay ran. So the same measurement is taken synchronously
    * here as well, in a layout effect, and the observer is left to do what it is
    * actually for: noticing that the box has since changed size.
@@ -303,7 +303,7 @@ export default function TokenStream({
         /*
          * Width alone: the type stays as the stylesheet set it and the count of
          * columns is what gives. `clientWidth` less the padding is the room the
-         * run actually has — the band is inset by a rule and a gutter — and the
+         * run actually has - the band is inset by a rule and a gutter - and the
          * count is rounded *down*, because a field set in `pre` cannot wrap: one
          * column too many is a line running out past the edge of the panel
          * rather than a line one character short of it.
@@ -359,7 +359,7 @@ export default function TokenStream({
   const nextId = useRef(1)
 
   /* the waves running through the field, and the way to wake the loop that
-     draws them — the loop lives with the field's own timer, so it is handed
+     draws them - the loop lives with the field's own timer, so it is handed
      back out here for the pointer to reach */
   const waves = useRef<Wave[]>([])
   const kick = useRef<(() => void) | null>(null)
@@ -421,7 +421,7 @@ export default function TokenStream({
     /**
      * Does a front stand anywhere on this line of the field right now? Two ways
      * it does not: it has not reached the line yet, or it has gone straight
-     * past it — the furthest the line reaches from the press is its far end, so
+     * past it - the furthest the line reaches from the press is its far end, so
      * once the ring is wider than that the line is behind it and settled.
      */
     const crosses = (wave: Wave, dy: number, radius: number) => {
@@ -432,12 +432,12 @@ export default function TokenStream({
 
     /*
      * One frame of the field. Each row is grouped into runs drawn the same way,
-     * so a tag — or a stretch of a wavefront — is a single element rather than
+     * so a tag - or a stretch of a wavefront - is a single element rather than
      * a span per character.
      *
      * `churned` says the noise itself has moved, which is every line at once.
      * A wave frame has not touched the noise, so only the lines a front stands
-     * on now — and the ones it has just left — are built again; the rest are
+     * on now - and the ones it has just left - are built again; the rest are
      * handed back as the very same arrays, which is what lets `Row` drop out of
      * the render. A front is on three or four lines of a field fifteen or twenty
      * deep, so most of the work goes away and the frame is spent where the
@@ -577,7 +577,7 @@ export default function TokenStream({
   /**
    * A press on the field. The front is put in at a fixed speed and lives until
    * it has reached the furthest corner, so where you press changes how long the
-   * wave runs rather than how fast it sweeps — a press in a corner crosses the
+   * wave runs rather than how fast it sweeps - a press in a corner crosses the
    * whole field, one in the middle is over in half the time.
    */
   function strike(event: ReactPointerEvent<HTMLDivElement>) {

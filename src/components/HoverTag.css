@@ -3,7 +3,7 @@
    tag. */
 .ht {
   display: inline;
-  /* never override the cursor of what it sits in — a nav link stays a link */
+  /* never override the cursor of what it sits in - a nav link stays a link */
   cursor: inherit;
 }
 
@@ -60,7 +60,7 @@
  * A word cannot be broken between its letters.
  *
  * Each character sits in a box of its own, and boxes are places a line is
- * allowed to break — so without this a heading would wrap in the middle of a
+ * allowed to break - so without this a heading would wrap in the middle of a
  * word rather than at the space, which is the one thing giving the characters
  * boxes could have cost.
  */
@@ -79,7 +79,7 @@
  *
  * Transparent rather than hidden: `visibility: hidden` would take it out of
  * the selection and away from a screen reader, and this is the copy that has
- * to stay readable — what is painted over it is noise for part of a second.
+ * to stay readable - what is painted over it is noise for part of a second.
  */
 .ht__slot {
   color: transparent;
@@ -133,7 +133,7 @@
  * The run of noise is held in a box of its own, of a height the heading sets.
  *
  * The alphabet the scramble is drawn from contains marks the display face does
- * not carry — the shaded block and the box-drawing rules — so mid-animation the
+ * not carry - the shaded block and the box-drawing rules - so mid-animation the
  * browser falls back to another font, whose ascent and descent are not the
  * display face's. The line box grows to fit them and shrinks again a frame
  * later, and everything below the heading rises and falls with it. Giving the
@@ -145,7 +145,7 @@
  * The real words hold the box; the animation is drawn over them.
  *
  * A heading at this size wraps, and how many lines it takes is not something a
- * fixed height can be told in advance — cut one to a single line and a title
+ * fixed height can be told in advance - cut one to a single line and a title
  * that runs to two simply paints its second line over the paragraph below.
  * So the words themselves stay in the flow, invisible, and are what the heading
  * is measured and wrapped by; the run that scrambles is lifted out of the flow
@@ -169,7 +169,7 @@
   inset: 0;
   /* A hair of slack.
      The copy underneath measures the very same markup, so the two set to the
-     same width — but sub-pixel rounding can still differ by a fraction, and a
+     same width - but sub-pixel rounding can still differ by a fraction, and a
      fraction is enough to push the last word onto a second line that the clip
      below then removes altogether. */
   right: -1px;
@@ -186,8 +186,8 @@
 /*
  * The band the markers stand in.
  *
- * They are out of the flow — that is what stops them pushing the heading
- * sideways as they open — but out of the flow also means nothing makes room for
+ * They are out of the flow - that is what stops them pushing the heading
+ * sideways as they open - but out of the flow also means nothing makes room for
  * them, and they were landing on the eyebrow above the title. The heading
  * reserves the band itself, so the markers have somewhere of their own to be.
  */
@@ -256,7 +256,7 @@
 
 /* ---- floating: bars that must not reflow -------------------------- *
  * The resting box stays in the layout as an invisible ghost and the tagged form
- * is drawn over it, so nothing around it moves — a link can never slide out
+ * is drawn over it, so nothing around it moves - a link can never slide out
  * from under the cursor between the press and the release. The floating layer
  * takes no pointer events, so every click reaches the link underneath.       */
 .ht--float {
@@ -271,9 +271,9 @@
 }
 
 /* At rest the floating layer is inert, so a click anywhere near it reaches
-   whatever is underneath. Once it has opened it is the thing being pointed at —
+   whatever is underneath. Once it has opened it is the thing being pointed at -
    it is drawn over its own link and is the only thing the cursor can find there
-   — so it takes pointer events back and the click travels up to the anchor it
+   - so it takes pointer events back and the click travels up to the anchor it
    sits inside. Opened text that could not be clicked would be a target that
    grows out from under the pointer. */
 .ht--float .ht__body {

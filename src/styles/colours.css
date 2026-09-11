@@ -1,5 +1,5 @@
 /* =====================================================================
-   COLOURS — the only file to touch when restyling the tool.
+   COLOURS - the only file to touch when restyling the tool.
    Every colour in the interface resolves to one of these tokens; nothing
    in a component or a page hard-codes a value. Grouped by the job the
    colour does, not by where it happens to appear.
@@ -21,7 +21,7 @@
 
   /* The frame: the four rules the content block stands in. They are drawn
      off the content's own edges, so they are structure rather than
-     decoration, and they are a shade quieter than --line — a card's own
+     decoration, and they are a shade quieter than --line - a card's own
      edge has to stay the stronger of the two where they meet. */
   --frame-line: #d5d8dc;
   /* the same frame where it crosses the dark full-bleed slide */
@@ -38,7 +38,7 @@
 
   /* The deep green the "Why joint?" slide is set on: the same hue as --accent,
      taken down to a surface a page can be printed on. --green-lit is the one
-     that has to be read *on* it — headings, and the tag the title opens into —
+     that has to be read *on* it - headings, and the tag the title opens into -
      so it is light enough to carry text rather than only to decorate. */
   --green-surface: #1e4436;
   --green-deep: #143025;
@@ -119,7 +119,7 @@
      --tag-premise, so the charts and the annotations agree; that pair is
      validated for colour-vision deficiency against --bg. Below is the
      single-hue sequential ramp used by the heatmap and the neutral that
-     stands for "outside any argument" — the neutral is always spelled
+     stands for "outside any argument" - the neutral is always spelled
      out in the legend, never left to colour alone.                    */
   --chart-ramp-0: #ffeceb; /* ramp: lightest */
   --chart-ramp-1: #e0341c; /* ramp: darkest */
@@ -130,8 +130,8 @@
      never cycled: colour follows the candidate, so a filter or a
      withdrawal never repaints the ones that are left.
 
-     They are the entity hues above, reordered — nothing new is
-     introduced — and the order is the one that passes. Checked as a
+     They are the entity hues above, reordered - nothing new is
+     introduced - and the order is the one that passes. Checked as a
      categorical palette against the paper surface: lightness band,
      chroma floor, adjacent-pair separation under deuteranopia,
      protanopia and tritanopia, the normal-vision floor and contrast all
@@ -142,7 +142,7 @@
      taking a generated hue.
 
      The neutral position is a true grey, so it reads as the absence of a
-     side rather than as a seventh one — and it is always named in the
+     side rather than as a seventh one - and it is always named in the
      legend and labelled on the chart, never left to colour alone.      */
   --series-1: var(--tag-role);
   --series-2: var(--tag-date);

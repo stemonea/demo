@@ -288,7 +288,7 @@ kbd {
 }
 
 /* what had to be dropped to make the annotation legal: quiet, but never
-   silent — a correction pass is exactly where this has to be said */
+   silent - a correction pass is exactly where this has to be said */
 .setbox__warnings {
   display: flex;
   flex-direction: column;
@@ -304,9 +304,9 @@ kbd {
 /*
  * The two boxes a pass starts from, set as one.
  *
- * They were stacked, each as tall as whatever happened to be inside it — the
+ * They were stacked, each as tall as whatever happened to be inside it - the
  * text box carrying a drop target and its notes, the type box a strip of chips
- * and a form — so the pair read as two unrelated panels of different sizes.
+ * and a form - so the pair read as two unrelated panels of different sizes.
  * Side by side in equal columns they are the same size in both directions:
  * `1fr` each gives them the same width, and a grid row stretches its cells to
  * the taller of the two, so the heights come out equal without either being

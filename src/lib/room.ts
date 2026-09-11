@@ -6,7 +6,7 @@ import type { Ballot } from './poll'
  * A room: the same relay, with a network under it.
  *
  * `localSession.ts` shares a running debate between tabs of one browser, which
- * is honest and useless in a room full of people — the link cannot leave the
+ * is honest and useless in a room full of people - the link cannot leave the
  * machine it was copied on. When there is a service to hold the room, this is
  * the transport instead: the browser running the debate publishes each turn as
  * it is annotated, and everyone watching is pushed it over `EventSource`.
@@ -29,7 +29,7 @@ export const isRoom = (session: string) => session.startsWith('r-')
 
 /**
  * What the service says about a room, apart from its turns and its votes.
- * `watching` is people who have the debate open — not tabs of the browser
+ * `watching` is people who have the debate open - not tabs of the browser
  * running it, which opens the votes stream and never this one.
  */
 interface RoomState {
@@ -68,7 +68,7 @@ const readState = (data: string): RoomState | null => {
  *
  * `onRun` is handed the whole run each time it changes, in exactly the shape
  * the local relay posts on its channel, so the view watching it cannot tell the
- * two transports apart — which is the point, and what keeps the demo build and
+ * two transports apart - which is the point, and what keeps the demo build and
  * the served build the same page.
  *
  * `onLost` says the connection has dropped. It is not an error to report and

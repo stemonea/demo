@@ -122,7 +122,7 @@
    `min-width: 0` is what lets a figure wider than its cell scroll *itself*
    rather than being clipped; `overflow: hidden` is then safe again, and is
    what keeps anything that still overruns from being painted across whatever
-   is beside it. The two go together — the clipping bug was the first without
+   is beside it. The two go together - the clipping bug was the first without
    the second. */
 .deep__cell {
   gap: 12px;

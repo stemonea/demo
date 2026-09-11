@@ -63,7 +63,7 @@
 
 /* ---- who is standing ----------------------------------------------- */
 /* The speaker list holds whoever chaired the debate as well as whoever
-   ran in it, and no rule can tell them apart — so the person running it
+   ran in it, and no rule can tell them apart - so the person running it
    says, and the ballot the watchers see is the one they set. */
 .poll__ballot {
   display: flex;
@@ -190,7 +190,7 @@
   fill: var(--ink-faint);
 }
 
-/* text wears text colour — the swatch beside it carries the identity */
+/* text wears text colour - the swatch beside it carries the identity */
 .standing__label {
   font-family: var(--font-sans);
   font-size: 12px;

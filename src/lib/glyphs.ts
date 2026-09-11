@@ -1,5 +1,5 @@
 /**
- * The alphabet the generated noise is drawn from — marks and letters, not
+ * The alphabet the generated noise is drawn from - marks and letters, not
  * words, so a run of it reads as a model mid-generation rather than as text.
  * Shared by the hero field and by the hover effect, so the two are visibly the
  * same substance.

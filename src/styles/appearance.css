@@ -231,8 +231,8 @@ body {
 /*
  * The joint row, on the green slide.
  *
- * The navy above is the site's treatment for anything that reads as code — the
- * sample transcript, the joint panel, the flow of the single-pass system — and
+ * The navy above is the site's treatment for anything that reads as code - the
+ * sample transcript, the joint panel, the flow of the single-pass system - and
  * it stays that everywhere it appears. On the one slide that has been taken
  * into the accent's own hue it would be the only thing left of the old dark,
  * a blue block in the middle of a green page, so it is retoned to match rather
@@ -252,11 +252,11 @@ body {
  *
  * Every preview lights its link in the accent on hover, which is right on the
  * five light slides and hides it on this one: the accent *is* the panel here,
- * so the words went out the instant the pointer arrived — and since the whole
+ * so the words went out the instant the pointer arrived - and since the whole
  * slide is the link, the pointer is always there when anyone is reading it. The
  * rule that lit it green was `.preview--green :is(…)`, a class and a class; the
  * one that put it back to the accent was `.preview:hover .preview__cta`, a
- * class, a pseudo-class and a class — one step more specific, so it won
+ * class, a pseudo-class and a class - one step more specific, so it won
  * whatever the order of the files. Naming the slide as well settles it on
  * specificity rather than on which stylesheet happens to be loaded last.
  */
@@ -713,7 +713,7 @@ body {
  * green matched to the slide's top-left corner, and by the right-hand edge the
  * slide had travelled a sixth of the way towards its dark end while the bar had
  * not moved at all. What that left along the bottom of the bar was a soft step
- * — read, reasonably, as the bar still drawing a rule.
+ * - read, reasonably, as the bar still drawing a rule.
  *
  * `background-attachment: fixed` anchors the gradient to the window rather than
  * to the element, so both boxes are windows on to the same field and the seam

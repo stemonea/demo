@@ -10,7 +10,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  *
  * Re-clicking the route you are already on takes you back to its beginning: the
  * pages travel sideways, so that means the first slide of the deck, not the top
- * of a vertical page — a plain `scrollTo(top)` moves nothing here and reads as a
+ * of a vertical page - a plain `scrollTo(top)` moves nothing here and reads as a
  * dead link, which is exactly what `Home` and the brand looked like while on the
  * landing page.
  */

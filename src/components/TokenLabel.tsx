@@ -7,13 +7,13 @@ import './TokenLabel.css'
  *
  * The same alphabet the hero field is drawn from, resolving left to right into
  * the words: the button is generated the way a turn is, which is the one thing
- * this whole demo is about. It runs on `run` — the caller bumps that on hover
- * and on focus — and always ends on the real text, however it is interrupted.
+ * this whole demo is about. It runs on `run` - the caller bumps that on hover
+ * and on focus - and always ends on the real text, however it is interrupted.
  *
  * The text is laid out twice: an invisible copy holds the width, so a run of
  * glyphs wider than the letters cannot make the button breathe, and the visible
  * one is the label itself. That copy is not selectable and not exposed, so the
- * button still reads and copies as the one string it is — the name for anything
+ * button still reads and copies as the one string it is - the name for anything
  * not looking at pixels belongs on the control, and the caller puts it there.
  */
 
@@ -24,7 +24,7 @@ import './TokenLabel.css'
  * The same wave the hovered headings use, for the same reason: replacing the
  * whole label with noise and revealing it back meant every hover began with
  * the button's name gone, which is a flicker rather than a rebuild. Here the
- * label is legible throughout — the front has settled the start of it before
+ * label is legible throughout - the front has settled the start of it before
  * it has reached the end.
  *
  * Durations, not counts of timer fires: an interval that does not divide into

@@ -9,7 +9,7 @@
 export type Layer = 'argument' | 'entity'
 
 /**
- * The argument layer is fixed — the CoNLL export writes one column per layer, so
+ * The argument layer is fixed - the CoNLL export writes one column per layer, so
  * the two components it can name are known ahead of time. The entity layer is
  * whatever the user declares, or whatever an imported annotation turns out to
  * contain.
@@ -38,7 +38,7 @@ export function newSpanId(): string {
  * A counter that starts at zero on every page load is fine while every span is
  * minted in that load. Spans that come back from storage were minted in another
  * one, and the next `newSpanId()` would hand out an id one of them already
- * holds — two different spans under one identity, which is exactly what the id
+ * holds - two different spans under one identity, which is exactly what the id
  * exists to prevent. Restoring an annotation therefore pushes the counter past
  * everything it restored.
  */
@@ -178,7 +178,7 @@ export function toJson(text: string, spans: ManualSpan[]): string {
  * An imported annotation is a first draft: the interesting work is moving a
  * boundary one token at a time until it sits where a human would have put it.
  * Every edit is token-aligned, because a span that ends inside a word has no
- * reading in BIO — which is what the export has to produce.
+ * reading in BIO - which is what the export has to produce.
  * --------------------------------------------------------------------- */
 
 /** The first and last token a span covers, or null if it covers none. */
@@ -198,7 +198,7 @@ export type Edge = 'start' | 'end'
 /**
  * Moves one edge of a span by a single token: `-1` pulls the edge to the left,
  * `+1` pushes it to the right. Growing past the text, or shrinking a span down
- * to nothing, is refused rather than clamped — the button is what tells the
+ * to nothing, is refused rather than clamped - the button is what tells the
  * visitor there is nowhere left to go.
  */
 export function nudgeSpan(

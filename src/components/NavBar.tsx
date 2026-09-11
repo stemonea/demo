@@ -24,7 +24,7 @@ const LINKS: { to: Route; label: string }[] = [
  *
  * A spectator was handed one debate to watch. Putting the tool's own
  * navigation over it offers them the playground, the manual annotator and
- * somebody else's analytics — none of which they were invited to, and the
+ * somebody else's analytics - none of which they were invited to, and the
  * first click takes them out of the thing they were sent. So the bar keeps the
  * mark, which says what they are looking at, and nothing that leads anywhere:
  * no links, and a brand that is a name rather than a way home.
@@ -45,14 +45,14 @@ export default function NavBar({
    * Where the bar draws no rule under itself.
    *
    * The bar paints no surface, so it is already the colour of the page behind
-   * it — measured, the two agree to within a value of 255. What was still
+   * it - measured, the two agree to within a value of 255. What was still
    * reading as a band along the top was the rule alone: a line drawn across an
    * otherwise continuous gradient marks off everything above it, and the eye
    * takes the strip it encloses for a differently coloured bar.
    *
    * The rule earns its place over a page with a top edge of its own to be
    * separated from. It does not over a deck, where a slide fills the window and
-   * the line simply cuts across it — which is why the landing page has been
+   * the line simply cuts across it - which is why the landing page has been
    * without one since it was asked for, and why "Why joint?" is now too.
    */
   const seamless = route === '/' || route === '/why-joint'

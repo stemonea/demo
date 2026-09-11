@@ -2,7 +2,7 @@
    bench, which make the same measurement and must look as though they do.
 
    Geometry only: the radius, the shadow and the surfaces are the site's, set in
-   appearance.css beside every other panel — a band is a cell of a sheet, not a
+   appearance.css beside every other panel - a band is a cell of a sheet, not a
    card of its own, so what it needs from that sheet is a hairline and nothing
    more. */
 .band {
@@ -18,7 +18,7 @@
  * It is computed while the reader waits for it, so it should land rather than
  * appear: a short rise into place says a row has been added, where a row simply
  * being there from one frame to the next reads as the list having jumped. Short
- * and small on purpose — this happens once per turn and a run is many turns, so
+ * and small on purpose - this happens once per turn and a run is many turns, so
  * anything longer would be a wait added to the wait.
  */
 @media (prefers-reduced-motion: no-preference) {
@@ -123,7 +123,7 @@
  * height of the row: three columns of markup grow at three different rates, and
  * without this the row is as tall as the wordiest system made it while the
  * other two sit in white space. Line height is the reading kind, not the
- * interface kind — this is the one thing on the row anybody actually reads.
+ * interface kind - this is the one thing on the row anybody actually reads.
  */
 .band__reading {
   min-width: 0;
@@ -137,7 +137,7 @@
  * The fastest of the three on this row.
  *
  * Marked on the cell rather than in a legend, because the comparison is the
- * point of the row — and marked the way the site marks a chosen thing anywhere
+ * point of the row - and marked the way the site marks a chosen thing anywhere
  * else, with the accent inset it uses for a raised selection, rather than with
  * a colour invented here.
  */

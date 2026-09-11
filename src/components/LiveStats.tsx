@@ -43,10 +43,10 @@ const SORTS: { key: Sort; label: string; hint: string }[] = [
 /**
  * The three ways of narrowing the list, one shown at a time.
  *
- * `types` is the NER class — every PERSON, every DATE. `entities` is the name
+ * `types` is the NER class - every PERSON, every DATE. `entities` is the name
  * itself, after aliases have been folded together, so "Obama" and "Barack
- * Obama" are one row. They answer different questions — "are dates argued
- * with, or only cited?" against "what is actually said about this person?" —
+ * Obama" are one row. They answer different questions - "are dates argued
+ * with, or only cited?" against "what is actually said about this person?" -
  * and a reader nearly always wants one or the other, never both at once.
  */
 type Lens = 'speakers' | 'types' | 'entities'
@@ -54,7 +54,7 @@ type Lens = 'speakers' | 'types' | 'entities'
 /**
  * How several selected entity types are combined.
  *
- * `any` is the union — every component that names at least one of them — and is
+ * `any` is the union - every component that names at least one of them - and is
  * what a reader means by "show me people and organizations". `all` is the
  * intersection, and it is the question this schema exists to answer: which
  * arguments put a PERSON and a DATE inside the same claim. A sequential
@@ -72,11 +72,11 @@ function toggle(list: string[], value: string): string[] {
  * What the debate adds up to, under the debate itself.
  *
  * Everything here is arithmetic over the annotations that have already
- * arrived — no model, no second pass — so it can be recomputed from scratch on
+ * arrived - no model, no second pass - so it can be recomputed from scratch on
  * every turn and always agrees with what is on screen above it.
  *
  * Two panels, not three, and they are not three equal things to read: the left
- * one is the question — narrow by who said it, or by what it named — and the
+ * one is the question - narrow by who said it, or by what it named - and the
  * right one is the answer, the components themselves. Three lists side by side
  * each scrolling inside its own slot made the reader do the arranging; here the
  * control is on the left, the result is on the right, and the sentence between
@@ -91,7 +91,7 @@ export default function LiveStats({ turns }: Props) {
   /** the named entities the list is narrowed to, by merged key */
   const [pickedEntities, setPickedEntities] = useState<string[]>([])
   /* how several of each are combined: union, or intersection. They are kept
-     apart because the questions are different sizes — two types inside one
+     apart because the questions are different sizes - two types inside one
      claim is common, two particular names inside one claim is the finding */
   const [typeMatch, setTypeMatch] = useState<Match>('any')
   const [entityMatch, setEntityMatch] = useState<Match>('any')
@@ -114,7 +114,7 @@ export default function LiveStats({ turns }: Props) {
    * one row here, which is also the only way to see the finding they add up
    * to: a type can be named constantly and still almost never be argued with.
    *
-   * Components are counted, not mentions — a claim that names three people is
+   * Components are counted, not mentions - a claim that names three people is
    * one claim that names a person, which is what "how many claims contain a
    * PERSON" asks. That is the question a sequential pipeline cannot answer at
    * all: by the time it finds the entities, the argument spans are gone.
@@ -146,7 +146,7 @@ export default function LiveStats({ turns }: Props) {
       }
     }
 
-    /* a type named only outside every argument still belongs in the table —
+    /* a type named only outside every argument still belongs in the table -
        that it is never argued with is the finding, not a reason to hide it */
     for (const mention of stats.mentions) {
       const entry = row(mention.type)
@@ -171,7 +171,7 @@ export default function LiveStats({ turns }: Props) {
   )
 
   /* a speaker who has not spoken yet cannot stay selected, and neither can a
-     type nobody has named — the debate arrives a turn at a time, so a
+     type nobody has named - the debate arrives a turn at a time, so a
      selection can be made and then fall out from under itself */
   const onSpeakers = useMemo(() => {
     const known = new Set(speakers.map((speaker) => speaker.speaker))
@@ -195,8 +195,8 @@ export default function LiveStats({ turns }: Props) {
   /*
    * The surface a mention was said with, back to the entity it belongs to.
    *
-   * `analyse` folds aliases together after the fact — "Obama" becomes "barack
-   * obama" once the longer form has been seen — and it is that merged key the
+   * `analyse` folds aliases together after the fact - "Obama" becomes "barack
+   * obama" once the longer form has been seen - and it is that merged key the
    * entity table and the charts are built on. A component only carries the
    * words as they were spoken, so this is the one bridge between the two: it
    * is built from the mentions `analyse` has already keyed, which is what
@@ -219,7 +219,7 @@ export default function LiveStats({ turns }: Props) {
     () =>
       said.map((component, index) => ({
         /* its place in the debate, which does not move when a filter narrows
-           the list — an index into the *filtered* list was changing the React
+           the list - an index into the *filtered* list was changing the React
            key of every row below whichever one was dropped, so narrowing threw
            away and rebuilt the list it was narrowing */
         id: index,
@@ -261,7 +261,7 @@ export default function LiveStats({ turns }: Props) {
   const mostOfAnEntity = Math.max(1, ...stats.entities.map((entity) => entity.total))
 
   /* the entity list as it is being read: everything, or what matches the
-     search — with whatever is currently held always kept in view, so a filter
+     search - with whatever is currently held always kept in view, so a filter
      never hides the thing it is filtering by */
   const foundEntities = useMemo(() => {
     const needle = find.trim().toLowerCase()
@@ -288,7 +288,7 @@ export default function LiveStats({ turns }: Props) {
    * A pair pressed in the co-occurrence figure is a question with one answer:
    * the components that hold both names. So it takes both keys, switches the
    * combination to the intersection, and moves the panel to the list it just
-   * changed — a filter the reader cannot see them set is a filter they will
+   * changed - a filter the reader cannot see them set is a filter they will
    * read the result of as the whole debate.
    */
   const pickPair = useCallback((a: string, b: string) => {
@@ -327,7 +327,7 @@ export default function LiveStats({ turns }: Props) {
         {/*
           The left panel asks the question.
 
-          Both ways of narrowing — by who was speaking, by what was named — are
+          Both ways of narrowing - by who was speaking, by what was named - are
           the same act, so they share one panel and one heading that says what
           pressing a row will do. Only one is on screen at a time, which is what
           gives the entity table the width its five columns need, and what
@@ -394,12 +394,12 @@ export default function LiveStats({ turns }: Props) {
             {lens === 'speakers' ? (
               <>
                 <p className="cell__note">
-                  One scale for everyone, so the lengths compare. Pick two and the list on the right holds both —
+                  One scale for everyone, so the lengths compare. Pick two and the list on the right holds both -
                   which is how one speaker's argument is read against another's.
                 </p>
 
                 {/* two series, so the legend is always there and every count is
-                    also written out — identity never rests on the colour alone */}
+                    also written out - identity never rests on the colour alone */}
                 <ul className="key" aria-hidden="true">
                   <li className="key__item key__item--claim">Claim</li>
                   <li className="key__item key__item--premise">Premise</li>
@@ -425,7 +425,7 @@ export default function LiveStats({ turns }: Props) {
                 <p className="cell__note">
                   {stats.totalMentions} mention{stats.totalMentions === 1 ? '' : 's'} in all,{' '}
                   {stats.groundedMentions} of them inside a claim or a premise. Press a heading to reorder, a row
-                  to filter — take several and choose whether a component must name <em>any</em> of them or{' '}
+                  to filter - take several and choose whether a component must name <em>any</em> of them or{' '}
                   <em>all</em>.
                 </p>
 
@@ -503,7 +503,7 @@ export default function LiveStats({ turns }: Props) {
             ) : (
               <>
                 <p className="cell__note">
-                  The names themselves, with aliases folded together — “Obama” and “Barack Obama” are one row.
+                  The names themselves, with aliases folded together - “Obama” and “Barack Obama” are one row.
                   Each bar is how that name was used: advanced inside a claim, offered inside a premise, or merely
                   said. Take two and switch to <em>all</em> for the components that name both.
                 </p>
@@ -583,7 +583,7 @@ export default function LiveStats({ turns }: Props) {
 
             Every narrowing is done by pressing a row in the panel to the left,
             and a pressed row is a quiet thing at this size. Writing the state
-            out where the effect is — and giving every part of it a way back —
+            out where the effect is - and giving every part of it a way back -
             is what stops a filtered list from being read as the whole debate.
           */}
           <div className={`showing${narrowed ? ' is-narrowed' : ''}`}>
@@ -665,10 +665,10 @@ export default function LiveStats({ turns }: Props) {
             entityKey={entityKey}
             empty={
               !narrowed
-                ? 'Nothing yet — the debate is still arriving.'
+                ? 'Nothing yet - the debate is still arriving.'
                 : (onTypes.length > 1 && typeMatch === 'all') || (onEntities.length > 1 && entityMatch === 'all')
                   ? 'No single component holds all of those at once. Switch the filter to “any”, or drop one of them.'
-                  : 'Nothing matches that yet — clear a filter above, or wait for more of the debate.'
+                  : 'Nothing matches that yet - clear a filter above, or wait for more of the debate.'
             }
           />
         </section>
@@ -678,7 +678,7 @@ export default function LiveStats({ turns }: Props) {
         The same aggregation, cut four more ways.
 
         These figures were only ever on the Analytics page, over a transcript
-        that had already finished — so the one view where the numbers are
+        that had already finished - so the one view where the numbers are
         actually moving was the one view that could not show them. They are
         drawn from the `stats` above, which is recomputed on every turn, so
         they arrive with the turn and cannot disagree with the panels.
@@ -698,7 +698,7 @@ interface ArguedRow {
  * What was argued, memoised on the filtered list itself.
  *
  * The panel around it holds a search box, a tab and a set of toggles, and none
- * of those change which components are shown — but every keystroke was
+ * of those change which components are shown - but every keystroke was
  * rebuilding all of them, mentions and all. `shown` is a memo of its own, so
  * comparing it is one reference: type in the entity search and this list is
  * skipped entirely.
@@ -760,7 +760,7 @@ interface ChipItem {
 }
 
 /**
- * One narrowing, named and undoable — however many values it holds.
+ * One narrowing, named and undoable - however many values it holds.
  *
  * A filter that can carry several values is written as one phrase with several
  * names in it, not as one filter per name: "naming any of PERSON, DATE" is the
@@ -794,8 +794,8 @@ function ChipGroup({
           onClick={onMatch}
           title={
             match === 'any'
-              ? 'Showing components that hold at least one of these — press for the ones that hold all of them'
-              : 'Showing components that hold all of these at once — press for the ones that hold at least one'
+              ? 'Showing components that hold at least one of these - press for the ones that hold all of them'
+              : 'Showing components that hold all of these at once - press for the ones that hold at least one'
           }
         >
           {verb ?? label} <strong>{match}</strong> of
@@ -848,8 +848,8 @@ function Figure({ value, bar, tone }: { value: number; bar: number | null; tone?
  * One speaker: how much they have argued, what it was made of, and the way
  * into the words themselves.
  *
- * The whole block is the target rather than a link inside it — the number and
- * the bar are what raise the question, so they are what answers it — and it
+ * The whole block is the target rather than a link inside it - the number and
+ * the bar are what raise the question, so they are what answers it - and it
  * carries a box that is ticked when the speaker is one of the ones being held,
  * because a row that does something and looks like a caption is a row nobody
  * presses.
@@ -924,7 +924,7 @@ function Speaker({
  * One named entity: how often it was said, and what it was said inside.
  *
  * The type table above answers "are dates argued with at all"; this answers
- * "what happens to *this* name" — and the bar is the same three-part reading
+ * "what happens to *this* name" - and the bar is the same three-part reading
  * the analytics deck gives it, so the row and the figure below the band say
  * the same thing about the same entity.
  */
@@ -951,7 +951,7 @@ function Named({
         aria-pressed={on}
         title={`${entity.label} · ${spec?.label ?? entity.type}: named ${entity.total} time${
           entity.total === 1 ? '' : 's'
-        } — ${entity.claim} inside a claim, ${entity.premise} inside a premise, ${entity.outside} outside any argument`}
+        } - ${entity.claim} inside a claim, ${entity.premise} inside a premise, ${entity.outside} outside any argument`}
       >
         <span className="named__head">
           <span className="named__mark" aria-hidden="true" />

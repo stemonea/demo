@@ -1,5 +1,5 @@
 /* ---- the compare bench --------------------------------------------- *
- * A turn, three systems, three clocks — advanced by hand.
+ * A turn, three systems, three clocks - advanced by hand.
  *
  * Geometry and type only. Every surface here is named in appearance.css beside
  * the panel it is a sibling of: `.bench__doors` and `.bench__panel` are joined
@@ -93,7 +93,7 @@
 /*
  * The foot: a shade off the paper it sits on, the way every card's is, and run
  * out to the door's own edges. The bleed has to match the door's padding
- * exactly — it was two pixels short of it, so the foot's text sat inset from
+ * exactly - it was two pixels short of it, so the foot's text sat inset from
  * everything above it.
  */
 .bench__door-foot {

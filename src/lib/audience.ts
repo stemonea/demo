@@ -6,7 +6,7 @@ import { NEUTRAL, type Ballot } from './poll'
  * The floor in `poll.ts` is real: every ballot on it was pressed by somebody,
  * and it is carried between tabs of one browser or, where there is a service,
  * between everyone in the room. Neither reaches across devices on a build with
- * nothing behind it — a phone that scans the code can count its own vote and
+ * nothing behind it - a phone that scans the code can count its own vote and
  * nobody else's, so the bars under the answers would read 100% of one person
  * for every person in the room, which is a poll that says nothing.
  *
@@ -14,7 +14,7 @@ import { NEUTRAL, type Ballot } from './poll'
  * device derives the same audience the same way the turns are derived: a seeded
  * generator, the session id as the seed, the turn count as the clock. Nothing
  * is exchanged and nothing is stored, and yet two phones open on the same code
- * show the same floor moving the same way — because they are computing it, not
+ * show the same floor moving the same way - because they are computing it, not
  * receiving it.
  *
  * Two things keep this honest and both matter more than the effect:
@@ -72,7 +72,7 @@ function prng(seed: number): () => number {
  * Which way the room is leaning at a given turn.
  *
  * Without this the audience is a random walk, and a random walk drawn as shares
- * is a flat line with noise on it — which is the one thing the moderator's
+ * is a flat line with noise on it - which is the one thing the moderator's
  * chart exists to show *not* happening. Two slow waves of unrelated period,
  * phased off the session, give a room that swings and comes back: turns where
  * one side gains, turns where it gives it up again, and no repeat inside the
@@ -107,7 +107,7 @@ function choose(draw: number, tilt: number, ballot: string[]): string {
  *
  * The ballot is the one exception, and it is a small one. The names come from
  * whoever has argued so far, so a speaker joining the ballot mid-debate
- * redistributes some of the room — which is the right behaviour for a real
+ * redistributes some of the room - which is the right behaviour for a real
  * poll that has just gained a candidate, and in this transcript happens in the
  * opening minute or not at all.
  */
@@ -137,7 +137,7 @@ export function simulatedFloor(session: string, ballot: string[], turns: number)
       }
       if (draw >= SWITCH) continue
       /* a move is a second draw, so the decision to move and where to move are
-         not the same number — otherwise everyone who moves moves the same way */
+         not the same number - otherwise everyone who moves moves the same way */
       const next = choose(roll(), tiltAt(seed, turn), ballot)
       if (next === standing) continue
       standing = next
@@ -154,7 +154,7 @@ export function simulatedFloor(session: string, ballot: string[], turns: number)
  * The simulated room folded in under the real one.
  *
  * Real first, always: the keys here are `sim-…` and a real voter's id is eight
- * characters of base 36, so nothing can collide — but the order says the rule
+ * characters of base 36, so nothing can collide - but the order says the rule
  * even so. What comes back is what the tally is run on.
  */
 export function withCrowd(votes: Map<string, Ballot[]>, crowd: Map<string, Ballot[]> | null): Map<string, Ballot[]> {

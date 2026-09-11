@@ -8,9 +8,9 @@ import { isRoom, watchRoom } from './room'
  * A live debate shared between tabs of one browser.
  *
  * The service-backed share link needs a service: the session id belongs to it,
- * and the stream is its. The demonstration has neither — it replays a
+ * and the stream is its. The demonstration has neither - it replays a
  * transcript that shipped with the site, on this machine, with nothing behind
- * it — and yet it is the build that gets shown to people. A published demo
+ * it - and yet it is the build that gets shown to people. A published demo
  * whose one shareable feature is the one that cannot be shown is not much of a
  * demo.
  *
@@ -21,7 +21,7 @@ import { isRoom, watchRoom } from './room'
  * channel carries nothing that was said before it was listening.
  *
  * The limit is stated wherever the link is, and it is a real one: same browser,
- * same machine. Nothing here crosses a network — that is what the service and
+ * same machine. Nothing here crosses a network - that is what the service and
  * its stream are for.
  */
 
@@ -64,7 +64,7 @@ export interface SharedRun {
 /**
  * What publishing a run reports back.
  *
- * `watching` is people who have the debate open — a figure only a room can
+ * `watching` is people who have the debate open - a figure only a room can
  * know, and 0 for a run relayed between tabs, where the browser has no way of
  * counting anybody. `lost` says the room stopped answering: the debate is still
  * being run and annotated here, it is only the watching that has stopped.
@@ -129,7 +129,7 @@ export function usePublishRun(
 
   /* the room's side: what it has confirmed it holds, whether a call is in
      flight, whether one is owed, and the run as it stood when it was. Refs,
-     because none of it is anything to re-render for — only `reach` is, and
+     because none of it is anything to re-render for - only `reach` is, and
      that is what the panel shows. */
   const held = useRef({ session: '', count: 0 })
   const sending = useRef(false)
@@ -178,7 +178,7 @@ export function usePublishRun(
    * because that makes receiving an assignment rather than an accumulation.
    * Over the network the same habit would be a hundred and fifty kilobyte POST
    * per turn by the end of a long debate, so the room is sent only the turns
-   * past what it has said it holds — and it is the room's own count that is
+   * past what it has said it holds - and it is the room's own count that is
    * believed, so nothing here has to work out what arrived.
    *
    * One call at a time, and a flag rather than a queue. A turn that lands while
@@ -211,8 +211,8 @@ export function usePublishRun(
             was.watching === answer.watching && !was.lost ? was : { watching: answer.watching, lost: false },
           )
         } catch {
-          /* the service went away mid-debate. The debate is not the room's —
-             it carries on in this browser — so this is said rather than thrown,
+          /* the service went away mid-debate. The debate is not the room's -
+             it carries on in this browser - so this is said rather than thrown,
              and the next turn is what tries again */
           setReach((was) => (was.lost ? was : { ...was, lost: true }))
           break
@@ -258,7 +258,7 @@ export function usePublishRun(
       window.localStorage.setItem(keyOf(session), JSON.stringify(state))
     } catch {
       /* out of quota, or storage refused: the channel still carries the run to
-         a tab that is already listening — only opening one late is lost */
+         a tab that is already listening - only opening one late is lost */
     }
   }, [session, turns, total, ballot, playing, complete])
 
@@ -309,7 +309,7 @@ export function useWatchRun(session: string | null, startedAt: number | null = n
 
     /* a room with no service under it: the debate is not sent here, it is
        worked out here, from the transcript this build ships and the moment the
-       run started — which is the one thing the link had to carry. Without that
+       run started - which is the one thing the link had to carry. Without that
        moment there is nothing to derive, and the view says as much rather than
        showing an empty debate that will never fill. */
     if (isReplaySession(session)) {

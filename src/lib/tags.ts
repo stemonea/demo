@@ -48,7 +48,7 @@ export function getTagSpec(name: string): TagSpec | undefined {
 /**
  * The name this app knows a tag by: `organization` in the markup is `org` here,
  * which is what the colour tokens and the counters are keyed on. Unknown names
- * are returned as they came — they are still shown, just not as one of ours.
+ * are returned as they came - they are still shown, just not as one of ours.
  */
 export function canonicalTag(name: string): string {
   const lower = name.toLowerCase()

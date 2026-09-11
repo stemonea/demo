@@ -1,15 +1,15 @@
 /**
  * Reading an annotation back in.
  *
- * The annotator can already write three things out — inline markup, JSON spans
- * and two-layer CoNLL — and this is the inverse of all three, so a file that
+ * The annotator can already write three things out - inline markup, JSON spans
+ * and two-layer CoNLL - and this is the inverse of all three, so a file that
  * left the tool, or came out of the tagger, can be loaded and corrected by hand
  * instead of being annotated again from nothing.
  *
  * Everything is normalised to the one representation the workbench edits:
  * character offsets over plain text. What a format cannot express is dropped
- * rather than guessed at, and what it expresses illegally — a stray closer, two
- * spans of one layer that half-overlap — is reported instead of repaired
+ * rather than guessed at, and what it expresses illegally - a stray closer, two
+ * spans of one layer that half-overlap - is reported instead of repaired
  * silently, because a correction pass is exactly where the visitor wants to be
  * told.
  */
@@ -95,7 +95,7 @@ function looksLikeConll(text: string): boolean {
 /* ---- inline markup --------------------------------------------------- */
 
 /**
- * `<claim>Iran <person>Trump</person> said</claim>` — the format the tagger
+ * `<claim>Iran <person>Trump</person> said</claim>` - the format the tagger
  * emits. The parser is the forgiving one the comparison pages use, so a file
  * with defects still loads; the defects are just reported.
  */
@@ -147,10 +147,10 @@ function fromJson(source: string): Draft {
 
   const root = parsed as { text?: unknown; spans?: unknown }
   if (typeof root?.text !== 'string') {
-    throw new Error('That JSON has no "text" field — expected { text, spans: [...] }.')
+    throw new Error('That JSON has no "text" field - expected { text, spans: [...] }.')
   }
   if (!Array.isArray(root.spans)) {
-    throw new Error('That JSON has no "spans" array — expected { text, spans: [...] }.')
+    throw new Error('That JSON has no "spans" array - expected { text, spans: [...] }.')
   }
 
   const text = root.text
@@ -296,7 +296,7 @@ function finish(draft: Draft): Annotated {
   const warnings = [...draft.warnings]
   const spans: ManualSpan[] = []
 
-  /* outermost first, so a container is admitted before what it contains —
+  /* outermost first, so a container is admitted before what it contains -
      nesting is legal and both survive, while a genuine half-overlap is refused
      at the point it is reached and named in the warnings */
   const ordered = [...draft.spans].sort((a, b) => a.start - b.start || b.end - a.end)

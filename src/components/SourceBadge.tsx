@@ -5,7 +5,7 @@ const COPY: Record<Source, { label: string; title: string }> = {
   backend: { label: 'annotation service', title: 'Live answer from the configured backend' },
   precomputed: {
     label: 'pre-computed',
-    title: 'A bundled example: the reported output for this turn, replayed in the browser — nothing was sent to the annotation service',
+    title: 'A bundled example: the reported output for this turn, replayed in the browser - nothing was sent to the annotation service',
   },
   heuristic: {
     label: 'offline heuristic',

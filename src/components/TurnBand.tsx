@@ -42,7 +42,7 @@ export interface TurnRow {
  * The turn itself is written once, above the three, because it is the one thing
  * they have in common and repeating it three times would make the row about the
  * transcript rather than about what the systems did with it. Each cell carries
- * its own time and a bar drawn against the slowest of the three *on this row* —
+ * its own time and a bar drawn against the slowest of the three *on this row* -
  * the comparison being made is within the turn, not against the whole run, so
  * the scale is the row's.
  *
@@ -75,8 +75,8 @@ export default function TurnBand({
    *
    * It is the one thing the three columns have in common, and it is also the
    * longest thing on the row: a debate turn runs to a paragraph, and printed in
-   * full above every band it would push the readings — which are what the row
-   * is for — off the screen. So the head keeps who is speaking and how long the
+   * full above every band it would push the readings - which are what the row
+   * is for - off the screen. So the head keeps who is speaking and how long the
    * turn is, and the words themselves are one press away for whoever wants to
    * check an annotation against its source.
    */
@@ -171,7 +171,7 @@ export default function TurnBand({
                 * by composing the joint model with itself reproduces the shape
                 * of the loss but not a second model's accuracy, and its time is
                 * not a trained stage's time. Only the cases that could be
-                * misread are named — a system served by its own model says
+                * misread are named - a system served by its own model says
                 * nothing, because there is nothing to warn about.
                 */}
               {nesting?.verdict && <VerdictBadge verdict={nesting.verdict} note={nesting.note} />}

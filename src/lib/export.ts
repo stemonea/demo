@@ -119,8 +119,8 @@ export function toXml(tagged: string): string {
 /**
  * What was said, with the annotation taken back off.
  *
- * The transcript is the one artefact somebody reads rather than parses — it
- * gets pasted into a report, mailed to a speaker, searched for a sentence —
+ * The transcript is the one artefact somebody reads rather than parses - it
+ * gets pasted into a report, mailed to a speaker, searched for a sentence -
  * and every other format here is unreadable at that job. It is `extract`'s
  * `plain`, not a regex over the markup, so what comes out is exactly the text
  * the character offsets in the JSON export are counted against: the two can
@@ -146,7 +146,7 @@ export type FormatId = (typeof FORMATS)[number]['id']
  * The object URL is released on a later tick, not on the next line. Revoking it
  * the instant after `click()` is a race the browser sometimes loses: the click
  * only *starts* the download, and a URL pulled out from under it before it has
- * been read gives an empty file or nothing at all — intermittently, and more
+ * been read gives an empty file or nothing at all - intermittently, and more
  * often on a slow machine, which is the worst way for a bug like this to
  * behave. A minute is longer than any browser needs and still frees it.
  */

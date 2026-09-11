@@ -8,7 +8,7 @@ import './LiveCharts.css'
  *
  * A real debate names a couple of hundred things and most of them once. A
  * figure that tried to draw all of them would be unreadable at any size, so it
- * draws the ones that carry the debate — and says, in its own caption, how
+ * draws the ones that carry the debate - and says, in its own caption, how
  * many it left out, which is the part that keeps it honest against the totals
  * above it.
  *
@@ -36,7 +36,7 @@ interface Props {
  * The figures the analytics deck draws, under the live debate.
  *
  * They used to exist only on the Analytics page, over a transcript that had
- * already finished — which meant the one view where the numbers are actually
+ * already finished - which meant the one view where the numbers are actually
  * moving was the one view that could not show them. Nothing here is a second
  * computation: `analyse` is already recomputed on every turn for the panels
  * above, and these are further readings of the same object, so they cannot
@@ -44,7 +44,7 @@ interface Props {
  *
  * The speakers × entities heatmap that used to open the band is not here. It
  * needs a column per entity and a row per speaker, and in half the width of
- * this band that is a grid of cells too small to read a number in — a figure
+ * this band that is a grid of cells too small to read a number in - a figure
  * that has to be squinted at is not a figure. It stays on the Analytics page,
  * which gives it a full slide.
  */
@@ -80,7 +80,7 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
           <h3 className="display deep__title">Who argues what</h3>
         </div>
         <p className="deep__lead">
-          Recomputed on every turn, from the annotations above — the whole debate so far, not the filtered list.
+          Recomputed on every turn, from the annotations above - the whole debate so far, not the filtered list.
           Press an entity or a pair to send it up to the explorer.
         </p>
       </header>
@@ -141,7 +141,7 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
 
       {!enough ? (
         <p className="deep__empty">
-          Nothing to aggregate yet — the figures appear as soon as the first entity is named inside an argument.
+          Nothing to aggregate yet - the figures appear as soon as the first entity is named inside an argument.
         </p>
       ) : (
         <div className="deep__grid">
@@ -195,8 +195,8 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
 /*
  * Memoised on the aggregation it draws.
  *
- * The explorer above these figures has state of its own — a search box, a tab,
- * a set of filters — and none of it changes what they show: they are the whole
+ * The explorer above these figures has state of its own - a search box, a tab,
+ * a set of filters - and none of it changes what they show: they are the whole
  * debate, narrowed by nothing but their own row of switches. Without this,
  * every keystroke in the entity search redrew three charts and two thousand
  * timeline cells for no change at all.

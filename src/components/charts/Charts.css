@@ -220,7 +220,7 @@
  * `min-width: 0` is what makes the scroll work rather than the grid simply
  * being wider than the box that holds it: as a flex item it would otherwise
  * refuse to shrink below its content, take the full width of all its columns,
- * and be cut off by whatever encloses it — with no scrollbar of its own to get
+ * and be cut off by whatever encloses it - with no scrollbar of its own to get
  * the clipped turns back.
  */
 /*
@@ -230,7 +230,7 @@
  * but never is: a debate of any length makes the turn columns overrun the box,
  * and a column asked to shrink under overflow goes to its floor. Every real
  * timeline therefore drew its names at 92px, where "European Commission" and
- * "European Central Bank" are both "European C…" — two different rows with the
+ * "European Central Bank" are both "European C…" - two different rows with the
  * same label, in the one figure whose whole job is telling entities apart. The
  * turns are already scrolled; giving the names the width they need costs a
  * little more of the same scrolling and buys back the row headings.
@@ -248,7 +248,7 @@
    *
    * The names are sticky, so the scrolled timeline passes underneath them, and
    * wherever it happened to stop, the column straddling that edge was shown as
-   * a sliver — a dot sawn down the middle against the rule, which is what the
+   * a sliver - a dot sawn down the middle against the rule, which is what the
    * figure was being read as broken for. Snapping the turn headings past the
    * names means the first turn on screen is always a whole one. `proximity`
    * rather than `mandatory`: it tidies where the reader lets go, it does not
@@ -273,13 +273,13 @@
  *
  * A row whose label has scrolled off the side is a row of dots that means
  * nothing. The label has to be opaque and it has to be above what passes under
- * it, and the shadow carries its surface across the 2px grid gap as well — a
+ * it, and the shadow carries its surface across the 2px grid gap as well - a
  * transparent stripe there is exactly wide enough for a dot to show through
  * and read as sitting on top of the name.
  *
  * `align-self: stretch` is the other half of being opaque, and the half that
  * was missing. The grid centres its items, so the name was a box only as tall
- * as the words in it, sitting in a row half again that height — and the turns
+ * as the words in it, sitting in a row half again that height - and the turns
  * sliding underneath were visible in the band above it and the band below,
  * as pale stripes running out of the names into the figure. What looked like
  * boxes drawn around the text was the text's own surface being too short to
@@ -326,7 +326,7 @@
 /*
  * The name itself. `text-overflow` needs a block container with inline content
  * to work on, which the label stopped being when it became a flex box, so the
- * truncation lives here instead — and `min-width: 0` is what lets a flex item
+ * truncation lives here instead - and `min-width: 0` is what lets a flex item
  * be narrower than the words inside it and therefore be truncated at all.
  */
 .timeline__name {
@@ -426,7 +426,7 @@
 }
 
 /* the link between the two names, drawn heavier than a hairline: it is what
-   the pair asserts — these two were said inside one component — so it should
+   the pair asserts - these two were said inside one component - so it should
    read as a bond at a glance rather than as punctuation */
 .pairs__link {
   width: 22px;

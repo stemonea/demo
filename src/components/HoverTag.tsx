@@ -10,13 +10,13 @@ interface Props {
   /** what the text turns into while it is tagged, when that differs */
   expand?: string
   /**
-   * Selector of the ancestor whose hover drives the effect — a card, a nav
-   * pill — so the whole area is the target and there is no dead margin around
+   * Selector of the ancestor whose hover drives the effect - a card, a nav
+   * pill - so the whole area is the target and there is no dead margin around
    * the words. Defaults to the text itself.
    */
   zone?: string
   /**
-   * Show the resting text as a self-closing tag — `<ArguStream/>` — instead of as
+   * Show the resting text as a self-closing tag - `<ArguStream/>` - instead of as
    * bare words. The markers are then part of how it reads at rest, and hovering
    * opens them into the real tag around the expanded text.
    */
@@ -30,13 +30,13 @@ interface Props {
  *
  * The animation is a wave, not a curtain. It used to replace the whole string
  * with noise on its first frame and then reveal it back left to right, which
- * meant every hover began with the title *gone* — one frame of nothing legible
+ * meant every hover began with the title *gone* - one frame of nothing legible
  * is exactly what a flicker is. Here each character is only noise while the
  * front is over it: the head of the word has settled while the tail has not
  * been touched yet, and at no moment is the whole of it unreadable.
  *
  * Both are durations rather than frame counts, because the clock is the only
- * thing that keeps an animation honest when the main thread is busy — which on
+ * thing that keeps an animation honest when the main thread is busy - which on
  * a live page it is, every time a turn lands. A dropped frame then costs only
  * itself: the next one works out where the wave should have got to by now,
  * instead of a backlog of timer fires arriving at once and jumping it forward.
@@ -56,7 +56,7 @@ interface Cell {
  * The run, cut into words and then into characters.
  *
  * Each character keeps a box of its own, and a word is unbreakable, so the
- * line still wraps exactly where the words allow and nowhere else — which a
+ * line still wraps exactly where the words allow and nowhere else - which a
  * flat run of per-character boxes would not do.
  */
 function lay(rest: string, now: string): { space: boolean; cells: Cell[] }[] {
@@ -84,8 +84,8 @@ function lay(rest: string, now: string): { space: boolean; cells: Cell[] }[] {
  * Both the copy that holds the box and the copy that is painted over it go
  * through here, and that is the whole point of it being a component: the two
  * have to lay out identically to the pixel. When only the painted one had its
- * characters in boxes it set a little wider than the box did — per-character
- * boxes cannot kern across their edges — so the last word of a title crossed
+ * characters in boxes it set a little wider than the box did - per-character
+ * boxes cannot kern across their edges - so the last word of a title crossed
  * the width the box had reserved, wrapped to a second line, and was cut off by
  * the clip that keeps the noise inside the words. "Live debate" lost "debate";
  * "Why joint?" lost "joint?".
@@ -117,7 +117,7 @@ function Run({ rest, now }: { rest: string; now: string }) {
  * How often a character that is currently noise is drawn again.
  *
  * Glyphs churning at sixty a second strobe rather than scramble, and this is
- * the only thing pacing the repaints — so the component renders about thirty
+ * the only thing pacing the repaints - so the component renders about thirty
  * times a second instead of on every frame.
  */
 const CHURN_MS = 34
@@ -127,8 +127,8 @@ const WATCH_MS = 250
 /**
  * Text that annotates itself under the cursor.
  *
- * Hovering it dissolves the words into generated glyphs — the same alphabet the
- * hero field is drawn from — which then resolve, left to right, into the tagged
+ * Hovering it dissolves the words into generated glyphs - the same alphabet the
+ * hero field is drawn from - which then resolve, left to right, into the tagged
  * form: `<text>…</text>` for ordinary writing, and the tag of the thing itself
  * where there is one, as `ArguStream` resolving into `<argustream>Joint Argument
  * and Entity Tagging</argustream>`. Leaving it plays the same move backwards.
@@ -139,7 +139,7 @@ const WATCH_MS = 250
  * `zone` widens what counts as "over it": the effect then starts the moment the
  * cursor enters the surrounding card or button, not only when it finds the
  * letters themselves. A watchdog checks, while the effect is running, that the
- * cursor really is still there — a `pointerleave` that never arrives, because
+ * cursor really is still there - a `pointerleave` that never arrives, because
  * the deck scrolled the element away or the pointer left the window, would
  * otherwise leave the text tagged for good.
  */
@@ -239,8 +239,8 @@ export default function HoverTag({ children, tag = 'text', expand, zone, selfClo
   /*
    * Whether the effect is running, held in a ref as well as in state.
    *
-   * `pointerenter` can arrive again while the tag is already open — the
-   * watchdog below and a layout that shifts under the cursor both produce it —
+   * `pointerenter` can arrive again while the tag is already open - the
+   * watchdog below and a layout that shifts under the cursor both produce it -
    * and re-entering would restart the scramble from the noise every time,
    * which is a tag that never finishes resolving. Both transitions are
    * therefore made idempotent at the door rather than inside the animation.
@@ -258,8 +258,8 @@ export default function HoverTag({ children, tag = 'text', expand, zone, selfClo
    * Leaving closes the tag. It only re-runs the wave if there is something for
    * it to change back.
    *
-   * Where the tagged form is the same words as the resting one — which is
-   * every heading on the site — scrambling on the way out was the text taking
+   * Where the tagged form is the same words as the resting one - which is
+   * every heading on the site - scrambling on the way out was the text taking
    * itself apart and putting itself back exactly as it was, for no reason a
    * reader could see. It read as the title being yanked, because that is what
    * it was. The markers folding away is the whole of what leaving means there,
@@ -308,8 +308,8 @@ export default function HoverTag({ children, tag = 'text', expand, zone, selfClo
     >
       {/* Keeps the resting box in the layout for the floating variant, where the
           tagged form is lifted out of the flow; `display: none` otherwise.
-          It mirrors the body exactly — the same markers, folded or open by the
-          same rules — so whatever the variant does to them, the box the layout
+          It mirrors the body exactly - the same markers, folded or open by the
+          same rules - so whatever the variant does to them, the box the layout
           sees and the thing drawn over it are the same width. */}
       <span className="ht__ghost" aria-hidden="true">
         <span className="ht__mark">{selfClosing ? '<' : openMark}</span>
@@ -324,14 +324,14 @@ export default function HoverTag({ children, tag = 'text', expand, zone, selfClo
           This is what the animation kept catching on. The glyphs it is drawn
           from are not the widths of the letters they stand in for, so in a run
           of ordinary text every character to the right of the ones being
-          scrambled was shifted a little on every frame — and at heading size,
+          scrambled was shifted a little on every frame - and at heading size,
           with the rest of the word still perfectly legible beside it, that is
           a title visibly shuddering rather than an effect.
 
           Sized by the resting letter and never by what is standing in for it,
           nothing can move: a glyph wider than its box simply overhangs it. The
           boxes are there at rest too, so there is no moment of relaying out
-          when the pointer arrives or leaves — the one thing left that could
+          when the pointer arrives or leaves - the one thing left that could
           still have produced a jump.
 
           The letter itself stays in the box, transparent: it is what carries

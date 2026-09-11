@@ -10,7 +10,7 @@ import './styles/appearance.css'
  * The build is split: the QR encoder is fetched only when there is a code to
  * draw, which is what keeps ten kilobytes of Reed-Solomon out of the common
  * case. The file names carry a hash of their contents, so a new deploy writes
- * new names and removes the old ones — and a page that was loaded *before* that
+ * new names and removes the old ones - and a page that was loaded *before* that
  * deploy is still holding the old names. The moment it reaches for a piece it
  * has not fetched yet, the piece is gone: `Failed to fetch dynamically imported
  * module`, and, because the import happens under `Suspense` with nothing
@@ -25,7 +25,7 @@ import './styles/appearance.css'
  * Vite reports it rather than leaving it to be guessed at, and the answer is to
  * fetch the document again: the new one names the files that exist. Once, and
  * recorded in `sessionStorage`, because reloading is only the answer when the
- * chunk is missing — offline, it would be a loop, and a loop is worse than the
+ * chunk is missing - offline, it would be a loop, and a loop is worse than the
  * error it is trying to fix.
  */
 const RELOADED = 'jaet.stale-build-reloaded'

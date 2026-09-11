@@ -3,7 +3,7 @@
    popover that opens on a span and the editor inside it.
 
    It lives with the component rather than with either page, because both
-   the hand annotator and the playground draw it — the rules that place it
+   the hand annotator and the playground draw it - the rules that place it
    in a page (the instruments beside the sheet, the slide it sits on) stay
    with the page that does the placing.
    ===================================================================== */
@@ -23,13 +23,13 @@
   align-items: center;
   /* A flex item refuses to shrink below its own content by default, and this
      bar's content is a quote, a class for every label in the schema and three
-     buttons — wider than any half-width column. Left at `auto` the bar does
+     buttons - wider than any half-width column. Left at `auto` the bar does
      not wrap, it pushes: it forces its container open, and in a card that is
      ruled to a grid the head and the foot are dragged open with it. It is
      allowed to be narrower than it would like, and to wrap instead. */
   min-width: 0;
   /* wrapped lines pack at the top rather than being spread down a bar that
-     was given a height — three classes floating apart is not a toolbar */
+     was given a height - three classes floating apart is not a toolbar */
   align-content: flex-start;
   gap: 8px 18px;
   padding: 10px 14px;
@@ -120,7 +120,7 @@
 }
 
 /* The sheet being annotated, cut into the page: the words sit in a recess with
-   the shading on its inner edge, and nothing is laid over them — an annotation
+   the shading on its inner edge, and nothing is laid over them - an annotation
    has to stay as readable as the text it is on. */
 .workspace__text {
   position: relative;
@@ -144,7 +144,7 @@
 
 /* ---- the menu that opens on a tagged span -------------------------- */
 /* `left` is worked out against the pane in the component, so the panel only
-   has to be dropped clear of the click — or lifted clear of it, when it opened
+   has to be dropped clear of the click - or lifted clear of it, when it opened
    on a span near the foot of the sheet */
 .spanmenu {
   position: absolute;

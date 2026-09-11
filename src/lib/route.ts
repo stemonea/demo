@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * Minimal hash routing — no dependencies, works on any static host
+ * Minimal hash routing - no dependencies, works on any static host
  * (GitHub Pages, S3, a plain folder) without server rewrites.
  * Add a route by extending `ROUTES`, then branch in `App.tsx`.
  */
@@ -22,8 +22,8 @@ export type Route = (typeof ROUTES)[number]
  *
  * A route is still one of `ROUTES` and nothing else; anything after a `?` is
  * a parameter of that route, not a route of its own. That is what lets one
- * view be addressed twice — `#/live` is the debate you are running, and
- * `#/live?session=…` is the same view watching someone else's — without a
+ * view be addressed twice - `#/live` is the debate you are running, and
+ * `#/live?session=…` is the same view watching someone else's - without a
  * second entry in the table or a second page to keep in step with the first.
  */
 function splitHash(): { path: string; query: string } {
@@ -59,8 +59,8 @@ export function useHashParam(name: string): string | null {
 /**
  * The address to hand to somebody else.
  *
- * Absolute, and built from where this build actually lives — a project page in
- * a subfolder, a preview on another port — so the link works from the machine
+ * Absolute, and built from where this build actually lives - a project page in
+ * a subfolder, a preview on another port - so the link works from the machine
  * it is pasted into rather than only from the one it was copied on.
  */
 export function linkTo(route: Route, params?: Record<string, string>): string {

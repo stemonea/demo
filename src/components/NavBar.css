@@ -14,7 +14,7 @@
    * The bar paints no surface of its own.
    *
    * It used to be a pane of frosted glass, which is the right thing for a bar
-   * that content travels under — and nothing here does: `.app` is a flex column
+   * that content travels under - and nothing here does: `.app` is a flex column
    * that clips, so the page scrolls inside its own row and never behind this
    * one. The blur had nothing to blur, and the flat translucent white it was
    * mixed from could not follow the gradient `.app` is painted with: the bar
@@ -25,7 +25,7 @@
    */
   background: transparent;
   /* the bar is a rule of the sheet like any other: drawn everywhere the bar is
-     read as sitting over a page — which the landing page is not */
+     read as sitting over a page - which the landing page is not */
   border-bottom: var(--rule) solid var(--line);
   transition: color 0.42s var(--ease-out, ease), border-color 0.2s ease;
 }
@@ -33,7 +33,7 @@
 /*
  * The tone, on a layer that can be faded.
  *
- * A background cannot be transitioned from nothing to a gradient — there is no
+ * A background cannot be transitioned from nothing to a gradient - there is no
  * halfway between "no image" and an image, so the bar simply changed colour
  * between one frame and the next while the slide it belongs to was still
  * travelling. Painting the field on a layer of its own and moving its opacity
@@ -75,7 +75,7 @@
  * No rule where the bar sits over a deck; see `seamless` in NavBar.tsx.
  *
  * The width is kept and only the colour is dropped, so the bar measures the
- * same as everywhere else — `--nav-h` is what the live view sizes its first
+ * same as everywhere else - `--nav-h` is what the live view sizes its first
  * screen against, and a bar that lost a pixel here would make every other page
  * disagree with it by one.
  */
@@ -92,7 +92,7 @@
  * the left, where one belongs. The move is done with `left` and a transform
  * rather than by changing how the bar lays itself out: `position: relative`
  * leaves the mark exactly where the flex row put it, so nothing around it
- * reflows and the links keep the places they will occupy — the mark simply
+ * reflows and the links keep the places they will occupy - the mark simply
  * travels over them. Both halves are animatable, so it glides instead of
  * jumping between two layouts.
  *
@@ -120,7 +120,7 @@
  * Centred under the cursor as well as at rest.
  *
  * `HoverTag` keeps the resting mark in the layout as an invisible ghost and
- * paints the opened tag over it, anchored to the ghost's left edge — which is
+ * paints the opened tag over it, anchored to the ghost's left edge - which is
  * right everywhere the mark is a brand in the corner, and wrong here. Centring
  * is done on the ghost, and `<argustream>ARGUSTREAM</argustream>` is a good deal
  * wider than `<ARGUSTREAM/>`, so the whole of that extra width used to grow to
@@ -213,7 +213,7 @@
  * construction. That stops working over a full-bleed slide, which is a surface
  * the bar is *above* rather than part of: the "Why joint?" slide runs green
  * from just under the bar to the foot of the window, and the bar went on
- * showing the light gradient behind it — a pale strip across the top of the one
+ * showing the light gradient behind it - a pale strip across the top of the one
  * slide meant to fill the screen.
  *
  * So here alone the bar takes a surface, and it takes the one the slide begins
@@ -227,7 +227,7 @@
    * What a tag opens into, on the tone.
    *
    * `HoverTag` colours the text it reveals with `var(--tag-<name>, var(--accent))`,
-   * and for ordinary words the name is `text` — which nothing defines, so it
+   * and for ordinary words the name is `text` - which nothing defines, so it
    * fell through to the accent. On a green bar the accent *is* the bar: every
    * link went dark green the moment it was pointed at, which is the one moment
    * it has to be readable. Named here, the fallback never runs and a tag opens
@@ -241,7 +241,7 @@
  *
  * `--tag-argustream` has to be restated *here* and not on the bar. Custom
  * properties are resolved by the nearest ancestor that sets them, and
- * `.nav__brand` sets this one a few lines above — so a value put on the header
+ * `.nav__brand` sets this one a few lines above - so a value put on the header
  * never reached the mark inside it, and hovering the logo opened it in the
  * logo's own dark green: on a green bar, the tag and the `<` `/>` around it
  * both went out at the moment they were pointed at. Set at the brand, it beats

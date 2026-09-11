@@ -7,7 +7,7 @@ import { getTagSpec } from './tags'
  * Plain text, one turn per block, blocks separated by a blank line, each turn
  * opening with the speaker in capitals followed by a colon. It is the shape a
  * debate transcript already has, and it is what a live feed emits one turn at a
- * time — which is why the same file can be replayed as if it were arriving.
+ * time - which is why the same file can be replayed as if it were arriving.
  *
  * A turn may already carry its annotation: if the block contains inline tags of
  * the schema, that annotation is taken as the answer for that turn and no call
@@ -19,7 +19,7 @@ export interface FeedTurn {
   /** position in the transcript, 0-based */
   index: number
   speaker: string
-  /** the turn as plain text, tags removed — what would be sent for annotation */
+  /** the turn as plain text, tags removed - what would be sent for annotation */
   text: string
   /** the annotation the file already carried, if it carried one */
   tagged?: string
@@ -31,7 +31,7 @@ export const SPEAKER_PREFIX = /^(?:<[a-zA-Z][\w-]*>)*([A-Z][A-Z'.\- ]{1,40}?)\s*
 /** The rules shown on the intake screen, so the copy cannot drift from the parser. */
 export const FORMAT_RULES = [
   'A .txt file, UTF-8, up to 400 KB.',
-  'One turn per block, blocks separated by a blank line — a turn may run over several lines.',
+  'One turn per block, blocks separated by a blank line - a turn may run over several lines.',
   'Every turn opens with the speaker in capitals, then a colon ":", and then the turn text.'
 ]
 
@@ -42,7 +42,7 @@ Reduction Act in 2022.
 
 TRUMP: The Senate blocked that bill, and prices went up anyway.`
 
-/** The same three turns, already annotated — replayed without calling anything. */
+/** The same three turns, already annotated - replayed without calling anything. */
 export const FORMAT_SAMPLE_ANNOTATED = `<person>HARRIS</person>: <premise>Inflation is down because we passed
 the <law>Inflation Reduction Act</law> in <date>2022</date></premise>.
 
@@ -51,7 +51,7 @@ the <law>Inflation Reduction Act</law> in <date>2022</date></premise>.
 /**
  * Splits a loaded transcript into turns.
  *
- * A blank line ends a turn, and so does a new `SPEAKER:` prefix — so a file
+ * A blank line ends a turn, and so does a new `SPEAKER:` prefix - so a file
  * written one turn per line, with no blank lines at all, still comes out right.
  */
 export function parseTranscript(text: string): FeedTurn[] {
@@ -85,7 +85,7 @@ export function parseTranscript(text: string): FeedTurn[] {
   })
 }
 
-/** True when a block carries inline tags of the schema — an answer, not a question. */
+/** True when a block carries inline tags of the schema - an answer, not a question. */
 function isAnnotated(block: string): boolean {
   if (!block.includes('<')) return false
   for (const name of countTags(parseTaggedText(block)).keys()) {

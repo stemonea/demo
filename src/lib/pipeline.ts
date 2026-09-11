@@ -8,15 +8,15 @@ import type { FeedTurn } from './transcript'
  * A debate arrives faster than a tagger answers, so the feed is not driven by
  * the requests: two things run at once.
  *
- *   producer — annotates turns in order, `concurrency` requests in flight, and
+ *   producer - annotates turns in order, `concurrency` requests in flight, and
  *              never further than `lookAhead` turns past what the reader sees,
  *              so a long transcript does not flood the service in one burst;
- *   consumer — reveals one buffered turn at a time, as soon as it is an answer.
+ *   consumer - reveals one buffered turn at a time, as soon as it is an answer.
  *
  * A turn is never held back for a turn that does not exist yet: the reader is
  * already waiting for the tagger, and adding reading time on top of that is
  * waiting twice. So the pace follows the buffer. With nothing queued behind it,
- * a turn appears the moment it arrives — the model sets the rhythm. With turns
+ * a turn appears the moment it arrives - the model sets the rhythm. With turns
  * already waiting, which is what a transcript that arrived annotated looks like,
  * each one is held long enough to be read: `msPerWord` per word, never less than
  * `minPace` and never more than `maxPace`.
@@ -32,7 +32,7 @@ import type { FeedTurn } from './transcript'
  * exactly what the "waiting" state reports instead of hiding it.
  *
  * The transport is a detail the rest of this file does not know about. By
- * default the producer issues one `POST` per turn — no streaming server needed.
+ * default the producer issues one `POST` per turn - no streaming server needed.
  * Given `annotateTurn`, it waits on that instead: `useLiveSession` hands it a
  * turn pushed over SSE by a service that is annotating the whole debate. The
  * buffer, the consumer and everything the UI reads are the same either way,
@@ -40,7 +40,7 @@ import type { FeedTurn } from './transcript'
  *
  * One replay is one mount: the hook holds a single transcript for its lifetime,
  * and restarting means remounting the caller with a new `key`. That keeps the
- * session state honest — there is no half-reset replay to reason about.
+ * session state honest - there is no half-reset replay to reason about.
  */
 export interface AnnotatedTurn extends FeedTurn {
   tagged: string
@@ -60,7 +60,7 @@ export interface PipelineOptions {
    * pushes that turn instead.
    */
   annotateTurn?: (turn: FeedTurn, signal: AbortSignal) => Promise<{ tagged: string; source: Source; elapsedMs: number }>
-  /** turns computed before the first one is shown — one, so none is batched */
+  /** turns computed before the first one is shown - one, so none is batched */
   warmup?: number
   /** how far past the visible turn the producer may run */
   lookAhead?: number
@@ -124,8 +124,8 @@ export function useAnnotationPipeline(turns: FeedTurn[], options: PipelineOption
   const activeRef = useRef<Set<number>>(new Set())
   const abortRef = useRef<AbortController | null>(null)
 
-  /* The session handle. It is created here rather than lazily, so a remount —
-     including the one StrictMode simulates in development — always gets a live
+  /* The session handle. It is created here rather than lazily, so a remount -
+     including the one StrictMode simulates in development - always gets a live
      controller and empty bookkeeping instead of the aborted ones it left. */
   useEffect(() => {
     const controller = new AbortController()
@@ -216,8 +216,8 @@ export function useAnnotationPipeline(turns: FeedTurn[], options: PipelineOption
    * buffer is reduced to whether there is anything to move on to at all. Both
    * for the same reason: a turn landing in the background used to re-run this
    * effect, which cleared the pending timer and started the wait again from
-   * the top. With a service pushing several turns during one hold — which is
-   * exactly what a live session does — the turn on screen was held for as long
+   * the top. With a service pushing several turns during one hold - which is
+   * exactly what a live session does - the turn on screen was held for as long
    * as turns kept arriving, so the feed stalled precisely when the service was
    * keeping up best. Now the timer is set when a turn is revealed and left
    * alone until it fires.

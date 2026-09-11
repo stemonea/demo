@@ -6,7 +6,7 @@ import type { LayerView } from './view'
 
 /**
  * The client. Every request this app makes goes through here, and every address
- * it uses comes from `config/backend.ts` — so a page never touches fetch, a URL
+ * it uses comes from `config/backend.ts` - so a page never touches fetch, a URL
  * or a retry policy, and pointing the demo at another service is one file.
  *
  *   annotate(text, view)   one turn      -> the playground, the live feed, analytics
@@ -22,14 +22,14 @@ import type { LayerView } from './view'
  * The address points at `jaet-be` by default, so a turn typed into the
  * playground is annotated by the model. With no address configured, or with one
  * that is not up, the four turns of the paper fall back to their pre-computed
- * answers — labelled as such, never passed off as a prediction — while anything
+ * answers - labelled as such, never passed off as a prediction - while anything
  * else is reported as what it is: a turn nobody computed. `config/backend.ts`
  * says which of those fallbacks are allowed.
  */
 
 export const apiBase = BACKEND.baseUrl || null
 
-/** Where an answer came from — the UI shows this next to every result. */
+/** Where an answer came from - the UI shows this next to every result. */
 export type Source = 'backend' | 'precomputed' | 'heuristic' | 'file'
 
 export type FailureKind = 'config' | 'network' | 'timeout' | 'http' | 'payload'
@@ -70,7 +70,7 @@ export interface SystemRun {
   tagged: string
   /**
    * What the service reported this system spent, or null when nobody measured
-   * it — a turn replayed from the fixtures was not computed here, and printing
+   * it - a turn replayed from the fixtures was not computed here, and printing
    * a number for it would be inventing the very figure this view compares.
    */
   elapsedMs: number | null
@@ -79,7 +79,7 @@ export interface SystemRun {
    * What actually ran this system, as the service reports it.
    *
    * A pipeline can be served by two trained stage taggers or, where those are
-   * not configured, by the joint model asked each stage's own instruction —
+   * not configured, by the joint model asked each stage's own instruction -
    * one layer, with nothing said about the other. Both reproduce the
    * pipeline's structure; only the first reproduces a second model's accuracy,
    * and a time from one must never be read as a time from the other. `null` is
@@ -185,7 +185,7 @@ export async function compare(text: string, view: LayerView, signal?: AbortSigna
  *
  * The clock that counts is the service's. Timing the round trip here would be
  * timing this machine's network as much as the tagger, and on a conference wifi
- * that is not a figure anybody should put in a table — so each system is
+ * that is not a figure anybody should put in a table - so each system is
  * expected to report its own, and a system that reports none is shown as
  * unmeasured instead of being given the round trip to wear.
  *
@@ -262,7 +262,7 @@ function offlineAcross(text: string, started: number): DoubleResult {
  * turns are replayed from the table the paper reports, which gives their
  * annotations and not their latencies. They are here so the bench has something
  * to show and so the single pass reads as the quick one against two stages that
- * are not — which is the finding — and they are the same for every turn, so
+ * are not - which is the finding - and they are the same for every turn, so
  * nothing about them should be read as varying with the input.
  *
  * Anything published from this view on a build with no service behind it is
@@ -291,7 +291,7 @@ export function replayAcross(text: string): DoubleResult {
  *
  * A system may come back as `{ text, elapsed_ms }` or as a bare string; the
  * string is accepted so a service can be pointed at this view before it has
- * been taught to time itself, and its time is then null rather than zero —
+ * been taught to time itself, and its time is then null rather than zero -
  * "not measured" and "took no time" are not the same claim.
  */
 function readRuns(payload: unknown): Record<SystemId, SystemRun> | null {
@@ -330,8 +330,8 @@ function readRuns(payload: unknown): Record<SystemId, SystemRun> | null {
 
 /**
  * A debate is not a turn: it is uploaded once, as the file it already is, and
- * the service answers with the whole queue — every turn's speaker and text, the
- * first few already annotated — plus a session to stream the rest from. What
+ * the service answers with the whole queue - every turn's speaker and text, the
+ * first few already annotated - plus a session to stream the rest from. What
  * the service says about the file (`warnings`) is shown as it came.
  */
 export interface LiveTurnPayload {
@@ -393,7 +393,7 @@ export async function startLiveDebate(
     throw new ApiError(
       'network',
       'Could not reach the annotation service to upload the transcript.',
-      `${reason(cause)} — check that the service is running and that it allows this origin.`,
+      `${reason(cause)} - check that the service is running and that it allows this origin.`,
       url,
     )
   } finally {
@@ -428,8 +428,8 @@ export interface Transcription {
 /**
  * One spoken turn, as the line the annotator reads.
  *
- * The recording is converted before it gets here — 16 kHz mono PCM, which is
- * what the service will accept and what Whisper wants — so this only has to
+ * The recording is converted before it gets here - 16 kHz mono PCM, which is
+ * what the service will accept and what Whisper wants - so this only has to
  * carry it. There is no offline stand-in: a turn nobody transcribed is not a
  * turn, and pretending otherwise would put words in a speaker's mouth.
  */
@@ -467,7 +467,7 @@ export async function transcribe(
     throw new ApiError(
       'network',
       'Could not reach the service to transcribe what was said.',
-      `${reason(cause)} — check that the service is running and that it allows this origin.`,
+      `${reason(cause)} - check that the service is running and that it allows this origin.`,
       url,
     )
   } finally {
@@ -515,7 +515,7 @@ export function liveTranscript(session: string): string | null {
 }
 
 /* ------------------------------------------------------------------ *
- * Rooms — a spoken session other people can watch                     *
+ * Rooms - a spoken session other people can watch                     *
  * ------------------------------------------------------------------ */
 
 /** The same advice every room error ends with; there is only one fix. */
@@ -532,7 +532,7 @@ export interface RoomTurnPayload {
 
 /** What the room says it holds after being published to. */
 export interface RoomPublished {
-  /** turns it now has — the `since` for the next call */
+  /** turns it now has - the `since` for the next call */
   held: number
   /** how many people have the debate open, which is not tabs of this browser */
   watching: number
@@ -564,7 +564,7 @@ export async function openRoom(signal?: AbortSignal): Promise<string> {
  * Only the turns past what it already holds: the room appends by index and
  * drops one it has, so a retry after a dropped connection cannot duplicate a
  * turn. The answer is how many it now holds, which is what the next call sends
- * from — the sender never has to work that out for itself.
+ * from - the sender never has to work that out for itself.
  */
 export async function publishToRoom(
   room: string,
@@ -721,7 +721,7 @@ async function post(url: string, body: unknown, timeoutMs: number, signal?: Abor
     throw new ApiError(
       'network',
       `Could not reach the service at ${url}.`,
-      `${reason(cause)} — check the address in src/config/backend.ts, that the service is running, and that it allows this origin (CORS).`,
+      `${reason(cause)} - check the address in src/config/backend.ts, that the service is running, and that it allows this origin (CORS).`,
       url,
     )
   } finally {
@@ -784,11 +784,11 @@ async function httpHint(response: Response): Promise<string> {
   /* FastAPI's generic details ("Not Found") say less than the pointer below */
   if (detail && detail !== response.statusText) return detail
   const status = response.status
-  if (status === 401 || status === 403) return 'The service rejected the credentials — check VITE_API_KEY.'
+  if (status === 401 || status === 403) return 'The service rejected the credentials - check VITE_API_KEY.'
   if (status === 404) return 'Check the routes in src/config/backend.ts.'
   if (status === 413) return 'The turn is too long for the service.'
-  if (status === 422) return 'The service refused the request body — check bodies in src/config/backend.ts.'
-  if (status === 429) return 'Rate limited — wait a moment and try again.'
+  if (status === 422) return 'The service refused the request body - check bodies in src/config/backend.ts.'
+  if (status === 429) return 'Rate limited - wait a moment and try again.'
   if (status >= 500) return 'The failure is on the service side; its logs will say more.'
   return 'Check that the request body matches what the service expects.'
 }
@@ -866,8 +866,8 @@ function reason(cause: unknown): string {
  * A pause that can be cut short.
  *
  * The listener is taken off again whichever way the wait ends. It used to be
- * left on: one signal serves a whole replay — the pipeline holds a single
- * controller for every turn of the debate — so a wait per turn meant a
+ * left on: one signal serves a whole replay - the pipeline holds a single
+ * controller for every turn of the debate - so a wait per turn meant a
  * listener per turn accumulating on it, each holding a timer and a settled
  * promise. An already-aborted signal is answered directly, because attaching
  * to one that has already fired hears nothing.

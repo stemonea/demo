@@ -2,8 +2,8 @@
 /*
  * A target, rather than a row with a button on the end of it.
  *
- * It used to read left to right — a line of text, then a button pushed to the
- * far side by `space-between` — which is the shape of a toolbar and not of a
+ * It used to read left to right - a line of text, then a button pushed to the
+ * far side by `space-between` - which is the shape of a toolbar and not of a
  * place to drop something. The whole box accepts a file, so the whole box is
  * what should look like it does: the invitation, the terms and the way in are
  * stacked on one centre line, and the box is given the height to be aimed at.

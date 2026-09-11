@@ -6,8 +6,8 @@ import { parseTranscript, type FeedTurn } from './transcript'
  *
  * A build on a static host has no service behind it, so the live view cannot
  * annotate anything: what it can do is replay a debate that was annotated
- * already. That is what this is — one transcript, shipped with the site, every
- * turn carrying its markup — and in demo mode it is what the live view plays
+ * already. That is what this is - one transcript, shipped with the site, every
+ * turn carrying its markup - and in demo mode it is what the live view plays
  * whatever file it is handed.
  *
  * It is fetched rather than imported so it stays out of the bundle, and read
@@ -16,7 +16,7 @@ import { parseTranscript, type FeedTurn } from './transcript'
 let cached: FeedTurn[] | null = null
 
 /**
- * The transcript carries a `[12] SPEAKER` line above each turn — an index the
+ * The transcript carries a `[12] SPEAKER` line above each turn - an index the
  * file was written with, not part of what was said. Left in, it becomes the
  * first words of the turn and takes the speaker's name with it, because the
  * name the feed shows is read off the beginning of the turn. Dropping those
@@ -31,7 +31,7 @@ const INDEX_LINE = /^\s*\[\d+\]\s/
  * A model's time goes with what it produces, so this does too: a floor, then a
  * few milliseconds a word, then a ceiling so a long answer does not become a
  * long wait. What it buys is not the number itself but the state the pipeline
- * is in while it counts — the turn is *in flight*, so the feed shows it being
+ * is in while it counts - the turn is *in flight*, so the feed shows it being
  * annotated, the queue shows it running, and the buffer fills behind it,
  * exactly as on a real run.
  */
@@ -44,8 +44,8 @@ export function demoDelay(text: string): number {
  * The annotation the file already carries, handed over as if it had just been
  * produced.
  *
- * The turns go into the pipeline stripped of their markup — see
- * `withheldAnnotations` — so the pipeline has to ask for each one, which is the
+ * The turns go into the pipeline stripped of their markup - see
+ * `withheldAnnotations` - so the pipeline has to ask for each one, which is the
  * only way it will show the work happening. This is what answers, after a wait.
  */
 export function demoAnnotator(annotations: Map<number, string>) {
@@ -71,8 +71,8 @@ export function demoAnnotator(annotations: Map<number, string>) {
 /**
  * The turns as the pipeline should receive them, and the markup held back.
  *
- * A turn that arrives carrying its annotation is taken straight into the feed —
- * there is nothing to compute — and that is exactly why the demonstration
+ * A turn that arrives carrying its annotation is taken straight into the feed -
+ * there is nothing to compute - and that is exactly why the demonstration
  * looked frozen: everything was ready at once, so nothing was ever seen being
  * worked on. Holding the markup back and giving it up one turn at a time is
  * what puts the run back on screen.

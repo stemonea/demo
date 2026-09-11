@@ -43,7 +43,7 @@
 /*
  * Width alone: the run spans the panel, and keeps the type its own rules set.
  *
- * `overflow: hidden` is the guard, not the mechanism — the column count is
+ * `overflow: hidden` is the guard, not the mechanism - the column count is
  * rounded down so nothing should reach the edge, but a fractional pixel in the
  * measurement must never be able to push a line out over the panel beside it.
  */
@@ -57,7 +57,7 @@
   width: 100%;
 }
 
-/* one character, measured rather than assumed — never in the flow */
+/* one character, measured rather than assumed - never in the flow */
 .stream__probe {
   position: absolute;
   top: 0;

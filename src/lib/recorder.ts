@@ -3,8 +3,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 /**
  * The microphone, and the one shape the service accepts.
  *
- * A browser will record to whatever container it feels like — webm/opus on
- * Chrome, mp4/aac on Safari — and none of them is something a Python service
+ * A browser will record to whatever container it feels like - webm/opus on
+ * Chrome, mp4/aac on Safari - and none of them is something a Python service
  * can open without ffmpeg on the path. So the conversion happens here, using
  * the audio engine the browser already has: the recording is decoded, resampled
  * to the rate Whisper is trained at, mixed to one channel and written out as
@@ -64,7 +64,7 @@ export function encodeWav(samples: Float32Array, rate: number): Blob {
  * `OfflineAudioContext` does the resampling: rendering the decoded buffer into
  * a context that runs at 16 kHz is a resample, and connecting a multi-channel
  * source to a one-channel destination is a downmix. Both are the browser's own,
- * which is the point — hand-rolling either is how a recording ends up sounding
+ * which is the point - hand-rolling either is how a recording ends up sounding
  * like a fax machine.
  */
 export async function toMono16k(recorded: Blob): Promise<Float32Array> {
@@ -96,7 +96,7 @@ export async function toMono16k(recorded: Blob): Promise<Float32Array> {
 
 export interface Recorder {
   phase: RecorderPhase
-  /** 0…1, how loud it is right now — the meter, and the proof it is listening */
+  /** 0…1, how loud it is right now - the meter, and the proof it is listening */
   level: number
   /** how long the microphone has been open, in seconds */
   seconds: number
@@ -112,7 +112,7 @@ export interface Recorder {
  * One turn at a time.
  *
  * The microphone is opened for a single speaker and closed again, and closing
- * it is what produces the turn — there is no continuous stream to segment and
+ * it is what produces the turn - there is no continuous stream to segment and
  * no diarisation to get wrong, because the person running the session says who
  * is about to talk. The permission prompt is only ever raised on `open`, so
  * nothing asks for a microphone until someone presses the button.

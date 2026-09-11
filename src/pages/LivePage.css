@@ -2,7 +2,7 @@
  * The debate fills the first screen; the statistics are underneath it.
  *
  * Everything else in this app is one screen that never scrolls, and the live
- * view was too — but the band below has to be somewhere, and squeezing it into
+ * view was too - but the band below has to be somewhere, and squeezing it into
  * the same screen leaves the debate a few lines tall. So this page flows: the
  * grid is given the height of the screen it is on, the band follows it, and
  * scrolling down is how you reach it. What must never happen is the page
@@ -12,8 +12,8 @@
 /*
  * `overflow-anchor: none`, for the same reason the watcher's page turns it off.
  *
- * The figures under the debate fill in as the debate runs — a bar chart gains a
- * row when another name is entered into it, the pairs arrive one at a time —
+ * The figures under the debate fill in as the debate runs - a bar chart gains a
+ * row when another name is entered into it, the pairs arrive one at a time -
  * and a reader down among them is reading below something that just grew. Their
  * place is put back by `useSteadyScroll`, which holds on to the block the top of
  * the view is resting on. A browser that also anchored would correct the same
@@ -33,7 +33,7 @@
    *
    * `.page` is a column flex container the height of the screen, and a flex item
    * shrinks below its content by default. Left at that, the shell was drawn at
-   * the height of the window while holding half as much again — which is not a
+   * the height of the window while holding half as much again - which is not a
    * clipped box but a *shorter* one, with the content hanging out of it and the
    * frame rule `.shell::after` drawn straight across the debate rather than
    * under it. Refusing the shrink is what puts the rule back at the foot of what
@@ -59,8 +59,8 @@
  * subtracting a guess at everything above it. The guess was close, and close
  * is not enough: a transport bar that wrapped to a second line, or a wider
  * window that grew the headline, pushed the foot of the box below the fold.
- * So the *screen* carries the height — the window, less the navigation and
- * the margin the frame keeps — and the debate takes whatever the two blocks
+ * So the *screen* carries the height - the window, less the navigation and
+ * the margin the frame keeps - and the debate takes whatever the two blocks
  * above it leave. A head that grows now costs the debate a line instead of
  * hanging off the bottom of the window.
  */
@@ -76,7 +76,7 @@
     /* the window, less the navigation and the two paddings between it and
        here: `.page__inner` keeps the frame margin plus the scroll step, and
        `.shell` keeps the frame margin again. Four frame margins and two
-       steps in all — count them wrong and the box lands under the fold,
+       steps in all - count them wrong and the box lands under the fold,
        which is exactly what it used to do. */
     height: calc(
       100dvh - var(--nav-h) - 4 * var(--frame-margin) - 2 * clamp(6px, 1.4vh, 20px)
@@ -90,7 +90,7 @@
 /*
  * The head is read once and then never again; the feed is read the whole time.
  * So the head is kept to what it has to say and every pixel it gives up goes
- * to the debate — the grid takes what is left, and nothing here grows as turns
+ * to the debate - the grid takes what is left, and nothing here grows as turns
  * arrive, which is what stopped the page from scrolling away underneath.
  */
 .live__head {
@@ -99,6 +99,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 14px 20px;
+  text-align: justify;
 }
 
 .live__title {
@@ -203,7 +204,7 @@
  * absolutely positioned descendant if it is itself a containing block. The
  * loader at the foot of the feed carries a 1px `.visually-hidden` span with no
  * offsets: without this line its containing block is somewhere up the tree, the
- * clip does not apply to it, and it sits at its static position — thousands of
+ * clip does not apply to it, and it sits at its static position - thousands of
  * pixels down, once enough turns have arrived. The page then scrolls to
  * nowhere, and everything on it scrolls away.
  */
@@ -316,8 +317,8 @@
  * column has a fixed shape however many turns the debate has.
  *
  * `min-height` is what stops "what the export leaves" from being nothing. The
- * panel above it has no ceiling — anything added to it takes its room out of
- * here — and with a floor of zero the queue was squeezed to nothing and
+ * panel above it has no ceiling - anything added to it takes its room out of
+ * here - and with a floor of zero the queue was squeezed to nothing and
  * disappeared entirely rather than getting smaller. Below this the column
  * scrolls instead, which is a thing a reader can see and do something about.
  */
@@ -380,7 +381,7 @@
   color: var(--ink-soft);
 }
 
-/* computed but not shown yet — the work that ran behind the reader */
+/* computed but not shown yet - the work that ran behind the reader */
 .queue__item.is-ready {
   opacity: 1;
   color: var(--ink);
@@ -438,8 +439,8 @@
  * The upload box is a target, and a target is aimed at rather than spread over.
  *
  * Stretched to the full width of its half of the intake it read as a band
- * across the panel — the shape of a section divider, not of a place to drop a
- * file — and the words centred inside it sat in the middle of a box that was
+ * across the panel - the shape of a section divider, not of a place to drop a
+ * file - and the words centred inside it sat in the middle of a box that was
  * itself flush to both edges, so the centring never actually showed. Held to a
  * width of its own and centred in its column on both axes, it is the thing
  * being offered rather than the top of a list of things.
@@ -498,7 +499,7 @@
 
   /*
    * Narrow enough that the navigation wraps, so the screen above cannot be
-   * worked out from a constant any more — and narrow enough that the queue
+   * worked out from a constant any more - and narrow enough that the queue
    * and the debate are stacked rather than side by side. The box takes a
    * height of its own here, as it always did, so the queue scrolls inside it
    * instead of running two hundred turns down the page.

@@ -153,15 +153,15 @@ const SEP = '\u241f'
  * The last aggregation, kept against the list it was made from.
  *
  * Two blocks of a live page ask for the same reading of the same debate on
- * every turn — the ballot, to say what each candidate has actually put on the
- * record, and the running totals underneath it — and the list they are both
+ * every turn - the ballot, to say what each candidate has actually put on the
+ * record, and the running totals underneath it - and the list they are both
  * handed is one array. Answering it twice is a second pass over the whole
  * transcript for a result that cannot differ from the first.
  *
  * Keyed on identity and not on contents, which is what makes it safe: this is a
  * pure function of the turns it is given, so the same array is the same answer,
  * and a list that has changed at all is a different array. One entry is enough
- * — the callers ask within the same render — and holding a single debate costs
+ * - the callers ask within the same render - and holding a single debate costs
  * nothing worth reclaiming.
  */
 let lastAsked: AnalysedTurn[] | null = null
@@ -208,7 +208,7 @@ function aggregate(turns: AnalysedTurn[]): DebateStats {
    * Pairs are counted after the merge, not during the walk.
    *
    * `mergeAliases` rewrites a mention's key in place once it has seen the
-   * fuller form of the name — "obama" becomes "barack obama" — and every other
+   * fuller form of the name - "obama" becomes "barack obama" - and every other
    * table here is built on the key it leaves behind. Counting the pairs while
    * walking meant counting them under the keys the merge was about to
    * replace: the figure came out keyed to entities that no longer existed, so
@@ -265,7 +265,7 @@ export const WHOLE_DEBATE: ChartLens = { argumentativeOnly: false, minMentions: 
  * The figures are drawn from the top of a list a couple of hundred names long,
  * and which names reach the top is a question with more than one right answer.
  * A name said thirty times in passing outranks one put inside four claims, and
- * the tail is mostly things said exactly once — so a reader who wants to know
+ * the tail is mostly things said exactly once - so a reader who wants to know
  * what is being *argued* about, rather than what is being said, is reading past
  * the figure rather than from it.
  *
@@ -393,7 +393,7 @@ export function normalise(surface: string): string {
    *
    * `<role>President</role>` is a whole entity whose surface is nothing but an
    * honorific: stripping it left the empty string, so every bare role in the
-   * debate — president, senator, governor — merged into one nameless entity
+   * debate - president, senator, governor - merged into one nameless entity
    * that no filter could tell apart and no chart could label. Dropping the
    * titles only when something survives keeps "Mr Obama" folding into "obama"
    * while leaving a role its own name.

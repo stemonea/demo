@@ -27,7 +27,7 @@ interface Props {
  * The room, for whoever is running the debate.
  *
  * Three numbers and one chart. The numbers are the ones a tally cannot give
- * you — how many people moved, and how many gave up on both sides — and the
+ * you - how many people moved, and how many gave up on both sides - and the
  * chart is where they moved, laid against the turn that moved them. A final
  * result says who won the room; this says which minute won it.
  */
@@ -62,16 +62,16 @@ export default function PollBoard({ session, speakers, ballot, onBallot, turns, 
         {!!crowd?.size && (
           <p className="poll__simulated" role="note">
             <strong>{crowd.size} of these voters are simulated.</strong> This build has no service behind it, so real
-            votes cannot be pooled between devices — every phone in the room counts only its own. The simulated floor
+            votes cannot be pooled between devices - every phone in the room counts only its own. The simulated floor
             is derived from the session id and the turn count, so it is the same on every device watching, and it
             moves as the debate does. Anybody voting here is counted as themselves, on top of it.
           </p>
         )}
       </header>
 
-      {/* who is standing: it opens as the speakers who have argued — a
+      {/* who is standing: it opens as the speakers who have argued - a
           moderator asks and does not assert, so the annotation separates them
-          without anyone having to say so — and the toggles are the correction */}
+          without anyone having to say so - and the toggles are the correction */}
       <div className="poll__ballot">
         <span className="poll__ballot-label">
           On the ballot
@@ -208,7 +208,7 @@ function Standing({ report, ballot, turns }: { report: ReturnType<typeof tally>;
   )
 
   /* direct labels, pushed apart so two close lines do not print over each
-     other — the one thing a validator cannot check for you */
+     other - the one thing a validator cannot check for you */
   const labels = useMemo(() => {
     const placed = drawn
       .map((line) => ({
@@ -224,7 +224,7 @@ function Standing({ report, ballot, turns }: { report: ReturnType<typeof tally>;
       if (gap < LABEL_GAP) placed[i].at = placed[i - 1].at + LABEL_GAP
     }
 
-    /* pushing them apart can push the last one off the bottom — which with
+    /* pushing them apart can push the last one off the bottom - which with
        every line at the same height is not the rare case, it is what a debate
        looks like before anybody has voted differently. The stack moves up as
        one, so the spacing survives and the labels stay on the sheet. */
@@ -382,8 +382,8 @@ function Standing({ report, ballot, turns }: { report: ReturnType<typeof tally>;
 /**
  * The same thing, read rather than looked at.
  *
- * Not the chart transcribed turn by turn — two hundred columns is not a table
- * anybody reads — but what the chart is being asked: where each position
+ * Not the chart transcribed turn by turn - two hundred columns is not a table
+ * anybody reads - but what the chart is being asked: where each position
  * stands now, and the best it ever did.
  */
 function Numbers({ report, ballot }: { report: ReturnType<typeof tally>; ballot: string[] }) {

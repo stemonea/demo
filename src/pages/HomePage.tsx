@@ -178,8 +178,7 @@ export default function HomePage({ onSlideChange }: Props) {
             <span className="eyebrow">Manual</span>
             <h2 className="display preview__title"><HoverTag zone=".preview">Build it by hand</HoverTag></h2>
             <p className="preview__lead">
-              Load a .txt transcript, declare your own entity set, tag both layers by hand, and export two-layer
-              CoNLL - the format the tagger is trained and evaluated on.
+              Load a transcript, declare your own entity set, tag both layers by hand, and export it.
             </p>
             <span className="preview__cta">Open the annotator →</span>
           </div>
@@ -211,8 +210,7 @@ is\tI-CLAIM\tO`}</pre>
             <span className="eyebrow">Info</span>
             <h2 className="display preview__title"><HoverTag zone=".preview">Why joint?</HoverTag></h2>
             <p className="preview__lead">
-              A claim constrains which entities are plausible inside it; an entity in subject position signals a
-              predication. Split the task in two and each stage becomes blind to the other.
+              Split the task in two and see the difference with the joint approach.
             </p>
             <span className="preview__cta">See the three systems →</span>
           </div>

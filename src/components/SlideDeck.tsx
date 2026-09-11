@@ -12,7 +12,7 @@ export interface SlideItem {
    *
    * The deck moves by gesture and by arrow key, neither of which says where it
    * goes. Where the slide after this one is the answer to the slide being read
-   * — the examples behind a question, the argument behind a tool — the deck can
+   * - the examples behind a question, the argument behind a tool - the deck can
    * say so in words instead of leaving the reader to find it.
    *
    * `to` is the slide it leads to, and defaults to the one after this. Naming it
@@ -246,8 +246,8 @@ const WHEEL_COOLDOWN = 550
 
 /**
  * True when the wheel belongs to a scrollable region inside the slide rather
- * than to the deck. Only explicit opt-ins count — an element marked
- * `data-scroll` or a form control — so the deck never silently swallows the
+ * than to the deck. Only explicit opt-ins count - an element marked
+ * `data-scroll` or a form control - so the deck never silently swallows the
  * gesture just because a slide happens to be a few pixels too tall.
  */
 function absorbs(target: EventTarget | null, deltaX: number, deltaY: number, boundary: HTMLElement): boolean {
@@ -261,7 +261,7 @@ function absorbs(target: EventTarget | null, deltaX: number, deltaY: number, bou
        * A region that scrolls vertically keeps the whole vertical gesture, and
        * keeps it at its ends too. Handing the wheel back once the region is at
        * its top means that reading back up through a long text carries you out
-       * of the slide the moment you reach the first line — you were reading,
+       * of the slide the moment you reach the first line - you were reading,
        * not navigating, and the page went backwards under you. The deck is
        * still reached by the bar, the arrow keys and everywhere that is not an
        * inner scroller.

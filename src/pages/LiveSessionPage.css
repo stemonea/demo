@@ -141,11 +141,11 @@
  * The colour of the tool, not black.
  *
  * This was filled with the ink the body copy is set in, which made the first
- * thing on the page a black slab — and the live view's own play button, two
+ * thing on the page a black slab - and the live view's own play button, two
  * clicks away, is `btn--accent` and green. Two pages of the same tool opening
  * with the same control in two different colours is the sort of difference a
  * reader reads as meaning, and there is none here. So it takes the accent at
- * rest and, under the cursor, the same accent carried a little towards the ink —
+ * rest and, under the cursor, the same accent carried a little towards the ink -
  * `--accent-hover`, which is 88% accent. It darkens without ever leaving the
  * colour the tool is drawn in: a control that answers a cursor by turning black
  * is the black slab back again, one movement later.
@@ -176,7 +176,7 @@
 
 /* a microphone that is open and listening to a room: the one state here that
    earns an alarm colour, and the one thing on the page that has to be found in
-   a hurry. A debate being played is not this — see `is-running` below. */
+   a hurry. A debate being played is not this - see `is-running` below. */
 .mic__btn.is-live {
   background: var(--bad);
   border-color: var(--bad);
@@ -236,7 +236,7 @@
  * Both words are laid into the same grid cell: the longest is drawn and hidden,
  * so it sets the width, and the current one is centred on top of it. The badge
  * is then the same size in every phase, which is what stops the bar from
- * re-wrapping — and the debate under it from jumping fifty-three pixels — every
+ * re-wrapping - and the debate under it from jumping fifty-three pixels - every
  * time a turn starts being annotated and again when it lands. `LONGEST_PHASE`
  * in the page is where the hidden word comes from.
  */
@@ -314,13 +314,13 @@
  * The first screen, and only it.
  *
  * The grid used to carry a height worked out by subtracting a guess at
- * everything above it — `100dvh - 400px` — and the guess was always going to
+ * everything above it - `100dvh - 400px` - and the guess was always going to
  * drift: a name added to the floor wraps the bar, a notice appears, a way to
  * type a turn is added underneath. Every one of those pushed the foot of the
  * feed below the fold.
  *
- * So the *screen* carries the height — the window, less the navigation and the
- * margins the frame keeps — and the feed takes whatever the blocks above it
+ * So the *screen* carries the height - the window, less the navigation and the
+ * margins the frame keeps - and the feed takes whatever the blocks above it
  * leave. A head that grows now costs the debate a line instead of hanging off
  * the bottom of the window.
  */
@@ -337,21 +337,21 @@
    *
    * This was a fixed `height`, and a fixed height is a promise the contents
    * cannot keep: the debate below has a minimum of its own and will not shrink
-   * past it, so anything added above — the box for typing a turn, a notice, a
-   * second line of names on the floor — pushed the debate straight out of the
+   * past it, so anything added above - the box for typing a turn, a notice, a
+   * second line of names on the floor - pushed the debate straight out of the
    * bottom of a box that was not allowed to grow. Nothing clipped it, and the
    * blocks after it are laid out against the height the box claims rather than
    * the height it is using, so the running totals were drawn over the top of
    * the debate and the QR code underneath them.
    *
-   * As a minimum it does the one thing it was for — on a tall window the debate
-   * still fills the first screen, because the grid below takes up the slack —
+   * As a minimum it does the one thing it was for - on a tall window the debate
+   * still fills the first screen, because the grid below takes up the slack -
    * and when there is more to show than the window holds, the screen grows and
    * the page scrolls, which is what a page is for.
    *
    * The window, less the navigation and the two paddings between it and here:
    * `.page__inner` keeps the frame margin plus the scroll step, and `.shell`
-   * keeps the frame margin again — four margins and two steps. Under the floor
+   * keeps the frame margin again - four margins and two steps. Under the floor
    * of 420px the debate is not worth reading, so the screen gives up there and
    * lets the page scroll instead.
    */
@@ -363,15 +363,15 @@
   }
 }
 
-/* the link on the left, the debate on the right — the same shape the replay
+/* the link on the left, the debate on the right - the same shape the replay
    has, and the reason the session page stopped wasting half its width */
 .session__grid {
   /*
    * It takes the room the screen has left, and nothing from what it holds.
    *
    * `flex-basis: 0` rather than `auto` is the whole of that: measured from its
-   * contents, this box starts at the height of the taller of its two panels —
-   * the share panel is six hundred pixels of text and a code — and a box that
+   * contents, this box starts at the height of the taller of its two panels -
+   * the share panel is six hundred pixels of text and a code - and a box that
    * starts that tall goes on being that tall, whatever room the screen actually
    * has. Started at nothing, it grows into the space above it and no further,
    * which is what puts the debate and the link back inside their own panels
@@ -383,7 +383,7 @@
    *
    * The feed takes what the blocks above it leave, which is the right rule and
    * gives it too little on a short window. So it also claims a share of the
-   * window itself — but a *share*, capped, because a flat figure large enough
+   * window itself - but a *share*, capped, because a flat figure large enough
    * to matter on a laptop is a figure that hangs off the bottom of anything
    * smaller. Above the cap the height above decides, as before.
    */
@@ -397,7 +397,7 @@
    * Left to itself a grid row is as tall as its content, and the row is free to
    * be taller than the grid that draws it: the share panel is six hundred
    * pixels of text and a code, so it ran straight out of the bottom of the
-   * debate box and over the top of the totals underneath — the panel's own
+   * debate box and over the top of the totals underneath - the panel's own
    * `overflow-y: auto` never came into it, because a box that is never made
    * shorter than its contents has nothing to scroll. `minmax(0, 1fr)` holds the
    * row to the box, and the two panels scroll inside themselves as they were
@@ -539,7 +539,7 @@
  *
  * Centred and given room: this is meant to be read from across a room rather
  * than from in front of the screen, so it is the largest thing on the panel and
- * the link underneath is the footnote. It is always drawn — it *is* the link,
+ * the link underneath is the footnote. It is always drawn - it *is* the link,
  * and how far that link travels is said in words under it rather than by the
  * code being missing.
  */
@@ -572,7 +572,7 @@
 }
 
 /* the link itself: readable, selectable, and never mistaken for something
-   to type into — it is the address, not a field */
+   to type into - it is the address, not a field */
 .share__url {
   flex: 1 1 auto;
   min-width: 0;
@@ -630,7 +630,7 @@
 /*
  * The microphone needs a quiet room and a transcription service, and there are
  * two ordinary reasons to have neither. Typing the turn skips the hearing and
- * nothing else — same speaker, same annotation call, same feed — so a session
+ * nothing else - same speaker, same annotation call, same feed - so a session
  * can be run, watched and voted on with a keyboard alone.
  */
 /*
@@ -638,7 +638,7 @@
  *
  * Three bands, stacked rather than flowed: what this is, the turn itself, and
  * what becomes of it. The box is the whole width of the card at every size,
- * which is what a paragraph wants — the old row put the send button beside it
+ * which is what a paragraph wants - the old row put the send button beside it
  * and the box lost sixty pixels to a control that is pressed once per turn.
  */
 .say {
@@ -706,7 +706,7 @@
  *
  * Large, because it is now only here when it was asked for: the bar above has
  * the button that opens it, and a box nobody opened costs the debate nothing.
- * That is what pays for these figures — five lines to start rather than three,
+ * That is what pays for these figures - five lines to start rather than three,
  * and a ceiling in `dvh` so a tall window gives a long turn more of itself
  * than a short one can afford to.
  *
@@ -736,8 +736,8 @@
 /*
  * The one action of the card, and the only filled thing in it.
  *
- * Smaller than a page's own primary button — this is the foot of a panel, not
- * the bottom of a screen — and accented rather than ink, so it is plainly not
+ * Smaller than a page's own primary button - this is the foot of a panel, not
+ * the bottom of a screen - and accented rather than ink, so it is plainly not
  * the microphone above it: the two are different ways to give a turn, and a
  * reader should never have to work out which black button they are looking at.
  */
@@ -767,7 +767,7 @@
  *
  * Same reservation as the phase badge beside it, same reason: this bar is a
  * wrapping row, and a control that changes width mid-turn moves the wrap, which
- * moves the debate underneath it. Both labels share one grid cell — the longest
+ * moves the debate underneath it. Both labels share one grid cell - the longest
  * drawn and hidden, the current one centred over it.
  */
 .mic__label {
@@ -788,7 +788,7 @@
  * Hard against the light beside it, not centred in the space reserved.
  *
  * Centred, a short word drifted away from the dot and left a hole between the
- * two — the button read as a dot and a label rather than as one control. The
+ * two - the button read as a dot and a label rather than as one control. The
  * slack belongs at the far end, where it is just a button with room in it.
  */
 .mic__label-word {

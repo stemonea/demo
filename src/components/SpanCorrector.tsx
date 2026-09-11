@@ -16,7 +16,7 @@ import './TaggedText.css'
 import './SpanCorrector.css'
 
 /**
- * How wide the popover is allowed to get — the `max-width` its stylesheet
+ * How wide the popover is allowed to get - the `max-width` its stylesheet
  * gives it, repeated here because the position has to be worked out before
  * there is anything to measure.
  */
@@ -53,7 +53,7 @@ interface Props {
   empty?: ReactNode
   /** what the host puts at the right end of the label bar, after Undo and Clear */
   barExtra?: ReactNode
-  /** said under the text, inside the pane — the host's own message line */
+  /** said under the text, inside the pane - the host's own message line */
   note?: ReactNode
   /**
    * The instruments beside the sheet: the export column, the span list.
@@ -71,7 +71,7 @@ interface Props {
  * Correcting an annotation, wherever it came from.
  *
  * Selecting words and giving them a class, moving an edge a word at a time,
- * changing a class, taking a span off — the same surface serves a transcript
+ * changing a class, taking a span off - the same surface serves a transcript
  * annotated from nothing and a turn the tagger has just answered, because in
  * both cases the work is the same: the classes are usually right and the
  * boundaries usually are not.
@@ -79,7 +79,7 @@ interface Props {
  * Nothing here knows where the annotation came from. It is handed text, spans
  * as character offsets, and the classes that may be assigned; it hands back
  * spans. That is what lets the hand annotator and the playground share one
- * implementation instead of drifting apart — and it is why the correction pass
+ * implementation instead of drifting apart - and it is why the correction pass
  * looks and behaves identically on the two pages rather than merely similarly.
  *
  * It renders as a fragment, not as a box of its own: the label bar and the
@@ -189,7 +189,7 @@ export default function SpanCorrector({
 
   /**
    * Moves one edge of one span by a single word. This is the whole point of
-   * correcting an annotation someone — or something — else made: the classes
+   * correcting an annotation someone - or something - else made: the classes
    * are usually right and the boundaries usually are not.
    */
   const nudge = useCallback(
@@ -204,7 +204,7 @@ export default function SpanCorrector({
     [tokens, spans, onChange, onActiveSpan, say],
   )
 
-  /** Same span, different class — the other half of a correction pass. */
+  /** Same span, different class - the other half of a correction pass. */
   const relabel = useCallback(
     (span: ManualSpan, label: string) => {
       if (label === span.label) return
@@ -243,7 +243,7 @@ export default function SpanCorrector({
 
       const open = editing ? spans.find((span) => span.id === editing) : null
       if (open && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-        /* the end edge by default, the start edge with Shift — one hand, four
+        /* the end edge by default, the start edge with Shift - one hand, four
            moves, which is what a correction pass is made of */
         event.preventDefault()
         event.stopPropagation()
@@ -317,7 +317,7 @@ export default function SpanCorrector({
      * The popover used to be centred on the click and left where that put it,
      * which is fine on a sheet that has the width of a slide and wrong
      * anywhere narrower: on half a card, a span near either edge opened a
-     * panel that hung outside the box — and the box clips, so what hung out
+     * panel that hung outside the box - and the box clips, so what hung out
      * was simply not there. It is clamped instead, and flipped above the
      * click when it is nearer the foot of the pane than the head.
      */
@@ -482,8 +482,8 @@ export default function SpanCorrector({
  * Everything a host needs to draw a row of its own that behaves like one of
  * the popover's: the same editor, the same removal, the same lit span.
  *
- * The span list beside the sheet on the hand annotator is exactly that — a
- * second way into the same correction — so it is given the instruments rather
+ * The span list beside the sheet on the hand annotator is exactly that - a
+ * second way into the same correction - so it is given the instruments rather
  * than a second implementation of them.
  */
 export interface SpanTools {
@@ -526,7 +526,7 @@ interface EditorProps {
 /**
  * The refinement pass, in one small control: which class this is, and where its
  * two edges sit. Each arrow moves an edge by exactly one word, and is disabled
- * when there is no word left to move it onto — the button is what says the span
+ * when there is no word left to move it onto - the button is what says the span
  * has reached the end of the text, or the last word it can give up.
  *
  * It is rendered in two places, the popover on the text and the row in the span
@@ -630,9 +630,9 @@ interface RenderOptions {
 
 /**
  * Renders the text with one nested element per span, exactly as `TaggedText`
- * does for model output — same classes, and the type written in the same place:
+ * does for model output - same classes, and the type written in the same place:
  * an argument component opens with its label, an entity carries its own after
- * it — so a turn corrected by hand looks like a turn that came back from the
+ * it - so a turn corrected by hand looks like a turn that came back from the
  * tagger. Tokens are the leaves and carry `data-token`, which is what the
  * selection is resolved against.
  */

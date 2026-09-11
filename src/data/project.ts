@@ -21,6 +21,6 @@ export const FAILURE_MECHANISMS = [
   {
     title: 'The second stage rewrites already-tagged text',
     body:
-      'The second stage must insert its own tags into text that already carries the tags of the first one — a condition it is never supervised on. This produces crossing, ill-formed markup and, more insidiously, the silent deletion of tags the first stage had produced correctly.',
+      'The second stage must insert its own tags into text that already carries the tags of the first one - a condition it is never supervised on. This produces crossing, ill-formed markup and, more insidiously, the silent deletion of tags the first stage had produced correctly.',
   },
 ]

@@ -4,7 +4,7 @@
   white-space: nowrap;
 }
 
-/* the real words, invisible, holding the width open — and never selected */
+/* the real words, invisible, holding the width open - and never selected */
 .tokenlabel__width {
   visibility: hidden;
   user-select: none;

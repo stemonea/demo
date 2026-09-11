@@ -116,7 +116,7 @@ export const EXAMPLES: Example[] = [
     index: 'Example 4',
     title: 'Type confusion the joint model avoids',
     commentary:
-      'A statistic advanced as a position is a claim, not a premise. Both pipelines mislabel it, while the joint model does not — an illustration of the lack of comprehensive signal between the two stages.',
+      'A statistic advanced as a position is a claim, not a premise. Both pipelines mislabel it, while the joint model does not - an illustration of the lack of comprehensive signal between the two stages.',
     gold:
       '<person>ROMNEY</person>: <claim>Production on government land of oil is down 14 percent</claim>.',
     outputs: {

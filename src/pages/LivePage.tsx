@@ -324,7 +324,7 @@ function Feed({ loaded, onNewFile }: FeedProps) {
      back to read something */
   const { box: feedBox, onScroll: onFeedScroll, behind, jump: toEnd } = useFeed<HTMLDivElement>(shown.length)
   /* and the page under the feed keeps the reader's place while the figures on
-     it fill in — the same correction the watcher's page has always had, which
+     it fill in - the same correction the watcher's page has always had, which
      this one was simply left out of */
   const { scroller, content } = useSteadyScroll<HTMLDivElement, HTMLDivElement>()
   const fromFile = useMemo(() => countAnnotated(turns), [turns])

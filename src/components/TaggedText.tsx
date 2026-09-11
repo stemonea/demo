@@ -59,7 +59,7 @@ function renderNode(node: TagNode, key: number) {
    * Where the type is written depends on how much of the text the span covers.
    * An argument component runs over a whole sentence, so it is opened by a label
    * that reads as its heading; an entity is a word or two, and a full label in
-   * front of every one of them turns the turn into a list of labels — so it
+   * front of every one of them turns the turn into a list of labels - so it
    * carries a short code after it, the way a footnote marker would.
    */
   const label = spec?.label ?? node.name

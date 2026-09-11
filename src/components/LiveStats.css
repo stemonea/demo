@@ -3,7 +3,7 @@
 
    A section of its own, not a continuation of the box above it: it opens
    with its own heading, stands clear of the debate, and is read top to
-   bottom then left to right — how much of it there is, then the question
+   bottom then left to right - how much of it there is, then the question
    on the left and the answer on the right.
 
      +-----------------------------------------------+
@@ -19,8 +19,8 @@
    The band used to be three lists side by side, each scrolling in its own
    slot: the reader had to work out which one drove which, and the entity
    table had five columns inside a third of the width. Now the left panel
-   is plainly the control — one list at a time, under a heading that says
-   what pressing a row does — and the right panel is plainly the result,
+   is plainly the control - one list at a time, under a heading that says
+   what pressing a row does - and the right panel is plainly the result,
    with the filter written out directly over the list it has shortened.
    ===================================================================== */
 
@@ -190,7 +190,7 @@
 /*
  * A pair of tabs, not two stacked panels.
  *
- * They are the same act — narrow the list on the right — so they share one
+ * They are the same act - narrow the list on the right - so they share one
  * heading and one slot, and only one is on screen. That is what gives the
  * entity table the width its five columns need, and it leaves the reader with
  * one list to scroll on this side instead of two half-height ones.
@@ -329,7 +329,7 @@
  *
  * It used to carry no chrome at all at rest, on the argument that the band is
  * read more often than it is pressed. That argument cost the reader the one
- * thing they needed to know — that the row does something — so the row now
+ * thing they needed to know - that the row does something - so the row now
  * sits on the sunken surface with a rule down its side, the way every other
  * pressable thing on the sheet does.
  */
@@ -373,7 +373,7 @@
  * The box that says this row is one of several that can be held at once.
  *
  * Empty at rest, ticked when the speaker is in view. A row that filters is a
- * checkbox whatever it is drawn as, so it is drawn as one — and the reader can
+ * checkbox whatever it is drawn as, so it is drawn as one - and the reader can
  * see from the column of boxes that picking a second one is allowed.
  */
 .speaker__mark {
@@ -430,7 +430,7 @@
  * The track is the full scale, the bar is this speaker's share of it.
  *
  * Every speaker is measured against the same maximum, so the lengths can be
- * compared — a bar that filled its own row would say every speaker argued the
+ * compared - a bar that filled its own row would say every speaker argued the
  * same amount, which is the one thing this band exists to disprove.
  */
 .speaker__track {
@@ -562,7 +562,7 @@
 /*
  * One row per entity, after aliases are folded together.
  *
- * The table above is about classes — are dates argued with, or only cited —
+ * The table above is about classes - are dates argued with, or only cited -
  * and this is about a particular name: how often it came up, and how much of
  * that was inside an argument rather than in passing. The bar is the same
  * three-part reading the analytics figures give the entity, so a row here and
@@ -704,7 +704,7 @@
 /*
  * One table, five columns: how often a type is named, how many claims name
  * one, how many premises do, and how many mentions are left over in between.
- * Reading across a row is the point of it — a name that is said constantly
+ * Reading across a row is the point of it - a name that is said constantly
  * and argued with almost never is a row whose first figure is large and whose
  * middle two are not.
  *
@@ -732,7 +732,7 @@
   --tag-color: var(--tag-fallback);
   display: grid;
   /* px, not em: the head sets a smaller font of its own, and em columns would
-     resolve differently there — the two would stop lining up */
+     resolve differently there - the two would stop lining up */
   grid-template-columns: minmax(72px, 1fr) 92px 84px 92px 52px;
   align-items: center;
   gap: 10px;
@@ -763,7 +763,7 @@
 }
 
 /* a heading that reorders the table says so by being pressable, and the one
-   in force says so by being the only one in ink — with the caret that names
+   in force says so by being the only one in ink - with the caret that names
    the direction, so the ranking is never inferred from the bars alone */
 .table__sort {
   display: flex;
@@ -945,7 +945,7 @@
  *
  * It used to sit in a bar above all three panels, a long way from the rows it
  * had shortened. Here it is the line the reader crosses on the way into the
- * components, so a short list is never read as the whole debate — and every
+ * components, so a short list is never read as the whole debate - and every
  * part of it carries the way to undo it.
  */
 .showing {
@@ -977,8 +977,8 @@
 /*
  * One narrowing, however many values it holds.
  *
- * The phrase is the filter and the names sit inside it — "naming any of PERSON,
- * DATE" — rather than one filter per name with the label repeated in front of
+ * The phrase is the filter and the names sit inside it - "naming any of PERSON,
+ * DATE" - rather than one filter per name with the label repeated in front of
  * each. Each name keeps its own × , so a filter of four types can be taken
  * apart one type at a time.
  */
@@ -1002,8 +1002,8 @@
  * With more than one value the label becomes the switch.
  *
  * Union or intersection is the question the reader is actually asking of a
- * multi-type filter — "components that name a person *or* a date" against
- * "components that name a person *and* a date" — and the second is the one the
+ * multi-type filter - "components that name a person *or* a date" against
+ * "components that name a person *and* a date" - and the second is the one the
  * joint schema exists to be able to answer. It belongs on the word that says
  * which is in force, not in a separate control somewhere else on the band.
  */
@@ -1213,7 +1213,7 @@
 }
 
 /* One column: the control first, then the list it drives, in the order they
-   are used. The band gives up its own height here — two full-width panels
+   are used. The band gives up its own height here - two full-width panels
    stacked inside a fixed one would be two slots half a screen tall. */
 @media (max-width: 900px) {
   .stats__row {

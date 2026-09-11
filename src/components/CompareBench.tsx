@@ -15,7 +15,7 @@ import type { LayerView } from '../lib/view'
 import './CompareBench.css'
 
 /**
- * One turn, three systems, one clock each — and the reader holding the trigger.
+ * One turn, three systems, one clock each - and the reader holding the trigger.
  *
  * The "Double" page answers the same question by working a whole transcript
  * through on its own; this is the same measurement made by hand. Nothing is
@@ -23,7 +23,7 @@ import './CompareBench.css'
  * further is computed until Next is. That is the point rather than a
  * limitation: a run that advances by itself puts the reader in front of a queue
  * they cannot stop on the row they wanted to read, and the row is the whole
- * finding — three annotations of one turn, and what each of them cost.
+ * finding - three annotations of one turn, and what each of them cost.
  *
  * The turns are always done one at a time and in order. Three systems racing
  * each other through a queue would be three systems contending for one machine,
@@ -99,7 +99,7 @@ function Intake({ onStart }: { onStart: (loaded: Loaded) => void }) {
    * A dropped transcript, checked here before anything is sent.
    *
    * With no service behind the site the only turns that have three answers are
-   * the four the paper reports, so those are what the bench runs — said
+   * the four the paper reports, so those are what the bench runs - said
    * plainly, and with the dropped file still read and checked, because loading
    * a transcript is the gesture this screen is about and skipping it would be
    * demonstrating something else.
@@ -129,7 +129,7 @@ function Intake({ onStart }: { onStart: (loaded: Loaded) => void }) {
        * gesture this screen is about and skipping it would be demonstrating
        * something else. What it is not is announced: a banner explaining that
        * the page is a simulation is the page talking about itself instead of
-       * working. The claim is made where it can be checked — on each cell, next
+       * working. The claim is made where it can be checked - on each cell, next
        * to the figure it qualifies.
        */
       if (DEMO) {
@@ -254,7 +254,7 @@ function Run({ loaded, onReset }: { loaded: Loaded; onReset: () => void }) {
    * effect, tears it down and runs it again on mount, so the first turn is
    * always started twice and cancelled once, and a run that checked only
    * "was I aborted" would leave the bench believing it was still generating for
-   * ever — which is exactly what it did.
+   * ever - which is exactly what it did.
    */
   const run = useCallback(
     async (index: number, controller: AbortController) => {
@@ -269,7 +269,7 @@ function Run({ loaded, onReset }: { loaded: Loaded; onReset: () => void }) {
         if (DEMO) {
           /*
            * A build with nothing behind it replays the reported answers rather
-           * than spending a timeout per turn learning that nobody is listening —
+           * than spending a timeout per turn learning that nobody is listening -
            * and then spends the time those answers are modelled to have taken.
            *
            * The wait is the demonstration. A row that appeared the instant it
@@ -321,7 +321,7 @@ function Run({ loaded, onReset }: { loaded: Loaded; onReset: () => void }) {
   /*
    * The first turn is what Compare was pressed for, so it goes without being
    * asked for again. The controller is the effect's own, so the teardown React
-   * performs on mount cancels this run and the re-run starts a clean one — the
+   * performs on mount cancels this run and the re-run starts a clean one - the
    * bench is never left holding a cancelled turn.
    */
   useEffect(() => {

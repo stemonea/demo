@@ -12,7 +12,7 @@ import './QrCode.css'
  *
  * One `<path>`, not a rect per module. A code of this size is about a thousand
  * dark modules, and a thousand elements is a thousand elements to lay out and
- * paint every time the panel re-renders — which, on the page running a live
+ * paint every time the panel re-renders - which, on the page running a live
  * debate, is every turn. As one path it is a single node and a single paint.
  *
  * `shape-rendering: crispEdges` matters more than it looks: a scanner reads the
@@ -31,8 +31,8 @@ const CORRECTION = 'M' as const
 /**
  * The quiet zone, in modules, and it is not decoration: the specification asks
  * for four clear modules on every side, and a scanner that cannot find them
- * will not attempt the code at all. Anything the panel puts around this — a
- * border, a background of a different colour — must stay outside it.
+ * will not attempt the code at all. Anything the panel puts around this - a
+ * border, a background of a different colour - must stay outside it.
  */
 const QUIET = 4
 

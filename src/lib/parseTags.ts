@@ -25,8 +25,8 @@ interface Frame {
  *
  * A live debate re-reads its whole transcript on every turn: the totals, the
  * components, the tagged text of every turn already on screen. The parse is
- * deterministic and the trees are never mutated — `filterLayer` and
- * `filterTags` copy the nodes they change, and everything else only reads — so
+ * deterministic and the trees are never mutated - `filterLayer` and
+ * `filterTags` copy the nodes they change, and everything else only reads - so
  * the same string can hand back the same tree, and a debate that walked its
  * own past on every turn stops costing the square of its own length.
  *
@@ -157,7 +157,7 @@ function collectText(nodes: TagNode[]): string {
 }
 
 /**
- * Writes parsed nodes back to inline markup — the inverse of the parser, used
+ * Writes parsed nodes back to inline markup - the inverse of the parser, used
  * when a filtered view has to travel on as text (raw markup, copy, export).
  * A span the model never closed is serialised as it arrived, opener only, so
  * the round-trip never silently repairs a defect.

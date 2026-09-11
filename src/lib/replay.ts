@@ -5,7 +5,7 @@ import { parseTaggedText, serializeNodes, type TagNode } from './parseTags'
  *
  * The bundled turns are pre-computed: their answer is already in the bundle and
  * nothing is sent anywhere. Dropping it on screen in one frame hides what the
- * model actually does, so the playground plays it back instead — the turn is
+ * model actually does, so the playground plays it back instead - the turn is
  * revealed a few words at a time and each span closes around its text the moment
  * it is reached, which is the shape of the real output as it arrives.
  *
@@ -17,7 +17,7 @@ import { parseTaggedText, serializeNodes, type TagNode } from './parseTags'
 export type ReplayPhase = 'reading' | 'argument' | 'entity'
 
 export interface ReplayStep {
-  /** the markup revealed so far — always parseable on its own */
+  /** the markup revealed so far - always parseable on its own */
   text: string
   /** what the model is doing at this point, for the caption */
   phase: ReplayPhase

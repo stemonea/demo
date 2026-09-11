@@ -65,7 +65,7 @@ export function WhoArguesWhat({ stats, limit = 8 }: HeatmapProps) {
       <div className="chart__legend">
         <span className="chart__ramp" aria-hidden="true" />
         <span className="chart__legend-text">
-          0 mentions to {max} — cells carry their own number, so the shade is only a second reading.
+          0 mentions to {max} - cells carry their own number, so the shade is only a second reading.
         </span>
       </div>
     </figure>
@@ -93,7 +93,7 @@ function Row({
             key={entity.key}
             className={`matrix__cell${count ? '' : ' is-empty'}`}
             style={{ ['--weight' as string]: count ? 0.14 + (count / max) * 0.86 : 0 }}
-            title={`${speaker} — ${entity.label}: ${count} argumentative mention${count === 1 ? '' : 's'}`}
+            title={`${speaker} - ${entity.label}: ${count} argumentative mention${count === 1 ? '' : 's'}`}
           >
             {count || ''}
           </span>
@@ -181,7 +181,7 @@ function Segment({ width, color, label }: { width: number; color: string; label:
 /**
  * When each entity enters the debate, and how it is used at that moment.
  *
- * The grid is the whole debate, always — a running debate used to be drawn as
+ * The grid is the whole debate, always - a running debate used to be drawn as
  * a window on its last stretch, which kept the newest turns in view at the
  * price of the early ones being unreachable. A reader who pauses to look at
  * how something started could not get back to turn one at all, which is the
@@ -197,7 +197,7 @@ function Segment({ width, color, label }: { width: number; color: string; label:
  * short of the true maximum. Measured against the old 24px, that shortfall read
  * as the reader having scrolled away, and a live debate silently stopped
  * following itself after the first turn. One column is 34px plus the 2px gap,
- * so this clears it with room to spare — and it doubles as the slack a reader
+ * so this clears it with room to spare - and it doubles as the slack a reader
  * needs before a nudge of the wheel is taken for leaving the front.
  */
 const FOLLOW_SLACK = 48
@@ -287,7 +287,7 @@ export function MentionTimeline({ stats, limit = 7 }: HeatmapProps) {
           latest ⇥
         </button>
         <span className="chart__nav-note">
-          {follow ? 'following the debate' : `holding still — ${turns.length} turns in all`}
+          {follow ? 'following the debate' : `holding still - ${turns.length} turns in all`}
         </span>
       </div>
 
@@ -336,8 +336,8 @@ function TimelineRow({
         /*
          * A cell is one turn wide, and a turn that named the same entity five
          * times would lay five dots across a column that has room for three.
-         * They used to simply overrun: on to the neighbouring turns, and — at
-         * the left edge of a scrolled timeline — underneath the column of
+         * They used to simply overrun: on to the neighbouring turns, and - at
+         * the left edge of a scrolled timeline - underneath the column of
          * names, where a dot reappeared as a half circle past the rule and
          * read as belonging to the name rather than to a turn. So the row
          * draws what fits and counts the rest, which is the same bargain the

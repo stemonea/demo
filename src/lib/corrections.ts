@@ -7,7 +7,7 @@ import { stripTags } from './parseTags'
  *
  * Correcting a turn is work, and work that disappears when a panel is closed is
  * work nobody will do twice. So a correction outlives the view it was made in:
- * closing the workbench, picking another turn, coming back tomorrow — the
+ * closing the workbench, picking another turn, coming back tomorrow - the
  * annotation is still the one that was left, and the turn it belongs to is what
  * finds it again.
  *
@@ -36,14 +36,14 @@ const KEPT = 40
  * The turn a correction belongs to.
  *
  * Keyed on the words, not on the markup over them: a correction is of a turn,
- * and it should still be there when the same turn is annotated a second time —
+ * and it should still be there when the same turn is annotated a second time -
  * including by a service that answers it slightly differently. The base it was
  * made against travels with it, so what the pass changed stays exactly as
  * measurable as it was.
  */
 export function correctionKey(tagged: string): string {
   const text = stripTags(tagged).trim().replace(/\s+/g, ' ')
-  /* FNV-1a: a few lines, stable across loads, and enough to tell turns apart —
+  /* FNV-1a: a few lines, stable across loads, and enough to tell turns apart -
      the value is a key in this browser's own store, never an identifier */
   let hash = 0x811c9dc5
   for (let i = 0; i < text.length; i += 1) {
@@ -123,7 +123,7 @@ export function saveCorrection(tagged: string, correction: Correction): boolean 
   return write(all)
 }
 
-/** Forgets the pass on this turn — what *Reset* leaves behind. */
+/** Forgets the pass on this turn - what *Reset* leaves behind. */
 export function forgetCorrection(tagged: string): void {
   const all = read()
   if (!(correctionKey(tagged) in all)) return

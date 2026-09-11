@@ -5,8 +5,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
  *
  * A live debate wants to stay at its own end: the turn that has just landed is
  * the one to look at, and having to chase it down the page would be worse than
- * useless. But the moment a reader scrolls back — to check what was claimed
- * four turns ago, to read a long answer properly — the next turn used to yank
+ * useless. But the moment a reader scrolls back - to check what was claimed
+ * four turns ago, to read a long answer properly - the next turn used to yank
  * the box out from under them, which makes reading the transcript of a running
  * debate impossible.
  *
@@ -24,8 +24,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
  * wrong for deciding that they have come back to it: a reader who pushes the
  * feed up by twenty pixels is inside a wide band, so the scroll they just made
  * was read as "still at the end", the feed took hold again and put them back.
- * Coming back is now the one thing it means — the scroll has to actually reach
- * the bottom — and the slack is only what a fractional layout leaves behind.
+ * Coming back is now the one thing it means - the scroll has to actually reach
+ * the bottom - and the slack is only what a fractional layout leaves behind.
  */
 const REJOIN = 8
 
@@ -57,7 +57,7 @@ export interface Feed<T extends HTMLElement> {
 export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
   const box = useRef<T>(null)
   /* state, because whether it is following is something the view renders and
-     the effect below has to re-run when it changes — and a ref beside it,
+     the effect below has to re-run when it changes - and a ref beside it,
      because the scroll handler has to compare against the current value
      without waiting for a render to hand it one */
   const [following, setFollowing] = useState(true)
@@ -80,7 +80,7 @@ export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
    * Let go of the end, at the first sign the reader wants to be somewhere else.
    *
    * This used to be reachable only through the scroll handler, and only after
-   * half a screen of travel — and inside that band the feed was still
+   * half a screen of travel - and inside that band the feed was still
    * following, so the next turn to land put the view straight back at the
    * foot. A reader pushing up a notch at a time with a trackpad never got out
    * of the band: every push was undone by the next arrival, a second or two
@@ -180,7 +180,7 @@ export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
   const onScroll = useCallback(() => {
     const node = box.current
     if (!node) return
-    /* the foot still takes hold again on its own — scrolling back down to the
+    /* the foot still takes hold again on its own - scrolling back down to the
        end is how a reader says they are done reading */
     if (node.scrollHeight - node.clientHeight - node.scrollTop <= REJOIN) hold()
     else release()
@@ -201,7 +201,7 @@ export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
  *
  * The watcher's page is not only the feed: under it are the ballot, the running
  * totals and the figures, and every one of them is redrawn when a turn lands.
- * They do not merely redraw, they *resize* — the ballot opens from one line
+ * They do not merely redraw, they *resize* - the ballot opens from one line
  * into a board the moment a second name has argued, a bar chart takes another
  * row as another name is entered into it, the pairs fill in one at a time. A
  * reader who has scrolled down to any of that is reading below something that
@@ -209,7 +209,7 @@ export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
  * down the screen, which reads as the view hopping up on its own, and it does
  * it again on the next turn.
  *
- * Browsers have a name for the fix — scroll anchoring — and Safari does not
+ * Browsers have a name for the fix - scroll anchoring - and Safari does not
  * implement it at all, which is why this shows up on one machine and not the
  * next. So it is done here rather than hoped for, and the scrollers it is done
  * on turn the native mechanism off (`overflow-anchor: none`) so the two can
@@ -231,8 +231,8 @@ export function useFeed<T extends HTMLElement>(count: number): Feed<T> {
  * The blocks a page offers to be held on to.
  *
  * Marking them is what gives the correction its aim. Left to the top-level
- * sections alone it is too coarse — a section that contains the whole view
- * cannot report that something inside it, above the reader, has grown — so a
+ * sections alone it is too coarse - a section that contains the whole view
+ * cannot report that something inside it, above the reader, has grown - so a
  * page marks the pieces a reader actually reads to: a figure, a panel, a band.
  */
 const STEADY = '[data-steady]'
@@ -313,8 +313,8 @@ export function useSteadyScroll<S extends HTMLElement, C extends HTMLElement>():
       }
     }
 
-    /* the blocks are not all there at the start — the figures appear with the
-       first entity, the board with the second speaker — so the list of what to
+    /* the blocks are not all there at the start - the figures appear with the
+       first entity, the board with the second speaker - so the list of what to
        watch is rebuilt when the page gains or loses one, once per frame however
        many turns land in it */
     let queued = 0

@@ -5,8 +5,8 @@ import { isRoom, watchRoomVotes } from './room'
 /**
  * Where the room stands, while the debate is going on.
  *
- * A spectator is given one thing to do — say who they are with, or that they
- * are with nobody — and may change their mind as often as the debate gives
+ * A spectator is given one thing to do - say who they are with, or that they
+ * are with nobody - and may change their mind as often as the debate gives
  * them reason to. That is the measurement: not the final tally, which any poll
  * can produce, but *when* people moved and which way, laid against the turn
  * that moved them.
@@ -14,19 +14,19 @@ import { isRoom, watchRoomVotes } from './room'
  * Every ballot is kept, not just the standing one. A count of who leads can be
  * derived from the last vote of each person; how many changed their mind, and
  * how many gave up on both sides, cannot be derived from anything but the
- * history — and those are the two numbers a moderator actually wants.
+ * history - and those are the two numbers a moderator actually wants.
  *
  * The transport is the one the live view already uses between tabs: each voter
  * writes their own key, so two of them cannot overwrite each other, and posts
  * on a channel so the room updates at once. It is the same limit stated
- * everywhere else — same browser, same machine — and the same thing a service
+ * everywhere else - same browser, same machine - and the same thing a service
  * would replace with an endpoint.
  */
 
 const POLL = 'jaet.poll.'
 const VOTER = 'jaet.voter'
 
-/** Standing aside from both — a position, not the absence of one. */
+/** Standing aside from both - a position, not the absence of one. */
 export const NEUTRAL = '__neutral__'
 
 export const isNeutral = (choice: string) => choice === NEUTRAL
@@ -37,7 +37,7 @@ export const isNeutral = (choice: string) => choice === NEUTRAL
  * The series palette is six hues assigned in a fixed order and validated as a
  * set; a seventh is not a new hue, because a generated one would land wherever
  * it landed and there is no way to check it. Past six, the remainder is drawn
- * as "others" — which on a ballot is honest rather than dismissive: a poll with
+ * as "others" - which on a ballot is honest rather than dismissive: a poll with
  * seven people on it is a poll about the leaders and the field.
  */
 const HUES = 6
@@ -79,7 +79,7 @@ const channelOf = (session: string) => `${POLL}${session}`
  * Who this browser tab is, for the length of the tab.
  *
  * `sessionStorage`, not `localStorage`: a second tab is a second voter, which
- * is both what a demonstration needs — three windows, three people — and what
+ * is both what a demonstration needs - three windows, three people - and what
  * a real audience looks like, one device at a time. Reloading keeps the id, so
  * a refresh is not a new person and does not double-count.
  */
@@ -118,7 +118,7 @@ export function useBallot(session: string | null, turn: number) {
          * A room is told the whole history, not the ballot just cast, and it
          * replaces what this voter had. That is what makes voting from a phone
          * on a bad network safe: a re-post after a dropped connection cannot
-         * turn one person into two, and cannot invent a change of mind — which
+         * turn one person into two, and cannot invent a change of mind - which
          * is the figure whoever is running the debate is actually watching.
          *
          * `write` still runs above it, and deliberately: the copy in this
@@ -128,7 +128,7 @@ export function useBallot(session: string | null, turn: number) {
         if (isRoom(session)) {
           void voteInRoom(session, voter, next).catch(() => {
             /* the room did not take it. The choice stands here, and the next
-               one sends this history again — there is nothing to queue */
+               one sends this history again - there is nothing to queue */
           })
         }
         return next
@@ -172,7 +172,7 @@ function write(session: string, voter: string, ballots: Ballot[]) {
  * The floor: everything every voter has said, as it comes in.
  *
  * `present` is how many people have the debate open, which only a room can
- * know — a run relayed between tabs has no way of counting anybody, and reports
+ * know - a run relayed between tabs has no way of counting anybody, and reports
  * 0. It arrives on the votes stream rather than with the turns because whoever
  * is running the debate opens only this one, and they are the one who needs to
  * see that somebody has scanned in.
@@ -199,7 +199,7 @@ export function useVotes(session: string | null): Floor {
     if (!session) return
 
     /* a room the service is holding: everyone's history, pushed, and replaced
-       whole on every change — nothing to reconcile and no gap after a drop */
+       whole on every change - nothing to reconcile and no gap after a drop */
     if (isRoom(session)) {
       return watchRoomVotes(session, (floor, here) => {
         setVotes(floor)

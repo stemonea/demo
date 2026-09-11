@@ -7,7 +7,7 @@ import type { FeedTurn } from './transcript'
  * A room with no service under it: the same debate, derived twice.
  *
  * The other two transports move state. `localSession.ts` posts the run on a
- * `BroadcastChannel`, `room.ts` pushes it down an `EventSource` — and both need
+ * `BroadcastChannel`, `room.ts` pushes it down an `EventSource` - and both need
  * something in the middle, which is exactly what a build published to a static
  * host does not have. A QR code drawn there scans perfectly and opens a page
  * that will never be told anything.
@@ -15,7 +15,7 @@ import type { FeedTurn } from './transcript'
  * This is the third answer, and it does not move state at all. The published
  * build ships the debate it plays (`public/demo/tagged.txt`, fetched by
  * `loadDemoTranscript`), and the pace it plays it at is a pure function of the
- * words in each turn — no randomness, no network, nothing local to the machine.
+ * words in each turn - no randomness, no network, nothing local to the machine.
  * Two devices holding the same file and the same function need one number
  * between them to be showing the same turn at the same moment: when the run
  * started. That number fits in a link, so it travels on the QR code itself.
@@ -29,7 +29,7 @@ import type { FeedTurn } from './transcript'
  *
  * What it cannot do is carry anything that was not decided in advance. A
  * schedule is not a channel: whoever is running the debate can re-issue the
- * clock — which is what pausing does, and why the code is redrawn — but a phone
+ * clock - which is what pausing does, and why the code is redrawn - but a phone
  * that has already scanned cannot be told. That limit is stated where the link
  * is, and it is the honest shape of a room with no service in it.
  */
@@ -42,7 +42,7 @@ export const isReplaySession = (session: string) => session.startsWith(PREFIX)
 /**
  * A new replayed room.
  *
- * The id says what it is — it is shown to whoever scans in, and `live-4f2a1c`
+ * The id says what it is - it is shown to whoever scans in, and `live-4f2a1c`
  * is a more honest thing to read at the top of a page than an opaque token.
  * The clock is deliberately *not* in it: votes are counted against the session,
  * so an id that changed whenever the debate was paused would empty the floor
@@ -77,7 +77,7 @@ export function readClock(raw: string | null): number | null {
  * It lives here rather than beside the view that plays it because it is now the
  * one thing two devices have to agree on. The session page imports it; so does
  * every phone watching. A number changed in one place and not the other would
- * not break anything visibly — it would just quietly put the room a turn behind
+ * not break anything visibly - it would just quietly put the room a turn behind
  * the stage.
  */
 const PER_WORD = 55
@@ -121,7 +121,7 @@ export function elapsedBefore(script: FeedTurn[], at: number): number {
  * It is written as a start in the past rather than as "turn 4, now": a single
  * origin is the whole of what the other side needs, and it stays correct while
  * nobody is listening. Resuming after a pause anchors it again from wherever
- * the run had got to, which is why the code has to be redrawn — the schedule
+ * the run had got to, which is why the code has to be redrawn - the schedule
  * has not changed, but its origin has.
  */
 export function clockFor(script: FeedTurn[], at: number, now: number): number {
@@ -138,7 +138,7 @@ function landedBy(elapsed: number, marks: number[]): number {
 /**
  * Who is on the ballot, worked out the way the session works it out.
  *
- * The session opens the ballot to whoever has argued — a moderator asks and
+ * The session opens the ballot to whoever has argued - a moderator asks and
  * does not assert, and the annotation separates the two without anybody having
  * to say so. The rule is applied here to the same turns, so a watcher is
  * offered the same names without the ballot ever having been sent.
@@ -196,8 +196,8 @@ const TICK_MS = 250
 /**
  * Watch a replayed room: the same signature as `watchRoom`, and no connection.
  *
- * The view above it cannot tell the three transports apart — it is handed a
- * `SharedRun` and does not ask where from — which is what keeps the published
+ * The view above it cannot tell the three transports apart - it is handed a
+ * `SharedRun` and does not ask where from - which is what keeps the published
  * build and the served build the same page rather than two that have to be
  * kept in step.
  */

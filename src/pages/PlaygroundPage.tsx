@@ -91,12 +91,12 @@ const FAILURE_COPY: Record<FailureKind | 'unknown', Failure> = {
   network: {
     title: 'The service could not be reached',
     message: 'The request never got an answer.',
-    hint: 'It may be starting up or temporarily down — try again in a moment.',
+    hint: 'It may be starting up or temporarily down - try again in a moment.',
   },
   timeout: {
     title: 'The service did not answer in time',
     message: 'The turn was sent, but nothing came back before the deadline.',
-    hint: 'Long turns take longer to compute — try again, or shorten the text.',
+    hint: 'Long turns take longer to compute - try again, or shorten the text.',
   },
   http: {
     title: 'The service refused the request',
@@ -106,7 +106,7 @@ const FAILURE_COPY: Record<FailureKind | 'unknown', Failure> = {
   payload: {
     title: 'The answer could not be read',
     message: 'The service replied with something this page cannot display.',
-    hint: 'Try again — if it persists, the service is answering in an unexpected shape.',
+    hint: 'Try again - if it persists, the service is answering in an unexpected shape.',
   },
   unknown: {
     title: 'The request failed',
@@ -128,8 +128,8 @@ const EXAMPLE_TURNS = FIXTURES.map((fixture, i) => ({
 
 /**
  * The playground has two ways in. The bundled turns are pre-computed examples,
- * replayed locally and labelled as such. "Yours" empties the editor: that text —
- * and only that text — is sent to the annotation service to be computed. Once a
+ * replayed locally and labelled as such. "Yours" empties the editor: that text -
+ * and only that text - is sent to the annotation service to be computed. Once a
  * result is on screen, the component filter reads the layers apart client-side.
  */
 export default function PlaygroundPage() {
@@ -150,7 +150,7 @@ export default function PlaygroundPage() {
    *
    * The two are separate on purpose: closing the workbench goes back to reading
    * the annotation, it does not throw the annotation away. The pass outlives
-   * the panel, the turn and the visit — `lib/corrections` keeps it.
+   * the panel, the turn and the visit - `lib/corrections` keeps it.
    */
   const [correction, setCorrection] = useState<Correction | null>(null)
   const [pass, setPass] = useState(false)
@@ -164,7 +164,7 @@ export default function PlaygroundPage() {
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
   const replayRef = useRef<number | null>(null)
 
-  /** Stops a replay in flight — a new pick, your own text, or leaving the page. */
+  /** Stops a replay in flight - a new pick, your own text, or leaving the page. */
   function stopReplay() {
     if (replayRef.current !== null) {
       window.clearInterval(replayRef.current)
@@ -189,7 +189,7 @@ export default function PlaygroundPage() {
     return () => controller.abort()
   }, [])
 
-  /** the pass as markup — what the page shows, copies and exports once it exists */
+  /** the pass as markup - what the page shows, copies and exports once it exists */
   const corrected = useMemo(
     () => (correction ? toTagged(correction.text, correction.spans) : ''),
     [correction],
@@ -207,7 +207,7 @@ export default function PlaygroundPage() {
    * The model's answer until somebody corrects it, and the correction from then
    * on. Reading and correcting are two views of one annotation rather than two
    * annotations, which is what stops the pass from being lost every time the
-   * workbench closes — and what makes the component filter, the copy and the
+   * workbench closes - and what makes the component filter, the copy and the
    * export all show the same thing.
    */
   const answer = correction && diff?.edits ? corrected : (result?.tagged ?? '')
@@ -223,7 +223,7 @@ export default function PlaygroundPage() {
     [answer],
   )
 
-  /* the answer with the switched-off components dropped, tags only — text intact */
+  /* the answer with the switched-off components dropped, tags only - text intact */
   const shown = useMemo(
     () => (answer ? serializeNodes(filterTags(parseTaggedText(answer), active)) : ''),
     [answer, active],
@@ -232,8 +232,8 @@ export default function PlaygroundPage() {
   /**
    * Leaves the turn: the pass on screen goes, what was written down stays.
    *
-   * Called when the answer itself is replaced — another example, your own text,
-   * a fresh request — because a correction is spans over one turn's words and
+   * Called when the answer itself is replaced - another example, your own text,
+   * a fresh request - because a correction is spans over one turn's words and
    * means nothing over another's. The store keeps it under that turn, so coming
    * back to the turn brings it back.
    */
@@ -248,7 +248,7 @@ export default function PlaygroundPage() {
   /**
    * Opens the workbench on the turn on screen.
    *
-   * A pass already made — this visit or an earlier one — is opened as it was
+   * A pass already made - this visit or an earlier one - is opened as it was
    * left. A first pass starts from the model's answer, read through the same
    * reader a loaded file goes through, so a defect the model left is reported
    * here rather than carried silently into an export.
@@ -392,7 +392,7 @@ export default function PlaygroundPage() {
     if (!trimmed || status === 'loading' || status === 'replaying') return
 
     /* a bundled turn is answered from its pre-computed output, whatever route it
-       arrived by — pasted, retyped or picked — and never leaves the browser */
+       arrived by - pasted, retyped or picked - and never leaves the browser */
     const example = findFixture(trimmed)
     if (example) {
       replay(example.outputs.joint)
@@ -423,7 +423,7 @@ export default function PlaygroundPage() {
 
   /**
    * The classes a correction may assign: the schema the tagger writes, plus
-   * anything its answer turned out to carry that the registry does not know —
+   * anything its answer turned out to carry that the registry does not know -
    * an unknown tag can still be moved and relabelled, and dropping it from the
    * list would be the one way to lose it.
    */
@@ -462,10 +462,10 @@ export default function PlaygroundPage() {
   /**
    * Where what is on screen came from. Once a span has moved, the annotation is
    * no longer the model's and the badge that says where it came from would be a
-   * lie — so it is replaced by what it is, and by what was done to it.
+   * lie - so it is replaced by what it is, and by what was done to it.
    */
   /* the annotation read as structure: whether its tags nest the way the schema
-     says they must. A hand-corrected pass is checked too — the editor refuses a
+     says they must. A hand-corrected pass is checked too - the editor refuses a
      partial overlap, but a turn that arrived broken stays broken until the span
      that broke it is dealt with */
   const nesting = checkNesting(answer)
@@ -613,7 +613,7 @@ export default function PlaygroundPage() {
                       onClick={() => setMode((value) => (value === 'raw' ? 'rendered' : 'raw'))}
                       aria-pressed={mode === 'raw'}
                       disabled={pass}
-                      title={pass ? 'Rendered while you correct — Export writes the markup' : undefined}
+                      title={pass ? 'Rendered while you correct - Export writes the markup' : undefined}
                     >
                       Raw markup
                     </button>
@@ -626,7 +626,7 @@ export default function PlaygroundPage() {
                 {pass && correction ? (
                   /* One cell, not two. Above 901px the two cards are subgrids
                      sharing a head / editor / foot track, and the pass is two
-                     elements — a bar and a sheet — where the reading was one.
+                     elements - a bar and a sheet - where the reading was one.
                      Left loose they take a track each, which puts the sheet in
                      the footer's row. So they travel in the editor's cell. */
                   <div className="pg__bench">
@@ -713,7 +713,7 @@ export default function PlaygroundPage() {
                     <div className="pg__passline">
                       <p className="pg__pass">
                         <kbd>Esc</kbd> clears, <kbd>⌫</kbd> undoes ·{' '}
-                        {kept ? <>kept on this browser</> : <>not kept on this browser — export first</>}
+                        {kept ? <>kept on this browser</> : <>not kept on this browser - export first</>}
                       </p>
                       {badge}
                     </div>

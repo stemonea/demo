@@ -9,7 +9,7 @@
 
 /* The joint system is the reference column. With no shadow to raise it and no
    border of its own to thicken, what marks it is a rule drawn inside its own
-   edge — the way a drawing calls out the part it is about. */
+   edge - the way a drawing calls out the part it is about. */
 .panel--joint {
   box-shadow: inset 0 0 0 2px var(--ink);
 }

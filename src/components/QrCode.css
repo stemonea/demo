@@ -17,7 +17,7 @@
  * Its own two colours, not the panel's.
  *
  * A scanner reads contrast between neighbouring modules, so the ground has to
- * be painted rather than left to whatever is behind — and it has to be the
+ * be painted rather than left to whatever is behind - and it has to be the
  * lighter of the two. `--paper` and `--ink` are the strongest pair the palette
  * has, which is what this needs and what a tinted surface would cost it.
  */

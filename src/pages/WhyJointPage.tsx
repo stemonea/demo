@@ -53,16 +53,16 @@ export default function WhyJointPage() {
    * The page used to argue first and invite second: an overview, four reported
    * examples, and only then a box to type in. Anyone who arrived wanting to see
    * the thing work had to travel past the whole argument to reach it. Putting
-   * their turn first reverses that — the tool is the first thing offered, and
+   * their turn first reverses that - the tool is the first thing offered, and
    * the case for it is what the slide points at, in words, for whoever wants it
    * after they have seen it run.
    */
   /*
    * The write-only slide is off for now.
    *
-   * The bench that opens the deck does everything this one does and more — it
+   * The bench that opens the deck does everything this one does and more - it
    * takes a typed turn as well as a transcript, and it times what the three
-   * systems spend — so having both offers the reader the same thing twice, once
+   * systems spend - so having both offers the reader the same thing twice, once
    * in a poorer version. It is kept in the source rather than deleted because
    * the decision is about what to show, not about whether the screen was worth
    * building: flip this to bring it back.
@@ -73,7 +73,7 @@ export default function WhyJointPage() {
     /*
      * The bench opens the deck: a turn, or a transcript, put through the three
      * systems with the clock running and advanced by hand. It is the argument
-     * made rather than described — everything after it explains what the three
+     * made rather than described - everything after it explains what the three
      * columns are and why the two pipelines lose what they lose.
      */
     {
@@ -98,7 +98,7 @@ export default function WhyJointPage() {
      * From here on the deck is the argument, read in order, so every slide of it
      * carries the way to the next one: the overview into the first example, each
      * example into the one after it, and the last of them back to the reader's
-     * own turn where the deck began. The run closes rather than stopping — an
+     * own turn where the deck began. The run closes rather than stopping - an
      * arrow that simply disappeared on the final slide would leave whoever had
      * read the whole case with nothing to press.
      */

@@ -9,14 +9,14 @@ interface Props {
   session: string
   /** who is standing, as the person running the debate set it */
   ballot: string[]
-  /** the debate so far — what a voter is deciding on */
+  /** the debate so far - what a voter is deciding on */
   turns: AnalysedTurn[]
   /**
    * A room that is not there, for the published build that cannot pool one.
    *
    * A phone watching a replayed debate can count its own vote and nobody
    * else's, which would put every bar at 100% of one person. This is what puts
-   * a room under the answers — and it is said, under them, that it is one.
+   * a room under the answers - and it is said, under them, that it is one.
    */
   crowd?: Map<string, Ballot[]> | null
 }
@@ -26,7 +26,7 @@ interface Props {
  *
  * The first two letters of the last word, which is the surname: "VICE
  * PRESIDENT HARRIS" and "FORMER PRESIDENT TRUMP" become HA and TR. Taking one
- * letter from each of the last two words would have given PH and PT — both
+ * letter from each of the last two words would have given PH and PT - both
  * starting from the title they have in common, which is the half that
  * identifies nobody.
  */
@@ -42,13 +42,13 @@ function initials(name: string): string {
  * exception that makes watching worth doing: say who you are with, or that you
  * are with nobody, and say something different later if the debate gives you
  * reason to. Changing your mind is the point rather than a failure of the
- * form — the board the moderator sees counts the changes, not just the totals.
+ * form - the board the moderator sees counts the changes, not just the totals.
  *
  * The room's own standing is shown here too, under each answer. It is a
  * deliberate choice and not an oversight: a poll that shows a voter nothing
  * back is a form, and watching your side move while somebody is still talking
  * is the whole reason this is worth doing during a debate rather than after
- * one. The moderator keeps what a voter does not get — the evolution, turn by
+ * one. The moderator keeps what a voter does not get - the evolution, turn by
  * turn, and who changed their mind.
  *
  * Standing aside is a position and is offered as one, in the same row as the
@@ -66,7 +66,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
    * A ballot of bare names asks somebody to choose between two strings. The
    * tool already knows how much each of them has asserted and how much of that
    * they gave a reason for, and that is exactly what a viewer is weighing
-   * while they decide — so it is on the card they press.
+   * while they decide - so it is on the card they press.
    */
   const argued = useMemo(() => {
     const stats = analyse(debate)
@@ -79,7 +79,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
    * `useVotes` hears the other tabs and not itself: a `BroadcastChannel` does
    * not deliver to the context that posted, and a `storage` event fires
    * everywhere except the window that wrote. Left as it came, a voter would
-   * watch the room move for everybody but themselves — the count would be
+   * watch the room move for everybody but themselves - the count would be
    * right on the moderator's board and wrong in front of the person who had
    * just pressed the button.
    */
@@ -105,7 +105,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
           </div>
         </header>
         <p className="ballot__closed">
-          The floor is not open yet — whoever is running the debate has not put two names on the ballot.
+          The floor is not open yet - whoever is running the debate has not put two names on the ballot.
         </p>
       </section>
     )
@@ -125,7 +125,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
         </div>
         <p className="ballot__lead">
           Pick a side, or stand aside, and change it whenever the debate changes it for you. Every answer is kept
-          against the turn it was given at — so what the room does <em>during</em> the debate is the finding, not the
+          against the turn it was given at - so what the room does <em>during</em> the debate is the finding, not the
           final count.
         </p>
       </header>
@@ -141,7 +141,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
         ever right.
 
         Nothing is ever left with a hole beside it: an odd last candidate
-        takes the whole of its row, and standing aside always does — it is the
+        takes the whole of its row, and standing aside always does - it is the
         answer that is not one of them, and sitting apart underneath is what
         says so.
       */}
@@ -174,7 +174,7 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
                     the moderator's chart, so the two views name them the same
                     way without either having to spell it out */}
                 <span className="ballot__tile" aria-hidden="true">
-                  {neutral ? '—' : initials(option)}
+                  {neutral ? '-' : initials(option)}
                 </span>
                 <span className="ballot__who">
                   <span className="ballot__name">{neutral ? 'Neither of them' : option}</span>
@@ -209,16 +209,16 @@ export default function PollVote({ session, ballot, turns: debate, crowd = null 
       <p className="ballot__note">
         {choice === null ? (
           <>
-            Nothing counted from you yet — {voting} {voting === 1 ? 'person is' : 'people are'} voting.
+            Nothing counted from you yet - {voting} {voting === 1 ? 'person is' : 'people are'} voting.
           </>
         ) : changes === 0 ? (
           <>
-            Counted. Press another at any point and it will be counted from that turn — {voting}{' '}
+            Counted. Press another at any point and it will be counted from that turn - {voting}{' '}
             {voting === 1 ? 'person is' : 'people are'} voting.
           </>
         ) : (
           <>
-            Counted — you have changed your mind {changes} {changes === 1 ? 'time' : 'times'}, and {voting}{' '}
+            Counted - you have changed your mind {changes} {changes === 1 ? 'time' : 'times'}, and {voting}{' '}
             {voting === 1 ? 'person is' : 'people are'} voting.
           </>
         )}{' '}

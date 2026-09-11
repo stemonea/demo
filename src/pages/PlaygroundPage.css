@@ -3,7 +3,7 @@
  *
  * The block used to be the height of what was in it, so the two cells were
  * given whatever the heading and the paragraph above them left over and no
- * more — which on a long turn meant correcting a wall of text through a slot.
+ * more - which on a long turn meant correcting a wall of text through a slot.
  * Filling the page instead lets the grid take everything that is not the
  * header, so the size is derived from the window rather than picked, and the
  * block still closes exactly at the bottom of the first screen.
@@ -21,7 +21,7 @@
  * it.
  *
  * The rail is taken out of the flow on purpose. In it, the page began with the
- * service badge and the sheet started wherever that left off — so the whole
+ * service badge and the sheet started wherever that left off - so the whole
  * layout was hung off a mark that says whether a machine is answering, and it
  * moved when that mark did. The page begins where the writing begins; the badge
  * lives in the gutter the shell already holds on either side, which costs the
@@ -262,7 +262,7 @@
 /* ---- correcting the answer by hand --------------------------------- *
  * The same workbench the hand annotator uses, in the cell the reading was
  * in: the label bar under the card's head, the sheet where the annotation
- * was, both held off the card's edge by the margin the reading kept — so
+ * was, both held off the card's edge by the margin the reading kept - so
  * the card does not change shape when the pass opens.
  * ------------------------------------------------------------------- */
 /* The pass, in the cell the reading was in.
@@ -315,7 +315,7 @@
   color: var(--ink-soft);
 }
 
-/* an edit that was refused, and why — said where the edit was made */
+/* an edit that was refused, and why - said where the edit was made */
 .pg__note {
   padding-left: 10px;
   border-left: 2px solid var(--bad);

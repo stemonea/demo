@@ -17,7 +17,7 @@ export default function App() {
    * Whether the slide under the bar is one with a tone of its own.
    *
    * The bar paints no surface, which is what keeps it the colour of the page
-   * everywhere else — and is exactly why it cannot follow a slide that is not
+   * everywhere else - and is exactly why it cannot follow a slide that is not
    * the page: the "Why joint?" slide is full-bleed green from just under the
    * bar down, and the bar stayed the light gradient above it, cutting a pale
    * strip across the top of the one slide meant to fill the window. So the
