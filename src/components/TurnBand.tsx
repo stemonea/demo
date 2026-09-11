@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import TaggedText from './TaggedText'
 import TokenStream from './TokenStream'
+import VerdictBadge from './VerdictBadge'
 import { SYSTEMS, type SystemId } from '../data/systems'
 import { SPEAKER_PREFIX, type FeedTurn } from '../lib/transcript'
 import type { SystemRun } from '../lib/api'
 import { ms } from '../lib/duration'
+import { checkNesting } from '../lib/wellformed'
 import type { LayerView } from '../lib/view'
 import './TurnBand.css'
 
@@ -130,6 +132,11 @@ export default function TurnBand({
             )
           }
 
+          /* the structure of what came back, judged on the spot. A pipeline
+             that crossed its own tags is the thing these three columns were put
+             side by side to show, and it is said on the cell that did it */
+          const nesting = answer ? checkNesting(answer.tagged) : null
+
           return (
             <div className={`band__cell${quickestHere ? ' is-quickest' : ''}`} key={system.id}>
               <div className="band__clock">
@@ -167,6 +174,7 @@ export default function TurnBand({
                 * misread are named — a system served by its own model says
                 * nothing, because there is nothing to warn about.
                 */}
+              {nesting?.verdict && <VerdictBadge verdict={nesting.verdict} note={nesting.note} />}
               {answer && MISREADABLE[answer.servedBy ?? ''] && (
                 <span className="band__served" title={MISREADABLE[answer.servedBy ?? '']}>
                   {answer.servedBy}

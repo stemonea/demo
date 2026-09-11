@@ -280,3 +280,12 @@
     animation: none;
   }
 }
+
+/* the structural verdict, where the "served by" caveat sits: a note about the
+   answer rather than part of it, so it hangs at the start of the line instead
+   of stretching across the cell */
+.band__cell > .verdict {
+  align-self: flex-start;
+  margin-top: 2px;
+  cursor: help;
+}

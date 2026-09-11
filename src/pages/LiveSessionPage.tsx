@@ -49,6 +49,9 @@ const QrCode = lazy(() => import('../components/QrCode'))
 /** The floor as it opens: two sides and a chair, all of them renameable. */
 const OPENING_FLOOR = ['MODERATOR', 'SPEAKER A', 'SPEAKER B']
 
+/** The beat a turn is held for, as a promise rather than as a timer. */
+const held = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
+
 /** One turn as it was spoken, transcribed and annotated. */
 interface SpokenTurn {
   id: string
@@ -165,10 +168,18 @@ function Session() {
   const [draft, setDraft] = useState('')
   /* a turn written rather than spoken */
   const [typed, setTyped] = useState('')
-  /* whether the typing box is open. Closed by default, and closed is the point:
-     the box is the way in on a machine with no transcription service, not the
-     way in most of the time, and a block of it standing open under the
-     microphone was taking a fifth of the first screen from the debate */
+  /*
+   * Whether the typing box is open.
+   *
+   * Speaking and typing are two ways of giving the same turn, and which one is
+   * wanted changes from turn to turn: a debate followed from a broadcast is
+   * typed, the person in the room is spoken, and one session has both. So the
+   * box opens and closes at any point, beside a microphone that stays where it
+   * is — the choice is made per turn, not per session.
+   *
+   * Closed to begin with all the same: standing open it took a fifth of the
+   * first screen from the debate, which is what the screen is for.
+   */
   const [typing, setTyping] = useState(false)
   const [turns, setTurns] = useState<SpokenTurn[]>([])
   const [phase, setPhase] = useState<Phase>('idle')
@@ -310,7 +321,23 @@ function Session() {
    */
   async function say(text: string) {
     const said = text.trim()
-    if (!said || !current || busy) return
+    if (!said || busy) return
+
+    /*
+     * Where there is no service, a typed turn hands over the next turn of the
+     * debate that shipped with the site, whatever was typed — the same gesture
+     * the live page makes with a dropped file. The typing is not decoration:
+     * it is what advances the debate, one turn per turn, which is exactly what
+     * running a transcribed session by hand feels like.
+     */
+    if (DEMO) {
+      setNotice(null)
+      setTyped('')
+      await stepScripted()
+      return
+    }
+
+    if (!current) return
 
     setNotice(null)
     setPhase('annotating')
@@ -442,6 +469,19 @@ function Session() {
   const moreToPlay = script === null || fed < script.length
   const playing = feeding && moreToPlay
 
+  /**
+   * Whether this turn can be given as text at all.
+   *
+   * The microphone and the box are two ways to the same turn, so they are never
+   * both live at once: a turn being recorded is already being given. Where the
+   * debate is the one that shipped with the site, the box runs out when the
+   * transcript does, the same way the play button does.
+   */
+  const canSay =
+    !busy &&
+    recorder.phase !== 'recording' &&
+    (DEMO ? moreToPlay : Boolean(current))
+
   /*
    * One turn, then the wait its own length earns, then the next.
    *
@@ -491,6 +531,35 @@ function Session() {
        wherever the run had got to, which is why the code is redrawn */
     setClock(clockFor(loaded, fed, Date.now()))
     setFeeding(true)
+  }
+
+  /**
+   * One turn of that debate, taken by hand rather than by the timer.
+   *
+   * The turn is held for as long as the timer would have held it, so a session
+   * driven from the keyboard has the same beat as one left to play: the floor
+   * passes, the foot of the feed says the turn is being worked on, and then it
+   * lands. What it does not do is touch the clock. The clock is the one thing
+   * the room derives its own schedule from, and a run being stepped by hand has
+   * no schedule to hand anybody — the phones follow a debate that is played,
+   * which is what the play button is for.
+   */
+  async function stepScripted() {
+    const from = script ?? (await load())
+    if (!from) return
+    const at = fed
+    const next = from[at]
+    if (!next) return
+
+    /* a turn taken by hand takes the run over: the playback stops where it is
+       rather than racing this step to the same index */
+    setFeeding(false)
+    hand(from, at)
+    setPhase('annotating')
+
+    await held(fedPace(next.text))
+    push(from, at)
+    setPhase('idle')
   }
 
   /* ---- what the session adds up to --------------------------------- */
@@ -778,18 +847,21 @@ function Session() {
               {/* the way to the typing box, beside the microphone rather than
                   under it: the two are the same choice — how this turn gets
                   into the session — and only one of them needs the room */}
-              {!DEMO && (
-                <button
-                  type="button"
-                  className={`toggle${typing ? ' is-on' : ''}`}
-                  onClick={() => setTyping(!typing)}
-                  aria-expanded={typing}
-                  aria-controls="say-turn"
-                  title={typing ? 'Put the box away' : 'Type the turn instead of speaking it'}
-                >
-                  {typing ? 'Close' : 'Type the turn'}
-                </button>
-              )}
+              <button
+                type="button"
+                className={`toggle${typing ? ' is-on' : ''}`}
+                onClick={() => setTyping(!typing)}
+                aria-expanded={typing}
+                aria-controls="say-turn"
+                title={typing ? 'Put the box away' : 'Type this turn instead of speaking it'}
+              >
+                {/* the label does not change when the box opens: this is the
+                    control that says which of the two ways in is chosen, and a
+                    button that renames itself to "Close" is a second dismissal
+                    competing with the card's own — the selected state is what
+                    says it is open */}
+                Type the turn
+              </button>
             </span>
 
             <span className="mic__right">
@@ -798,18 +870,21 @@ function Session() {
             </span>
           </section>
 
-          {/* the same turn without the microphone: a quiet room, or a machine
-              with no transcription service listening on it. Not offered where
-              there is no service at all — a turn typed there has nothing to
-              annotate it either, and the played debate is the way in.
+          {/* The same turn without the microphone.
+              
+              A debate can be live and still arrive as text: a broadcast being
+              followed, a feed somebody is transcribing, a quiet room, a machine
+              with nothing listening on it. So this sits beside the microphone
+              rather than instead of it, and which of the two gives the next
+              turn is decided turn by turn, in the middle of the session.
 
               Behind the button in the bar above rather than always open. It is
-              the exception, not the way a session runs, and standing open it
-              spent a block of the first screen on a box nobody was typing in —
-              which came out of the debate, since the feed takes whatever the
-              blocks above it leave. Opened, it can be as large as it wants:
-              the room is being asked for. */}
-          {!DEMO && typing && (
+              not the way every session runs, and standing open it spent a block
+              of the first screen on a box nobody was typing in — which came out
+              of the debate, since the feed takes whatever the blocks above it
+              leave. Opened, it can be as large as it wants: the room is being
+              asked for. */}
+          {typing && (
           <form
             className="say"
             onSubmit={(event) => {
@@ -817,15 +892,26 @@ function Session() {
               void say(typed)
             }}
           >
-            {/* "or type the turn" read as an alternative to the microphone
+            {/* The head names the card and offers the way out of it.
+                
+                "or type the turn" read as an alternative to the microphone
                 because it used to sit under one, always open. Opened on
-                purpose it needs naming rather than offering — and the row has
-                the width to carry the three keys that work in it, which is
-                what a moderator with one hand on the keyboard wants to know */}
-            <label className="say__label" htmlFor="say-turn">
-              The turn
-              <span className="say__keys">Enter sends it · Shift+Enter for a new line · Esc closes</span>
-            </label>
+                purpose it needs naming rather than offering — and the way to
+                put it away belongs here as well as in the bar above, because
+                this is where the hands are. */}
+            <header className="say__head">
+              <label className="say__label" htmlFor="say-turn">
+                The turn
+              </label>
+              <button
+                type="button"
+                className="say__done"
+                onClick={() => setTyping(false)}
+                title="Put the box away and go back to the microphone"
+              >
+                Done
+              </button>
+            </header>
             {/*
               A turn is a paragraph, not a search box.
 
@@ -859,18 +945,25 @@ function Session() {
                 }
                 if (event.key !== 'Enter' || event.shiftKey) return
                 event.preventDefault()
-                if (typed.trim() && current && !busy && recorder.phase !== 'recording') void say(typed)
+                if (canSay && typed.trim()) void say(typed)
               }}
               placeholder={current ? `What ${current} said…` : 'Pick who is speaking first'}
-              disabled={!current || busy || recorder.phase === 'recording'}
+              disabled={!canSay}
             />
-            <button
-              type="submit"
-              className="toggle say__send"
-              disabled={!typed.trim() || !current || busy || recorder.phase === 'recording'}
-            >
-              Add turn
-            </button>
+            {/* What the keyboard does, and the one action of the card, on one
+                line: the hint is read once and the button is reached for every
+                turn, so the button is the thing that is filled and the hint is
+                the thing that is quiet. */}
+            <footer className="say__foot">
+              <p className="say__keys">Enter sends it · Shift+Enter for a new line · Esc closes</p>
+              <button
+                type="submit"
+                className="btn btn--accent say__send"
+                disabled={!canSay || !typed.trim()}
+              >
+                Add turn
+              </button>
+            </footer>
           </form>
           )}
 

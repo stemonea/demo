@@ -97,7 +97,7 @@ export async function loadDemoTranscript(): Promise<FeedTurn[]> {
   const response = await fetch(DEMO_TRANSCRIPT.url)
   if (!response.ok) {
     throw new Error(
-      `The demo transcript could not be read (${response.status}). ` +
+      `The transcript could not be read (${response.status}). ` +
         `It should be published at ${DEMO_TRANSCRIPT.url}.`,
     )
   }
@@ -110,7 +110,7 @@ export async function loadDemoTranscript(): Promise<FeedTurn[]> {
       .join('\n'),
   )
 
-  if (!turns.length) throw new Error('The demo transcript has no turn in it.')
+  if (!turns.length) throw new Error('The transcript has no turn in it.')
 
   cached = turns
   return turns

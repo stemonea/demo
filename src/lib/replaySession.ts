@@ -35,14 +35,14 @@ import type { FeedTurn } from './transcript'
  */
 
 /** A replayed room, as against `r-` for a real one and `local-` for a relayed one. */
-const PREFIX = 'demo-'
+const PREFIX = 'live-'
 
 export const isReplaySession = (session: string) => session.startsWith(PREFIX)
 
 /**
  * A new replayed room.
  *
- * The id says what it is — it is shown to whoever scans in, and `demo-4f2a1c`
+ * The id says what it is — it is shown to whoever scans in, and `live-4f2a1c`
  * is a more honest thing to read at the top of a page than an opaque token.
  * The clock is deliberately *not* in it: votes are counted against the session,
  * so an id that changed whenever the debate was paused would empty the floor

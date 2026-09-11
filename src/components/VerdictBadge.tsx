@@ -7,6 +7,16 @@ const LABELS: Record<Verdict, string> = {
   broken: 'structurally broken',
 }
 
-export default function VerdictBadge({ verdict }: { verdict: Verdict }) {
-  return <span className={`verdict verdict--${verdict}`}>{LABELS[verdict]}</span>
+/**
+ * `note` is what the badge says when it is pointed at. The curated examples
+ * carry one written by hand; a verdict worked out from the markup carries the
+ * line `checkNesting` composed, so a reader who wants to know *what* is broken
+ * does not have to go looking for it.
+ */
+export default function VerdictBadge({ verdict, note }: { verdict: Verdict; note?: string | null }) {
+  return (
+    <span className={`verdict verdict--${verdict}`} title={note ?? undefined}>
+      {LABELS[verdict]}
+    </span>
+  )
 }

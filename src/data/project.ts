@@ -8,7 +8,7 @@ export const PROJECT = {
   system: 'JOINT',
   dataset: 'DNE-ElecDeb',
   tagline:
-    'A single-pass tagger that inserts argument and entity markup into a debate turn at once, preserving the original transcript.',
+    'A real-time debate analyzer that identifies arguments and entities as the discussion unfolds, while preserving the original transcript.',
 }
 
 /** The two structural reasons why sequential composition fails. */

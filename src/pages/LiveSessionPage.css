@@ -538,37 +538,72 @@
  * nothing else — same speaker, same annotation call, same feed — so a session
  * can be run, watched and voted on with a keyboard alone.
  */
+/*
+ * The card a turn is typed into.
+ *
+ * Three bands, stacked rather than flowed: what this is, the turn itself, and
+ * what becomes of it. The box is the whole width of the card at every size,
+ * which is what a paragraph wants — the old row put the send button beside it
+ * and the box lost sixty pixels to a control that is pressed once per turn.
+ */
 .say {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 8px 12px;
-  padding: 10px 16px;
+  display: grid;
+  gap: 10px;
+  padding: 13px 16px 15px;
   border: var(--rule) solid var(--line);
   background: var(--bg-sunken);
 }
 
-/* on its own line, so the box under it gets the full width of the bar: the
-   label is two words and the turn is a paragraph */
-.say__label {
+/* what this is, and the way out of it */
+.say__head {
   display: flex;
-  flex: 1 0 100%;
-  flex-wrap: wrap;
   align-items: baseline;
-  gap: 4px 12px;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.say__label {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
 
-/* what the keyboard does in the box, on the line that was already there —
-   said quietly, and costing no height of its own */
+/*
+ * Done, rather than a second pill.
+ *
+ * The card already carries one filled button and the bar above carries
+ * another; a third bordered control here would make three things competing to
+ * be pressed. This is a word, in the colour the interface uses for something
+ * that can be acted on, and it sits where a card's dismissal always sits.
+ */
+.say__done {
+  padding: 2px 2px;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 12px;
+  transition: opacity 0.18s var(--ease-out);
+}
+
+.say__done:hover {
+  opacity: 0.65;
+}
+
+/* what the keyboard does, said once and quietly: it is read on the first turn
+   and never again, while the button beside it is reached for on every one */
+.say__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
 .say__keys {
-  letter-spacing: 0.06em;
-  text-transform: none;
-  font-size: 10.5px;
-  opacity: 0.75;
+  min-width: 0;
+  font-size: 11px;
+  color: var(--ink-faint);
 }
 
 /*
@@ -585,11 +620,10 @@
  * Past the ceiling it scrolls, and it can still be dragged taller by hand.
  */
 .say__input {
-  flex: 1 1 260px;
+  width: 100%;
   min-width: 0;
-  padding: 9px 12px;
+  padding: 11px 14px;
   border: var(--rule) solid var(--line-strong);
-  border-radius: 0;
   background: var(--paper);
   color: var(--ink);
   font: inherit;
@@ -604,9 +638,18 @@
   scrollbar-color: var(--line-strong) transparent;
 }
 
-/* the button lines up with the bottom of the box, not its middle */
+/*
+ * The one action of the card, and the only filled thing in it.
+ *
+ * Smaller than a page's own primary button — this is the foot of a panel, not
+ * the bottom of a screen — and accented rather than ink, so it is plainly not
+ * the microphone above it: the two are different ways to give a turn, and a
+ * reader should never have to work out which black button they are looking at.
+ */
 .say__send {
-  align-self: flex-end;
+  margin-left: auto;
+  padding: 9px 20px;
+  font-size: 12.5px;
 }
 
 .say__input:focus-visible {

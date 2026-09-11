@@ -32,8 +32,7 @@ export const SPEAKER_PREFIX = /^(?:<[a-zA-Z][\w-]*>)*([A-Z][A-Z'.\- ]{1,40}?)\s*
 export const FORMAT_RULES = [
   'A .txt file, UTF-8, up to 400 KB.',
   'One turn per block, blocks separated by a blank line — a turn may run over several lines.',
-  'Every turn opens with the speaker in capitals, then a colon: SPEAKER: text.',
-  'A turn that already carries inline tags is replayed as it is; a plain turn is sent to the service.',
+  'Every turn opens with the speaker in capitals, then a colon ":", and then the turn text.'
 ]
 
 export const FORMAT_SAMPLE = `MODERATOR: Welcome. Tonight's first question is on the economy.

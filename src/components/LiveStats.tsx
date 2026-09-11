@@ -305,7 +305,7 @@ export default function LiveStats({ turns }: Props) {
           <h2 className="display stats__title">What the debate adds up to</h2>
         </div>
         <p className="stats__lead">
-          Counted from the annotations already on screen above — no model, no second pass — and counted again
+          Counted from the annotations already on screen above - and counted again
           every time a turn lands.
         </p>
       </header>

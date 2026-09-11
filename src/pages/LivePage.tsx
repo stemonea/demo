@@ -4,6 +4,7 @@ import TaggedText from '../components/TaggedText'
 import TagLegend from '../components/TagLegend'
 import LayerSwitch from '../components/LayerSwitch'
 import SourceBadge from '../components/SourceBadge'
+import VerdictBadge from '../components/VerdictBadge'
 import ExportMenu from '../components/ExportMenu'
 import FileDrop from '../components/FileDrop'
 import TurnLoader from '../components/TurnLoader'
@@ -26,6 +27,7 @@ import {
   type LiveTurnPayload,
   type Source,
 } from '../lib/api'
+import { checkNesting } from '../lib/wellformed'
 import { DEMO, DEMO_PACE, DEMO_TRANSCRIPT } from '../config/backend'
 import { demoAnnotator, loadDemoTranscript, withheldAnnotations } from '../lib/demo'
 import type { LayerView } from '../lib/view'
@@ -139,16 +141,14 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
    * and the feed says so rather than letting anyone believe their own file was
    * annotated by something that is not there.
    */
-  async function loadDemo(insteadOf?: string) {
+  async function loadDemo() {
     setUploading(true)
     try {
       onLoad({
         turns: await loadDemoTranscript(),
         fileName: DEMO_TRANSCRIPT.name,
         session: null,
-        warnings: insteadOf
-          ? [`This is a demonstration with no annotation service behind it, so “${insteadOf}” was not annotated — the debate below is the one shipped with the site, already tagged.`]
-          : [],
+        warnings: []
       })
     } catch (cause) {
       onError((cause as Error).message)
@@ -167,7 +167,7 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
         onError(check.error)
         return
       }
-      await loadDemo(file.name)
+      await loadDemo()
       return
     }
 
@@ -220,15 +220,8 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
             </div>
             <p className="live__lead">
               The tagger operates at turn level, so a debate can be annotated while it unfolds. Load the transcript
-              you want replayed:{' '}
-              {liveDebateSupported() ? (
-                <>
-                  it is sent to the service, which starts annotating it straight away and pushes every turn as it
-                  finishes it — the feed fills itself, one turn at a time.
-                </>
-              ) : (
-                <>each turn is issued as its own request, exactly as a live feed would.</>
-              )}
+              you want replayed: it is sent to the service, which starts annotating it straight away and pushes every
+              turn as it finishes it.
             </p>
           </header>
 
@@ -359,13 +352,7 @@ function Feed({ loaded, onNewFile }: FeedProps) {
               </div>
               <p className="live__lead">
                 {fileName ? <strong>{fileName}</strong> : 'Transcript'} · {turns.length} turns.{' '}
-                {DEMO ? (
-                  <>
-                    This is a demonstration with nothing behind it: the debate arrived annotated and is played back one
-                    turn at a time, each held for as long as producing it would plausibly take, so the shape of a live
-                    run — the wait, the queue, the totals filling in — is what you see.
-                  </>
-                ) : session ? (
+                {session ? (
                   <>
                     The service is annotating it and pushing every turn as it finishes it — {live.received} of{' '}
                     {turns.length} have arrived, and each one appears here the moment it does.
@@ -527,11 +514,17 @@ const Turn = memo(function Turn({
   elapsedMs: number
   view: LayerView
 }) {
+  /* what came back, read as structure rather than as words: a turn whose tags
+     cross or never close is annotated in name only, and the feed says so on the
+     turn itself instead of letting it pass as an answer */
+  const nesting = checkNesting(tagged)
+
   return (
     <article className="turn">
       <header className="turn__head">
         <span className="turn__speaker">{speaker}</span>
         <span className="turn__meta">
+          {nesting.verdict && <VerdictBadge verdict={nesting.verdict} note={nesting.note} />}
           <SourceBadge source={source} elapsedMs={elapsedMs} />
         </span>
       </header>
@@ -573,13 +566,6 @@ const STATUS_LABEL: Record<PipelineStatus, string> = {
   done: 'complete',
 }
 
-/* the demonstration waits on itself, so it must not say it is waiting on a
-   service — there is not one, and the page has already said so */
-const DEMO_STATUS_LABEL: Partial<Record<PipelineStatus, string>> = {
-  waiting: 'annotating',
-  warming: 'annotating the first turn',
-}
-
 function Progress({
   status,
   shown,
@@ -594,7 +580,7 @@ function Progress({
   return (
     <span className="live__progress">
       <span className={`live__status live__status--${status}`}>
-        {(DEMO && DEMO_STATUS_LABEL[status]) || STATUS_LABEL[status]}
+        {STATUS_LABEL[status]}
       </span>
       {shown} shown · {annotated} annotated · {total} turns
     </span>

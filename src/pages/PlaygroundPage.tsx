@@ -3,6 +3,7 @@ import HoverTag from '../components/HoverTag'
 import TaggedText from '../components/TaggedText'
 import TagFilter, { type TagCount } from '../components/TagFilter'
 import SourceBadge from '../components/SourceBadge'
+import VerdictBadge from '../components/VerdictBadge'
 import ExportMenu from '../components/ExportMenu'
 import SpanCorrector, { type PaletteItem } from '../components/SpanCorrector'
 import {
@@ -14,6 +15,7 @@ import {
   type Source,
 } from '../lib/api'
 import { countTags, parseTaggedText, serializeNodes } from '../lib/parseTags'
+import { checkNesting } from '../lib/wellformed'
 import { filterTags } from '../lib/view'
 import {
   forgetCorrection,
@@ -462,7 +464,13 @@ export default function PlaygroundPage() {
    * no longer the model's and the badge that says where it came from would be a
    * lie — so it is replaced by what it is, and by what was done to it.
    */
-  const badge = diff?.edits ? (
+  /* the annotation read as structure: whether its tags nest the way the schema
+     says they must. A hand-corrected pass is checked too — the editor refuses a
+     partial overlap, but a turn that arrived broken stays broken until the span
+     that broke it is dealt with */
+  const nesting = checkNesting(answer)
+
+  const source = diff?.edits ? (
     <span
       className="pg__hand"
       title={`Against the model's answer: ${changes(diff)}. Export writes the annotation as it stands.`}
@@ -473,6 +481,15 @@ export default function PlaygroundPage() {
   ) : result ? (
     <SourceBadge source={result.source} elapsedMs={result.elapsedMs} />
   ) : null
+
+  /* the verdict first: where an answer is ill-formed, that is the thing to know
+     about it before where it came from */
+  const badge = (
+    <>
+      {nesting.verdict && <VerdictBadge verdict={nesting.verdict} note={nesting.note} />}
+      {source}
+    </>
+  )
 
   return (
     <div className="page">

@@ -133,7 +133,7 @@ function Intake({ onStart }: { onStart: (loaded: Loaded) => void }) {
        * to the figure it qualifies.
        */
       if (DEMO) {
-        onStart({ kind: 'file', name: 'bundled excerpt', turns: bundledTurns() })
+        onStart({ kind: 'file', name: file.name, turns: bundledTurns() })
         return
       }
 

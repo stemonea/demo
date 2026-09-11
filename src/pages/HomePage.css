@@ -271,6 +271,7 @@
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
+  text-align: justify; 
   gap: 28px;
 }
 
