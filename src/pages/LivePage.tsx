@@ -17,7 +17,7 @@ import {
   parseTranscript,
   type FeedTurn,
 } from '../lib/transcript'
-import { useFeed } from '../lib/feed'
+import { useFeed, useSteadyScroll } from '../lib/feed'
 import { useAnnotationPipeline, type PipelineStatus } from '../lib/pipeline'
 import { useLiveSession } from '../lib/liveSession'
 import {
@@ -36,7 +36,7 @@ import './LivePage.css'
 /**
  * Turns computed before the first one is shown: one.
  *
- * Nothing is batched — a turn is an answer as soon as the tagger has finished
+ * Nothing is batched - a turn is an answer as soon as the tagger has finished
  * it, and that is when it goes on screen. Waiting for a handful of them before
  * showing anything is a blank screen for as many generations as the handful is
  * long, which is precisely the wait this view exists to make visible.
@@ -50,7 +50,7 @@ const LOOK_AHEAD = 6
  *
  * `session` is what makes the feed live: the transcript was uploaded to the
  * service, which is annotating it and pushing each turn as it finishes. Without
- * one — no service configured, or a service that could not be reached — the
+ * one - no service configured, or a service that could not be reached - the
  * debate is replayed the way it always was, one request per turn, which is what
  * keeps a fully annotated transcript playable with nothing running at all.
  */
@@ -68,7 +68,7 @@ interface Loaded {
  * The view opens on the intake screen: a debate has to be loaded before it can
  * be replayed, and the format it must have is stated there. Once a transcript is
  * in, the first turns are annotated, the feed starts, and the rest arrive behind
- * what the reader is looking at — pushed by the service when there is one.
+ * what the reader is looking at - pushed by the service when there is one.
  */
 export default function LivePage() {
   const [loaded, setLoaded] = useState<Loaded | null>(null)
@@ -109,7 +109,7 @@ export default function LivePage() {
 }
 
 /* ------------------------------------------------------------------ *
- * Intake — the transcript, and the format it has to have               *
+ * Intake - the transcript, and the format it has to have               *
  * ------------------------------------------------------------------ */
 
 interface IntakeProps {
@@ -126,8 +126,8 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
    * The transcript, on its way to being annotated.
    *
    * The file is checked here first, so an obvious mistake is answered without a
-   * round trip, and then handed to the service, which checks it again — a
-   * service must not trust the page that calls it — and starts annotating it.
+   * round trip, and then handed to the service, which checks it again - a
+   * service must not trust the page that calls it - and starts annotating it.
    * A service that refuses the file says why, and that is what is shown. A
    * service that is not there at all is not a dead end: the debate is replayed
    * turn by turn instead, which is enough for a transcript that arrived
@@ -137,7 +137,7 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
    * The debate the site ships with, played whatever was dropped.
    *
    * In demo mode the file is still asked for and still checked, because that is
-   * the gesture the page is about — but what plays is the shipped transcript,
+   * the gesture the page is about - but what plays is the shipped transcript,
    * and the feed says so rather than letting anyone believe their own file was
    * annotated by something that is not there.
    */
@@ -220,7 +220,7 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
             </div>
             <p className="live__lead">
               The tagger operates at turn level, so a debate can be annotated while it unfolds. Load the transcript
-              you want replayed: it is sent to the service, which starts annotating it straight away and pushes every
+              you want replayed: it is sent to the model, which starts annotating it straight away and pushes every
               turn as it finishes it.
             </p>
           </header>
@@ -271,7 +271,7 @@ function toFeedTurn(turn: LiveTurnPayload): FeedTurn {
 }
 
 /* ------------------------------------------------------------------ *
- * Feed — the replay itself                                            *
+ * Feed - the replay itself                                            *
  * ------------------------------------------------------------------ */
 
 interface FeedProps {
@@ -309,8 +309,8 @@ function Feed({ loaded, onNewFile }: FeedProps) {
      *
      * With a buffer running six turns ahead the work is always already done,
      * so the feed only ever pops finished turns and there is nothing to watch.
-     * Held to one, the wait for the next turn is on screen — the loader says
-     * which turn is being annotated, the queue shows it running — and the
+     * Held to one, the wait for the next turn is on screen - the loader says
+     * which turn is being annotated, the queue shows it running - and the
      * rhythm of the feed becomes the rhythm of the generation, which is the
      * whole point of showing it live.
      */
@@ -323,9 +323,13 @@ function Feed({ loaded, onNewFile }: FeedProps) {
   /* the feed follows the newest turn, and lets go the moment somebody scrolls
      back to read something */
   const { box: feedBox, onScroll: onFeedScroll, behind, jump: toEnd } = useFeed<HTMLDivElement>(shown.length)
+  /* and the page under the feed keeps the reader's place while the figures on
+     it fill in — the same correction the watcher's page has always had, which
+     this one was simply left out of */
+  const { scroller, content } = useSteadyScroll<HTMLDivElement, HTMLDivElement>()
   const fromFile = useMemo(() => countAnnotated(turns), [turns])
 
-  /* everything shown so far, as one annotated transcript — what Export writes */
+  /* everything shown so far, as one annotated transcript - what Export writes */
   const annotatedSoFar = shown.map((entry) => entry.tagged).join('\n')
 
   /* the same turns as the analytics read them; recomputed only when one lands */
@@ -337,9 +341,9 @@ function Feed({ loaded, onNewFile }: FeedProps) {
   const activeSet = useMemo(() => new Set(active), [active])
 
   return (
-    <div className="page">
+    <div className="page" ref={scroller}>
       <div className="page__inner">
-        <div className="live shell">
+        <div className="live shell" ref={content}>
           {/* The first screen, and only it: the head, the transport and the
               debate. The box takes whatever the two above it leave, so a head
               that wraps to another line costs the debate a line rather than
@@ -354,19 +358,17 @@ function Feed({ loaded, onNewFile }: FeedProps) {
                 {fileName ? <strong>{fileName}</strong> : 'Transcript'} · {turns.length} turns.{' '}
                 {session ? (
                   <>
-                    The service is annotating it and pushing every turn as it finishes it — {live.received} of{' '}
+                    The service is annotating it and pushing every turn as it finishes it - {live.received} of{' '}
                     {turns.length} have arrived, and each one appears here the moment it does.
                   </>
                 ) : fromFile === turns.length ? (
                   <>
-                    Every turn arrived annotated in the file, so the feed replays it without calling the service — the
+                    Every turn arrived annotated in the file, so the feed replays it without calling the service - the
                     pacing, the buffer and the panels behave exactly as they do on a live run.
                   </>
                 ) : (
                   <>
-                    Each turn is computed and shown one at a time, and the ones behind it are computed while you read,
-                    up to {LOOK_AHEAD} turns ahead
-                    {fromFile > 0 && <> ({fromFile} came annotated in the file and cost nothing)</>}.
+                    Each turn is computed and shown one at a time, and the ones behind it are computed while you read.
                   </>
                 )}{' '}
                 Each turn is held long enough to be read.
@@ -411,19 +413,19 @@ function Feed({ loaded, onNewFile }: FeedProps) {
                     <div className="keep">
                       <h2 className="eyebrow">Keep this debate</h2>
                       <p className="keep__text">
-                        The service is holding the annotation of every turn it has computed — the whole debate, not
+                        The service is holding the annotation of every turn it has computed - the whole debate, not
                         only what has gone by here.
                       </p>
                       <p className="keep__note">
                         {live.complete
                           ? 'All turns annotated.'
-                          : `${live.received} of ${turns.length} annotated so far — exporting again later gets the rest.`}
+                          : `${live.received} of ${turns.length} annotated so far - exporting again later gets the rest.`}
                       </p>
                     </div>
                   )}
                   {/* Every way out of this page is one row of buttons.
-                      There used to be a download of its own above this — the
-                      service's own transcript — which made two places to save
+                      There used to be a download of its own above this - the
+                      service's own transcript - which made two places to save
                       the same debate from, one of them a large coloured button
                       that read as the way and left the four formats under it
                       looking like something else. One row, and `Plain text` in
@@ -497,7 +499,7 @@ function Feed({ loaded, onNewFile }: FeedProps) {
  *
  * A turn already on screen never changes: its words were annotated once and
  * that was that. But every new turn re-renders the feed, so two hundred turns
- * of tagged markup were being rebuilt to add one — which is the work that
+ * of tagged markup were being rebuilt to add one - which is the work that
  * makes a long replay stutter. The props are the fields rather than the turn
  * object, so a re-created object with the same content still compares equal.
  */

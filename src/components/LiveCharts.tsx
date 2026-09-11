@@ -1,6 +1,6 @@
-import { memo } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { Cooccurrence, EntityProfiles, MentionTimeline } from './charts/Charts'
-import type { DebateStats } from '../lib/analytics'
+import { narrow, type DebateStats } from '../lib/analytics'
 import './LiveCharts.css'
 
 /**
@@ -11,7 +11,14 @@ import './LiveCharts.css'
  * draws the ones that carry the debate — and says, in its own caption, how
  * many it left out, which is the part that keeps it honest against the totals
  * above it.
+ *
+ * Ten is where it opens and no longer where it ends: which names carry a
+ * debate is the reader's question, not the figure's, and the answer changes
+ * between a debate twenty turns in and one that has run its course. Five is a
+ * glance, twenty is the tail, and the caption says what each of them leaves
+ * out.
  */
+const ROWS = [5, 10, 20] as const
 const TOP = 10
 
 interface Props {
@@ -42,6 +49,27 @@ interface Props {
  * which gives it a full slide.
  */
 function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
+  /* how many rows every figure draws */
+  const [rows, setRows] = useState<number>(TOP)
+  /* drop the tail of things named exactly once */
+  const [repeated, setRepeated] = useState(false)
+  /* count a name only where it was put inside an argument */
+  const [argued, setArgued] = useState(false)
+
+  /*
+   * The figures' own reading of the debate.
+   *
+   * Memoised on the aggregation and the three switches rather than recomputed
+   * per figure: all three draw from one list, and filtering it once is what
+   * keeps them saying the same thing as each other.
+   */
+  const drawn = useMemo(
+    () => narrow(stats, { argumentativeOnly: argued, minMentions: repeated ? 2 : 1 }),
+    [stats, argued, repeated],
+  )
+
+  /* the controls are offered against the debate, not against what the switches
+     have left of it, so a lens that empties a figure can still be undone */
   const enough = stats.entities.length > 0 && stats.turns > 0
 
   return (
@@ -57,29 +85,83 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
         </p>
       </header>
 
+      {/*
+        What the figures are asked to draw, above all three of them.
+
+        The switches belong here and not on each cell: they are one reading of
+        one list, and three copies of them would invite three figures that
+        disagree. Each says what it does rather than what it hides, so a figure
+        that has been narrowed reads as an answer to a question somebody asked.
+      */}
+      {enough && (
+        <div className="deep__controls">
+          <span className="deep__control">
+            <span className="deep__control-label">rows</span>
+            {ROWS.map((count) => (
+              <button
+                type="button"
+                key={count}
+                className={`toggle${rows === count ? ' is-on' : ''}`}
+                onClick={() => setRows(count)}
+                aria-pressed={rows === count}
+                title={`Draw the ${count} names each figure ranks highest`}
+              >
+                {count}
+              </button>
+            ))}
+          </span>
+
+          <button
+            type="button"
+            className={`toggle${repeated ? ' is-on' : ''}`}
+            onClick={() => setRepeated((on) => !on)}
+            aria-pressed={repeated}
+            title="Leave out every name the debate has said exactly once"
+          >
+            Said more than once
+          </button>
+
+          <button
+            type="button"
+            className={`toggle${argued ? ' is-on' : ''}`}
+            onClick={() => setArgued((on) => !on)}
+            aria-pressed={argued}
+            title="Count a name only where it sits inside a claim or a premise, never where it is merely mentioned"
+          >
+            Argued with, not named
+          </button>
+
+          {(repeated || argued || rows !== TOP) && (
+            <button type="button" className="deep__reset" onClick={() => { setRows(TOP); setRepeated(false); setArgued(false) }}>
+              reset
+            </button>
+          )}
+        </div>
+      )}
+
       {!enough ? (
         <p className="deep__empty">
           Nothing to aggregate yet — the figures appear as soon as the first entity is named inside an argument.
         </p>
       ) : (
         <div className="deep__grid">
-          <section className="cell deep__cell">
+          <section className="cell deep__cell" data-steady>
             <h4 className="cell__head">
               How each entity is used
               <span className="cell__count">
-                {Math.min(TOP, stats.entities.length)}
-                <span className="cell__count-of">of {stats.entities.length}</span>
+                {Math.min(rows, drawn.entities.length)}
+                <span className="cell__count-of">of {drawn.entities.length}</span>
               </span>
             </h4>
-            <EntityProfiles stats={stats} limit={TOP} picked={picked} onPick={onPickEntity} />
+            <EntityProfiles stats={drawn} limit={rows} picked={picked} onPick={onPickEntity} />
           </section>
 
-          <section className="cell deep__cell">
+          <section className="cell deep__cell" data-steady>
             <h4 className="cell__head">
               Invoked together
               <span className="cell__count">
-                {Math.min(8, stats.cooccurrence.length)}
-                <span className="cell__count-of">of {stats.cooccurrence.length}</span>
+                {Math.min(rows, drawn.cooccurrence.length)}
+                <span className="cell__count-of">of {drawn.cooccurrence.length}</span>
               </span>
             </h4>
             {/*
@@ -88,10 +170,10 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
               and cannot know they were asserted together, because it has lost
               the span by the time it has the entities.
             */}
-            <Cooccurrence stats={stats} limit={8} picked={picked} onPick={onPickPair} />
+            <Cooccurrence stats={drawn} limit={rows} picked={picked} onPick={onPickPair} />
           </section>
 
-          <section className="cell deep__cell deep__cell--wide">
+          <section className="cell deep__cell deep__cell--wide" data-steady>
             <h4 className="cell__head">
               Turn by turn
               <span className="cell__count">
@@ -102,7 +184,7 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
             {/* the whole debate, scrolling: it rides the newest turn on its own
                 and lets go the moment the reader scrolls back, so a paused
                 debate can be read from turn one */}
-            <MentionTimeline stats={stats} limit={TOP} />
+            <MentionTimeline stats={drawn} limit={rows} />
           </section>
         </div>
       )}
@@ -115,7 +197,8 @@ function LiveCharts({ stats, picked, onPickEntity, onPickPair }: Props) {
  *
  * The explorer above these figures has state of its own — a search box, a tab,
  * a set of filters — and none of it changes what they show: they are the whole
- * debate, always. Without this, every keystroke in the entity search redrew
- * three charts and two thousand timeline cells for no change at all.
+ * debate, narrowed by nothing but their own row of switches. Without this,
+ * every keystroke in the entity search redrew three charts and two thousand
+ * timeline cells for no change at all.
  */
 export default memo(LiveCharts)

@@ -9,6 +9,20 @@
  * growing on its own as turns arrive, which is what the fixed heights below
  * are for.
  */
+/*
+ * `overflow-anchor: none`, for the same reason the watcher's page turns it off.
+ *
+ * The figures under the debate fill in as the debate runs — a bar chart gains a
+ * row when another name is entered into it, the pairs arrive one at a time —
+ * and a reader down among them is reading below something that just grew. Their
+ * place is put back by `useSteadyScroll`, which holds on to the block the top of
+ * the view is resting on. A browser that also anchored would correct the same
+ * growth a second time and take the view twice as far as it should.
+ */
+.page:has(> .page__inner > .live) {
+  overflow-anchor: none;
+}
+
 .page:has(> .page__inner > .live) .page__inner {
   max-height: none;
   /* Centre the intake when it fits; auto margins collapse to zero when the

@@ -691,9 +691,6 @@ body {
   margin-inline: 20px;
 }
 
-.preview__lead {
-  text-align: start;
-}
 
 .preview__cta {
   color: var(--accent);

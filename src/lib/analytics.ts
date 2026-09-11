@@ -245,6 +245,60 @@ function aggregate(turns: AnalysedTurn[]): DebateStats {
   }
 }
 
+/* ------------------------------------------------------------------ *
+ * Narrowing                                                           *
+ * ------------------------------------------------------------------ */
+
+/** How much of the debate a figure is asked to draw. */
+export interface ChartLens {
+  /** count only mentions that sit inside a claim or a premise */
+  argumentativeOnly: boolean
+  /** the fewest mentions a name needs before it is drawn at all */
+  minMentions: number
+}
+
+export const WHOLE_DEBATE: ChartLens = { argumentativeOnly: false, minMentions: 1 }
+
+/**
+ * The same debate, read through a narrower lens.
+ *
+ * The figures are drawn from the top of a list a couple of hundred names long,
+ * and which names reach the top is a question with more than one right answer.
+ * A name said thirty times in passing outranks one put inside four claims, and
+ * the tail is mostly things said exactly once — so a reader who wants to know
+ * what is being *argued* about, rather than what is being said, is reading past
+ * the figure rather than from it.
+ *
+ * Rather than a second aggregation with its own definitions, this is a filter
+ * over the one `analyse` already produced, which is what keeps it honest: the
+ * numbers under a lens are the same numbers, recounted over fewer mentions, and
+ * the captions go on saying how many names were left out.
+ *
+ * What is not touched is the debate's own totals - turns, components, speakers.
+ * Those describe what happened, not what is drawn, and a lens that quietly
+ * rewrote them would put the panels above these figures at odds with them.
+ */
+export function narrow(stats: DebateStats, lens: ChartLens): DebateStats {
+  if (!lens.argumentativeOnly && lens.minMentions <= 1) return stats
+
+  const counted = lens.argumentativeOnly
+    ? stats.mentions.filter((mention) => mention.inside !== null)
+    : stats.mentions
+
+  const entities = entityStats(counted).filter((entity) => entity.total >= lens.minMentions)
+  const keys = new Set(entities.map((entity) => entity.key))
+
+  return {
+    ...stats,
+    /* the timeline draws a dot per mention, so it has to lose the same ones */
+    mentions: counted.filter((mention) => keys.has(mention.key)),
+    entities,
+    matrix: stats.matrix.filter((cell) => keys.has(cell.key)),
+    /* a pair is only drawable while both halves still have a name to draw */
+    cooccurrence: stats.cooccurrence.filter((pair) => keys.has(pair.a) && keys.has(pair.b)),
+  }
+}
+
 interface VisitOptions {
   turn: number
   speaker: string
@@ -349,12 +403,29 @@ export function normalise(surface: string): string {
 }
 
 /**
- * Collapses short forms into the fullest form seen: "obama" folds into
- * "barack obama". Crude on purpose - real deployments want entity linking, and
- * the alias table is the first thing a demo should let a visitor inspect.
+ * Collapses short forms of a person's name into the fullest form seen:
+ * "obama" folds into "barack obama". Crude on purpose - real deployments want
+ * entity linking, and the alias table is the first thing a demo should let a
+ * visitor inspect.
+ *
+ * People only, because a shorter name is the one place where containment
+ * really does mean sameness. Everywhere else it means the opposite: "debate"
+ * is not the "ABC News Presidential Debate", "war" is not the "Israel-Hamas
+ * war", "election" is not "Election Day". Run over every type at once, the
+ * rule was worse still, because it did not even ask whether the two mentions
+ * were the same kind of thing: the organization "ABC" was folded into an
+ * event, the country "Israel" into a war, and the role "President of the
+ * United States" into the "Constitution of the United States". What came out
+ * was a chart row carrying a generic noun as its label - the commonest surface
+ * of the pile - and a count that belonged to several different things, which
+ * is exactly what the figures are read for and exactly what they got wrong.
+ *
+ * Left apart, those mentions are still each their own entity and still
+ * counted; they are simply not counted as one.
  */
 function mergeAliases(mentions: Mention[]) {
-  const keys = [...new Set(mentions.map((mention) => mention.key))]
+  const people = mentions.filter((mention) => mention.type === 'PERSON')
+  const keys = [...new Set(people.map((mention) => mention.key))]
   const canonical = new Map<string, string>()
 
   for (const key of keys) {
@@ -364,7 +435,7 @@ function mergeAliases(mentions: Mention[]) {
     if (longer) canonical.set(key, longer)
   }
 
-  for (const mention of mentions) {
+  for (const mention of people) {
     mention.key = canonical.get(mention.key) ?? mention.key
   }
 }

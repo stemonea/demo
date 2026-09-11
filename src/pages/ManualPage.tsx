@@ -79,8 +79,8 @@ export default function ManualPage() {
 
   /**
    * One door for both jobs. A plain `.txt` yields no spans and the visitor
-   * annotates it from nothing; a file that already carries an annotation — the
-   * tagger's inline markup, this tool's own JSON, a two-layer CoNLL — arrives
+   * annotates it from nothing; a file that already carries an annotation - the
+   * tagger's inline markup, this tool's own JSON, a two-layer CoNLL - arrives
    * with its spans already on the text, ready to be pushed around by hand.
    */
   async function loadFile(file: File | undefined | null) {
@@ -98,7 +98,7 @@ export default function ManualPage() {
     }
 
     /* an imported entity type joins the palette, or the annotation could be
-       read but not relabelled — and the export column would lose it */
+       read but not relabelled - and the export column would lose it */
     setEntityLabels((current) => [...current, ...value.entityLabels.filter((label) => !current.includes(label) && !ARGUMENT_LABELS.includes(label))])
     setText(value.text)
     setSpans(value.spans)
@@ -156,19 +156,17 @@ export default function ManualPage() {
               <h1 className="display manual__title"><HoverTag>Build the data by hand</HoverTag></h1>
             </div>
             <p className="manual__lead">
-              Load a transcript and annotate it from nothing, or load an annotation someone — or something — else
-              made and correct it word by word. Export two-layer CoNLL either way: the format the tagger is trained
-              and evaluated on.
+              Load a transcript, annotate it, and export the final annotated text.
             </p>
           </header>
 
           {/* The two things a pass needs before it can start: the text, and the
               set of types it will be marked with. They are a pair, so they are
-              set as one — side by side and stretched to a single height, rather
+              set as one - side by side and stretched to a single height, rather
               than one short box above a tall one. */}
           <div className="setup">
             <section className="setbox">
-              <h2 className="eyebrow">1 · Text — plain, or already annotated</h2>
+              <h2 className="eyebrow">Text plain, or already annotated</h2>
               <FileDrop
                 fileName={loaded?.name ?? null}
                 title="Drop a transcript or an annotation here"
@@ -181,7 +179,7 @@ export default function ManualPage() {
                 onFile={loadFile}
               />
               <p className="setbox__note setbox__note--formats">
-                Recognised as annotated: inline markup (<code>&lt;claim&gt;…&lt;/claim&gt;</code>), this tool's JSON
+                Recognised as annotated: inline markup (<code>&lt;claim&gt;...&lt;/claim&gt;</code>), this tool's JSON
                 spans, and two-layer CoNLL. Anything else loads as plain text.
               </p>
               {loaded && loaded.imported > 0 && (
@@ -201,7 +199,7 @@ export default function ManualPage() {
             </section>
 
             <section className="setbox">
-              <h2 className="eyebrow">2 · Entity set — yours</h2>
+              <h2 className="eyebrow">2 · Entity set - yours</h2>
               <Strip className="chips" aria-label="Entity set">
                 {entityLabels.map((label) => (
                   <span className="chip" key={label} style={{ ['--chip' as string]: colourOf(label) }}>
@@ -240,13 +238,12 @@ export default function ManualPage() {
               </form>
 
               <p className="setbox__note">
-                The argument layer is fixed —
+                The argument layer is fixed -
                 {ARGUMENT_LABELS.map((label) => (
                   <span className="chip chip--inline" key={label} style={{ ['--chip' as string]: colourOf(label) }}>
                     {label}
                   </span>
                 ))}
-                — because the CoNLL export writes one column for each layer.
               </p>
             </section>
           </div>
@@ -263,7 +260,7 @@ export default function ManualPage() {
           <header className="manual__head">
             <h2 className="display manual__section"><HoverTag>Annotate</HoverTag></h2>
             <p className="manual__lead">
-              Select words and pick a class to add a span — number keys work too, <kbd>Esc</kbd> clears and{' '}
+              Select words and pick a class to add a span - number keys work too, <kbd>Esc</kbd> clears and{' '}
               <kbd>⌫</kbd> undoes. Click a span that is already there to correct it: move either edge a word at a
               time with the arrows, or with <kbd>←</kbd> <kbd>→</kbd> for the end and <kbd>⇧</kbd> for the start.
             </p>
@@ -364,7 +361,7 @@ export default function ManualPage() {
                 <section className="workspace__panel">
                   <h3 className="eyebrow">Raw view</h3>
                   <pre className="workspace__code" data-no-drag>
-                    {tagged || '—'}
+                    {tagged || '-'}
                   </pre>
                 </section>
               </aside>

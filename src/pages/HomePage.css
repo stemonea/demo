@@ -325,7 +325,21 @@
 }
 
 .preview__lead {
+  /*
+   * Justified, and hyphenated because of it.
+   *
+   * A 44ch column is narrow enough that flush edges have to buy themselves the
+   * room somewhere, and without hyphenation they buy it from the word spaces:
+   * one long word held back opens a line into rivers. Letting the browser break
+   * words keeps the extra space small enough not to be seen, which is the only
+   * way justification is an improvement on a ragged edge at this measure.
+   *
+   * The alignment lives here and nowhere else. It used to be set a second time
+   * in `styles/appearance.css`, which loads after every page's own stylesheet
+   * and so quietly won the tie: changing it here did nothing at all.
+   */
   text-align: justify;
+  hyphens: auto;
   /* a display title, wrapped or not, needs more than a line's worth under it */
   margin-top: clamp(20px, 2.6vh, 34px);
   max-width: 44ch;

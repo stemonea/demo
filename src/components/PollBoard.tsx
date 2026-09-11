@@ -54,7 +54,7 @@ export default function PollBoard({ session, speakers, ballot, onBallot, turns, 
         </div>
         <p className="poll__lead">
           Everyone watching this debate can say who they are with, or that they are with nobody, and change their
-          mind as often as the debate gives them reason to. Every ballot is kept, so this is not a result — it is
+          mind as often as the debate gives them reason to. Every ballot is kept, so it is
           when the room moved, against the turn that moved it.
         </p>
         {/* said before the chart rather than under it: whoever reads these

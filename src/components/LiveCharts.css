@@ -43,6 +43,62 @@
   color: var(--ink-soft);
 }
 
+/*
+ * What the figures are asked to draw.
+ *
+ * A row of the same pill the rest of the page filters with, so a reader who
+ * has pressed one in the explorer above already knows what these do. It sits
+ * between the heading and the grid, hard against the top of the frame, because
+ * it governs every cell under it rather than any one of them.
+ */
+.deep__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: clamp(8px, 1.2vh, 14px);
+}
+
+.deep__control {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.deep__control-label {
+  margin-right: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.deep__controls .toggle {
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* the way back to the whole debate, and no heavier than the state it undoes */
+.deep__reset {
+  margin-left: auto;
+  padding: 5px 2px;
+  border: none;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.deep__reset:hover {
+  color: var(--accent);
+}
+
 .deep__empty {
   padding: 22px 18px;
   border: var(--rule) solid var(--line);

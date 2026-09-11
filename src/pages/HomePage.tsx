@@ -19,7 +19,7 @@ interface Props {
   /** lets the shell know which slide the landing deck is on */
   /**
    * Which slide the deck has settled on, and whether that slide carries a tone
-   * of its own — the bar has no surface, so it is the only thing that has to be
+   * of its own - the bar has no surface, so it is the only thing that has to be
    * told when the page beneath it stops being paper.
    */
   onSlideChange: (index: number, toned: boolean) => void
@@ -80,7 +80,7 @@ export default function HomePage({ onSlideChange }: Props) {
           </div>
           </div>
 
-          {/* the lower half of the hero, covered by the field — and press it:
+          {/* the lower half of the hero, covered by the field - and press it:
               the generation answers back, see `TokenStream` */}
           <div className="hero__field">
             <TokenStream fit interactive />
@@ -125,8 +125,8 @@ export default function HomePage({ onSlideChange }: Props) {
             <span className="eyebrow">Spoken</span>
             <h2 className="display preview__title"><HoverTag zone=".preview">Speak the debate</HoverTag></h2>
             <p className="preview__lead">
-              Say who is about to talk, open the microphone, close it when they stop. The turn is transcribed and
-              annotated before the next one begins — and a speaker can be added mid-debate.
+              Select who is about to speak, then either open the microphone or enter the text manually. 
+              Each turn is transcribed and annotated before the next one begins, and new speakers can be added at any point during the debate.
             </p>
             <span className="preview__cta">Open the session →</span>
           </div>
@@ -146,7 +146,7 @@ export default function HomePage({ onSlideChange }: Props) {
       ),
     },
     {
-      /* a preview of the playground — the whole slide opens it */
+      /* a preview of the playground - the whole slide opens it */
       id: 'home-try',
       label: 'Playground',
       node: (
@@ -179,7 +179,7 @@ export default function HomePage({ onSlideChange }: Props) {
             <h2 className="display preview__title"><HoverTag zone=".preview">Build it by hand</HoverTag></h2>
             <p className="preview__lead">
               Load a .txt transcript, declare your own entity set, tag both layers by hand, and export two-layer
-              CoNLL — the format the tagger is trained and evaluated on.
+              CoNLL - the format the tagger is trained and evaluated on.
             </p>
             <span className="preview__cta">Open the annotator →</span>
           </div>
@@ -201,7 +201,7 @@ is\tI-CLAIM\tO`}</pre>
       ),
     },
     {
-      /* a preview of the comparison — the whole slide opens it */
+      /* a preview of the comparison - the whole slide opens it */
       id: 'home-why',
       label: 'Why joint?',
       className: 'slide--green',
@@ -248,7 +248,7 @@ is\tI-CLAIM\tO`}</pre>
  * The tie between two of the four questions, and the question it becomes.
  *
  * At rest it is the rule the line has always had. Under the cursor it turns
- * into the mark the title is asking with — upright or turned over, decided
+ * into the mark the title is asking with - upright or turned over, decided
  * afresh each time the cursor arrives, so the line is never quite set the same
  * way twice. The two marks that open and close the title are fixed; these are
  * not, which is what makes them worth hovering.
@@ -257,7 +257,7 @@ is\tI-CLAIM\tO`}</pre>
  * flex item between two words, and a character swapped into its box would
  * change the width of the line and move all four words while the cursor is on
  * one of them. So the box stays exactly the rule's and the mark is centred over
- * it — which is also what keeps the mark centred between the words, since the
+ * it - which is also what keeps the mark centred between the words, since the
  * rule is what the gap is measured from.
  *
  * Whether the mark is showing is left to CSS `:hover` rather than held here.
@@ -283,7 +283,7 @@ function HeroRule() {
 /**
  * A hero button: it squares off under the cursor while its label is rebuilt out
  * of the glyph field's own alphabet. The hover lives here rather than in
- * `TokenLabel` so the anchor stays one element — the label is what animates, the
+ * `TokenLabel` so the anchor stays one element - the label is what animates, the
  * link is what is clicked.
  */
 function TokenLink({ to, className, label }: { to: Route; className: string; label: string }) {
@@ -302,7 +302,7 @@ function TokenLink({ to, className, label }: { to: Route; className: string; lab
  *
  * Each letter is drawn twice: an invisible copy at the resting weight holds the
  * advance open, and the visible one loses weight when the pointer is on it. The
- * word therefore never reflows — a letter that narrowed as it lightened would
+ * word therefore never reflows - a letter that narrowed as it lightened would
  * shift the ones after it out from under the cursor and flicker.
  *
  * The heading carries the real words as its label, so what is read aloud is a
