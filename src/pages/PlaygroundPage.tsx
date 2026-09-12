@@ -6,14 +6,8 @@ import SourceBadge from '../components/SourceBadge'
 import VerdictBadge from '../components/VerdictBadge'
 import ExportMenu from '../components/ExportMenu'
 import SpanCorrector, { type PaletteItem } from '../components/SpanCorrector'
-import {
-  annotate,
-  ApiError,
-  checkService,
-  type FailureKind,
-  type ServiceStatus,
-  type Source,
-} from '../lib/api'
+import { annotate, ApiError, checkService, type ServiceStatus, type Source } from '../lib/api'
+import { failureOf, type Failure } from '../lib/failure'
 import { countTags, parseTaggedText, serializeNodes } from '../lib/parseTags'
 import { checkNesting } from '../lib/wellformed'
 import { filterTags } from '../lib/view'
@@ -47,13 +41,6 @@ interface Shown {
   elapsedMs?: number
 }
 
-/** What went wrong, in the shape the panel needs to explain it. */
-interface Failure {
-  title: string
-  message: string
-  hint: string
-}
-
 const SERVICE_LABEL: Record<ServiceStatus['state'], string> = {
   checking: 'checking…',
   ready: 'service ready',
@@ -75,44 +62,6 @@ const SERVICE_HINT: Record<ServiceStatus['state'], string> = {
   ready: 'Examples are replayed in the browser; your own text is computed by the service.',
   unreachable: 'The examples still work; your own text needs the service.',
   offline: 'No annotation service is running, so only the pre-computed examples can be shown.',
-}
-
-/**
- * Failures are described by what they mean for the reader, never by the address
- * that failed: where the service lives is deployment detail and stays out of the
- * page.
- */
-const FAILURE_COPY: Record<FailureKind | 'unknown', Failure> = {
-  config: {
-    title: 'No annotation service is configured',
-    message: 'Your own text needs the service to compute it.',
-    hint: 'The examples above are pre-computed and work without it.',
-  },
-  network: {
-    title: 'The service could not be reached',
-    message: 'The request never got an answer.',
-    hint: 'It may be starting up or temporarily down - try again in a moment.',
-  },
-  timeout: {
-    title: 'The service did not answer in time',
-    message: 'The turn was sent, but nothing came back before the deadline.',
-    hint: 'Long turns take longer to compute - try again, or shorten the text.',
-  },
-  http: {
-    title: 'The service refused the request',
-    message: 'The turn was received but not annotated.',
-    hint: 'Try again with a shorter turn; if it keeps failing the service needs a look.',
-  },
-  payload: {
-    title: 'The answer could not be read',
-    message: 'The service replied with something this page cannot display.',
-    hint: 'Try again - if it persists, the service is answering in an unexpected shape.',
-  },
-  unknown: {
-    title: 'The request failed',
-    message: 'Something went wrong on the way to the annotation service.',
-    hint: 'Try again in a moment.',
-  },
 }
 
 /**
@@ -413,7 +362,7 @@ export default function PlaygroundPage() {
       if (response.source === 'backend') setService({ state: 'ready', url: null })
     } catch (cause) {
       if ((cause as Error).name === 'AbortError') return
-      setFailure(describe(cause))
+      setFailure(failureOf(cause))
       setStatus('error')
       if (cause instanceof ApiError && (cause.kind === 'network' || cause.kind === 'timeout')) {
         setService({ state: 'unreachable', url: null })
@@ -758,8 +707,3 @@ function changes(diff: SpanDiff): string {
   return parts.join(' · ')
 }
 
-/** Turns whatever was thrown into something a person can act on. */
-function describe(cause: unknown): Failure {
-  if (cause instanceof ApiError) return FAILURE_COPY[cause.kind] ?? FAILURE_COPY.unknown
-  return FAILURE_COPY.unknown
-}

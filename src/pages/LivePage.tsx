@@ -178,7 +178,7 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
     }
     const parsed = parseTranscript(result.text)
     if (!parsed.length) {
-      onError(`“${file.name}” has no non-empty line to annotate.`)
+      onError(`There is nothing to annotate in “${file.name}”. A transcript has one turn per line, as “SPEAKER: what they said”.`)
       return
     }
 

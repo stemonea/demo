@@ -27,6 +27,12 @@ import type { LayerView } from './view'
  * says which of those fallbacks are allowed.
  */
 
+/**
+ * The one sentence every "nothing is configured" failure ends with. There is
+ * only one fix, so there is only one way of saying it.
+ */
+const CONFIG_HINT = 'Set VITE_API_URL in .env, or baseUrl in src/config/backend.ts, and start jaet-be.'
+
 export const apiBase = BACKEND.baseUrl || null
 
 /** Where an answer came from - the UI shows this next to every result. */
@@ -388,12 +394,12 @@ export async function startLiveDebate(
     const headers = requestHeaders()
     delete headers['Content-Type']
     response = await fetch(url, { method: 'POST', headers, body, signal: controller.signal })
-  } catch (cause) {
+  } catch {
     if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
     throw new ApiError(
       'network',
-      'Could not reach the annotation service to upload the transcript.',
-      `${reason(cause)} - check that the service is running and that it allows this origin.`,
+      'The annotation service could not be reached, so the transcript was not sent.',
+      'Check that the service is running and that it allows this origin.',
       url,
     )
   } finally {
@@ -402,7 +408,7 @@ export async function startLiveDebate(
 
   if (!response.ok) {
     /* the service checks the file too, and its reason is the useful one */
-    throw new ApiError('http', `The service refused the transcript.`, await httpHint(response), url, response.status)
+    throw new ApiError('http', 'The service refused the transcript.', await httpHint(response), url, response.status)
   }
 
   const payload = (await response.json().catch(() => null)) as LiveSessionStart | null
@@ -442,8 +448,8 @@ export async function transcribe(
   if (!url) {
     throw new ApiError(
       'config',
-      'No annotation service is configured, so speech cannot be transcribed.',
-      'Set VITE_API_URL in .env, or baseUrl in src/config/backend.ts, and start jaet-be.',
+      'No annotation service is configured, so nothing can be transcribed.',
+      CONFIG_HINT,
       null,
     )
   }
@@ -462,12 +468,12 @@ export async function transcribe(
     const headers = requestHeaders()
     delete headers['Content-Type']
     response = await fetch(url, { method: 'POST', headers, body, signal: controller.signal })
-  } catch (cause) {
+  } catch {
     if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
     throw new ApiError(
       'network',
-      'Could not reach the service to transcribe what was said.',
-      `${reason(cause)} - check that the service is running and that it allows this origin.`,
+      'The service could not be reached, so what was said was not transcribed.',
+      'Check that the service is running and that it allows this origin.',
       url,
     )
   } finally {
@@ -518,9 +524,6 @@ export function liveTranscript(session: string): string | null {
  * Rooms - a spoken session other people can watch                     *
  * ------------------------------------------------------------------ */
 
-/** The same advice every room error ends with; there is only one fix. */
-const ROOM_CONFIG_HINT = 'Set VITE_API_URL in .env, or baseUrl in src/config/backend.ts, and start jaet-be.'
-
 /** One turn as it is handed to the room, and as it comes back out of it. */
 export interface RoomTurnPayload {
   index: number
@@ -548,7 +551,7 @@ export interface RoomPublished {
 export async function openRoom(signal?: AbortSignal): Promise<string> {
   const url = endpoint('room')
   if (!url) {
-    throw new ApiError('config', 'No service is configured, so no room can be opened.', ROOM_CONFIG_HINT, null)
+    throw new ApiError('config', 'No service is configured, so no room can be opened.', CONFIG_HINT, null)
   }
 
   const payload = (await post(url, {}, BACKEND.timeoutMs, signal)) as { room?: unknown } | null
@@ -573,7 +576,7 @@ export async function publishToRoom(
 ): Promise<RoomPublished> {
   const url = roomUrl(room, 'publish')
   if (!url) {
-    throw new ApiError('config', 'No service is configured, so there is no room to publish to.', ROOM_CONFIG_HINT, null)
+    throw new ApiError('config', 'No service is configured, so there is no room to publish to.', CONFIG_HINT, null)
   }
 
   const payload = (await post(
@@ -610,7 +613,7 @@ export async function voteInRoom(
 ): Promise<void> {
   const url = roomUrl(room, 'vote')
   if (!url) {
-    throw new ApiError('config', 'No service is configured, so there is no room to vote in.', ROOM_CONFIG_HINT, null)
+    throw new ApiError('config', 'No service is configured, so there is no room to vote in.', CONFIG_HINT, null)
   }
   await post(url, { voter, ballots }, BACKEND.timeoutMs, signal)
 }
@@ -683,14 +686,17 @@ async function send(url: string, body: unknown, signal?: AbortSignal) {
       return { payload: await post(url, body, BACKEND.timeoutMs, signal), attempts: attempt }
     } catch (cause) {
       if ((cause as Error).name === 'AbortError') throw cause
-      const error = cause instanceof ApiError ? cause : new ApiError('network', `The call to ${url} failed.`, reason(cause), url)
+      const error =
+        cause instanceof ApiError
+          ? cause
+          : new ApiError('network', 'The service could not be reached.', 'Try again in a moment.', url)
       if (attempt === attempts || !worthRetrying(error)) throw error
       await wait(BACKEND.retryDelayMs, signal)
     }
   }
 
   /* unreachable: the loop either returns or throws */
-  throw new ApiError('network', `The call to ${url} failed.`, 'No attempt was made.', url)
+  throw new ApiError('network', 'The service could not be reached.', 'Try again in a moment.', url)
 }
 
 async function post(url: string, body: unknown, timeoutMs: number, signal?: AbortSignal): Promise<unknown> {
@@ -708,20 +714,20 @@ async function post(url: string, body: unknown, timeoutMs: number, signal?: Abor
       body: JSON.stringify(body),
       signal: controller.signal,
     })
-  } catch (cause) {
+  } catch {
     if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
     if (timedOut.value) {
       throw new ApiError(
         'timeout',
-        `The service did not answer within ${Math.round(timeoutMs / 1000)} s.`,
-        'Raise timeoutMs in src/config/backend.ts, or check that the model is not stuck.',
+        `The service did not answer within ${Math.round(timeoutMs / 1000)} seconds.`,
+        'Try a shorter turn, or raise timeoutMs in src/config/backend.ts.',
         url,
       )
     }
     throw new ApiError(
       'network',
-      `Could not reach the service at ${url}.`,
-      `${reason(cause)} - check the address in src/config/backend.ts, that the service is running, and that it allows this origin (CORS).`,
+      'The service could not be reached.',
+      'Check the address in src/config/backend.ts, that the service is running, and that it allows this origin.',
       url,
     )
   } finally {
@@ -731,7 +737,7 @@ async function post(url: string, body: unknown, timeoutMs: number, signal?: Abor
   if (!response.ok) {
     throw new ApiError(
       'http',
-      `The service answered ${response.status} ${response.statusText}.`,
+      'The service refused the request.',
       await httpHint(response),
       url,
       response.status,
@@ -740,7 +746,7 @@ async function post(url: string, body: unknown, timeoutMs: number, signal?: Abor
 
   const text = await response.text().catch(() => '')
   if (!text.trim()) {
-    throw new ApiError('payload', 'The service answered with an empty body.', 'Expected the annotated turn.', url)
+    throw new ApiError('payload', 'The service answered with nothing at all.', 'Expected the annotated turn.', url)
   }
 
   try {
@@ -784,12 +790,12 @@ async function httpHint(response: Response): Promise<string> {
   /* FastAPI's generic details ("Not Found") say less than the pointer below */
   if (detail && detail !== response.statusText) return detail
   const status = response.status
-  if (status === 401 || status === 403) return 'The service rejected the credentials - check VITE_API_KEY.'
-  if (status === 404) return 'Check the routes in src/config/backend.ts.'
-  if (status === 413) return 'The turn is too long for the service.'
-  if (status === 422) return 'The service refused the request body - check bodies in src/config/backend.ts.'
-  if (status === 429) return 'Rate limited - wait a moment and try again.'
-  if (status >= 500) return 'The failure is on the service side; its logs will say more.'
+  if (status === 401 || status === 403) return 'The credentials were rejected. Check VITE_API_KEY.'
+  if (status === 404) return 'That route is not there. Check the routes in src/config/backend.ts.'
+  if (status === 413) return 'The turn is too long for the service. Send a shorter one.'
+  if (status === 422) return 'The request body was refused. Check bodies in src/config/backend.ts.'
+  if (status === 429) return 'The service is rate limiting. Wait a moment and try again.'
+  if (status >= 500) return 'The failure is on the service side. Its logs will say more.'
   return 'Check that the request body matches what the service expects.'
 }
 
@@ -828,8 +834,8 @@ function noService(text: string): ApiError {
     'config',
     findFixture(text)
       ? 'No annotation service is configured.'
-      : 'This text is not one of the bundled turns, and no annotation service is configured to compute it.',
-    'Start jaet-be (`JAET_STUB=1 ./venv/bin/uvicorn main:app --port 8000`), or set VITE_API_URL in .env / baseUrl in src/config/backend.ts.',
+      : 'Only the bundled turns can be answered without a service, and this is not one of them.',
+    CONFIG_HINT,
     null,
   )
 }

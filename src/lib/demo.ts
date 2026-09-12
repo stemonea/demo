@@ -97,8 +97,7 @@ export async function loadDemoTranscript(): Promise<FeedTurn[]> {
   const response = await fetch(DEMO_TRANSCRIPT.url)
   if (!response.ok) {
     throw new Error(
-      `The transcript could not be read (${response.status}). ` +
-        `It should be published at ${DEMO_TRANSCRIPT.url}.`,
+      'The debate that ships with this site could not be read. Reloading the page is what tries again.',
     )
   }
 
@@ -110,7 +109,7 @@ export async function loadDemoTranscript(): Promise<FeedTurn[]> {
       .join('\n'),
   )
 
-  if (!turns.length) throw new Error('The transcript has no turn in it.')
+  if (!turns.length) throw new Error('The debate that ships with this site has no turn in it. Reloading the page is what tries again.')
 
   cached = turns
   return turns

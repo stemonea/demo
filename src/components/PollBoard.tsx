@@ -1,11 +1,17 @@
 import { useMemo, useRef, useState, type CSSProperties } from 'react'
 import { withCrowd } from '../lib/audience'
-import { NEUTRAL, choiceColour, isNeutral, tally, useVotes, type Ballot } from '../lib/poll'
+import { NEUTRAL, choiceColour, isNeutral, tally, type Ballot } from '../lib/poll'
 import './PollBoard.css'
 
 interface Props {
-  /** the run the votes belong to */
-  session: string
+  /**
+   * Everyone's votes, as they stand.
+   *
+   * Subscribed to by the session above rather than here: the same stream
+   * carries the head count the share panel shows, and one page opening it
+   * twice would be two connections onto the same address for one figure.
+   */
+  votes: Map<string, Ballot[]>
   /** everyone who has spoken, in the order they first did */
   speakers: string[]
   /** who is standing, which the person running the debate decides */
@@ -31,8 +37,7 @@ interface Props {
  * chart is where they moved, laid against the turn that moved them. A final
  * result says who won the room; this says which minute won it.
  */
-export default function PollBoard({ session, speakers, ballot, onBallot, turns, crowd = null }: Props) {
-  const { votes } = useVotes(session)
+export default function PollBoard({ votes, speakers, ballot, onBallot, turns, crowd = null }: Props) {
   const [showing, setShowing] = useState(false)
 
   /* real votes over the simulated ones, never the other way about */

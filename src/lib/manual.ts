@@ -94,7 +94,7 @@ export function canAdd(
     if (identical) return `That span is already tagged ${span.label}.`
     const nested = (span.start <= candidate.start && span.end >= candidate.end) || (candidate.start <= span.start && candidate.end >= span.end)
     const disjoint = span.end <= candidate.start || span.start >= candidate.end
-    if (!nested && !disjoint) return 'Spans of the same layer cannot partially overlap.'
+    if (!nested && !disjoint) return 'Spans of the same layer cannot partially overlap. Put one inside the other, or keep them apart.'
   }
 
   return null

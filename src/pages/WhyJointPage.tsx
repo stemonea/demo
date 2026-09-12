@@ -11,7 +11,8 @@ import ExportMenu from '../components/ExportMenu'
 import { EXAMPLES } from '../data/examples'
 import { SYSTEMS } from '../data/systems'
 import { FAILURE_MECHANISMS } from '../data/project'
-import { compare, ApiError, type CompareResult } from '../lib/api'
+import { compare, type CompareResult } from '../lib/api'
+import { noticeOf } from '../lib/failure'
 import type { LayerView } from '../lib/view'
 import './WhyJointPage.css'
 
@@ -223,7 +224,7 @@ function OwnTurn({
       setStatus('done')
     } catch (cause) {
       if ((cause as Error).name === 'AbortError') return
-      setError(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+      setError(noticeOf(cause))
       setStatus('error')
     }
   }

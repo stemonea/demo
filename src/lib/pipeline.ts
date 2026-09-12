@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { annotate, ApiError, type Source } from './api'
+import { annotate, type Source } from './api'
+import { noticeOf } from './failure'
 import type { FeedTurn } from './transcript'
 
 /**
@@ -170,7 +171,7 @@ export function useAnnotationPipeline(turns: FeedTurn[], options: PipelineOption
       if ((cause as Error).name === 'AbortError' || controller.signal.aborted) return
       /* forget it was started, so a retry picks the same turn up again */
       startedRef.current.delete(turn.index)
-      setError(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+      setError(noticeOf(cause))
     } finally {
       if (!controller.signal.aborted) {
         activeRef.current.delete(turn.index)

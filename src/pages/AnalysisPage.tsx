@@ -10,7 +10,8 @@ import { TRANSCRIPT } from '../data/fixtures'
 import { SYSTEMS, type SystemId } from '../data/systems'
 import { EXAMPLES } from '../data/examples'
 import { analyse, type AnalysedTurn } from '../lib/analytics'
-import { annotate, ApiError, type Source } from '../lib/api'
+import { annotate, type Source } from '../lib/api'
+import { noticeOf } from '../lib/failure'
 import './AnalysisPage.css'
 
 /**
@@ -252,7 +253,7 @@ function Sourcebar({
       setOpen(false)
     } catch (cause) {
       if ((cause as Error).name !== 'AbortError') {
-        setError(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+        setError(noticeOf(cause))
       }
     } finally {
       setBusy(false)

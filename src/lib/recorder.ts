@@ -205,10 +205,10 @@ export function useRecorder(): Recorder {
       const name = (cause as Error).name
       setError(
         name === 'NotAllowedError'
-          ? 'The microphone was refused. Allow it for this page and press record again.'
+          ? 'The microphone was refused. Allow it for this page, then press record again.'
           : name === 'NotFoundError'
-            ? 'No microphone was found on this machine.'
-            : `The microphone could not be opened: ${(cause as Error).message}`,
+            ? 'No microphone was found on this machine. Type the turn instead.'
+            : 'The microphone could not be opened. Close anything else that is using it, then press record again.',
       )
       /*
        * Said, not only recorded.

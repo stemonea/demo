@@ -9,8 +9,9 @@ import LiveStats from '../components/LiveStats'
 import PollBoard from '../components/PollBoard'
 import PollVote from '../components/PollVote'
 import { useRecorder } from '../lib/recorder'
-import { annotate, closeRoom, openRoom, transcribe, ApiError, type Source } from '../lib/api'
+import { annotate, closeRoom, openRoom, transcribe, type Source } from '../lib/api'
 import { simulatedFloor } from '../lib/audience'
+import { noticeOf } from '../lib/failure'
 import { DEMO } from '../config/backend'
 import { loadDemoTranscript } from '../lib/demo'
 import {
@@ -32,6 +33,8 @@ import {
   type Published,
   type WatchTurn,
 } from '../lib/localSession'
+import { useVotes } from '../lib/poll'
+import { isRoom } from '../lib/room'
 import { linkTo, useHashParam } from '../lib/route'
 import type { LayerView } from '../lib/view'
 import './LiveSessionPage.css'
@@ -243,7 +246,7 @@ function Session() {
       const name = raw.trim().toUpperCase().replace(/\s+/g, ' ')
       if (!name) return
       if (/:/.test(name)) {
-        setNotice('A speaker name cannot contain a colon - that is what separates the name from the turn.')
+        setNotice('A name cannot contain a colon. That is what separates the name from the turn in a transcript.')
         return
       }
       setSpeakers((current) => (current.includes(name) ? current : [...current, name]))
@@ -257,7 +260,7 @@ function Session() {
   function removeSpeaker(name: string) {
     /* a name that has already said something stays: the turns above carry it */
     if (turns.some((turn) => turn.speaker === name)) {
-      setNotice(`${name} has already spoken, so the name stays with those turns.`)
+      setNotice(`${name} has already spoken, so the name stays with those turns. Take them off the ballot instead.`)
       return
     }
     setSpeakers((list) => {
@@ -287,15 +290,15 @@ function Session() {
     let recording: Awaited<ReturnType<typeof recorder.close>>
     try {
       recording = await recorder.close()
-    } catch (cause) {
+    } catch {
       setPhase('idle')
-      setNotice(`The recording could not be read: ${(cause as Error).message}`)
+      setNotice('The recording could not be read. Open the microphone and give the turn again.')
       return
     }
 
     if (!recording || recording.seconds < 0.25) {
       setPhase('idle')
-      setNotice('That was too short to transcribe - hold the microphone open while the turn is spoken.')
+      setNotice('That was too short to transcribe. Hold the microphone open for as long as the turn is spoken.')
       return
     }
 
@@ -305,13 +308,13 @@ function Session() {
       heard = await transcribe(recording.wav)
     } catch (cause) {
       setPhase('idle')
-      setNotice(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+      setNotice(noticeOf(cause))
       return
     }
 
     if (!heard.text) {
       setPhase('idle')
-      setNotice('Nothing was heard in that recording. Check the input level and try the turn again.')
+      setNotice('Nothing was heard in that recording. Check the input level, then give the turn again.')
       return
     }
 
@@ -336,11 +339,9 @@ function Session() {
       ])
       setNotice(null)
     } catch (cause) {
-      setNotice(
-        cause instanceof ApiError
-          ? `Heard “${heard.text}”, but it could not be annotated. ${cause.message} ${cause.hint}`
-          : (cause as Error).message,
-      )
+      /* what was heard is said back either way: the turn is lost, and the
+         speaker should not have to say it again to find out what it was */
+      setNotice(`“${heard.text}” was heard, and could not be annotated. ${noticeOf(cause)}`)
     } finally {
       setPhase('idle')
     }
@@ -395,7 +396,7 @@ function Session() {
       ])
       setTyped('')
     } catch (cause) {
-      setNotice(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+      setNotice(noticeOf(cause))
     } finally {
       setPhase('idle')
     }
@@ -493,7 +494,7 @@ function Session() {
       setScript(loaded)
       return loaded
     } catch (cause) {
-      setNotice((cause as Error).message)
+      setNotice(noticeOf(cause))
       return null
     } finally {
       setLoading(false)
@@ -744,7 +745,32 @@ function Session() {
 
   /* a spoken debate has no length known in advance, and it is live for as long
      as somebody is running it */
-  const reach = usePublishRun(room, relayed, 0, ballot, true, false)
+  const published = usePublishRun(room, relayed, 0, ballot, true, false)
+
+  /*
+   * The floor, and with it how many people are in the room.
+   *
+   * One subscription for both, opened here rather than inside the board: the
+   * board wants the votes and the panel above it wants the head count, and
+   * they arrive on the same stream - see `watchRoomVotes`. Two hooks would be
+   * two `EventSource`s onto the same address, for one figure.
+   *
+   * The head count has to come from here and not from the publish. Publishing
+   * answers with it as well, but a publish only happens when a turn lands, so
+   * that figure is whatever it was at the last turn - and the moment it is
+   * actually read is the one before any turn has landed at all, with the code
+   * on screen and the room filling up. The stream says somebody has scanned in
+   * when they scan in, and says it again when they leave.
+   *
+   * Only a room can count anybody: a run relayed between tabs and a replayed
+   * one report 0 down both paths, so the publish answer stands for those and
+   * the shape the panel is handed does not change.
+   */
+  const { votes, present } = useVotes(room)
+  const reach = useMemo<Published>(
+    () => ({ watching: isRoom(room) ? present : published.watching, lost: published.lost }),
+    [room, present, published.watching, published.lost],
+  )
 
   /*
    * The room the moderator is watching, when there is no service to hold one.
@@ -1109,7 +1135,7 @@ function Session() {
               live event the audience moving is the thing whoever is running it
               has to see first. */}
           <PollBoard
-            session={room}
+            votes={votes}
             crowd={crowd}
             speakers={speakers}
             ballot={ballot}

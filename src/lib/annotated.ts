@@ -142,15 +142,15 @@ function fromJson(source: string): Draft {
   try {
     parsed = JSON.parse(source)
   } catch (cause) {
-    throw new Error(`That JSON could not be read: ${(cause as Error).message}`, { cause })
+    throw new Error(`That file could not be read as JSON: ${(cause as Error).message}`, { cause })
   }
 
   const root = parsed as { text?: unknown; spans?: unknown }
   if (typeof root?.text !== 'string') {
-    throw new Error('That JSON has no "text" field - expected { text, spans: [...] }.')
+    throw new Error('That file has no "text" field. An annotated export is { text, spans: [...] }.')
   }
   if (!Array.isArray(root.spans)) {
-    throw new Error('That JSON has no "spans" array - expected { text, spans: [...] }.')
+    throw new Error('That file has no "spans" array. An annotated export is { text, spans: [...] }.')
   }
 
   const text = root.text

@@ -8,7 +8,8 @@ import { SYSTEMS, type SystemId } from '../data/systems'
 import { TRANSCRIPT } from '../data/fixtures'
 import { readTextFile } from '../lib/textFile'
 import { parseTranscript, type FeedTurn } from '../lib/transcript'
-import { annotateAcross, ApiError, replayAcross, type SystemRun } from '../lib/api'
+import { annotateAcross, replayAcross, type SystemRun } from '../lib/api'
+import { noticeOf } from '../lib/failure'
 import { DEMO } from '../config/backend'
 import { ms } from '../lib/duration'
 import type { LayerView } from '../lib/view'
@@ -116,7 +117,7 @@ function Intake({ onStart }: { onStart: (loaded: Loaded) => void }) {
       }
       const parsed = parseTranscript(result.text)
       if (!parsed.length) {
-        setError(`“${file.name}” has no non-empty line to annotate.`)
+        setError(`There is nothing to annotate in “${file.name}”. A transcript has one turn per line, as “SPEAKER: what they said”.`)
         return
       }
       setFileName(file.name)
@@ -303,7 +304,7 @@ function Run({ loaded, onReset }: { loaded: Loaded; onReset: () => void }) {
         setLive(null)
       } catch (cause) {
         if (!current()) return
-        setError(cause instanceof ApiError ? `${cause.message} ${cause.hint}` : (cause as Error).message)
+        setError(noticeOf(cause))
         setLive(null)
       }
     },
