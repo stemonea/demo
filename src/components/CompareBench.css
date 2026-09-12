@@ -114,16 +114,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-.bench__error,
 .bench__notice {
   padding: 10px 14px;
   border-radius: var(--radius-sm);
   font-size: 12.5px;
-}
-
-.bench__error {
-  background: var(--bad-soft);
-  color: var(--bad);
 }
 
 .bench__notice {

@@ -205,14 +205,6 @@
   font-size: 13px;
 }
 
-.own__error {
-  padding: 12px 14px;
-  border-left: 3px solid var(--bad);
-  background: var(--bad-soft);
-  color: var(--bad);
-  font-size: 13px;
-}
-
 .commentary--row {
   display: flex;
   flex-wrap: wrap;

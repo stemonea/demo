@@ -3,6 +3,7 @@ import HoverTag from '../components/HoverTag'
 import SlideDeck, { type SlideItem } from '../components/SlideDeck'
 import Strip from '../components/Strip'
 import FileDrop from '../components/FileDrop'
+import Notice from '../components/Notice'
 import SpanCorrector, { SpanEditor } from '../components/SpanCorrector'
 import { readTextFile } from '../lib/textFile'
 import { download } from '../lib/export'
@@ -248,7 +249,7 @@ export default function ManualPage() {
             </section>
           </div>
 
-          {message && <p className="manual__message">{message}</p>}
+          {message && <Notice tone="warn">{message}</Notice>}
         </div>
       ),
     },
@@ -278,7 +279,7 @@ export default function ManualPage() {
             onEditing={setEditing}
             onMessage={setMessage}
             empty={<p className="workspace__empty">Load a file on the previous slide to start.</p>}
-            note={message ? <p className="manual__message">{message}</p> : null}
+            note={message ? <Notice tone="warn">{message}</Notice> : null}
             side={({ tokens, nudge, relabel }) => (
               <aside className="workspace__side" data-scroll>
                 <section className="workspace__panel">

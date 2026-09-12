@@ -3,6 +3,7 @@ import HoverTag from '../components/HoverTag'
 import SlideDeck, { type SlideItem } from '../components/SlideDeck'
 import SourceBadge from '../components/SourceBadge'
 import FileDrop from '../components/FileDrop'
+import Notice from '../components/Notice'
 import { readTextFile } from '../lib/textFile'
 import { parseTranscript } from '../lib/transcript'
 import { Cooccurrence, EntityProfiles, MentionTimeline, WhoArguesWhat } from '../components/charts/Charts'
@@ -318,7 +319,7 @@ function Sourcebar({
               {busy ? 'Annotating…' : 'Annotate & analyse'}
             </button>
           </div>
-          {error && <p className="sourcebar__error">{error}</p>}
+          {error && <Notice>{error}</Notice>}
         </div>
       )}
     </div>

@@ -9,6 +9,7 @@ import { TRANSCRIPT } from '../data/fixtures'
 import { readTextFile } from '../lib/textFile'
 import { parseTranscript, type FeedTurn } from '../lib/transcript'
 import { annotateAcross, replayAcross, type SystemRun } from '../lib/api'
+import Notice from './Notice'
 import { noticeOf } from '../lib/failure'
 import { DEMO } from '../config/backend'
 import { ms } from '../lib/duration'
@@ -212,7 +213,7 @@ function Intake({ onStart }: { onStart: (loaded: Loaded) => void }) {
         </section>
       </div>
 
-      {error && <p className="bench__error">{error}</p>}
+      {error && <Notice>{error}</Notice>}
     </div>
   )
 }
@@ -383,7 +384,7 @@ function Run({ loaded, onReset }: { loaded: Loaded; onReset: () => void }) {
         </span>
       </header>
 
-      {error && <p className="bench__error">{error}</p>}
+      {error && <Notice>{error}</Notice>}
 
       {/* One panel: the three names, the turns under them, and what the pass has
           cost at its foot. Three separate blocks would read as three unrelated

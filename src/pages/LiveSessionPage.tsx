@@ -8,6 +8,7 @@ import ExportMenu from '../components/ExportMenu'
 import LiveStats from '../components/LiveStats'
 import PollBoard from '../components/PollBoard'
 import PollVote from '../components/PollVote'
+import Notice from '../components/Notice'
 import { useRecorder } from '../lib/recorder'
 import { annotate, closeRoom, openRoom, transcribe, type Source } from '../lib/api'
 import { simulatedFloor } from '../lib/audience'
@@ -787,6 +788,10 @@ function Session() {
     [room, clock, ballot, turns.length],
   )
 
+  /* the microphone's own trouble first: it is the one thing that stops a turn
+     from being given at all, and the notice under it can wait a moment */
+  const said = recorder.error ?? notice
+
   return (
     <div className="page" ref={scroller}>
       <div className="page__inner">
@@ -1082,7 +1087,7 @@ function Session() {
           </form>
           )}
 
-          {(notice || recorder.error) && <p className="session__notice">{recorder.error ?? notice}</p>}
+          {said && <Notice tone="warn">{said}</Notice>}
 
           <div className="session__grid">
             <aside className="session__side" data-scroll>

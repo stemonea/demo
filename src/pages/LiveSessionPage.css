@@ -26,14 +26,6 @@
   color: var(--ink-soft);
 }
 
-.session__notice {
-  padding: 10px 12px;
-  border-left: 3px solid var(--warn);
-  background: color-mix(in srgb, var(--warn) 10%, transparent);
-  color: var(--warn);
-  font-size: 12.5px;
-}
-
 /* ---- the floor: who is here, and who has it ----------------------- */
 .floor {
   display: flex;

@@ -6,6 +6,7 @@ import SourceBadge from '../components/SourceBadge'
 import VerdictBadge from '../components/VerdictBadge'
 import ExportMenu from '../components/ExportMenu'
 import SpanCorrector, { type PaletteItem } from '../components/SpanCorrector'
+import Notice from '../components/Notice'
 import { annotate, ApiError, checkService, type ServiceStatus, type Source } from '../lib/api'
 import { failureOf, type Failure } from '../lib/failure'
 import { countTags, parseTaggedText, serializeNodes } from '../lib/parseTags'
@@ -615,16 +616,9 @@ export default function PlaygroundPage() {
                     {status === 'replaying' && frame && <TaggedText text={frame.text} mode={mode} />}
                     {status === 'loading' && <p className="pg__placeholder">Computing this turn…</p>}
                     {status === 'error' && failure && (
-                      <div className="failure" role="alert">
-                        <p className="failure__title">{failure.title}</p>
-                        <p className="failure__message">{failure.message}</p>
-                        <p className="failure__hint">{failure.hint}</p>
-                        <div className="failure__actions">
-                          <button type="button" className="btn btn--accent failure__retry" onClick={submit}>
-                            Try again
-                          </button>
-                        </div>
-                      </div>
+                      <Notice title={failure.title} action={{ label: 'Try again', onClick: submit }}>
+                        {`${failure.message} ${failure.hint}`}
+                      </Notice>
                     )}
                     {status === 'done' && result && <TaggedText text={shown} mode={mode} />}
                   </div>

@@ -12,6 +12,7 @@ import { EXAMPLES } from '../data/examples'
 import { SYSTEMS } from '../data/systems'
 import { FAILURE_MECHANISMS } from '../data/project'
 import { compare, type CompareResult } from '../lib/api'
+import Notice from '../components/Notice'
 import { noticeOf } from '../lib/failure'
 import type { LayerView } from '../lib/view'
 import './WhyJointPage.css'
@@ -262,7 +263,7 @@ function OwnTurn({
         </div>
       </div>
 
-      {status === 'error' && <p className="own__error">{error}</p>}
+      {status === 'error' && error && <Notice>{error}</Notice>}
 
       {status === 'done' && result && (
         <>

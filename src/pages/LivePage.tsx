@@ -9,6 +9,7 @@ import ExportMenu from '../components/ExportMenu'
 import FileDrop from '../components/FileDrop'
 import TurnLoader from '../components/TurnLoader'
 import LiveStats from '../components/LiveStats'
+import Notice from '../components/Notice'
 import { readTextFile } from '../lib/textFile'
 import {
   countAnnotated,
@@ -244,7 +245,7 @@ function Intake({ fileName, error, onLoad, onError }: IntakeProps) {
                 onFile={load}
               />
               {uploading && <TurnLoader label="checking the transcript and opening the stream…" />}
-              {error && <p className="live__error">{error}</p>}
+              {error && <Notice>{error}</Notice>}
             </section>
           </div>
 
@@ -460,13 +461,8 @@ function Feed({ loaded, onNewFile }: FeedProps) {
               {(status === 'warming' || status === 'waiting') && (
                 <TurnLoader label={`annotating turn ${shown.length + 1} of ${turns.length}…`} />
               )}
-              {status === 'error' && (
-                <div className="live__error">
-                  <p>{error}</p>
-                  <button type="button" className="toggle" onClick={pipeline.retry}>
-                    Retry
-                  </button>
-                </div>
+              {status === 'error' && error && (
+                <Notice action={{ label: 'Try again', onClick: pipeline.retry }}>{error}</Notice>
               )}
 
               {behind > 0 && (

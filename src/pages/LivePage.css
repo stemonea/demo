@@ -289,19 +289,6 @@
   font-size: 14px;
 }
 
-.live__error {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border-left: 3px solid var(--bad);
-  background: var(--bad-soft);
-  color: var(--bad);
-  font-size: 13px;
-}
-
 .live__side {
   position: relative;
   min-height: 0;

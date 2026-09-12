@@ -636,8 +636,8 @@ body {
   box-shadow: var(--shadow-popover);
 }
 
-:is(.session__notice, .manual__message, .sourcebar__error,
-  .live__error, .own__error, .failure, .ballot__note) {
+/* `Notice` owns its own corner; these are the boxes that are not one */
+.ballot__note {
   border-radius: var(--radius-sm);
 }
 
