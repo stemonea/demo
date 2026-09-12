@@ -12,3 +12,5 @@ dist/
 # editor / OS noise
 .DS_Store
 *.log
+
+README.md
