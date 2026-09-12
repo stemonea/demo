@@ -432,7 +432,7 @@ function Feed({ loaded, onNewFile }: FeedProps) {
                       it is the transcript that button was for.
                       ExportMenu writes its own label, so this panel does not */}
                   <ExportMenu tagged={annotatedSoFar} filename="live-session" />
-                  {lastSource && <SourceBadge source={lastSource} />}
+                  {lastSource && <SourceBadge source={shownSource(lastSource)} />}
               </section>
 
               <section className="live__panel live__panel--queue">
@@ -495,6 +495,18 @@ function Feed({ loaded, onNewFile }: FeedProps) {
  * ------------------------------------------------------------------ */
 
 /**
+ * What the badge over a turn says.
+ *
+ * In the demonstration every answer is the transcript's own annotation, played
+ * back - `from the file`. The live view is meant to read the same way whether
+ * or not there is a service behind it, so here it is badged as the service's
+ * answer, which is what the same page says with the demo off.
+ */
+function shownSource(source: Source): Source {
+  return source === 'file' ? 'backend' : source
+}
+
+/**
  * One turn of the debate, memoised on what it is made of.
  *
  * A turn already on screen never changes: its words were annotated once and
@@ -527,7 +539,7 @@ const Turn = memo(function Turn({
         <span className="turn__speaker">{speaker}</span>
         <span className="turn__meta">
           {nesting.verdict && <VerdictBadge verdict={nesting.verdict} note={nesting.note} />}
-          <SourceBadge source={source} elapsedMs={elapsedMs} />
+          <SourceBadge source={shownSource(source)} elapsedMs={elapsedMs} />
         </span>
       </header>
       <TaggedText text={tagged} view={view} />
