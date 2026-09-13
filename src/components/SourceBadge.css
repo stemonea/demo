@@ -1,0 +1,31 @@
+.source {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid currentColor;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.source--backend {
+  color: var(--ok);
+}
+
+.source--precomputed,
+.source--file {
+  color: var(--ink-soft);
+}
+
+.source--heuristic {
+  color: var(--warn);
+}
+
+.source__time {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  opacity: 0.75;
+}

@@ -1,0 +1,48 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 0 4px;
+}
+
+/* the hero field, cut down to a band: it must not compete with the feed */
+.stream--loader {
+  justify-content: flex-start;
+  overflow: hidden;
+  border-left: 3px solid var(--line-strong);
+  padding-left: 12px;
+  opacity: 0.85;
+}
+
+.stream--loader .stream__field {
+  font-size: clamp(7px, 0.85vw, 12px);
+}
+
+.loader__label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink-faint);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loader__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: loader-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes loader-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__dot {
+    animation: none;
+  }
+}

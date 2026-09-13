@@ -1,0 +1,41 @@
+.layers {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.layers__label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.layers__track {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+}
+
+.layers__option {
+  padding: 7px 16px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.layers__option:hover {
+  color: var(--ink);
+}
+
+.layers__option.is-active {
+  background: var(--ink);
+  color: var(--bg);
+}

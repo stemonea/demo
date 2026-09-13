@@ -1,0 +1,142 @@
+.deck {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The horizontal viewport: one slide wide, travels to the right. */
+.deck__track {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.deck__track::-webkit-scrollbar {
+  display: none;
+}
+
+.deck__track.is-dragging {
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.deck__slide {
+  /* the anchor for a slide that names the way on; see `.deck__onward` */
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+/* `margin: auto 0` centres the slide when it fits and, unlike
+   `justify-content: center`, never clips its top when it overflows.
+   The flex column lets a slide hand its overflow to an inner `data-scroll`
+   region instead of scrolling as a whole. */
+.deck__slide-inner {
+  width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  margin-block: auto;
+  /* the frame's own margin, so what the slide scrolls by and what the rules
+     stand off the content by are one figure */
+  padding-block: calc(var(--frame-margin) + clamp(6px, 1.4vh, 20px));
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- the way on ---------------------------------------------------- *
+ * A slide can name what follows it. The control rides the right-hand edge of
+ * the slide that declares it, vertically centred, and turns its label out of
+ * the way until it is pointed at: at rest it is an arrow against the margin,
+ * under the cursor it opens into the sentence it stands for. It is only ever
+ * rendered on the slide currently being read, so nothing offstage can be
+ * tabbed into.
+ * ------------------------------------------------------------------- */
+.deck__onward {
+  position: absolute;
+  right: clamp(8px, 1.6vw, 22px);
+  top: 50%;
+  z-index: 4;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: var(--rule) solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--glass, var(--paper));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  text-align: left;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck__onward:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/*
+ * The label is folded away rather than absent.
+ *
+ * `max-width` on a nowrap run is what lets it open and close smoothly; hiding
+ * it with `display` would make the control jump between two sizes and drag the
+ * arrow across the screen with it.
+ */
+.deck__onward-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: max-width 0.32s var(--ease-out, ease), opacity 0.24s ease;
+}
+
+.deck__onward:hover .deck__onward-label,
+.deck__onward:focus-visible .deck__onward-label {
+  max-width: 22em;
+  opacity: 1;
+}
+
+.deck__onward-arrow {
+  font-size: 16px;
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* On a narrow screen there is no margin to ride, and a control floating over
+   the text is worse than one that is simply always readable. */
+@media (max-width: 720px) {
+  .deck__onward {
+    padding: 9px 12px;
+  }
+
+  .deck__onward-label {
+    max-width: 22em;
+    opacity: 1;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck__onward-label {
+    transition: none;
+  }
+}
