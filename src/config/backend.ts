@@ -64,8 +64,8 @@ export const DEMO = flag(env.VITE_DEMO as string | undefined, true)
  */
 export const DEMO_TRANSCRIPT = {
   /** what it is called when the page names the file it is playing */
-  name: 'tagged.txt',
-  url: `${trim(env.BASE_URL || '/')}/demo/tagged.txt`,
+  name: 'debate.txt',
+  url: `${trim(env.BASE_URL || '/')}/demo/debate.txt`,
 }
 
 /**

@@ -13,7 +13,7 @@ import type { FeedTurn } from './transcript'
  * that will never be told anything.
  *
  * This is the third answer, and it does not move state at all. The published
- * build ships the debate it plays (`public/demo/tagged.txt`, fetched by
+ * build ships the debate it plays (`public/demo/debate.txt`, fetched by
  * `loadDemoTranscript`), and the pace it plays it at is a pure function of the
  * words in each turn - no randomness, no network, nothing local to the machine.
  * Two devices holding the same file and the same function need one number
